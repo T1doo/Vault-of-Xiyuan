@@ -2,6 +2,8 @@
 
 ## 当前进展
 
+> 公开版说明：机器内部路径、GPU UUID、PID、工具会话与具体运行标识已脱敏。`$XIYUAN_WORKSPACE`、`$XIYUAN_GPU_UUID`、`$XIYUAN_RUN_ID`等为占位符，不是已设置的环境变量；历史命令需按本机记录还原后使用。精确命令、原始日志及恢复点保留在服务器各run目录与审计记录中，公开版不作为直接启动/恢复命令。
+
 最后核对：2026-09-07。**F1 / T01、T02 IN_PROGRESS，G1未通过。** 四个隔离环境、数据/权重/tokenizer/Plus资产准备已完成；61,750个样本的完整FAST审计通过。数据v2为450/50整episode、55,682/6,068动作起点，norm仅训练集；初态关联仍有未知项，不宣称严格初态留出。
 
 **300步小样本pilot已完成并退出0。** 200个train样本池、有效batch16、累计8×物理2，共4,800次样本抽取；前10步平均action loss13.606，末10步1.929。全部300更新的样本顺序独立复核一致，数值有限。实际100→200步全部10个LoRA叶子更新，32个冻结叶子不变；第100步冻结叶子与基础权重一致。完整检查点为run a/checkpoints/100、200、300。
@@ -12,7 +14,7 @@
 
 七维各一个真实单例全部执行成功；重复加载同状态精确一致，布局例仅1个118维状态，其余例为50×92库存、实际检查2行。机器人姿态扰动须检查预热后的观测，噪声例实际改变第三人称图像；这不等于最终manifest或全部初态唯一性已验收。专家完整开环仍9/10成功，失败例补充GT状态恢复诊断，不改写失败。
 
-当前没有本项目活跃GPU作业。2,000步全数据S开发训练配置已准备，尚未启动；下一步完成其启动前检查并按固定配置推进，同时做第300步开发检查、GPU累计对应及多checkpoint闭环。负责人代表回放/控制语义与曲线审阅仍待完成。F1不会因300步pilot结束而自动通过G1。
+当前GPU2正在执行2,000步全数据S开发训练（run_id=$XIYUAN_RUN_ID，PID（见本机记录），工具session（见本机记录））；最新核对57次有效更新，尚无该run的完整checkpoint。第300步小样本开发检查已执行，仍在首请求发生系数长度错误。继续GPU累计对应与后续多checkpoint闭环。负责人代表回放/控制语义与曲线审阅仍待完成。F1不会因300步pilot结束而自动通过G1。
 
 工程根upstream/openpi；训练pilot执行版本与provenance保存在run目录，后续服务/检查点保留修复另记工程Git版本，不追溯冒充旧作业代码。证据位于artifacts/audits/f1-resources-20260907/；阶段日志以下保留历史运行状态及失败，以上为最新恢复入口。
 
@@ -28,7 +30,7 @@
 
 ### 2026-09-07｜Python就绪，处理安装中的NFS归属检查
 
-`uv python install 3.11 --install-dir /nfs_share/lijunhui2/tools/python --no-bin` 退出0，实际安装CPython3.11.16。后续锁定该补丁版本，不修改系统Python或全局PATH。
+`uv python install 3.11 --install-dir $XIYUAN_WORKSPACE/tools/python --no-bin` 退出0，实际安装CPython3.11.16。后续锁定该补丁版本，不修改系统Python或全局PATH。
 
 学生环境使用UV_PROJECT_ENVIRONMENT=工作区/envs/policy-train、UV_CACHE_DIR=工作区/cache/uv、UV_LINK_MODE=copy，GIT_LFS_SKIP_SMUDGE=1，按固定openpi `uv sync --frozen --no-dev` 安装。初次及第一次重试分别被uv的LeRobot Git缓存目录及.git别名的NFS归属检查阻止（退出1）；保留policy-sync*.log/.exit。仅在本轮临时git-safe.config列出已知项目缓存/checkout精确路径，未设通配信任、未改用户全局配置。第二次重试已通过LeRobot构建，继续安装；上游pyproject/uv.lock未改，尚不能标环境通过。
 
@@ -55,11 +57,11 @@ GPU验证是明确的SYNTHETIC环境检查：128×128单位矩阵上的编译、
 已执行命令（以下路径属于本机；不需激活全局环境）：
 
 ```sh
-UV_CACHE_DIR=/nfs_share/lijunhui2/cache/uv /nfs_share/lijunhui2/tools/uv/bin/uv python install 3.11 --install-dir /nfs_share/lijunhui2/tools/python --no-bin
+UV_CACHE_DIR=$XIYUAN_WORKSPACE/cache/uv $XIYUAN_WORKSPACE/tools/uv/bin/uv python install 3.11 --install-dir $XIYUAN_WORKSPACE/tools/python --no-bin
 
-env -u PYTHONPATH -u PYTHONHOME -u VIRTUAL_ENV UV_CACHE_DIR=/nfs_share/lijunhui2/cache/uv UV_PYTHON_INSTALL_DIR=/nfs_share/lijunhui2/tools/python UV_PROJECT_ENVIRONMENT=/nfs_share/lijunhui2/envs/policy-train UV_LINK_MODE=copy GIT_LFS_SKIP_SMUDGE=1 GIT_CONFIG_GLOBAL=/nfs_share/lijunhui2/artifacts/audits/f1-env-20260907/git-safe.config /nfs_share/lijunhui2/tools/uv/bin/uv sync --project /nfs_share/lijunhui2/upstream/openpi --frozen --no-dev --python /nfs_share/lijunhui2/tools/python/cpython-3.11.16-linux-x86_64-gnu/bin/python3.11
+env -u PYTHONPATH -u PYTHONHOME -u VIRTUAL_ENV UV_CACHE_DIR=$XIYUAN_WORKSPACE/cache/uv UV_PYTHON_INSTALL_DIR=$XIYUAN_WORKSPACE/tools/python UV_PROJECT_ENVIRONMENT=$XIYUAN_WORKSPACE/envs/policy-train UV_LINK_MODE=copy GIT_LFS_SKIP_SMUDGE=1 GIT_CONFIG_GLOBAL=$XIYUAN_WORKSPACE/artifacts/audits/f1-env-20260907/git-safe.config $XIYUAN_WORKSPACE/tools/uv/bin/uv sync --project $XIYUAN_WORKSPACE/upstream/openpi --frozen --no-dev --python $XIYUAN_WORKSPACE/tools/python/cpython-3.11.16-linux-x86_64-gnu/bin/python3.11
 
-UV_CACHE_DIR=/nfs_share/lijunhui2/cache/uv /nfs_share/lijunhui2/tools/uv/bin/uv pip check --python /nfs_share/lijunhui2/envs/policy-train/bin/python
+UV_CACHE_DIR=$XIYUAN_WORKSPACE/cache/uv $XIYUAN_WORKSPACE/tools/uv/bin/uv pip check --python $XIYUAN_WORKSPACE/envs/policy-train/bin/python
 ```
 
 首条是实际初装历史命令，后续复现锁定已得到的3.11.16，不用浮动3.11请求升级补丁；已存在环境无需重装。sync使用临时精确safe.directory配置，覆盖本项目LeRobot缓存路径，不能删除此配置后假设NFS归属问题自动消失。源码锁hash：793488b5a55bb87200db90a61fd0af51922b686d94e1da4f4c587ab119b37d74。
@@ -82,7 +84,7 @@ Python3.8.20/3.10.21已装入项目tools目录，sim-clean/sim-plus/teacher虚�
 
 首个官方Spatial HDF5已下载并校验长度及LFS SHA256（508779600字节）。真实打开后确认50条完整演示；首条98步，actions7维，ee_pos3+ee_ori3+gripper_states2可组成基线8维本体状态，robot_states另为9维，不能混用或截断；两路RGB均128×128，states92维，demo含init_state/model_file。结构可用不代表时序或控制链路已验证。原始证据first-hdf5-inventory.json。现继续同revision全部10任务下载，复用第一项并逐个验证；尚未划分train/dev/final。
 
-当前已启动并持有工具句柄：sim-clean安装43503、sim-plus安装与teacher安装句柄见本次工具记录，全部数据下载50568（状态/进程在spatial-download.json）。中断后先查.exit、实际进程或同一工具句柄，不据超时重复启动。没有GPU科研作业、没有训练checkpoint；本批日志与锁文件在artifacts/audits/f1-resources-20260907。
+当前已启动并持有工具句柄：sim-clean安装（见本机记录）、sim-plus安装与teacher安装句柄见本次工具记录，全部数据下载（见本机记录）（状态/进程在spatial-download.json）。中断后先查.exit、实际进程或同一工具句柄，不据超时重复启动。没有GPU科研作业、没有训练checkpoint；本批日志与锁文件在artifacts/audits/f1-resources-20260907。
 
 ### 2026-09-07｜实际数据时序审计与负责人确认
 
@@ -92,11 +94,11 @@ Python3.8.20/3.10.21已装入项目tools目录，sim-clean/sim-plus/teacher虚�
 
 clean/plus基础安装及独立源码包安装已完成。首次导入暴露上游setup.py未发现外层namespace导致的现代editable空映射：只在各自环境增加精确source-root .pth，分别绑定独立LIBERO/Plus，未改全局PYTHONPATH或源码。clean随后导入通过。plus缺ImageMagick，已将Ubuntu官方包按APT SHA256校验后解压到项目tools/imagemagick，并补齐liblqr/libfftw3；仅在plus进程设置原生库路径，最终plus导入通过，无sudo/系统安装。
 
-teacher安装与pip check通过；初次导入受到继承的/share/apps/cuda/12.2的不可读libnvJitLink影响，进程级清除LD_LIBRARY_PATH后Torch2.3.1+cu121、torchvision0.18.1+cu121和FastVGGT/pycolmap/pyceres/open3d导入通过。原失败日志保留。基础模型与Plus资产仍在下载校验；FAST tokenizer文件已校验，尚未执行其远程代码。
+teacher安装与pip check通过；初次导入受到继承的$SYSTEM_CUDA_PATH的不可读libnvJitLink影响，进程级清除LD_LIBRARY_PATH后Torch2.3.1+cu121、torchvision0.18.1+cu121和FastVGGT/pycolmap/pyceres/open3d导入通过。原失败日志保留。基础模型与Plus资产仍在下载校验；FAST tokenizer文件已校验，尚未执行其远程代码。
 
 真实专家前三步回放完成，记录了原始XML到本机资产的路径映射（不改相机/几何参数）、图像朝向及位姿误差；raw朝向明显优于flip/rotate180。前三步未完成任务不算失败，现完整回放首条演示检验真实成功谓词。后续训练图像与在线输入采用同一经审计的确定性约定，不直接复制上游RLDS专用180度旋转。
 
-准备真实权重合成集成检查：run_id=f1-synthetic-model-20260907-a，GPU0启动前确认空闲，上限600秒/2次更新、物理与有效batch均1，仅诊断不计正式或学习曲线。配置/脚本hash及本地实现commit见real-model-check-registration.json，输出runs/diagnostics/f1-synthetic-model-20260907-a；验证冻结叶子不变、LoRA实际更新及不同RNG的模型入口预处理。依赖已满足，尚未宣称通过。
+准备真实权重合成集成检查：run_id=$XIYUAN_RUN_ID，GPU0启动前确认空闲，上限600秒/2次更新、物理与有效batch均1，仅诊断不计正式或学习曲线。配置/脚本hash及本地实现commit见real-model-check-registration.json，输出runs/diagnostics/$XIYUAN_RUN_ID；验证冻结叶子不变、LoRA实际更新及不同RNG的模型入口预处理。依赖已满足，尚未宣称通过。
 
 ### 2026-09-07｜资源、真实模型与数据验证汇总
 
@@ -117,7 +119,7 @@ teacher安装与pip check通过；初次导入受到继承的/share/apps/cuda/12
 | 真实动作回环 | real-data-roundtrip.json：100个样本通过，尚未做全量长度审计 |
 | norm独立复核 | norm-provenance-check.json/.log/.exit：train-only mean/std/q01/q99与独立重算完全一致，退出0 |
 
-Plus资产ZIP保存在NFS `data/raw/libero-plus-assets/assets.zip`；为避免约45万小文件的NFS开销，解压缓存位于 `/tmp/lijunhui2-libero-plus-assets-96764a4bfbda`，Plus assets链接指向它。该缓存可丢失，恢复先验完成标记/路径，缺失从保留ZIP重建；不能把临时盘当唯一持久证据。
+Plus资产ZIP保存在NFS `data/raw/libero-plus-assets/assets.zip`；为避免约45万小文件的NFS开销，解压缓存位于 `$PRIVATE_TEMP_PATH`，Plus assets链接指向它。该缓存可丢失，恢复先验完成标记/路径，缺失从保留ZIP重建；不能把临时盘当唯一持久证据。
 
 失败回放为table-center任务demo0（103帧），最终末端位置与记录差约0.0159米；视频显示放置靠近盘缘。原因仍待核实，不能断言只是模拟器误差，也不能换成功演示掩盖失败。原数据生成器可强制写末帧reward/done，验收采用实际仿真成功谓词。当前原始RGB与在线视图保留一致朝向，不复制RLDS专用180度旋转。
 
@@ -130,8 +132,8 @@ FAST实现保留合法编码并直接从token ID恢复动作段。发现上游�
 已验证的复核命令（CPU、无训练；工作目录为工程根）：
 
 ```sh
-env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu /nfs_share/lijunhui2/envs/policy-train/bin/python -m unittest discover -s /nfs_share/lijunhui2/upstream/openpi/tests/xiyuan -p test_data.py
-env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu /nfs_share/lijunhui2/envs/policy-train/bin/python /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/check-norm-provenance.py
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu $XIYUAN_WORKSPACE/envs/policy-train/bin/python -m unittest discover -s $XIYUAN_WORKSPACE/upstream/openpi/tests/xiyuan -p test_data.py
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu $XIYUAN_WORKSPACE/envs/policy-train/bin/python $XIYUAN_WORKSPACE/artifacts/audits/f1-resources-20260907/check-norm-provenance.py
 ```
 
 训练入口、累计/完整恢复、真实数据短训及七维单例仍未验收，不提供假设存在的训练启动命令。下一步从data-v2和上述实现commit继续，先查作业再启动。文档提交仅公开计划和结果摘要，数据、权重、视频、环境及私人规则留工作区。
@@ -145,7 +147,7 @@ env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLA
 已执行CLI先通过--help，实际命令：
 
 ```sh
-env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu HF_HOME=/nfs_share/lijunhui2/cache/huggingface HF_MODULES_CACHE=/nfs_share/lijunhui2/cache/huggingface/modules HF_HUB_OFFLINE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /nfs_share/lijunhui2/envs/policy-train/bin/python /nfs_share/lijunhui2/upstream/openpi/scripts/xiyuan/audit_token_lengths.py --data-dir /nfs_share/lijunhui2/protocols/data-v2 --raw-root /nfs_share/lijunhui2/data/raw/libero/libero_spatial --tokenizer-root /nfs_share/lijunhui2/weights/tokenizers --output /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/full-token-audit.json
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu HF_HOME=$XIYUAN_WORKSPACE/cache/huggingface HF_MODULES_CACHE=$XIYUAN_WORKSPACE/cache/huggingface/modules HF_HUB_OFFLINE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 $XIYUAN_WORKSPACE/envs/policy-train/bin/python $XIYUAN_WORKSPACE/upstream/openpi/scripts/xiyuan/audit_token_lengths.py --data-dir $XIYUAN_WORKSPACE/protocols/data-v2 --raw-root $XIYUAN_WORKSPACE/data/raw/libero/libero_spatial --tokenizer-root $XIYUAN_WORKSPACE/weights/tokenizers --output $XIYUAN_WORKSPACE/artifacts/audits/f1-resources-20260907/full-token-audit.json
 ```
 
 输出已存在时脚本拒绝覆盖；复核使用新的输出名。原始norm和manifest保持不变。
@@ -154,23 +156,23 @@ env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLA
 
 `check-real-resume.py --help`退出0后，登记 `real-resume-registration.json`，运行save模式：真实基础权重、data-v2实际样本、物理/有效batch1，固定初始化RNG123、模型RNG456、sampler seed0；保存第2次有效更新，并拟用第3次更新建立连续运行参考。独立restore进程将校验模型/optimizer/step hash，再比较同样本第3次更新的参数和指标。诊断配置为constant lr3e-5/warmup0，仅用于恢复比较，不是正式训练配置。
 
-当前save实际完成两步，action loss分别16.190626和11.707721，数据样本不同，不以此判断学习趋势。Orbax完整保存仍在 `runs/diagnostics/f1-real-resume-20260907-a/checkpoints/2.orbax-checkpoint-tmp-0`；尚未产生expected.json，也没有PASS结果。禁止把临时目录当完整checkpoint，禁止在session91909未结束时重复启动。保存进程仍真实存活；检查点包括norm及模型/optimizer，外侧provenance绑定数据/norm/基座来源/代码hash。最终完整恢复验证仍待执行。
+当前save实际完成两步，action loss分别16.190626和11.707721，数据样本不同，不以此判断学习趋势。Orbax完整保存仍在 `runs/diagnostics/$XIYUAN_RUN_ID/checkpoints/2.orbax-checkpoint-tmp-0`；尚未产生expected.json，也没有PASS结果。禁止把临时目录当完整checkpoint，禁止在session（见本机记录）未结束时重复启动。保存进程仍真实存活；检查点包括norm及模型/optimizer，外侧provenance绑定数据/norm/基座来源/代码hash。最终完整恢复验证仍待执行。
 
-启动前GPU1空闲；启动后核实另一项目渲染任务也出现在GPU1，PID371408不属本次任务，未终止或修改。当前自己的PID372761已进入保存收尾，最多600秒；后续restore改在重新确认空闲GPU进行。本次不用于吞吐benchmark，保留资源竞争事实。
+启动前GPU1空闲；启动后核实另一项目渲染任务也出现在GPU1，PID（见本机记录）不属本次任务，未终止或修改。当前自己的PID（见本机记录）已进入保存收尾，最多600秒；后续restore改在重新确认空闲GPU进行。本次不用于吞吐benchmark，保留资源竞争事实。
 
 实际启动（stdout/stderr保存为本轮real-resume-save.log）：
 
 ```sh
-env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES=GPU-414c52ba-72c6-fc45-95d6-1e9750bbc21b JAX_PLATFORMS=cuda XLA_PYTHON_CLIENT_PREALLOCATE=false HF_HOME=/nfs_share/lijunhui2/cache/huggingface HF_MODULES_CACHE=/nfs_share/lijunhui2/cache/huggingface/modules HF_HUB_OFFLINE=1 OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 timeout 600 /nfs_share/lijunhui2/envs/policy-train/bin/python /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/check-real-resume.py --mode save --run-dir /nfs_share/lijunhui2/runs/diagnostics/f1-real-resume-20260907-a
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES=$XIYUAN_GPU_UUID JAX_PLATFORMS=cuda XLA_PYTHON_CLIENT_PREALLOCATE=false HF_HOME=$XIYUAN_WORKSPACE/cache/huggingface HF_MODULES_CACHE=$XIYUAN_WORKSPACE/cache/huggingface/modules HF_HUB_OFFLINE=1 OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 timeout 600 $XIYUAN_WORKSPACE/envs/policy-train/bin/python $XIYUAN_WORKSPACE/artifacts/audits/f1-resources-20260907/check-real-resume.py --mode save --run-dir $XIYUAN_WORKSPACE/runs/diagnostics/$XIYUAN_RUN_ID
 ```
 
-这条命令是已启动历史记录，不可原样重复（run目录存在会拒绝）。恢复当前工作先poll工具session91909并读取save-status/log；只有checkpoint提交完成且expected.json存在后才允许进入restore。restore仅--help注册过，尚未验证执行成功。G1继续IN_PROGRESS，不存在无人值守后续训练队列。
+这条命令是已启动历史记录，不可原样重复（run目录存在会拒绝）。恢复当前工作先poll工具session（见本机记录）并读取save-status/log；只有checkpoint提交完成且expected.json存在后才允许进入restore。restore仅--help注册过，尚未验证执行成功。G1继续IN_PROGRESS，不存在无人值守后续训练队列。
 
-保存更新：session91909已退出0，save-status为COMPLETE；正式提交的诊断checkpoint路径为 `runs/diagnostics/f1-real-resume-20260907-a/checkpoints/2`（约4.6G），snapshot.json绑定完整模型/optimizer/step，expected.json含连续第3步参数hash/样本/指标。原临时目录状态已结束。重新查询GPU2空闲后启动独立restore，工具session79933/PID380944，GPU UUID见registration更新；600秒限时保持不变。restore使用同一已注册CLI，将mode改为restore，CUDA_VISIBLE_DEVICES改为GPU2的UUID，日志real-resume-restore.log。启动本身不等于恢复验证通过。
+保存更新：session（见本机记录）已退出0，save-status为COMPLETE；正式提交的诊断checkpoint路径为 `runs/diagnostics/$XIYUAN_RUN_ID/checkpoints/2`（约4.6G），snapshot.json绑定完整模型/optimizer/step，expected.json含连续第3步参数hash/样本/指标。原临时目录状态已结束。重新查询GPU2空闲后启动独立restore，工具session（见本机记录）/PID（见本机记录），GPU UUID见registration更新；600秒限时保持不变。restore使用同一已注册CLI，将mode改为restore，CUDA_VISIBLE_DEVICES改为GPU2的UUID，日志real-resume-restore.log。启动本身不等于恢复验证通过。
 
 ### 2026-09-07｜恢复诊断结果：状态恢复通过，接续更新失败
 
-独立restore session79933已终止，退出1；失败处为 `resumed continuation differs exactly`。在这之前，第2步的全部模型参数、optimizer叶子及step与保存前snapshot逐项shape/dtype/SHA256精确一致，继续采样的sample_id也与连续运行相同。连续第3步loss=14.61308575、grad_norm=26.53478622；独立恢复第3步loss=14.64101601、grad_norm=26.78891373，最终参数hash不同。不能把“成功读取checkpoint”当作完整恢复验收，也不能根据这次跨GPU比较放宽容差。
+独立restore session（见本机记录）已终止，退出1；失败处为 `resumed continuation differs exactly`。在这之前，第2步的全部模型参数、optimizer叶子及step与保存前snapshot逐项shape/dtype/SHA256精确一致，继续采样的sample_id也与连续运行相同。连续第3步loss=14.61308575、grad_norm=26.53478622；独立恢复第3步loss=14.64101601、grad_norm=26.78891373，最终参数hash不同。不能把“成功读取checkpoint”当作完整恢复验收，也不能根据这次跨GPU比较放宽容差。
 
 完整checkpoint和expected/snapshot/provenance均保留，失败日志real-resume-restore.log保留；没有训练/教师/评测活跃作业。该差异可能涉及跨进程编译、模型静态状态或数值执行路径，现有证据尚未定位原因。下一步在相同GPU上独立复验并保存输入batch/hash、图结构及重复前向/更新误差，区分输入、状态和编译问题；未经证实不归咎GPU。原诊断脚本hash已绑定provenance，新增诊断用新版本/新输出，不覆盖历史证据。恢复gate仍未通过，F1与真实S学习训练均继续待办。
 
@@ -178,7 +180,7 @@ env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES=GPU-414c
 
 同一原GPU1、同脚本、同checkpoint复验退出1：第3步loss=14.613085746765137，与连续参考精确相同；grad_norm=26.534759521484375，参考26.534786224365234，参数hash仍不同。证据real-resume-same-gpu.log；原跨GPU失败日志不覆盖。此证据缩小排查范围，不自动放宽容差或判恢复通过。
 
-新增v2诊断记录训练输入叶子的值hash/shape/dtype/weak_type/sharding、模型静态图和StableHLO。第一次误在已忙GPU1启动后，立即精确匹配并终止自己的PID394933（退出143），未触碰其他项目进程；该run b保留。随后启动保护在同一次调用中两次检查选定GPU的显存和利用率，忙卡拒绝，再在GPU2登记run c。它是本次有限诊断入口，不是通用调度器，仍存在检查后外部作业启动的竞态，须运行中检查。
+新增v2诊断记录训练输入叶子的值hash/shape/dtype/weak_type/sharding、模型静态图和StableHLO。第一次误在已忙GPU1启动后，立即精确匹配并终止自己的PID（见本机记录）（退出143），未触碰其他项目进程；该run b保留。随后启动保护在同一次调用中两次检查选定GPU的显存和利用率，忙卡拒绝，再在GPU2登记run c。它是本次有限诊断入口，不是通用调度器，仍存在检查后外部作业启动的竞态，须运行中检查。
 
 run c完成两步及完整checkpoint保存，但新增step.lower检查在JAX ArgInfo重建TrainState时触发jaxtyping类型错误，save退出1；不是模型前向或checkpoint写入失败。保存前inputs/graph和完整snapshot已留存。仅在lower检查局部使用上游array_typing.disable_typechecking，实际训练的类型校验保持开启；新probe复用已有checkpoint，不重新生成训练参考或重复下载。当前probe对同一恢复状态、同一输入重复更新3次，测量重复误差，不提前指定为恢复PASS。
 
@@ -187,14 +189,14 @@ run c完成两步及完整checkpoint保存，但新增step.lower检查在JAX Arg
 已验证命令：
 
 ```sh
-env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu /nfs_share/lijunhui2/envs/policy-train/bin/python -m unittest discover -s /nfs_share/lijunhui2/upstream/openpi/tests/xiyuan -p test_training.py
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu $XIYUAN_WORKSPACE/envs/policy-train/bin/python -m unittest discover -s $XIYUAN_WORKSPACE/upstream/openpi/tests/xiyuan -p test_training.py
 ```
 
-当前恢复点：run c完整checkpoints/2、snapshot.json、save-inputs.json/save-graph.txt；重复误差probe工具session49854、PID405355、GPU2、上限600秒，登记real-repeat-c-restore-registration.json，日志real-repeat-c-restore.log。先poll同一session和登记终态，不以状态文件尚未更新就重启。G1仍未通过，正式/真实开发学习长训尚未开始。
+当前恢复点：run c完整checkpoints/2、snapshot.json、save-inputs.json/save-graph.txt；重复误差probe工具session（见本机记录）、PID（见本机记录）、GPU2、上限600秒，登记real-repeat-c-restore-registration.json，日志real-repeat-c-restore.log。先poll同一session和登记终态，不以状态文件尚未更新就重启。G1仍未通过，正式/真实开发学习长训尚未开始。
 
 ### 2026-09-07｜重复误差与实际输入差异已实测
 
-probe session49854退出0；同一恢复状态、同一样本重复3次更新，loss均14.6259765625、grad_norm均26.91887664794922，全部10个LoRA参数叶子相对首次结果的最大绝对差均为0。证据run c/repeat-probe-result.json、repeat-probe-lora.npz，结论只适用于此已编译程序，不是恢复gate通过。
+probe session（见本机记录）退出0；同一恢复状态、同一样本重复3次更新，loss均14.6259765625、grad_norm均26.91887664794922，全部10个LoRA参数叶子相对首次结果的最大绝对差均为0。证据run c/repeat-probe-result.json、repeat-probe-lora.npz，结论只适用于此已编译程序，不是恢复gate通过。
 
 save-inputs与restore-inputs共78个叶子：所有值hash、shape、dtype及分片均一致，唯一差异是state.step的weak_type从True变False。原始比对resume-input-diff.json已留存。此标记可能改变JAX编译，但尚未证明是全部差异的原因。重复误差为0，不能以“自然随机波动”解释或直接容忍此前差异。
 
@@ -217,12 +219,12 @@ F1训练入口已实现：工程scripts/xiyuan/train_s.py，本地commit9f50f774
 实际CPU诊断命令：
 
 ```sh
-env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= MUJOCO_GL=egl PYNPUT_BACKEND=dummy LIBERO_CONFIG_PATH=/nfs_share/lijunhui2/local/libero-clean MPLCONFIGDIR=/nfs_share/lijunhui2/cache/matplotlib-clean NUMBA_CACHE_DIR=/nfs_share/lijunhui2/cache/numba-clean OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 timeout 180 /nfs_share/lijunhui2/envs/sim-clean/bin/python /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/check-failed-expert-state.py
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= MUJOCO_GL=egl PYNPUT_BACKEND=dummy LIBERO_CONFIG_PATH=$XIYUAN_WORKSPACE/local/libero-clean MPLCONFIGDIR=$XIYUAN_WORKSPACE/cache/matplotlib-clean NUMBA_CACHE_DIR=$XIYUAN_WORKSPACE/cache/numba-clean OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 timeout 180 $XIYUAN_WORKSPACE/envs/sim-clean/bin/python $XIYUAN_WORKSPACE/artifacts/audits/f1-resources-20260907/check-failed-expert-state.py
 ```
 
-当前v4 save工具session27687仍在执行；此前v3和CPU诊断均终止。恢复先查real-resume-v4-e-save-registration.json及原session；只有save COMPLETE和expected.json存在才启动restore。F1/G1未通过，未启动后台学习训练队列。
+当前v4 save工具session（见本机记录）仍在执行；此前v3和CPU诊断均终止。恢复先查real-resume-v4-e-save-registration.json及原session；只有save COMPLETE和expected.json存在才启动restore。F1/G1未通过，未启动后台学习训练队列。
 
-v4保存更新：session27687退出0，完整run e/checkpoints/2及expected.json已生成；连续第3步loss14.65478515625、grad_norm26.65860939025879。当前独立恢复session65924，GPU2，登记real-resume-v4-e-restore-registration.json；恢复结果仍待核实，不能提前判PASS。
+v4保存更新：session（见本机记录）退出0，完整run e/checkpoints/2及expected.json已生成；连续第3步loss14.65478515625、grad_norm26.65860939025879。当前独立恢复session（见本机记录），GPU2，登记real-resume-v4-e-restore-registration.json；恢复结果仍待核实，不能提前判PASS。
 
 ### 2026-09-07｜独立恢复精确通过，进入真实累计入口检查
 
@@ -230,21 +232,21 @@ v4/run e的save与restore均退出0。恢复模型/optimizer/step全部hash一�
 
 训练入口已要求配置中的xla_flags与启动环境精确匹配，缺失则拒绝启动，代码commit357c33d（完整hash以工程Git为准）。主文档同步当前共享S运行要求，四组不分别选GPU编译算法设置。真实成本必须按这个已验证设置测量，不复用旧默认编译下的短时步速。
 
-开始F1实际入口限定2次有效更新：launch-s-entry.py经GPU2空闲保护启动，工具session26126；物理batch2×累计8=有效16，配置仍为300步小样本pilot的固定总时程，但本段--stop-after 2，不运行余下298步。上限900秒，日志f1-s-entry-entry-two-updates.log，登记同名前缀registration.json；输出runs/pilot/f1-s-overfit-20260907-a。恢复按原总时程保持schedule，不因分段重设LR或采样。warmup10只属于小样本pilot；当前没有长训或正式作业。
+开始F1实际入口限定2次有效更新：launch-s-entry.py经GPU2空闲保护启动，工具session（见本机记录）；物理batch2×累计8=有效16，配置仍为300步小样本pilot的固定总时程，但本段--stop-after 2，不运行余下298步。上限900秒，日志f1-s-entry-entry-two-updates.log，登记同名前缀registration.json；输出runs/pilot/$XIYUAN_RUN_ID。恢复按原总时程保持schedule，不因分段重设LR或采样。warmup10只属于小样本pilot；当前没有长训或正式作业。
 
-真实入口首次session26126在run创建前因Fast tokenizer的.cache目录被文件hash循环读取而退出1，没有执行更新。修复只遍历实际文件，独立确认5个tokenizer文件可读、run尚不存在；本地代码commit daa1a1d，原失败日志保留。限定2更新重试已启动，session24145/PID446501，GPU2，输出同计划run a，新日志f1-s-entry-entry-two-updates-retry.log及新registration。当前仍在模型初始化/首次编译阶段，未宣称累计GPU通过。
+真实入口首次session（见本机记录）在run创建前因Fast tokenizer的.cache目录被文件hash循环读取而退出1，没有执行更新。修复只遍历实际文件，独立确认5个tokenizer文件可读、run尚不存在；本地代码commit daa1a1d，原失败日志保留。限定2更新重试已启动，session（见本机记录）/PID（见本机记录），GPU2，输出同计划run a，新日志f1-s-entry-entry-two-updates-retry.log及新registration。当前仍在模型初始化/首次编译阶段，未宣称累计GPU通过。
 
 ### 2026-09-07｜实际累计入口通过两步，启动300步小样本pilot
 
-session24145退出0，COMPLETE_REQUESTED_SEGMENT：两次有效更新均完成，每步物理2×累计8=有效16，action loss分别14.98901367/13.66802406，梯度范数15.68289757/14.32157516，数值有限。第2步完整checkpoint位于runs/pilot/f1-s-overfit-20260907-a/checkpoints/2，status记录checkpoint_update=2。首步含编译/数据19.66秒、第二步含数据6.53秒；未达到稳定300更新profile要求，不作正式吞吐。两步不同样本loss不能作为已学会任务的证据，GPU累计对等大batch的数值检查仍待补齐。
+session（见本机记录）退出0，COMPLETE_REQUESTED_SEGMENT：两次有效更新均完成，每步物理2×累计8=有效16，action loss分别14.98901367/13.66802406，梯度范数15.68289757/14.32157516，数值有限。第2步完整checkpoint位于runs/pilot/$XIYUAN_RUN_ID/checkpoints/2，status记录checkpoint_update=2。首步含编译/数据19.66秒、第二步含数据6.53秒；未达到稳定300更新profile要求，不作正式吞吐。两步不同样本loss不能作为已学会任务的证据，GPU累计对等大batch的数值检查仍待补齐。
 
-按持续完成F1授权，launch-s-overfit.py从这个完整第2步checkpoint恢复至预先固定的300步，配置、200样本池、seed、总scheduler时程和有效batch不变；不是重新初始化或重置样本cursor。启动保护已确认GPU2空闲并登记：session89825，最多额外298更新，外层限时3600秒；内部每100步/段末保存，完整checkpoint后才更新状态。日志f1-s-entry-overfit-resume-to-300.log，登记同名前缀registration.json。此前planned配置现在已被实际入口使用，权威resolved-config/provenance/schedule.sha256位于run目录；不修改运行中的配置与代码。
+按持续完成F1授权，launch-s-overfit.py从这个完整第2步checkpoint恢复至预先固定的300步，配置、200样本池、seed、总scheduler时程和有效batch不变；不是重新初始化或重置样本cursor。启动保护已确认GPU2空闲并登记：session（见本机记录），最多额外298更新，外层限时3600秒；内部每100步/段末保存，完整checkpoint后才更新状态。日志f1-s-entry-overfit-resume-to-300.log，登记同名前缀registration.json。此前planned配置现在已被实际入口使用，权威resolved-config/provenance/schedule.sha256位于run目录；不修改运行中的配置与代码。
 
-此小样本pilot仅F1诊断，不进formal主表，不越G2。实际后台只有已启动的这一有限作业，未启动1k—3k全数据训练或正式四组队列。恢复先poll session89825，再核对status、metrics各attempt和最近完整checkpoint；不要因对话结束重复启动。完整目标仍包含小样本曲线、全数据短训/多checkpoint开发闭环、GPU累计对应与七维生效/初态审计、代表回放人工检查；G1尚未通过。
+此小样本pilot仅F1诊断，不进formal主表，不越G2。实际后台只有已启动的这一有限作业，未启动1k—3k全数据训练或正式四组队列。恢复先poll session（见本机记录），再核对status、metrics各attempt和最近完整checkpoint；不要因对话结束重复启动。完整目标仍包含小样本曲线、全数据短训/多checkpoint开发闭环、GPU累计对应与七维生效/初态审计、代表回放人工检查；G1尚未通过。
 
 ### 2026-09-07｜七维真实单例、开发服务与300步pilot收口
 
-七维单例session42827退出0，7个子进程均退出0；登记plus-singletons-run.json为COMPLETE，GPU3已释放。每例通过实际OffScreenRenderEnv创建、官方state shape检查、重复reset和10步预热；两个视图128×128×3 uint8。背景/机器人/视角/语言/噪声/布局/光照分别选官方index0/258/608/984/1374/1725/2110，详细JSON/PNG/日志在plus-singleton-*；总体及组件比较为plus-singletons-summary/effects.json。不是策略rollout或正式评测manifest。
+七维单例session（见本机记录）退出0，7个子进程均退出0；登记plus-singletons-run.json为COMPLETE，GPU3已释放。每例通过实际OffScreenRenderEnv创建、官方state shape检查、重复reset和10步预热；两个视图128×128×3 uint8。背景/机器人/视角/语言/噪声/布局/光照分别选官方index0/258/608/984/1374/1725/2110，详细JSON/PNG/日志在plus-singleton-*；总体及组件比较为plus-singletons-summary/effects.json。不是策略rollout或正式评测manifest。
 
 机器人例native reset相对参考最大关节差0.06668，加载同一官方状态后差为0，10步预热后差0.04272，说明不能只看set_init_state瞬间就判扰动无效，也不能向策略发送预热前缓存观测。噪声例noise=3，wrapper与同一步未加噪图像的第三人称平均绝对像素差8.187，腕部为0。布局库存仅1×118，实际不能靠换seed凑20单元。语言例的完整改写真实可用；其他类别API语言包含文件配置后缀，需要在评测清单构造时排除机械后缀，而非让策略按task_id恢复答案。
 
@@ -254,8 +256,22 @@ session24145退出0，COMPLETE_REQUESTED_SEGMENT：两次有效更新均完成�
 
 第100步修复后的smoke和第200步smoke均在第一请求返回invalid_coefficient_length，实际执行0个策略动作，success=False。前者原服务适配错误与后者真实生成长度失败分开记录；第200步保留生成token IDs，离线解码得到13个FAST token、56个系数，要求10×7=70，Action标记与EOS存在，不是256预算截断。证据s-loop-100-result、s-loop-100-retry-result、s-loop-200-result及s-loop-200-coefficient-diagnostic.json。未截尾/补零、未更改成功判据。各服务/renderer均由有时限launcher终止，当前已无遗留服务。
 
-pilot续段session89825已退出0，实际完成300更新；run status=COMPLETE_REQUESTED_SEGMENT、checkpoint_update=300。完整逐步/采样汇总pilot-overfit-summary.json，全部1—300连续无重复更新，每步16个sample_id与独立PCG64重建一致。第100步32个冻结叶子与实际基础指纹完全一致（trained-freeze-100.json），100→200全部10个LoRA叶子变化、32个冻结叶子不变（pilot-updates-100-200.json），CPU检查均退出0。首10/末10平均loss13.605976/1.928849，仅训练集小池结果，不代表控制成功或完整数据泛化。
+pilot续段session（见本机记录）已退出0，实际完成300更新；run status=COMPLETE_REQUESTED_SEGMENT、checkpoint_update=300。完整逐步/采样汇总pilot-overfit-summary.json，全部1—300连续无重复更新，每步16个sample_id与独立PCG64重建一致。第100步32个冻结叶子与实际基础指纹完全一致（trained-freeze-100.json），100→200全部10个LoRA叶子变化、32个冻结叶子不变（pilot-updates-100-200.json），CPU检查均退出0。首10/末10平均loss13.605976/1.928849，仅训练集小池结果，不代表控制成功或完整数据泛化。
 
 上游保留策略在提交100步时自动回收了早期非周期的2步入口检查点；当前100/200/300均完整保留，2步历史日志仍在但不能再作为现存恢复点。后续训练入口已改为保留全部检查点，CPU测试保存2/100/101并恢复最早2成功，退出0，checkpoint-retention.log；不覆盖或删除现存实验产物。本轮训练完成后才改入口，不改变旧pilot执行代码；后续作业用新版本。
 
 全数据2,000步S配置protocols/f1-s-full-2000-planned.json已准备但未启动：同一基础权重重新初始化、全部train样本、有效16/物理2、warmup1000、每500步保存、单段18000秒上限。不是从小池微调模型继续训练后冒充原始初始化基线，也不是正式20k四组训练。下一步仍需GPU累计对应、真实入口确定性细查、多checkpoint开发闭环、初态/指令清单收口和人工审阅。当前真实完成范围仅以上证据，G1未通过。
+
+### 2026-09-07｜全数据短训启动与空闲GPU持续授权
+
+全数据2,000步S开发训练已实际启动，非从小样本模型接续：run_id=$XIYUAN_RUN_ID，GPU2/UUID $XIYUAN_GPU_UUID，PID（见本机记录），工具session（见本机记录）。最新核对57更新，配置hash6ab8ac143b71e97337de0ceedc2b4b95bfc74e0401271489804319b441acd9a3；物理2×累计8=有效16，全部train样本，warmup1000，K=2000，每500步保存并保留全部checkpoint。内层18000秒训练上限，外层18600秒含保存宽限；3.6—5小时是由小池步时推算的估计，不是本次实测。启动命令 `python3 artifacts/audits/f1-resources-20260907/launch-s-full.py`，登记f1-s-entry-full-2000-fresh-registration.json及同前缀.log；恢复先查同一工具session和run status，不重复启动。
+
+小样本第300步在同一预留开发单元的20步smoke已结束，session（见本机记录）退出0（表示执行器完成，不表示策略成功）。结果仍invalid_coefficient_length，执行0个策略动作、success=False；s-loop-300-result.json及server/client日志保留，策略服务和renderer已释放。G1继续未通过。
+
+负责人明确追加资源授权：“有其他空闲的gpu你也可以增加预算，不止用两张，可以并行使用更多张”“核心宗旨是只要有空的就可以用”。**从本次授权起，确认空闲的GPU均可使用，没有固定两卡并发上限；GPU数量及相应资源预算可以增加，无需为使用第3张或更多空闲卡再次询问。** 旧日志中的两卡并行限制属于当时的资源安排，不作为后续上限。按项目全局登记实际卡/作业，优先并行独立训练、开发评测、累计/确定性检查和复现；忙卡不抢、陌生PID不杀。该授权已同步工作区私人AGENTS.md、执行手册、实验计划和本阶段PLAN。私人AGENTS不上传公开仓库。
+
+当前运行中的2,000步作业保持已记录配置及有效batch，新增空闲卡用于后续就绪任务或经过验证的多卡入口；不会通过临时更改正在运行作业的卡数破坏恢复与公平性。剩余总卡时和完成时间按实际空闲窗口重估，两卡700/840卡时等旧情景只作比较参考，预算可依本次授权增加。科学任务范围与gate仍按既定四组协议推进。
+
+本轮为授权与资源规则文档更新；git diff --check退出0，旧“暂按两张”“不自动使用八卡”“两卡默认一个大作业一张卡”等当前指令已替换。历史日志和两卡数学算例保留并标明参考性质；没有改训练源码、参数、数据或终止正在运行的作业。
+
+发布检查说明：首次git push被自动审批拒绝，理由为新增公开文档包含机器内部路径、GPU UUID、PID及运行交接元数据。已将公开Markdown中的这些标识改为占位符，并明确占位命令不能直接执行；真实原件已备份到服务器私有审计目录，各run/registration继续作为精确恢复依据。未公开的提交将改写为脱敏版本后再推送，避免把已移除的新标识留在本次待推送历史中。科学结果和新的空闲GPU授权不变。

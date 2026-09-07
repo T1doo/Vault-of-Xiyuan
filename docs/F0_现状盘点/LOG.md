@@ -1,10 +1,12 @@
 # F0：现状盘点——阶段日志
 
+> 公开版的内部路径已改为占位符；本机原始命令及审计产物保留在服务器，不应直接复制占位命令执行。
+
 ## 当前进展
 
 最后核对：2026-09-07 14:00:21 +08:00。**F0/T00 DONE（盘点完成）**。六步结果与证据见本日志末尾阶段总结，PLAN 已按证据勾选；G1—G5 均未通过，F1 尚未开始。
 
-当前文档分支 main，已发布基线 `eaf03864f3e75d6ff132e28bdc41fc6030cd26bf`；本轮 F0 PLAN/LOG 包含此前认证修复日志，未覆盖历史；最新文档版本以本文件所在Git提交为准，阶段执行时基线与发布版本分开追溯。实际学生工程选 `/nfs_share/lijunhui2/upstream/openpi`，上游 commit `215abfb217dbac7d5f1273282331b9b1866c0479`；本轮仅新增该工程短 AGENTS.md，尚无科研实现 commit。其余上游版本见执行记录。
+当前文档分支 main，已发布基线 `eaf03864f3e75d6ff132e28bdc41fc6030cd26bf`；本轮 F0 PLAN/LOG 包含此前认证修复日志，未覆盖历史；最新文档版本以本文件所在Git提交为准，阶段执行时基线与发布版本分开追溯。实际学生工程选 `$XIYUAN_WORKSPACE/upstream/openpi`，上游 commit `215abfb217dbac7d5f1273282331b9b1866c0479`；本轮仅新增该工程短 AGENTS.md，尚无科研实现 commit。其余上游版本见执行记录。
 
 活跃科研作业/自动队列：无；本轮审计脚本及三次只读新会话均已结束，最终进程核查未发现匹配残留。无 GPU lease、checkpoint、有效更新或分片恢复源。两卡仍只是多人共享服务器的可用并发预估，资源快照不保证下次可用。
 
@@ -58,7 +60,7 @@ F0无剩余阻塞。F1待验证事项包括依赖解析与锁定、驱动/JAX实
 - 活跃实验作业：本次未启动任何作业。
 - 下一步：按负责人指令推进；开始科研实施时先执行 T00 只读审计。
 
-验证：`git diff --cached --check`、`git push -u origin main` 和 `gh repo view T1doo/Vault-of-Xiyuan --json url,visibility,owner,defaultBranchRef` 均成功（退出码 0）。共享目录归属检查通过临时 `GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig` 处理，未修改用户全局 Git 配置。
+验证：`git diff --cached --check`、`git push -u origin main` 和 `gh repo view T1doo/Vault-of-Xiyuan --json url,visibility,owner,defaultBranchRef` 均成功（退出码 0）。共享目录归属检查通过临时 `GIT_CONFIG_GLOBAL=$PRIVATE_TEMP_PATH` 处理，未修改用户全局 Git 配置。
 
 ## 2026-09-06：文档通读与服务器适配审阅
 
@@ -123,7 +125,7 @@ InSpire 的 π₀-FAST 先例与当前 LoRA/Spatial 设置有差异；Spatial Fo
 
 ## 2026-09-06：个人公开文档仓库
 
-按负责人明确要求，在 `/nfs_share/lijunhui2/Vault-of-Xiyuan` 创建个人公开 Git 仓库，并将原工作区 `docs/` 移入仓库。`AGENTS.md` 留在工作区根目录，其阅读入口更新为 `Vault-of-Xiyuan/docs/...`。
+按负责人明确要求，在 `$XIYUAN_WORKSPACE/Vault-of-Xiyuan` 创建个人公开 Git 仓库，并将原工作区 `docs/` 移入仓库。`AGENTS.md` 留在工作区根目录，其阅读入口更新为 `Vault-of-Xiyuan/docs/...`。
 
 负责人已授权将本仓库发布到 GitHub。此次变更只涉及文档组织和路径说明，不改变实验协议，也未启动科研实验。
 
@@ -150,12 +152,12 @@ F0/T00 文档与服务器审阅。以下为实际执行过的命令记录，其�
 
 ## Git 状态
 
-在 `/nfs_share/lijunhui2` 执行。前置条件：已有 `/tmp/xiyuan-gitconfig` 且含本仓库的精确 safe.directory 配置。该临时文件来自前一次仓库创建操作，不是仓库内依赖，也不保证重启后存在。
+在 `$XIYUAN_WORKSPACE` 执行。前置条件：已有 `$PRIVATE_TEMP_PATH` 且含本仓库的精确 safe.directory 配置。该临时文件来自前一次仓库创建操作，不是仓库内依赖，也不保证重启后存在。
 
 ```sh
-GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan status --short
-GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan rev-parse HEAD
-GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan branch --show-current
+GIT_CONFIG_GLOBAL=$PRIVATE_TEMP_PATH git -C Vault-of-Xiyuan status --short
+GIT_CONFIG_GLOBAL=$PRIVATE_TEMP_PATH git -C Vault-of-Xiyuan rev-parse HEAD
+GIT_CONFIG_GLOBAL=$PRIVATE_TEMP_PATH git -C Vault-of-Xiyuan branch --show-current
 ```
 
 本次入口工作树干净，分支 main，提交 c50040af2f1e4ffeb1c01f03699a206171aff8b6。普通 git 命令因共享目录归属检查失败；临时配置方式成功，未修改用户全局配置。
@@ -170,7 +172,7 @@ nvidia-smi --query-compute-apps=gpu_uuid,pid,process_name,used_memory --format=c
 nvidia-smi topo -m
 lscpu
 free -h
-df -hT /nfs_share/lijunhui2 /tmp /dev/shm
+df -hT $XIYUAN_WORKSPACE /tmp /dev/shm
 /usr/bin/python3 --version
 ```
 
@@ -181,10 +183,10 @@ df -hT /nfs_share/lijunhui2 /tmp /dev/shm
 在工作区根执行过以下命令，四项 clone 退出码均为 0。目标目录现已存在，以下为历史记录，不应重复执行 clone 或覆盖目录；具体版本见 STATUS 和仓库外 `artifacts/audits/scientific_source_inventory_20260906.json`。未初始化 openpi 子模块，未安装依赖、下载训练数据或权重。
 
 ```sh
-git clone --depth 1 https://github.com/Physical-Intelligence/openpi.git /nfs_share/lijunhui2/upstream/openpi
-git clone --depth 1 https://github.com/mystorm16/FastVGGT.git /nfs_share/lijunhui2/upstream/FastVGGT
-git clone --depth 1 https://github.com/Lifelong-Robot-Learning/LIBERO.git /nfs_share/lijunhui2/upstream/LIBERO
-git clone --depth 1 https://github.com/sylvestf/LIBERO-plus.git /nfs_share/lijunhui2/upstream/LIBERO-plus
+git clone --depth 1 https://github.com/Physical-Intelligence/openpi.git $XIYUAN_WORKSPACE/upstream/openpi
+git clone --depth 1 https://github.com/mystorm16/FastVGGT.git $XIYUAN_WORKSPACE/upstream/FastVGGT
+git clone --depth 1 https://github.com/Lifelong-Robot-Learning/LIBERO.git $XIYUAN_WORKSPACE/upstream/LIBERO
+git clone --depth 1 https://github.com/sylvestf/LIBERO-plus.git $XIYUAN_WORKSPACE/upstream/LIBERO-plus
 ```
 
 默认沙箱首次网络访问失败，宿主机网络执行成功。共享目录 Git 状态检查使用另建的临时精确 safe.directory 配置，未改变用户全局设置；源码审阅四个版本的 rev-parse/status 均退出 0。静态 AST 检查 Spatial 十任务均为黑碗到盘子，不等于真实环境回放通过。
@@ -198,7 +200,7 @@ git clone --depth 1 https://github.com/sylvestf/LIBERO-plus.git /nfs_share/lijun
 以下命令已在本次编辑前执行通过（退出 0），发布前对最终内容复查；只检查文档，不替代项目测试：
 
 ```sh
-GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan diff --check
+GIT_CONFIG_GLOBAL=$PRIVATE_TEMP_PATH git -C Vault-of-Xiyuan diff --check
 ```
 
 最终修订复查通过（退出 0）：6 个 Markdown 的围栏/相对链接/无聊天内部引用标记；两份主文档的新增审计内容；手册中 K=20000、seeds 0/1/2、λ_A=0.3、λ_B=0.1、第 12 层默认值保留。一次初始检查因把“不得引入”语义检查写成过严的完全相同措辞而失败，修正检查以接受两份文档的实际等义表达后通过，未为此改实验内容。
@@ -213,7 +215,7 @@ GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan diff --check
 
 迁移前所有相关文件（含未提交/未跟踪记录）已备份至工作区仓库外 `artifacts/docs-backup-20260907-105230/`，附原始 SHA256 清单。旧 STATUS/DECISIONS/RUNBOOK 全文迁入上方历史区后停止维护；已提交历史保留，未改写Git历史。代码、环境、数据、原始产物未搬动、删除或重建。本轮未提交/推送，未启动实验。
 
-实际操作：运行 `/usr/bin/python3 /tmp/xiyuan-simplify-docs.py` 完成备份后的迁移（退出0），随后清理主文档旧入口与阅读规则。验证（退出0）：旧三份账本全文与备份一致且完整包含于本日志；七阶段各仅PLAN/LOG；Markdown相对链接/围栏通过；两份主文档原YAML、bash块及公式保留；核心审阅约束保留。`GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan diff --check` 退出0。以上为文档检查，不是模型或新会话加载验收。
+实际操作：运行 `/usr/bin/python3 $PRIVATE_TEMP_PATH` 完成备份后的迁移（退出0），随后清理主文档旧入口与阅读规则。验证（退出0）：旧三份账本全文与备份一致且完整包含于本日志；七阶段各仅PLAN/LOG；Markdown相对链接/围栏通过；两份主文档原YAML、bash块及公式保留；核心审阅约束保留。`GIT_CONFIG_GLOBAL=$PRIVATE_TEMP_PATH git -C Vault-of-Xiyuan diff --check` 退出0。以上为文档检查，不是模型或新会话加载验收。
 
 ### 2026-09-07｜细化 F0 计划并准备发布
 
@@ -225,7 +227,7 @@ GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan diff --check
 
 用户询问并要求处理命令行 push 无凭据问题。实际发现现有 gh 2.94.0 与 T1doo 登录可复用：沙箱内 auth status 曾报无效，宿主机网络复查退出0确认登录有效，未重新登录或读取令牌。仅在 Vault 的本地 Git 配置为 github.com 接入已有 gh auth git-credential，未改变用户全局配置或凭据，配置不进入公开提交。
 
-实际验证：在宿主机网络执行 `GIT_TERMINAL_PROMPT=0 GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C /nfs_share/lijunhui2/Vault-of-Xiyuan push --dry-run origin main`，随后同环境执行 `push origin main`，均退出0并返回 Everything up-to-date。共享目录仍使用已有临时 safe.directory 配置，文件存在性须检查；该认证修复不代表沙箱网络可访问 GitHub，也不自动配置其他仓库。未启动科研作业。此条为修复后的本地日志追加，尚未发布。
+实际验证：在宿主机网络执行 `GIT_TERMINAL_PROMPT=0 GIT_CONFIG_GLOBAL=$PRIVATE_TEMP_PATH git -C $XIYUAN_WORKSPACE/Vault-of-Xiyuan push --dry-run origin main`，随后同环境执行 `push origin main`，均退出0并返回 Everything up-to-date。共享目录仍使用已有临时 safe.directory 配置，文件存在性须检查；该认证修复不代表沙箱网络可访问 GitHub，也不自动配置其他仓库。未启动科研作业。此条为修复后的本地日志追加，尚未发布。
 
 ### 2026-09-07T13:50:29.114630+08:00｜开始执行 F0
 
@@ -279,7 +281,7 @@ GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan diff --check
 
 ### 2026-09-07｜新会话规则核验、失败与修复
 
-实际入口为已有 `upstream/openpi`，原先没有AGENTS/override，本轮只新增短读取入口，没有改变源码。使用已核验 help 的 codex-cli 0.153.4，以 `codex exec --cd /nfs_share/lijunhui2/upstream/openpi --sandbox read-only --ephemeral --json` 启动无旧聊天上下文核验，未使用resume/fork。完整参数/工具调用与结果分别保存在本轮审计目录的events JSONL；非科研runner。
+实际入口为已有 `upstream/openpi`，原先没有AGENTS/override，本轮只新增短读取入口，没有改变源码。使用已核验 help 的 codex-cli 0.153.4，以 `codex exec --cd $XIYUAN_WORKSPACE/upstream/openpi --sandbox read-only --ephemeral --json` 启动无旧聊天上下文核验，未使用resume/fork。完整参数/工具调用与结果分别保存在本轮审计目录的events JSONL；非科研runner。
 
 - 第一次：已读主文档，但180秒到限，退出124，无最终结论，不能算完整核验成功。
 - 第二次：会话退出0，但其唯一工具误用不存在的python，工具退出127；文件读取未完成，该次不通过。
@@ -302,7 +304,7 @@ GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan diff --check
 | 5 来源与依赖 | 固定源码、候选组合、官方来源与revision、入口风险已查明；7项轻量HTTP检查成功 | resource-access.json、各metadata.json、dependency-and-entrypoints.json |
 | 6 交接 | 日志已汇总、PLAN按证据勾选；F1首个动作和待验项明确，未自动切阶段 | 本阶段PLAN/LOG |
 
-实际运行的审计脚本为 `python3 /tmp/xiyuan-f0-audit.py`、`python3 /tmp/xiyuan-f0-sources.py`（执行时解释器使用/usr/bin/python3），脚本自身均退出0；脚本内部各命令的失败/超时另存JSON，不用外层退出0掩盖。脚本副本已保留于本轮审计目录，便于复核真实操作；它们是本次审计证据，不冒充已注册的项目CLI。新会话和Git复核的退出码见各独立文件。后续复查可以使用这些已有系统查询，不能照抄未验证的训练命令。
+实际运行的审计脚本为 `python3 $PRIVATE_TEMP_PATH`、`python3 $PRIVATE_TEMP_PATH`（执行时解释器使用/usr/bin/python3），脚本自身均退出0；脚本内部各命令的失败/超时另存JSON，不用外层退出0掩盖。脚本副本已保留于本轮审计目录，便于复核真实操作；它们是本次审计证据，不冒充已注册的项目CLI。新会话和Git复核的退出码见各独立文件。后续复查可以使用这些已有系统查询，不能照抄未验证的训练命令。
 
 剩余项属于F1及后续实施验证：获取固定uv/Python并解析隔离依赖；检查JAX/CUDA实际兼容；确认clean/plus统一核心版本与渲染依赖；安全下载及HDF5转换、回放和初态关系审计。若用户目录依赖方案不能解决系统库问题，再提出具体管理员需求，当前不修改驱动或使用sudo。
 
