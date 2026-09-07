@@ -8,7 +8,7 @@
 
 真实基础权重的两步**合成诊断**通过：10个LoRA参数叶子更新、冻结叶子hash不变、实际模型入口预处理跨RNG一致。9项FAST测试、4项数据测试、100个真实样本动作回环通过。专家回放十任务各一条，9成功、1失败待排查，不能写成专家回放全部通过或策略成功率。
 
-工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前真实恢复诊断run_id=f1-real-resume-20260907-a：save进程已退出0，第2步完整checkpoint已提交，第3步连续参考已生成。独立restore已退出1：加载后的模型/optimizer/step hash一致，但同样本接续更新不一致，恢复验收未通过。当前本次诊断进程均已结束，没有项目活跃GPU作业；保留完整第2步checkpoint与连续参考。该作业不是正式学习训练。
+工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前真实恢复诊断run_id=f1-real-resume-20260907-a：save进程已退出0，第2步完整checkpoint已提交，第3步连续参考已生成。独立restore已退出1：加载后的模型/optimizer/step hash一致，但同样本接续更新不一致，恢复验收未通过。原run a诊断已结束；run c重复误差probe已退出0，当前没有本次活跃GPU作业，保留原完整第2步checkpoint与连续参考。该作业不是正式学习训练。
 
 下一步：全量token长度盘点已通过；实现并验证完整训练保存/恢复，再做小样本学习与1k—3k步S短训、开发闭环；排查失败回放，验证七维实际reset/扰动生效。G1人工回放/控制与曲线审查尚未签收，未满足G1或正式训练前G2。
 
@@ -169,3 +169,31 @@ env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES=GPU-414c
 独立restore session79933已终止，退出1；失败处为 `resumed continuation differs exactly`。在这之前，第2步的全部模型参数、optimizer叶子及step与保存前snapshot逐项shape/dtype/SHA256精确一致，继续采样的sample_id也与连续运行相同。连续第3步loss=14.61308575、grad_norm=26.53478622；独立恢复第3步loss=14.64101601、grad_norm=26.78891373，最终参数hash不同。不能把“成功读取checkpoint”当作完整恢复验收，也不能根据这次跨GPU比较放宽容差。
 
 完整checkpoint和expected/snapshot/provenance均保留，失败日志real-resume-restore.log保留；没有训练/教师/评测活跃作业。该差异可能涉及跨进程编译、模型静态状态或数值执行路径，现有证据尚未定位原因。下一步在相同GPU上独立复验并保存输入batch/hash、图结构及重复前向/更新误差，区分输入、状态和编译问题；未经证实不归咎GPU。原诊断脚本hash已绑定provenance，新增诊断用新版本/新输出，不覆盖历史证据。恢复gate仍未通过，F1与真实S学习训练均继续待办。
+
+### 2026-09-07｜同卡恢复复验与梯度累计入口
+
+同一原GPU1、同脚本、同checkpoint复验退出1：第3步loss=14.613085746765137，与连续参考精确相同；grad_norm=26.534759521484375，参考26.534786224365234，参数hash仍不同。证据real-resume-same-gpu.log；原跨GPU失败日志不覆盖。此证据缩小排查范围，不自动放宽容差或判恢复通过。
+
+新增v2诊断记录训练输入叶子的值hash/shape/dtype/weak_type/sharding、模型静态图和StableHLO。第一次误在已忙GPU1启动后，立即精确匹配并终止自己的PID394933（退出143），未触碰其他项目进程；该run b保留。随后启动保护在同一次调用中两次检查选定GPU的显存和利用率，忙卡拒绝，再在GPU2登记run c。它是本次有限诊断入口，不是通用调度器，仍存在检查后外部作业启动的竞态，须运行中检查。
+
+run c完成两步及完整checkpoint保存，但新增step.lower检查在JAX ArgInfo重建TrainState时触发jaxtyping类型错误，save退出1；不是模型前向或checkpoint写入失败。保存前inputs/graph和完整snapshot已留存。仅在lower检查局部使用上游array_typing.disable_typechecking，实际训练的类型校验保持开启；新probe复用已有checkpoint，不重新生成训练参考或重复下载。当前probe对同一恢复状态、同一输入重复更新3次，测量重复误差，不提前指定为恢复PASS。
+
+梯度累计已实现并本地提交：src/xiyuan/training.py及tests/xiyuan/test_training.py，commit ef844cf（完整hash以工程Git为准）。输入限制为等大小微批次，先逐样本均值、累积后平均梯度，再统一裁剪/optimizer更新一次；有效步只加1。CPU synthetic测试比较3×2与batch6、独立解析梯度/一次裁剪及冻结参数不变，还确认错误的逐微批次裁剪会产生不同结果。测试退出0，证据accumulation-cpu.log；语法检查退出0。真实模型GPU累计、大batch对应和吞吐尚未运行，不称已支持完整生产训练。
+
+已验证命令：
+
+```sh
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu /nfs_share/lijunhui2/envs/policy-train/bin/python -m unittest discover -s /nfs_share/lijunhui2/upstream/openpi/tests/xiyuan -p test_training.py
+```
+
+当前恢复点：run c完整checkpoints/2、snapshot.json、save-inputs.json/save-graph.txt；重复误差probe工具session49854、PID405355、GPU2、上限600秒，登记real-repeat-c-restore-registration.json，日志real-repeat-c-restore.log。先poll同一session和登记终态，不以状态文件尚未更新就重启。G1仍未通过，正式/真实开发学习长训尚未开始。
+
+### 2026-09-07｜重复误差与实际输入差异已实测
+
+probe session49854退出0；同一恢复状态、同一样本重复3次更新，loss均14.6259765625、grad_norm均26.91887664794922，全部10个LoRA参数叶子相对首次结果的最大绝对差均为0。证据run c/repeat-probe-result.json、repeat-probe-lora.npz，结论只适用于此已编译程序，不是恢复gate通过。
+
+save-inputs与restore-inputs共78个叶子：所有值hash、shape、dtype及分片均一致，唯一差异是state.step的weak_type从True变False。原始比对resume-input-diff.json已留存。此标记可能改变JAX编译，但尚未证明是全部差异的原因。重复误差为0，不能以“自然随机波动”解释或直接容忍此前差异。
+
+新增canonicalize_training_state明确将step表示为JAX int32非weak scalar，供初始化和恢复后共同调用，不改变数值或采样游标。CPU合成测试验证fresh/host-roundtrip后相同aval和值；与累计回归一起2项通过，退出0，证据accumulation-counter-cpu.log。函数尚未接入真实训练诊断，因此不能声称问题已修复。下一步将它接入新版本的实际诊断，固定真实JIT输入/输出分片，再做同卡独立恢复；若仍不同，比较编译与确定性设置，继续保留原证据与精度标准。
+
+本轮所有进程均已终止。最近完整checkpoint为run c/checkpoints/2，另保留run a/checkpoints/2及其连续第3步expected；没有可用于学习结论的训练checkpoint。F1/G1继续IN_PROGRESS，真实累计GPU对应、小样本与1k—3k训练、开发闭环、失败专家回放及七维生效检查仍未完成。
