@@ -8,7 +8,7 @@
 
 真实基础权重的两步**合成诊断**通过：10个LoRA参数叶子更新、冻结叶子hash不变、实际模型入口预处理跨RNG一致。9项FAST测试、4项数据测试、100个真实样本动作回环通过。专家回放十任务各一条，9成功、1失败待排查，不能写成专家回放全部通过或策略成功率。
 
-工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前真实恢复诊断run_id=f1-real-resume-20260907-a：save进程已退出0，第2步完整checkpoint已提交，第3步连续参考已生成。独立restore正在GPU2运行，PID380944、工具session79933，限时600秒；尚待实际恢复结果。该作业不是正式学习训练。
+工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前真实恢复诊断run_id=f1-real-resume-20260907-a：save进程已退出0，第2步完整checkpoint已提交，第3步连续参考已生成。独立restore已退出1：加载后的模型/optimizer/step hash一致，但同样本接续更新不一致，恢复验收未通过。当前本次诊断进程均已结束，没有项目活跃GPU作业；保留完整第2步checkpoint与连续参考。该作业不是正式学习训练。
 
 下一步：全量token长度盘点已通过；实现并验证完整训练保存/恢复，再做小样本学习与1k—3k步S短训、开发闭环；排查失败回放，验证七维实际reset/扰动生效。G1人工回放/控制与曲线审查尚未签收，未满足G1或正式训练前G2。
 
@@ -163,3 +163,9 @@ env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES=GPU-414c
 这条命令是已启动历史记录，不可原样重复（run目录存在会拒绝）。恢复当前工作先poll工具session91909并读取save-status/log；只有checkpoint提交完成且expected.json存在后才允许进入restore。restore仅--help注册过，尚未验证执行成功。G1继续IN_PROGRESS，不存在无人值守后续训练队列。
 
 保存更新：session91909已退出0，save-status为COMPLETE；正式提交的诊断checkpoint路径为 `runs/diagnostics/f1-real-resume-20260907-a/checkpoints/2`（约4.6G），snapshot.json绑定完整模型/optimizer/step，expected.json含连续第3步参数hash/样本/指标。原临时目录状态已结束。重新查询GPU2空闲后启动独立restore，工具session79933/PID380944，GPU UUID见registration更新；600秒限时保持不变。restore使用同一已注册CLI，将mode改为restore，CUDA_VISIBLE_DEVICES改为GPU2的UUID，日志real-resume-restore.log。启动本身不等于恢复验证通过。
+
+### 2026-09-07｜恢复诊断结果：状态恢复通过，接续更新失败
+
+独立restore session79933已终止，退出1；失败处为 `resumed continuation differs exactly`。在这之前，第2步的全部模型参数、optimizer叶子及step与保存前snapshot逐项shape/dtype/SHA256精确一致，继续采样的sample_id也与连续运行相同。连续第3步loss=14.61308575、grad_norm=26.53478622；独立恢复第3步loss=14.64101601、grad_norm=26.78891373，最终参数hash不同。不能把“成功读取checkpoint”当作完整恢复验收，也不能根据这次跨GPU比较放宽容差。
+
+完整checkpoint和expected/snapshot/provenance均保留，失败日志real-resume-restore.log保留；没有训练/教师/评测活跃作业。该差异可能涉及跨进程编译、模型静态状态或数值执行路径，现有证据尚未定位原因。下一步在相同GPU上独立复验并保存输入batch/hash、图结构及重复前向/更新误差，区分输入、状态和编译问题；未经证实不归咎GPU。原诊断脚本hash已绑定provenance，新增诊断用新版本/新输出，不覆盖历史证据。恢复gate仍未通过，F1与真实S学习训练均继续待办。
