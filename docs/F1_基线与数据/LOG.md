@@ -318,3 +318,10 @@ pilot续段session（见本机记录）已退出0，实际完成300更新；run 
 Plus全量状态哈希盘点最终退出0：2,402配置/0错误；背景258、机器人350、视角376、语言390、噪声351、布局385、光照292。除布局外每配置50行且行内唯一；布局385个配置每个只有1行、状态维度跨92/105/118/131/144/157。结果plus-state-uniqueness.json，解释限于存储行唯一性，不能替代reset/血缘/最终manifest。
 
 第500步全数据模型使用隔离推理worktree的缓存位置修正版检查5个真实训练帧，5/5仍invalid_coefficient_length；没有执行策略动作。固定step500候选位置不再是唯一未测因素，优先等待训练后续checkpoint再判断是否属于欠训练。原运行主worktree provenance未改变。
+
+
+### 2026-09-07｜Plus原生seed生效审计
+
+七类代表Plus配置（背景、机器人初态、视角、语言、噪声、布局、光照）各执行native reset：同seed两次状态逐元素精确一致，不同seed状态hash不同，qpos最大差约0.0228；布局状态为118维，其余代表为92维。证据plus-seed-effect.json，退出0。该测试调用底层reset而非策略rollout，说明seed确实能影响原生reset，但官方`set_init_state`会覆盖完整状态，正式单元仍需固定官方状态、记录seed并在预热后取观测。首次运行缺ImageMagick native库失败，按本地已验证原生库路径重试通过；失败日志保留。
+
+全数据S训练最新约640/2000更新，第500步checkpoint保持完整，仍按固定有效batch16及确定性XLA运行。上述Plus CPU状态审计未占用GPU，未干扰训练；当前主作业之外没有新的长期训练队列。
