@@ -8,9 +8,9 @@
 
 真实基础权重的两步**合成诊断**通过：10个LoRA参数叶子更新、冻结叶子hash不变、实际模型入口预处理跨RNG一致。9项FAST测试、4项数据测试、100个真实样本动作回环通过。专家回放十任务各一条，9成功、1失败待排查，不能写成专家回放全部通过或策略成功率。
 
-工程分支 `xiyuan/f1-baseline`，实现commit `7be08142871980d4ebe7b93d3efe617ad784adb4`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前没有项目训练/教师/评测后台作业，没有可恢复的学习训练checkpoint。最近只读GPU查询：GPU0忙，其余卡接近空闲；启动时须重新检查，不能据此预占。
+工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前有一个已登记的真实模型保存/恢复诊断：run_id=f1-real-resume-20260907-a，save进程PID372761、工具session91909，GPU1，限时600秒。两次真实数据更新完成，完整checkpoint仍在临时目录写入，尚不可恢复；它不是正式学习训练。GPU1随后出现其他项目渲染进程，本次有限诊断收尾后不再在该卡提交后续；restore待重新检查空闲卡。
 
-下一步：全量token长度盘点；实现并验证完整训练保存/恢复，再做小样本学习与1k—3k步S短训、开发闭环；排查失败回放，验证七维实际reset/扰动生效。G1人工回放/控制与曲线审查尚未签收，未满足G1或正式训练前G2。
+下一步：全量token长度盘点已通过；实现并验证完整训练保存/恢复，再做小样本学习与1k—3k步S短训、开发闭环；排查失败回放，验证七维实际reset/扰动生效。G1人工回放/控制与曲线审查尚未签收，未满足G1或正式训练前G2。
 
 ## 执行记录
 
@@ -131,3 +131,33 @@ env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLA
 ```
 
 训练入口、累计/完整恢复、真实数据短训及七维单例仍未验收，不提供假设存在的训练启动命令。下一步从data-v2和上述实现commit继续，先查作业再启动。文档提交仅公开计划和结果摘要，数据、权重、视频、环境及私人规则留工作区。
+
+### 2026-09-07｜全量FAST长度与完整动作解码审计
+
+新增并实际运行工程CLI `scripts/xiyuan/audit_token_lengths.py`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`。只使用已批准data-v2的状态、动作、当前指令及train-only norm；不读取监督或使用GPU。逐样本经过实际delta/normalize与严格FAST编码、完整解码，覆盖训练55,682和验证6,068个样本，退出0。
+
+训练长度范围60—91，验证61—92；两者P50/P95/P99均72/83/86，最长公共prefix58，无样本超过128。全部61,750个动作解码均为有限10×7数组。由此128可用于当前S开发训练；不据此认定加入A方向后也不会溢出，也不代表编解码无量化误差。证据 `full-token-audit.json/.log`，记录manifest/norm hash及最长样本ID；耗时约105.94秒为本CPU审计耗时。
+
+已执行CLI先通过--help，实际命令：
+
+```sh
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu HF_HOME=/nfs_share/lijunhui2/cache/huggingface HF_MODULES_CACHE=/nfs_share/lijunhui2/cache/huggingface/modules HF_HUB_OFFLINE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /nfs_share/lijunhui2/envs/policy-train/bin/python /nfs_share/lijunhui2/upstream/openpi/scripts/xiyuan/audit_token_lengths.py --data-dir /nfs_share/lijunhui2/protocols/data-v2 --raw-root /nfs_share/lijunhui2/data/raw/libero/libero_spatial --tokenizer-root /nfs_share/lijunhui2/weights/tokenizers --output /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/full-token-audit.json
+```
+
+输出已存在时脚本拒绝覆盖；复核使用新的输出名。原始norm和manifest保持不变。
+
+### 2026-09-07｜独立进程真实恢复诊断进行中
+
+`check-real-resume.py --help`退出0后，登记 `real-resume-registration.json`，运行save模式：真实基础权重、data-v2实际样本、物理/有效batch1，固定初始化RNG123、模型RNG456、sampler seed0；保存第2次有效更新，并拟用第3次更新建立连续运行参考。独立restore进程将校验模型/optimizer/step hash，再比较同样本第3次更新的参数和指标。诊断配置为constant lr3e-5/warmup0，仅用于恢复比较，不是正式训练配置。
+
+当前save实际完成两步，action loss分别16.190626和11.707721，数据样本不同，不以此判断学习趋势。Orbax完整保存仍在 `runs/diagnostics/f1-real-resume-20260907-a/checkpoints/2.orbax-checkpoint-tmp-0`；尚未产生expected.json，也没有PASS结果。禁止把临时目录当完整checkpoint，禁止在session91909未结束时重复启动。保存进程仍真实存活；检查点包括norm及模型/optimizer，外侧provenance绑定数据/norm/基座来源/代码hash。最终完整恢复验证仍待执行。
+
+启动前GPU1空闲；启动后核实另一项目渲染任务也出现在GPU1，PID371408不属本次任务，未终止或修改。当前自己的PID372761已进入保存收尾，最多600秒；后续restore改在重新确认空闲GPU进行。本次不用于吞吐benchmark，保留资源竞争事实。
+
+实际启动（stdout/stderr保存为本轮real-resume-save.log）：
+
+```sh
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES=GPU-414c52ba-72c6-fc45-95d6-1e9750bbc21b JAX_PLATFORMS=cuda XLA_PYTHON_CLIENT_PREALLOCATE=false HF_HOME=/nfs_share/lijunhui2/cache/huggingface HF_MODULES_CACHE=/nfs_share/lijunhui2/cache/huggingface/modules HF_HUB_OFFLINE=1 OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 timeout 600 /nfs_share/lijunhui2/envs/policy-train/bin/python /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/check-real-resume.py --mode save --run-dir /nfs_share/lijunhui2/runs/diagnostics/f1-real-resume-20260907-a
+```
+
+这条命令是已启动历史记录，不可原样重复（run目录存在会拒绝）。恢复当前工作先poll工具session91909并读取save-status/log；只有checkpoint提交完成且expected.json存在后才允许进入restore。restore仅--help注册过，尚未验证执行成功。G1继续IN_PROGRESS，不存在无人值守后续训练队列。
