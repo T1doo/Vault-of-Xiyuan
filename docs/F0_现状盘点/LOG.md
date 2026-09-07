@@ -2,13 +2,15 @@
 
 ## 当前进展
 
-最后核对：2026-09-07（F0计划细化，准备发布供复审）。F0/T00 IN_PROGRESS。已完成公开审阅读取、文档整理和此前硬件/源码静态盘点；新会话规则加载、环境、数据及模型尚未验证，G1—G5 未通过。
+最后核对：2026-09-07 14:00:21 +08:00。**F0/T00 DONE（盘点完成）**。六步结果与证据见本日志末尾阶段总结，PLAN 已按证据勾选；G1—G5 均未通过，F1 尚未开始。
 
-文档基线提交：ee60b41402c8ee96bafe17cae9f4e2134ffd4d1c，本轮及此前修改仍在工作树；implementation_commit 尚无项目实现值。上游版本与实测材料见下方完整历史记录。
+当前文档分支 main，已发布基线 `eaf03864f3e75d6ff132e28bdc41fc6030cd26bf`；本轮 F0 PLAN/LOG 包含此前认证修复日志，未覆盖历史；最新文档版本以本文件所在Git提交为准，阶段执行时基线与发布版本分开追溯。实际学生工程选 `/nfs_share/lijunhui2/upstream/openpi`，上游 commit `215abfb217dbac7d5f1273282331b9b1866c0479`；本轮仅新增该工程短 AGENTS.md，尚无科研实现 commit。其余上游版本见执行记录。
 
-本次未启动科研作业/自动队列，无 run_id、GPU lease、checkpoint、有效更新或分片恢复源；未重新查询当前整机GPU占用。两卡是共享服务器可用并发预估，无硬截止日，数据/环境从零准备。
+活跃科研作业/自动队列：无；本轮审计脚本及三次只读新会话均已结束，最终进程核查未发现匹配残留。无 GPU lease、checkpoint、有效更新或分片恢复源。两卡仍只是多人共享服务器的可用并发预估，资源快照不保证下次可用。
 
-下一步：按 [PLAN.md](PLAN.md) 先核验实际工程新会话规则加载与资源/路径，再进入 F1 环境准备及 T02/T08 初态库存。已验证命令在下方历史命令记录，重用前核对环境/版本与当前产物；不重新clone已存在目录。
+F0无剩余阻塞。F1待验证事项包括依赖解析与锁定、驱动/JAX实际兼容、渲染依赖、原始HDF5回放/初态及安全转换适配，不能因F0完成宣称这些已通过。新会话核验的失败及只读越范围偏差已在末尾披露。
+
+**下一步（本轮不执行）：等待负责人决定进入F1后，先在工作区用户目录获取并校验固定版本uv，准备Python3.11与隔离policy-train环境。**前置条件为继续授权、官方发行版/校验值核对及所选路径可写；不需要此刻GPU空闲，安装后再按F1计划验证。README仍指向F0。可复用的已验证审计命令见本日志，重新运行前先检查实际路径/配置与进程；不重复clone。
 
 ## 执行记录
 
@@ -218,3 +220,98 @@ GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C Vault-of-Xiyuan diff --check
 将 PLAN.md 细化为六步：保护现场、核验规则入口、更新资源快照、明确环境与路径、核对来源与依赖、收口交接。每步写清操作、证据和边界，均未冒充实际执行；F0以只读盘点为主，安装/大资源下载/模型验证留F1及后续。负责人随后授权推送，发布范围包括本轮文档简化迁移、此前未提交的三项复审细节和F0计划。当前阶段仍F0，不启动科研作业，不迁移代码或环境；私人工作区AGENTS不进入公开仓库。
 
 发布前检查：18个Markdown的相对链接、围栏及七阶段PLAN/LOG成对结构通过；`git diff --check`退出0，远端fetch退出0。此前历史全文保留和配置/公式不变检查见上一条迁移记录。本次为文档检查，无模型/仿真测试。发布成功与提交标识以远端实际Git记录为准。
+
+### 2026-09-07｜修复 Vault 命令行 Git 认证
+
+用户询问并要求处理命令行 push 无凭据问题。实际发现现有 gh 2.94.0 与 T1doo 登录可复用：沙箱内 auth status 曾报无效，宿主机网络复查退出0确认登录有效，未重新登录或读取令牌。仅在 Vault 的本地 Git 配置为 github.com 接入已有 gh auth git-credential，未改变用户全局配置或凭据，配置不进入公开提交。
+
+实际验证：在宿主机网络执行 `GIT_TERMINAL_PROMPT=0 GIT_CONFIG_GLOBAL=/tmp/xiyuan-gitconfig git -C /nfs_share/lijunhui2/Vault-of-Xiyuan push --dry-run origin main`，随后同环境执行 `push origin main`，均退出0并返回 Everything up-to-date。共享目录仍使用已有临时 safe.directory 配置，文件存在性须检查；该认证修复不代表沙箱网络可访问 GitHub，也不自动配置其他仓库。未启动科研作业。此条为修复后的本地日志追加，尚未发布。
+
+### 2026-09-07T13:50:29.114630+08:00｜开始执行 F0
+
+负责人授权本轮仅执行F0并记录日志。先复用现有材料，保护入口工作树中尚未提交的Git认证日志。当前文档基线为已发布 eaf03864f3e75d6ff132e28bdc41fc6030cd26bf；本次原始证据集中在仓库外 `artifacts/audits/f0-20260907/`。不进入F1、不修改其文档、不安装环境或运行模型。
+
+### 2026-09-07｜F0资源、来源与静态依赖检查
+
+现场保护：复用三份历史审计/备份清单；备份SHA256全部匹配。文档库main为 eaf03864f3e75d6ff132e28bdc41fc6030cd26bf，保留既有认证日志未提交修改。四上游提交与原记录一致，LIBERO为master，其余main。F1工程根选现有 `upstream/openpi`，只新增短AGENTS入口，源码未改；其aloha/libero子模块尚未初始化，所记libero子模块提交与独立LIBERO checkout不同，F1必须显式选择实际来源，不能混用。FastVGGT干净；LIBERO/Plus最初status各25秒超时，保留记录；用GIT_OPTIONAL_LOCKS=0作有界复核均退出0、无修改。
+
+宿主机快照：8张RTX A6000，总显存各49140 MiB，空闲48661—48664 MiB，查询时计算进程列表为空，驱动535.274.02；并非独占或持续空闲承诺。双路EPYC7542/128逻辑CPU、内存503GiB/可用448GiB，NFS可用约26TiB，本地盘约421GiB；未测速、不改资源预算为八卡。原始命令、时间与退出码见 `artifacts/audits/f0-20260907/host-and-repos.json`。仅需启动GPU作业前重新检查，当前无科研作业。
+
+工具：系统 `/usr/bin/python3` 为3.10.12，没有python、uv、conda、mamba可执行入口；常用本用户位置也未发现uv/conda。codex-cli 0.153.4、现有gh、tmux和sbatch二进制可见；sbatch存在不代表已获资源预约或调度可用。动态库缓存可见EGL/GL、expat、fontconfig；包查询未找到libfontconfig1-dev、libmagickwand-dev、libosmesa6，退出1是缺包记录，不是安装失败。未更改系统。MagickWand/渲染后端在F1验证，必要时先评估用户目录依赖方案，再提出具体管理员需求。
+
+候选环境（均未创建/未安装，最终锁定须F1验证）：
+
+| 环境 | 候选及依据 | 待核验 |
+|---|---|---|
+| policy-train | Python3.11；固定openpi锁中的JAX0.5.3 CUDA12、Flax0.10.2、Torch2.7.1 | 535驱动下完整wheel/PTX/JIT兼容；不盲升驱动，uv.lock包含nvcc12.9.41等依赖 |
+| teacher | Python3.10；官方Torch2.3.1、torchvision0.18.1、NumPy1.26.1 | 其余未钉死依赖解析后固定；权重/特征接口与双视图另验 |
+| sim-clean | 官方Python3.8.13、Torch1.11.0+cu113、NumPy1.22.4、robosuite1.4.0 | openpi示例列robosuite1.4.1，与官方要求不同；先统一依据并做回放验证，不混装 |
+| sim-plus | 独立Python3.8.13，沿相同LIBERO核心候选；usd-core25.5作为候选 | PyPI元数据有cp38 Linux wheel，不存在据此认定必须升级Python的依据；Wand/ImageMagick及渲染需验证 |
+
+本机路径选择（以下除源码/已有审计外均拟建；没有创建目录树）：
+
+| 用途 | 工作区相对路径 | 状态 |
+|---|---|---|
+| 实际学生工程 | upstream/openpi | 已有，新增短入口待纳入其后续实现版本 |
+| 教师/clean/plus来源 | upstream/FastVGGT、upstream/LIBERO、upstream/LIBERO-plus | 已有，不复制到另一个code树 |
+| 四环境 | envs/policy-train、envs/teacher、envs/sim-clean、envs/sim-plus | 拟建，分别隔离 |
+| 环境管理工具 | tools/uv | 拟建，仅本用户工作区 |
+| LIBERO配置 | local/libero-clean、local/libero-plus | 拟建；源码支持LIBERO_CONFIG_PATH，不改HOME |
+| 原始/转换数据 | data/raw/libero_spatial、data/processed | 拟建 |
+| 基础与教师权重/tokenizer | weights/pi0_fast_base、weights/fastvggt、weights/tokenizers | 拟建 |
+| 方向/教师监督 | supervision/directions、supervision/teacher-features | 拟建，正式推理不挂载 |
+| 协议与运行结果 | protocols、runs（按run_id收集日志/checkpoint/结果） | 拟建 |
+| 包/下载缓存 | cache | 拟建，不能作唯一恢复源 |
+| 本轮审计 | artifacts/audits/f0-20260907 | 已有，含原始命令/退出码 |
+
+来源检查仅GET小型元数据或HEAD，未下载HDF5、模型或资产压缩包。7项HTTP200，详细清单/时间在 `resource-access.json`：
+
+| 资源 | 官方来源 | 当前元数据revision/后续校验 |
+|---|---|---|
+| π₀-FAST base | gs://openpi-assets/checkpoints/pi0_fast_base | 公共对象列表可读，本次仅3项部分列表；F1全清单记录generation/校验和并验完整下载 |
+| PaliGemma词表 | gs://big_vision/paligemma_tokenizer.model | HEAD200；F1保存对象版本/内容hash |
+| FAST processor | physical-intelligence/fast（HF） | ec4d7aa71691cac0b8bed6942be45684db2110f4；含远程代码，执行前审阅并固定revision |
+| Spatial原始演示 | yifengzhu-hf/LIBERO-datasets（HF dataset） | f13aa24a3da8c43c7225569f28c562979fa0e35a；列出10个Spatial HDF5，不代表已核验轨迹/状态 |
+| Plus资产 | Sylvest/LIBERO-plus（HF dataset） | dd2bd61b7d9a6fef1abc52d606e983b41886a149；有assets.zip，不采用Plus混合训练集 |
+| 教师权重 | facebook/VGGT_tracker_fixed（HF） | 4d9d9494b2211c90ab9cd3c8c6aa188fe363103d；按官方model_tracker_fixed_e20.pt核验 |
+
+实际入口仅静态检查（详见 dependency-and-entrypoints.json），未运行项目CLI --help：openpi train/serve存在，但没有xiyuan四组注册；官方转换示例读取多套件RLDS并可能清理同名输出，不能直接用于我们的Spatial原始HDF5，F1需安全适配并保留sample_id/回放关联；LIBERO下载器可选Spatial/HF，但有覆盖/强制下载逻辑，正式下载前需固定revision和避免覆盖；FastVGGT eval_custom存在，默认合并参数不是“关闭”。不把示例可见写成链路可用。
+
+### 2026-09-07｜新会话规则核验、失败与修复
+
+实际入口为已有 `upstream/openpi`，原先没有AGENTS/override，本轮只新增短读取入口，没有改变源码。使用已核验 help 的 codex-cli 0.153.4，以 `codex exec --cd /nfs_share/lijunhui2/upstream/openpi --sandbox read-only --ephemeral --json` 启动无旧聊天上下文核验，未使用resume/fork。完整参数/工具调用与结果分别保存在本轮审计目录的events JSONL；非科研runner。
+
+- 第一次：已读主文档，但180秒到限，退出124，无最终结论，不能算完整核验成功。
+- 第二次：会话退出0，但其唯一工具误用不存在的python，工具退出127；文件读取未完成，该次不通过。
+- 第三次：显式使用本机已验证 `/usr/bin/python3`，工具退出0、会话退出0。自动指令以本目录AGENTS指令块提供；工具显式读取工程AGENTS、工作区AGENTS、README、两份主文档及F0 PLAN/LOG，输出字节数/SHA256。独立检查确认七个必需文件均实际读取，稳定来源hash相符，当前阶段F0被正确识别。
+
+第三次的路径提取范围偏宽，还只读了README中F1—F6的链接，并探测了不存在的根PLAN/LOG；这是已记录的核验偏差，不是完美限定范围测试。没有修改其他阶段或执行科研。原始 `rules-python3-events.jsonl`、`rules-python3-final.txt` 与 `rules-verification.json` 支持本次仅关于必需文件发现/可读的通过结论，不证明模型或任意未来会话行为。
+
+中断恢复时先检查退出码和产物，未重复启动已完成检查。最终只读查询本用户相关F0脚本/新会话进程，无匹配残留，见 `final-active-check.json`。
+
+### 2026-09-07｜F0 阶段总结
+
+**结论：F0/T00盘点完成，停在F0；没有进入F1，G1/G2未通过。**
+
+| 计划步骤 | 实际结论 | 证据（工作区 artifacts/audits/f0-20260907/） |
+|---|---|---|
+| 1 保护现场 | 文档/四上游根、分支与commit明确；原未提交日志保留；备份校验通过；两仓库status超时后复核干净 | host-and-repos.json、LIBERO*-status-retry.txt/.exit |
+| 2 规则入口 | 沿用openpi，新增短入口；最终新会话实际读取必需文件通过，保留前两次失败及第三次额外只读偏差 | rules-*-events.jsonl、rules-verification.json |
+| 3 资源快照 | 宿主机GPU/CPU/RAM/文件系统有实测快照；共享使用边界清楚；没有做压测 | host-and-repos.json |
+| 4 路径与环境 | 实际工具/目录访问检查完成；四环境及数据/监督/输出路径明确为拟建 | host-and-repos.json及本日志路径表 |
+| 5 来源与依赖 | 固定源码、候选组合、官方来源与revision、入口风险已查明；7项轻量HTTP检查成功 | resource-access.json、各metadata.json、dependency-and-entrypoints.json |
+| 6 交接 | 日志已汇总、PLAN按证据勾选；F1首个动作和待验项明确，未自动切阶段 | 本阶段PLAN/LOG |
+
+实际运行的审计脚本为 `python3 /tmp/xiyuan-f0-audit.py`、`python3 /tmp/xiyuan-f0-sources.py`（执行时解释器使用/usr/bin/python3），脚本自身均退出0；脚本内部各命令的失败/超时另存JSON，不用外层退出0掩盖。脚本副本已保留于本轮审计目录，便于复核真实操作；它们是本次审计证据，不冒充已注册的项目CLI。新会话和Git复核的退出码见各独立文件。后续复查可以使用这些已有系统查询，不能照抄未验证的训练命令。
+
+剩余项属于F1及后续实施验证：获取固定uv/Python并解析隔离依赖；检查JAX/CUDA实际兼容；确认clean/plus统一核心版本与渲染依赖；安全下载及HDF5转换、回放和初态关系审计。若用户目录依赖方案不能解决系统库问题，再提出具体管理员需求，当前不修改驱动或使用sudo。
+
+本轮修改范围仅F0 PLAN/LOG和必要工程短入口，原始证据在仓库外；未修改F1—F6文档、两份主文档或README，未创建环境/大数据目录、下载数据或权重、运行模型/仿真/教师缓存，也未推送。无科研作业或训练恢复点。等待负责人审阅F0结果后决定是否进入F1。
+
+收口检查通过（退出0）：Vault仅F0 PLAN/LOG有修改；README、两份主文档及F1—F6与HEAD一致；17项勾选、链接/围栏及必需审计证据检查通过，`git diff --check`退出0。结果保存于本轮审计目录final-document-check.txt。本轮仍为未提交、未推送状态。
+
+### 2026-09-07｜负责人要求每次完成后发布并提供审阅链接
+
+负责人持续授权：以后每次完成工作，提交并推送Vault内本次相关修改，最终回复附对应文件的GitHub链接与提交标识。本轮补发F0计划勾选、完整日志和仓库短入口中的发布约定；完整本机规则仅留工作区。历史记录中的“未推送”描述保留为当时状态，发布结果由实际远端核验确定。
+
+该约定已写入工作区AGENTS和仓库短入口。此为F0核验后新增的发布规则，原规则读取证据仍对应其当时hash，不冒充对新增文字再次做了新会话验证。无科学参数或实验运行变化，当前仍停在F0。
