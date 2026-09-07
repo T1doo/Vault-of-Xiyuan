@@ -2,15 +2,19 @@
 
 ## 当前进展
 
-最后核对：2026-09-07。**F1 / T01、T02 IN_PROGRESS，T08库存已初查；G1未通过。** 四个隔离环境安装、依赖检查与必要导入通过；Spatial十任务500条演示、基础权重、两类tokenizer及Plus资产下载校验完成。环境导入通过不等于完整训练/评测验收。
+最后核对：2026-09-07。**F1 / T01、T02 IN_PROGRESS，G1未通过。** 四个隔离环境、数据/权重/tokenizer/Plus资产准备已完成；61,750个样本的完整FAST审计通过。数据v2为450/50整episode、55,682/6,068动作起点，norm仅训练集；初态关联仍有未知项，不宣称严格初态留出。
 
-数据采用负责人批准的动作后观测时序修正，当前恢复入口为 `protocols/data-v2/data-spec.json`：450/50整episode划分，训练55,682、验证6,068个动作起点；仅训练集norm独立重算一致。原始数据不改。初态关联仍有未知项，不宣称严格初态留出。
+**300步小样本pilot已完成并退出0。** 200个train样本池、有效batch16、累计8×物理2，共4,800次样本抽取；前10步平均action loss13.606，末10步1.929。全部300更新的样本顺序独立复核一致，数值有限。实际100→200步全部10个LoRA叶子更新，32个冻结叶子不变；第100步冻结叶子与基础权重一致。完整检查点为run a/checkpoints/100、200、300。
 
-真实基础权重的两步**合成诊断**通过：10个LoRA参数叶子更新、冻结叶子hash不变、实际模型入口预处理跨RNG一致。9项FAST测试、4项数据测试、100个真实样本动作回环通过。专家回放十任务各一条，9成功、1失败待排查，不能写成专家回放全部通过或策略成功率。
+**独立恢复诊断已精确通过**：统一step类型/分片，并固定确定性GPU执行设置后，模型、optimizer、step、样本和接续更新逐参数一致。实际累计入口已运行，但GPU上累计与等效大batch的数值比较仍待完成。
 
-工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前真实恢复诊断run_id=f1-real-resume-20260907-a：save进程已退出0，第2步完整checkpoint已提交，第3步连续参考已生成。独立restore已退出1：加载后的模型/optimizer/step hash一致，但同样本接续更新不一致，恢复验收未通过。原run a诊断已结束；run c重复误差probe已退出0，v4/run e保存/独立恢复均已精确通过；实际累计两步和完整checkpoint已通过；当前GPU2运行固定300步小样本pilot续段（session89825，最多298更新/3600秒），保留原完整第2步checkpoint与连续参考。该作业不是正式学习训练。
+**开发闭环尚未通过。** 第100、200步固定checkpoint在同一预留clean开发单元的首请求均出现动作系数长度错误；第200步生成56个，要求70个，未补零/截断，未向仿真发送动作。训练loss下降不能替代策略闭环成功。最初浮点token承载类型的服务适配错误已单独修复并保留失败记录。
 
-下一步：全量token长度盘点已通过；实现并验证完整训练保存/恢复，再做小样本学习与1k—3k步S短训、开发闭环；排查失败回放，验证七维实际reset/扰动生效。G1人工回放/控制与曲线审查尚未签收，未满足G1或正式训练前G2。
+七维各一个真实单例全部执行成功；重复加载同状态精确一致，布局例仅1个118维状态，其余例为50×92库存、实际检查2行。机器人姿态扰动须检查预热后的观测，噪声例实际改变第三人称图像；这不等于最终manifest或全部初态唯一性已验收。专家完整开环仍9/10成功，失败例补充GT状态恢复诊断，不改写失败。
+
+当前没有本项目活跃GPU作业。2,000步全数据S开发训练配置已准备，尚未启动；下一步完成其启动前检查并按固定配置推进，同时做第300步开发检查、GPU累计对应及多checkpoint闭环。负责人代表回放/控制语义与曲线审阅仍待完成。F1不会因300步pilot结束而自动通过G1。
+
+工程根upstream/openpi；训练pilot执行版本与provenance保存在run目录，后续服务/检查点保留修复另记工程Git版本，不追溯冒充旧作业代码。证据位于artifacts/audits/f1-resources-20260907/；阶段日志以下保留历史运行状态及失败，以上为最新恢复入口。
 
 ## 执行记录
 
@@ -237,3 +241,21 @@ session24145退出0，COMPLETE_REQUESTED_SEGMENT：两次有效更新均完成�
 按持续完成F1授权，launch-s-overfit.py从这个完整第2步checkpoint恢复至预先固定的300步，配置、200样本池、seed、总scheduler时程和有效batch不变；不是重新初始化或重置样本cursor。启动保护已确认GPU2空闲并登记：session89825，最多额外298更新，外层限时3600秒；内部每100步/段末保存，完整checkpoint后才更新状态。日志f1-s-entry-overfit-resume-to-300.log，登记同名前缀registration.json。此前planned配置现在已被实际入口使用，权威resolved-config/provenance/schedule.sha256位于run目录；不修改运行中的配置与代码。
 
 此小样本pilot仅F1诊断，不进formal主表，不越G2。实际后台只有已启动的这一有限作业，未启动1k—3k全数据训练或正式四组队列。恢复先poll session89825，再核对status、metrics各attempt和最近完整checkpoint；不要因对话结束重复启动。完整目标仍包含小样本曲线、全数据短训/多checkpoint开发闭环、GPU累计对应与七维生效/初态审计、代表回放人工检查；G1尚未通过。
+
+### 2026-09-07｜七维真实单例、开发服务与300步pilot收口
+
+七维单例session42827退出0，7个子进程均退出0；登记plus-singletons-run.json为COMPLETE，GPU3已释放。每例通过实际OffScreenRenderEnv创建、官方state shape检查、重复reset和10步预热；两个视图128×128×3 uint8。背景/机器人/视角/语言/噪声/布局/光照分别选官方index0/258/608/984/1374/1725/2110，详细JSON/PNG/日志在plus-singleton-*；总体及组件比较为plus-singletons-summary/effects.json。不是策略rollout或正式评测manifest。
+
+机器人例native reset相对参考最大关节差0.06668，加载同一官方状态后差为0，10步预热后差0.04272，说明不能只看set_init_state瞬间就判扰动无效，也不能向策略发送预热前缓存观测。噪声例noise=3，wrapper与同一步未加噪图像的第三人称平均绝对像素差8.187，腕部为0。布局库存仅1×118，实际不能靠换seed凑20单元。语言例的完整改写真实可用；其他类别API语言包含文件配置后缀，需要在评测清单构造时排除机械后缀，而非让策略按task_id恢复答案。
+
+已生成2402配置的公开指令映射草案protocols/plus-public-instructions-draft.json：390个语言变体逐字保留官方BDDL/API文本，其余2012个使用对应官方clean指令。仅在离线清单中解析已知配置来源，策略接收literal instruction、不接收task_id。该文件仍DRAFT，不是最终manifest或在线解析器；CPU审计退出0，证据plus-instruction-audit.log。
+
+本地S服务scripts/xiyuan/serve_s.py只绑定127.0.0.1、只接收四个公开字段，严格加载完整checkpoint及其中norm，逐请求重新生成，无跨episode动作/KV状态；B/教师未进入服务。首次20步smoke在首请求暴露上游sample_actions用默认float32零数组承载整数ID，而上游ExtractFASTActions无条件cast int32。项目服务现在只在有限、整数值、范围/shape合法时无损转换，不允许小数/NaN/溢出静默cast；2项synthetic回归退出0，serving-token-tests.log。该修复不改训练参数或核心tokenizer，不影响正在运行pilot的provenance。
+
+第100步修复后的smoke和第200步smoke均在第一请求返回invalid_coefficient_length，实际执行0个策略动作，success=False。前者原服务适配错误与后者真实生成长度失败分开记录；第200步保留生成token IDs，离线解码得到13个FAST token、56个系数，要求10×7=70，Action标记与EOS存在，不是256预算截断。证据s-loop-100-result、s-loop-100-retry-result、s-loop-200-result及s-loop-200-coefficient-diagnostic.json。未截尾/补零、未更改成功判据。各服务/renderer均由有时限launcher终止，当前已无遗留服务。
+
+pilot续段session89825已退出0，实际完成300更新；run status=COMPLETE_REQUESTED_SEGMENT、checkpoint_update=300。完整逐步/采样汇总pilot-overfit-summary.json，全部1—300连续无重复更新，每步16个sample_id与独立PCG64重建一致。第100步32个冻结叶子与实际基础指纹完全一致（trained-freeze-100.json），100→200全部10个LoRA叶子变化、32个冻结叶子不变（pilot-updates-100-200.json），CPU检查均退出0。首10/末10平均loss13.605976/1.928849，仅训练集小池结果，不代表控制成功或完整数据泛化。
+
+上游保留策略在提交100步时自动回收了早期非周期的2步入口检查点；当前100/200/300均完整保留，2步历史日志仍在但不能再作为现存恢复点。后续训练入口已改为保留全部检查点，CPU测试保存2/100/101并恢复最早2成功，退出0，checkpoint-retention.log；不覆盖或删除现存实验产物。本轮训练完成后才改入口，不改变旧pilot执行代码；后续作业用新版本。
+
+全数据2,000步S配置protocols/f1-s-full-2000-planned.json已准备但未启动：同一基础权重重新初始化、全部train样本、有效16/物理2、warmup1000、每500步保存、单段18000秒上限。不是从小池微调模型继续训练后冒充原始初始化基线，也不是正式20k四组训练。下一步仍需GPU累计对应、真实入口确定性细查、多checkpoint开发闭环、初态/指令清单收口和人工审阅。当前真实完成范围仅以上证据，G1未通过。
