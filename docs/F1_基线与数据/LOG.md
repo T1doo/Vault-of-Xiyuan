@@ -8,7 +8,7 @@
 
 真实基础权重的两步**合成诊断**通过：10个LoRA参数叶子更新、冻结叶子hash不变、实际模型入口预处理跨RNG一致。9项FAST测试、4项数据测试、100个真实样本动作回环通过。专家回放十任务各一条，9成功、1失败待排查，不能写成专家回放全部通过或策略成功率。
 
-工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前真实恢复诊断run_id=f1-real-resume-20260907-a：save进程已退出0，第2步完整checkpoint已提交，第3步连续参考已生成。独立restore已退出1：加载后的模型/optimizer/step hash一致，但同样本接续更新不一致，恢复验收未通过。原run a诊断已结束；run c重复误差probe已退出0，当前没有本次活跃GPU作业，保留原完整第2步checkpoint与连续参考。该作业不是正式学习训练。
+工程分支 `xiyuan/f1-baseline`，实现commit `d29c2a44f3a118895cd02d114334b3647b9838a2`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前真实恢复诊断run_id=f1-real-resume-20260907-a：save进程已退出0，第2步完整checkpoint已提交，第3步连续参考已生成。独立restore已退出1：加载后的模型/optimizer/step hash一致，但同样本接续更新不一致，恢复验收未通过。原run a诊断已结束；run c重复误差probe已退出0，v4/run e保存/独立恢复均已精确通过；实际累计两步和完整checkpoint已通过；当前GPU2运行固定300步小样本pilot续段（session89825，最多298更新/3600秒），保留原完整第2步checkpoint与连续参考。该作业不是正式学习训练。
 
 下一步：全量token长度盘点已通过；实现并验证完整训练保存/恢复，再做小样本学习与1k—3k步S短训、开发闭环；排查失败回放，验证七维实际reset/扰动生效。G1人工回放/控制与曲线审查尚未签收，未满足G1或正式训练前G2。
 
@@ -197,3 +197,43 @@ save-inputs与restore-inputs共78个叶子：所有值hash、shape、dtype及分
 新增canonicalize_training_state明确将step表示为JAX int32非weak scalar，供初始化和恢复后共同调用，不改变数值或采样游标。CPU合成测试验证fresh/host-roundtrip后相同aval和值；与累计回归一起2项通过，退出0，证据accumulation-counter-cpu.log。函数尚未接入真实训练诊断，因此不能声称问题已修复。下一步将它接入新版本的实际诊断，固定真实JIT输入/输出分片，再做同卡独立恢复；若仍不同，比较编译与确定性设置，继续保留原证据与精度标准。
 
 本轮所有进程均已终止。最近完整checkpoint为run c/checkpoints/2，另保留run a/checkpoints/2及其连续第3步expected；没有可用于学习结论的训练checkpoint。F1/G1继续IN_PROGRESS，真实累计GPU对应、小样本与1k—3k训练、开发闭环、失败专家回放及七维生效检查仍未完成。
+
+### 2026-09-07｜显式类型/分片复验、训练入口与失败回放诊断
+
+v3/run d采用统一int32非weak步数及显式JIT输入/输出分片。save退出0，restore退出1。恢复前后78个输入/状态叶子的全部值hash、shape、dtype、weak_type和sharding一致，StableHLO文本也完全一致（268,086字符）；但第三步连续loss14.65947247、恢复loss14.58457088，参数hash仍不同。证据run d/save-inputs、restore-inputs、save/restore-stablehlo及real-resume-v3-d-*.log。类型差异已消除，但不足以解决独立执行差异，未放宽容差。
+
+本机已安装jaxlib二进制包含xla_gpu_deterministic_ops与xla_gpu_autotune_level；新v4/run e仅在项目进程设置 `XLA_FLAGS=--xla_gpu_deterministic_ops=true --xla_gpu_autotune_level=0`，将运行参数写入provenance，重新做完整保存/恢复。没有改系统驱动、全局环境或研究损失。此时是诊断候选，未因开启参数就称确定性通过。资源/上限仍由launch-resume-v4.py在GPU2两次空闲检查后登记，单进程600秒，最多3次save更新/1次restore更新。
+
+F1训练入口已实现：工程scripts/xiyuan/train_s.py，本地commit9f50f7741e02bdf4f5ba7e699e1c9552f09783f0。支持有效batch16的等大小微批次累计、step对应固定sample_id计划、完整checkpoint/严格恢复、配置/数据/norm/tokenizer/实现及上游关键源码hash、分attempt追加日志和限时停止；拒绝formal及超过3000步的作业。--help、语法和拒绝20k作业检查退出0。真实模型CPU eval_shape检查8×2累计路径通过，42个参数叶子保留，证据accum-model-shapes.json/.log，实际更新0、未加载权重；不能替代GPU数值验证。
+
+工作区protocols/f1-s-overfit-planned.json仅PLANNED：首200个train样本、300更新、物理2/有效16、开发warmup10、max_token_len128、最大3600秒；与正式配置分离，尚未启动。恢复和真实累计验收未满足前，不宣称真实训练入口可用或已有学习曲线。下一步先2步入口检查并验证完整恢复，再推进小样本与1k—3k训练。
+
+失败专家演示追加CPU纯状态诊断（关闭图像与renderer，无GPU）：table-center/demo0完整开环仍失败；恢复记录末状态时成功谓词已为True，最后动作后仍True；逐步恢复states[i]再执行actions[i]最终也True。证据failed-expert-state-diagnostic.json/.log，退出0。这支持开环累积偏离是待解释现象，而非末记录状态在本环境必然无法满足成功；不证明具体是控制器、接触物理或环境版本的哪一项导致。9/10开环结果不改写，GT状态恢复仅离线诊断，不进入正式策略请求。
+
+实际CPU诊断命令：
+
+```sh
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= MUJOCO_GL=egl PYNPUT_BACKEND=dummy LIBERO_CONFIG_PATH=/nfs_share/lijunhui2/local/libero-clean MPLCONFIGDIR=/nfs_share/lijunhui2/cache/matplotlib-clean NUMBA_CACHE_DIR=/nfs_share/lijunhui2/cache/numba-clean OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 timeout 180 /nfs_share/lijunhui2/envs/sim-clean/bin/python /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/check-failed-expert-state.py
+```
+
+当前v4 save工具session27687仍在执行；此前v3和CPU诊断均终止。恢复先查real-resume-v4-e-save-registration.json及原session；只有save COMPLETE和expected.json存在才启动restore。F1/G1未通过，未启动后台学习训练队列。
+
+v4保存更新：session27687退出0，完整run e/checkpoints/2及expected.json已生成；连续第3步loss14.65478515625、grad_norm26.65860939025879。当前独立恢复session65924，GPU2，登记real-resume-v4-e-restore-registration.json；恢复结果仍待核实，不能提前判PASS。
+
+### 2026-09-07｜独立恢复精确通过，进入真实累计入口检查
+
+v4/run e的save与restore均退出0。恢复模型/optimizer/step全部hash一致；接续第3步同sample_id，loss14.65478515625、grad_norm26.65860939025879以及全部更新参数hash精确一致。证据run e/result.json明确PASS，两个registration为COMPLETE，原失败记录全部保留。采用统一step表示+显式分片+确定性GPU操作/关闭运行时自动调优的组合，不从组合实验声称单个参数独自解决全部原因；没有放宽任何容差。该结果证明这条真实模型恢复诊断，不自动覆盖新累计入口、其他硬件或F1可学习性。
+
+训练入口已要求配置中的xla_flags与启动环境精确匹配，缺失则拒绝启动，代码commit357c33d（完整hash以工程Git为准）。主文档同步当前共享S运行要求，四组不分别选GPU编译算法设置。真实成本必须按这个已验证设置测量，不复用旧默认编译下的短时步速。
+
+开始F1实际入口限定2次有效更新：launch-s-entry.py经GPU2空闲保护启动，工具session26126；物理batch2×累计8=有效16，配置仍为300步小样本pilot的固定总时程，但本段--stop-after 2，不运行余下298步。上限900秒，日志f1-s-entry-entry-two-updates.log，登记同名前缀registration.json；输出runs/pilot/f1-s-overfit-20260907-a。恢复按原总时程保持schedule，不因分段重设LR或采样。warmup10只属于小样本pilot；当前没有长训或正式作业。
+
+真实入口首次session26126在run创建前因Fast tokenizer的.cache目录被文件hash循环读取而退出1，没有执行更新。修复只遍历实际文件，独立确认5个tokenizer文件可读、run尚不存在；本地代码commit daa1a1d，原失败日志保留。限定2更新重试已启动，session24145/PID446501，GPU2，输出同计划run a，新日志f1-s-entry-entry-two-updates-retry.log及新registration。当前仍在模型初始化/首次编译阶段，未宣称累计GPU通过。
+
+### 2026-09-07｜实际累计入口通过两步，启动300步小样本pilot
+
+session24145退出0，COMPLETE_REQUESTED_SEGMENT：两次有效更新均完成，每步物理2×累计8=有效16，action loss分别14.98901367/13.66802406，梯度范数15.68289757/14.32157516，数值有限。第2步完整checkpoint位于runs/pilot/f1-s-overfit-20260907-a/checkpoints/2，status记录checkpoint_update=2。首步含编译/数据19.66秒、第二步含数据6.53秒；未达到稳定300更新profile要求，不作正式吞吐。两步不同样本loss不能作为已学会任务的证据，GPU累计对等大batch的数值检查仍待补齐。
+
+按持续完成F1授权，launch-s-overfit.py从这个完整第2步checkpoint恢复至预先固定的300步，配置、200样本池、seed、总scheduler时程和有效batch不变；不是重新初始化或重置样本cursor。启动保护已确认GPU2空闲并登记：session89825，最多额外298更新，外层限时3600秒；内部每100步/段末保存，完整checkpoint后才更新状态。日志f1-s-entry-overfit-resume-to-300.log，登记同名前缀registration.json。此前planned配置现在已被实际入口使用，权威resolved-config/provenance/schedule.sha256位于run目录；不修改运行中的配置与代码。
+
+此小样本pilot仅F1诊断，不进formal主表，不越G2。实际后台只有已启动的这一有限作业，未启动1k—3k全数据训练或正式四组队列。恢复先poll session89825，再核对status、metrics各attempt和最近完整checkpoint；不要因对话结束重复启动。完整目标仍包含小样本曲线、全数据短训/多checkpoint开发闭环、GPU累计对应与七维生效/初态审计、代表回放人工检查；G1尚未通过。

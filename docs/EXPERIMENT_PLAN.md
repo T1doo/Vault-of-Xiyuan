@@ -187,6 +187,9 @@ RTX A6000 的 48GB 是显卡规格，不是本项目显存占用的实测保证�
 
 记录 GPU/驱动、操作系统、各环境 Python、JAX/jaxlib/Flax、PyTorch、MuJoCo/robosuite、openpi/FastVGGT/LIBERO/LIBERO-Plus commit、FAST tokenizer revision、基础权重标识与哈希。禁止在正式训练中途自动更新依赖。
 
+**F1恢复实测补充（2026-09-07）：** 本机固定JAX环境下，即使输入与StableHLO一致，默认GPU编译设置仍出现跨进程更新差异。统一步数int32非weak类型、显式分片，并在学生进程固定 `XLA_FLAGS=--xla_gpu_deterministic_ops=true --xla_gpu_autotune_level=0` 后，真实权重/数据的独立保存恢复及下一次更新逐参数精确一致。此设置作为当前项目S运行要求，四组共享并纳入配置/检查点指纹；不是新方法或泛化结论。实际累计入口和其他硬件仍须各自验证，吞吐按该设置重新实测；详情见[F1日志](F1_基线与数据/LOG.md)。
+
+
 文档与工程分仓后分别记录 docs_repo_root/docs_commit、implementation_repo_root/implementation_commit 及各 upstream_commits；修改过的教师/仿真副本记录实际执行版本。作业、检查点、恢复和命令验证沿用同一归属，不用文档 commit 代替代码 commit。尚无项目实现时明确为空，开发期 dirty 修改另存差异证据。阶段日志顶部更新只改变追溯记录，docs_commit 不进入科学协议 hash；科学语义实际改变仍按版本纪律处理。
 
 T00/T01 在正式开发前验证新会话规则入口：从实际工程根/worktree 启动无旧聊天上下文的读取检查，记录自动加载和显式读取来源、规则及权威文档路径。仓库外 AGENTS.md 不能因位于父目录就假定自动加载；保留上游规则，采用短入口或已验证启动方式，不复制私人规则/第二份账本。具体步骤与官方依据见手册 2.4；写好入口不等于新会话检查通过。
