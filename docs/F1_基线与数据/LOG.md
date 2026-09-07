@@ -2,15 +2,15 @@
 
 ## 当前进展
 
-最后核对：2026-09-07 16:26:21 +08:00。**F1 / T01 IN_PROGRESS；本轮学生环境准备及最小运行检查完成，G1未通过。** uv0.12.10、CPython3.11.16与policy-train已安装；依赖一致性、必要导入、训练/服务CLI help、单卡JAX合成编译/求导/BF16检查均通过。
+最后核对：2026-09-07。**F1 / T01、T02 IN_PROGRESS，T08库存已初查；G1未通过。** 四个隔离环境安装、依赖检查与必要导入通过；Spatial十任务500条演示、基础权重、两类tokenizer及Plus资产下载校验完成。环境导入通过不等于完整训练/评测验收。
 
-工程根：/nfs_share/lijunhui2/upstream/openpi，来源commit 215abfb217dbac7d5f1273282331b9b1866c0479；未修改其pyproject/uv.lock或模型代码。入口文档commit 6c1cacc3d1a8b3981e5676c467603cdddabe8e18；最新文档以本文件所在提交为准。环境：/nfs_share/lijunhui2/envs/policy-train；证据：artifacts/audits/f1-env-20260907/（仓库外）。
+数据采用负责人批准的动作后观测时序修正，当前恢复入口为 `protocols/data-v2/data-spec.json`：450/50整episode划分，训练55,682、验证6,068个动作起点；仅训练集norm独立重算一致。原始数据不改。初态关联仍有未知项，不宣称严格初态留出。
 
-安装与验证进程均已结束；无训练、仿真服务、科研后台队列或checkpoint。短时验证只用当时空闲GPU1，禁用JAX预分配；验证后进程快照已记录。没有下载模型权重、训练HDF5或教师资产，没有转换数据、回放或启动训练。
+真实基础权重的两步**合成诊断**通过：10个LoRA参数叶子更新、冻结叶子hash不变、实际模型入口预处理跨RNG一致。9项FAST测试、4项数据测试、100个真实样本动作回环通过。专家回放十任务各一条，9成功、1失败待排查，不能写成专家回放全部通过或策略成功率。
 
-剩余：teacher/sim-clean/sim-plus环境和独立LIBERO配置尚未建立；实际模型加载、数据/动作链路、回放、冻结/更新及G1所有模型验收未执行。一次小矩阵JIT通过不能保证所有模型算子、显存或吞吐满足要求。
+工程分支 `xiyuan/f1-baseline`，实现commit `7be08142871980d4ebe7b93d3efe617ad784adb4`，位于 `upstream/openpi`；未推送官方上游。证据位于 `artifacts/audits/f1-resources-20260907/`，模型诊断恢复记录 `runs/diagnostics/f1-synthetic-model-20260907-b/result.json`。当前没有项目训练/教师/评测后台作业，没有可恢复的学习训练checkpoint。最近只读GPU查询：GPU0忙，其余卡接近空闲；启动时须重新检查，不能据此预占。
 
-下一步建议：先依据F0中独立LIBERO与子模块/robosuite差异，选清实际仿真来源和版本，再准备clean/plus隔离环境；其他F1工作按PLAN依赖推进，不因本轮环境通过直接长训。官方数据获取后先检查一条HDF5演示再安全适配转换。本轮在学生环境验证结果处收口，供负责人/GPT审阅。
+下一步：全量token长度盘点；实现并验证完整训练保存/恢复，再做小样本学习与1k—3k步S短训、开发闭环；排查失败回放，验证七维实际reset/扰动生效。G1人工回放/控制与曲线审查尚未签收，未满足G1或正式训练前G2。
 
 ## 执行记录
 
@@ -67,3 +67,67 @@ CPU导入检查使用本轮check-policy-env.py：调用时仅进程级清除PYTH
 本轮只完成PLAN“本轮执行范围”的三项，四环境总步骤仍未勾选。来源依据为固定openpi源码与 [uv官方安装说明](https://docs.astral.sh/uv/getting-started/installation/)、[JAX官方安装说明](https://docs.jax.dev/en/latest/installation.html)，最终兼容结论以本机检查的具体范围为准。文档将按负责人持续授权提交推送并给出固定版本链接；不公开环境、源码缓存或原始设备信息。
 
 发布前文档检查通过（退出0）：本轮四个文档的链接/围栏、README当前阶段、三项限定范围勾选；上游锁文件不变，其余环境及模型/数据/监督目录未创建。`git diff --check`退出0，远端fetch成功；仅推送Vault文档，安装与验证原件留工作区。
+
+### 2026-09-07｜持续目标：完成F1
+
+负责人明确持续目标完成F1，首批学生环境完成为实质进展；现继续余下环境、官方资源、数据/回放与项目S验证，最终以完整G1证据为准。保留原环境和日志，不重复安装；本批证据放artifacts/audits/f1-resources-20260907。正式训练仍未授权越过G2。
+
+### 2026-09-07｜余下环境与原始数据开始准备
+
+Python3.8.20/3.10.21已装入项目tools目录，sim-clean/sim-plus/teacher虚拟环境已建立但安装尚在进行。选用固定openpi示例核心robosuite1.4.1/MuJoCo3.2.3（与LIBERO requirements中的1.4.0差异显式记录），clean/plus保持一致；实际运行将导入独立LIBERO/Plus checkout，不使用未初始化子模块。环境兼容候选将示例Numba0.53.1/llvmlite0.36.0更新为0.58.1/0.41.1以配合NumPy1.22.4；其余库按源要求解析，真实导入/回放后再判可用，不称官方环境逐项复现。独立解析结果均退出0，保存在sim-clean/sim-plus/teacher.resolved.txt。
+
+首个官方Spatial HDF5已下载并校验长度及LFS SHA256（508779600字节）。真实打开后确认50条完整演示；首条98步，actions7维，ee_pos3+ee_ori3+gripper_states2可组成基线8维本体状态，robot_states另为9维，不能混用或截断；两路RGB均128×128，states92维，demo含init_state/model_file。结构可用不代表时序或控制链路已验证。原始证据first-hdf5-inventory.json。现继续同revision全部10任务下载，复用第一项并逐个验证；尚未划分train/dev/final。
+
+当前已启动并持有工具句柄：sim-clean安装43503、sim-plus安装与teacher安装句柄见本次工具记录，全部数据下载50568（状态/进程在spatial-download.json）。中断后先查.exit、实际进程或同一工具句柄，不据超时重复启动。没有GPU科研作业、没有训练checkpoint；本批日志与锁文件在artifacts/audits/f1-resources-20260907。
+
+### 2026-09-07｜实际数据时序审计与负责人确认
+
+全部10任务、500条演示已下载并校验，共62250行原始动作。逐演示比较真实joint_states与states中的机器人关节位置，在所有61750个可比较位置上，obs[i].joint_states与states[i+1]对应位置逐元素精确相同；同索引误差显著。结合固定源码create_dataset.py在env.step后采集obs的路径，确认原始数据不能直接同索引配对。原始证据full-hdf5-timing-audit.json、joint-state-lag-diagnostic.json；不是synthetic数据。
+
+负责人明确回复“同意”，采用统一修正：obs[i]、states[i+1]、actions[i+1:]，i从0到L-2。每条轨迹缺少动作前原始图像的首个动作起点不训练，共排除500个（约0.8%），保留61750个，其余不得因A/B监督差异删样本。不重新渲染训练图像，原HDF5保持不变。批准映射写入工作区protocols/data-timing-v1.json，四组共用；尚未锁定正式protocol.lock或生成划分/norm。
+
+clean/plus基础安装及独立源码包安装已完成。首次导入暴露上游setup.py未发现外层namespace导致的现代editable空映射：只在各自环境增加精确source-root .pth，分别绑定独立LIBERO/Plus，未改全局PYTHONPATH或源码。clean随后导入通过。plus缺ImageMagick，已将Ubuntu官方包按APT SHA256校验后解压到项目tools/imagemagick，并补齐liblqr/libfftw3；仅在plus进程设置原生库路径，最终plus导入通过，无sudo/系统安装。
+
+teacher安装与pip check通过；初次导入受到继承的/share/apps/cuda/12.2的不可读libnvJitLink影响，进程级清除LD_LIBRARY_PATH后Torch2.3.1+cu121、torchvision0.18.1+cu121和FastVGGT/pycolmap/pyceres/open3d导入通过。原失败日志保留。基础模型与Plus资产仍在下载校验；FAST tokenizer文件已校验，尚未执行其远程代码。
+
+真实专家前三步回放完成，记录了原始XML到本机资产的路径映射（不改相机/几何参数）、图像朝向及位姿误差；raw朝向明显优于flip/rotate180。前三步未完成任务不算失败，现完整回放首条演示检验真实成功谓词。后续训练图像与在线输入采用同一经审计的确定性约定，不直接复制上游RLDS专用180度旋转。
+
+准备真实权重合成集成检查：run_id=f1-synthetic-model-20260907-a，GPU0启动前确认空闲，上限600秒/2次更新、物理与有效batch均1，仅诊断不计正式或学习曲线。配置/脚本hash及本地实现commit见real-model-check-registration.json，输出runs/diagnostics/f1-synthetic-model-20260907-a；验证冻结叶子不变、LoRA实际更新及不同RNG的模型入口预处理。依赖已满足，尚未宣称通过。
+
+### 2026-09-07｜资源、真实模型与数据验证汇总
+
+本节更新前文安装中/下载中/未划分等历史状态，不删除失败记录。
+
+| 已执行项 | 结果及证据（本轮审计目录） |
+|---|---|
+| Spatial下载 | 10文件/500演示/62,250原始动作行；源revision及每文件LFS SHA256校验，spatial-download.json COMPLETE |
+| 基础模型 | 官方35对象共10,850,405,453字节，base-download.json COMPLETE；真实参数32叶子、2,923,335,408参数 |
+| FAST/PaliGemma | 本地文件校验完成，fast-download.json、paligemma-tokenizer.json；FAST处理器代码先审计后离线加载 |
+| 三个新增环境 | sim-clean125包、sim-plus131包、teacher127包依赖检查及必要导入通过；sim各自LIBERO_CONFIG_PATH隔离 |
+| Plus资产 | 固定revision ZIP校验，448,799文件解压及CRC检查完成，plus-extraction.json |
+| 专家回放 | expert-replay-run.json COMPLETE，十条视频及JSON保留；9/10成功 |
+| 七维资源 | plus-inventory.json：实际API枚举2,402配置，0加载错误，385个单行配置；不是2,402个独立评测单元 |
+| FAST测试 | tokenizer-tests-retry.log/.exit：9项PASS，退出0 |
+| 数据测试 | data-tests.log/.exit：4项synthetic PASS，退出0 |
+| 实际模型 | real-model-check-b.log/.exit及run result.json：两步synthetic PASS，退出0 |
+| 真实动作回环 | real-data-roundtrip.json：100个样本通过，尚未做全量长度审计 |
+| norm独立复核 | norm-provenance-check.json/.log/.exit：train-only mean/std/q01/q99与独立重算完全一致，退出0 |
+
+Plus资产ZIP保存在NFS `data/raw/libero-plus-assets/assets.zip`；为避免约45万小文件的NFS开销，解压缓存位于 `/tmp/lijunhui2-libero-plus-assets-96764a4bfbda`，Plus assets链接指向它。该缓存可丢失，恢复先验完成标记/路径，缺失从保留ZIP重建；不能把临时盘当唯一持久证据。
+
+失败回放为table-center任务demo0（103帧），最终末端位置与记录差约0.0159米；视频显示放置靠近盘缘。原因仍待核实，不能断言只是模拟器误差，也不能换成功演示掩盖失败。原数据生成器可强制写末帧reward/done，验收采用实际仿真成功谓词。当前原始RGB与在线视图保留一致朝向，不复制RLDS专用180度旋转。
+
+实际模型首次诊断a因未先batch的image mask构造失败，修复为先batch字典再构建Observation；重试前发现GPU0已被其他用户占用，未触碰其进程，改用空闲GPU1运行b。b实际更新两步，loss 4.64285755→3.75446439，所有10个LoRA叶子变化、冻结参数hash保持一致，模型预处理仅调用一次且train=False，跨RNG输入图像精确一致。首步编译约33.55秒、第二步约0.31秒均仅此batch1合成诊断，不是正式吞吐或真实数据可学习证据。
+
+FAST实现保留合法编码并直接从token ID恢复动作段。发现上游先decode为文本再strip/encode会在一个可复现fixture中丢失首FAST token，70个系数变68个并触发静默零动作；项目S改为明确边界和长度校验。IDCT遗漏ortho归一化及EOS测试误用bos ID的问题已纠正，失败记录保留；最终与直接上游FAST处理器比较，不以已损坏的外层文本回环作正确性标准。修正属于四组共用S，不计A/B方法贡献。
+
+数据v1在任何训练前补强初态来源审计并生成v2，v1标SUPERSEDED_BEFORE_ANY_TRAINING；train/val/norm文件hash完全一致，没有看模型效果重划分。500条演示init与官方初态行无精确匹配，这不证明独立，标UNKNOWN_NOT_INDEPENDENT。预留clean官方行0—4为开发候选、5—49为最终候选，但正式manifest未冻结，Plus跨条件血缘仍待核查。
+
+已验证的复核命令（CPU、无训练；工作目录为工程根）：
+
+```sh
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu /nfs_share/lijunhui2/envs/policy-train/bin/python -m unittest discover -s /nfs_share/lijunhui2/upstream/openpi/tests/xiyuan -p test_data.py
+env -u PYTHONPATH -u PYTHONHOME -u LD_LIBRARY_PATH CUDA_VISIBLE_DEVICES= JAX_PLATFORMS=cpu /nfs_share/lijunhui2/envs/policy-train/bin/python /nfs_share/lijunhui2/artifacts/audits/f1-resources-20260907/check-norm-provenance.py
+```
+
+训练入口、累计/完整恢复、真实数据短训及七维单例仍未验收，不提供假设存在的训练启动命令。下一步从data-v2和上述实现commit继续，先查作业再启动。文档提交仅公开计划和结果摘要，数据、权重、视频、环境及私人规则留工作区。
