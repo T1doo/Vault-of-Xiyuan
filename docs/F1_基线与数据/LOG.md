@@ -469,4 +469,30 @@ F1计划允许1k—3k开发训练；鉴于2k固定pilot的闭环仍有17/20解�
 
 在不改变原 20 回合结果的前提下，使用同一最终 checkpoint 做了 2 个非正式 review 回合：task0 row0 的解码失败回合和 task1 row0 的成功回合，各保存了 agentview/wrist 的并排视频及起始、中间、结束帧。review run 为 2 回合、1 成功、1 解码失败，退出0；不进入任何成功率或训练选择。
 
-服务器审计目录中的材料为 `f1-s-review-capture/s-task00-row0.mp4`、`f1-s-review-capture/s-task01-row0.mp4` 和 `f1-s-review-capture/review-contact-sheet.png`。负责人审阅时请检查相机朝向、对象与指令是否对应、接近/抓持/放置阶段、夹爪开合和失败回合是否出现控制接口或时序异常；同时查看已有专家成功回放及 table-center/demo0 失败例的原始/重渲染对照。视频没有上传公开仓库，G1 仍标记为 `BLOCKED_HUMAN`，等待实际人工确认。
+服务器审计目录中的材料为 `f1-s-review-capture/s-task00-row0.mp4`、`f1-s-review-capture/s-task01-row0.mp4` 和 `f1-s-review-capture/review-contact-sheet.png`。负责人审阅时请检查相机朝向、对象与指令是否对应、接近/抓持/放置阶段、夹爪开合和失败回合是否出现控制接口或时序异常；同时查看已有专家成功回放及 table-center/demo0 失败例的原始/重渲染对照。当时视频尚未上传公开仓库；经后续授权，公开副本见文末。G1 仍标记为 `BLOCKED_HUMAN`，等待实际人工确认。
+
+### 2026-09-08｜公开审阅材料
+
+负责人已明确授权将少量、脱敏的 F1 审阅副本发布到本阶段的 [`review/`](review/) 目录。本目录只包含从既有服务器证据导出的 PNG/MP4，不含原始 HDF5、模型权重、私人规则、凭据或完整运行日志；服务器原件和未压缩证据不被覆盖。
+
+**S 策略材料**使用最终 3,000 步 checkpoint 的两个非正式 review 回合：task0 row0 在控制步 90 发生 `POLICY_DECODE_FAILURE`，task1 row0 成功。两个 MP4 的每帧为 agentview/wrist 并排画面；contact sheet 和单帧 PNG 明确标出任务、初态行及控制步。它们不加入原 20 回合统计，也不改变 checkpoint 或 G1 判定。
+
+- [S task0 row0 失败视频](review/s-task00-row0.mp4)
+- [S task1 row0 成功视频](review/s-task01-row0.mp4)
+- [S task0 row0 关键帧：步0](review/s-task00-row0-frame0000.png) · [步45](review/s-task00-row0-frame0045.png) · [步90](review/s-task00-row0-frame0090.png)
+- [S task1 row0 关键帧：步0](review/s-task01-row0-frame0000.png) · [步48](review/s-task01-row0-frame0048.png) · [步95](review/s-task01-row0-frame0095.png)
+
+![S review contact sheet（任务、初态行和控制步已标注）](review/review-contact-sheet.png)
+
+**专家材料**分别覆盖一个成功任务和 `table-center/demo0` 失败任务。对照图左侧是原始 HDF5 的 `obs[0]` RGB，右侧是同一既有专家回放的 `frame[0]` 重渲染画面；上排为 agentview，下排为 wrist，图内已标明来源。回放视频保留完整时间顺序和终止位置，失败例未被剪掉。
+
+- [专家成功原始/重渲染对照](review/expert-success-compare.png)
+- [专家成功回放](review/expert-task-00.mp4)
+- [table-center/demo0 原始/重渲染对照](review/expert-table-center-demo0-compare.png)
+- [table-center/demo0 专家失败回放](review/expert-task-01.mp4)
+
+![专家成功：原始与重渲染对照](review/expert-success-compare.png)
+
+![table-center/demo0：原始与重渲染对照](review/expert-table-center-demo0-compare.png)
+
+专家回放用于检查数据时序、图像对应和控制语义；S 回放用于观察开发模型行为。公开画面不等于缓存回归或策略稳定性验收，也不替代负责人实际确认；G1 继续保持 `BLOCKED_HUMAN`。
