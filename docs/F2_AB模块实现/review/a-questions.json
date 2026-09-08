@@ -1,0 +1,2772 @@
+{
+  "status": "DRAFT_NOT_APPROVED_FOR_TRAINING",
+  "human_review_count": 0,
+  "source_review_sha256": "abe5eb49991da957eb00b9715b0360efac8e9bdb4c998d26feda03762f73450e",
+  "question_key": [
+    "sample_id",
+    "slot_index",
+    "protocol_version"
+  ],
+  "questions": [
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl between the plate and the ramekin",
+      "question_text": "Where is the black bowl between the plate and the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        -0.05085460985157901,
+        0.20632841473475344,
+        0.8983620356627411
+      ],
+      "eef_world": [
+        -0.21289736340316123,
+        -0.0020916654729727247,
+        1.1760241975535162
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.1620427535515822,
+        0.20842008020772618,
+        -0.2776621618907751
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.0692420816830489,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 2.4978608123320527e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q01",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000048",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl between the plate and the ramekin",
+      "question_text": "Where is the black bowl between the plate and the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "state_row": 49,
+      "observation_row": 48,
+      "object_world": [
+        -0.053279968026066334,
+        0.21192974569319073,
+        0.9022100369447281
+      ],
+      "eef_world": [
+        -0.057797188880252516,
+        0.17109564808448724,
+        0.9409593138602728
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.0045172208541861825,
+        0.04083409760870349,
+        -0.03874927691554464
+      ],
+      "dominant_axis_candidate": "+y",
+      "dominance_gap": 0.002084820693158851,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "left",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.5,
+      "eef_record_l2_error": 0.0001971176926251449,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q02",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000041",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl between the plate and the ramekin",
+      "question_text": "Where is the black bowl between the plate and the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "state_row": 42,
+      "observation_row": 41,
+      "object_world": [
+        -0.05070032383963975,
+        0.2087277045090709,
+        0.8983565627334215
+      ],
+      "eef_world": [
+        -0.05297389825926065,
+        0.176929966502586,
+        0.929063342384777
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.002273574419620901,
+        0.031797738006484916,
+        -0.030706779651355487
+      ],
+      "dominant_axis_candidate": "+y",
+      "dominance_gap": 0.0010909583551294288,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "left",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.4270833333333333,
+      "eef_record_l2_error": 7.68889148872739e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q03",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000096",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "state_row": 97,
+      "observation_row": 96,
+      "object_world": [
+        0.08346989885837833,
+        0.19562549171754579,
+        0.9024824894279011
+      ],
+      "eef_world": [
+        0.06438563622973191,
+        0.15207465290757993,
+        1.0130573666701825
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.019084262628646417,
+        0.04355083880996585,
+        -0.11057487724228143
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.06702403843231558,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 0.0003892012925581608,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q04",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl from table center",
+      "question_text": "Where is the black bowl from table center relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl from table center and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        -0.07500028882700588,
+        0.0006212295558784784,
+        0.8983371888880426
+      ],
+      "eef_world": [
+        -0.20097475073161292,
+        -0.0015627267903919571,
+        1.1733777621437
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.12597446190460704,
+        0.0021839563462704354,
+        -0.27504057325565745
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.1490661113510504,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 6.18478549757957e-06,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q05",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000051",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl from table center",
+      "question_text": "Where is the black bowl from table center relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl from table center and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+      "state_row": 52,
+      "observation_row": 51,
+      "object_world": [
+        -0.08291272426925637,
+        0.0009399552454825013,
+        0.9268339193400674
+      ],
+      "eef_world": [
+        -0.099034353516583,
+        0.03981735562878773,
+        0.9514362361187692
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.01612162924732663,
+        -0.03887740038330523,
+        -0.024602316778701727
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.0142750836046035,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.504950495049505,
+      "eef_record_l2_error": 0.00029024891070853387,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q06",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000035",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl from table center",
+      "question_text": "Where is the black bowl from table center relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl from table center and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+      "state_row": 36,
+      "observation_row": 35,
+      "object_world": [
+        -0.07500028653619564,
+        0.0006212285596539364,
+        0.8984041653006754
+      ],
+      "eef_world": [
+        -0.07594674611085538,
+        0.04025804025256349,
+        0.9409597063640783
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.0009464595746597332,
+        -0.03963681169290956,
+        -0.04255554106340298
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.0029187293704934225,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.3465346534653465,
+      "eef_record_l2_error": 0.0003030534302733434,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q07",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000101",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl from table center and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+      "state_row": 102,
+      "observation_row": 101,
+      "object_world": [
+        0.06312167826655171,
+        0.18546215097900895,
+        0.9022433747549298
+      ],
+      "eef_world": [
+        0.06323821768699063,
+        0.22715935838202997,
+        0.9347297911241362
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.00011653942043891863,
+        -0.04169720740302102,
+        -0.03248641636920646
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.009210791033814558,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 4.020093450566236e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q08",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl in the top drawer of the wooden cabinet",
+      "question_text": "Where is the black bowl in the top drawer of the wooden cabinet relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        0.07949308284572941,
+        -0.14632373487409434,
+        1.0625599547208788
+      ],
+      "eef_world": [
+        -0.20399998781342654,
+        0.0017993919403580883,
+        1.1669622032046003
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.28349307065915597,
+        -0.14812312681445242,
+        -0.10440224848372148
+      ],
+      "dominant_axis_candidate": "+x",
+      "dominance_gap": 0.13536994384470355,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "front",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 3.452321940670195e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q09",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000059",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl in the top drawer of the wooden cabinet",
+      "question_text": "Where is the black bowl in the top drawer of the wooden cabinet relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "state_row": 60,
+      "observation_row": 59,
+      "object_world": [
+        0.06921848893205025,
+        -0.1488483033437386,
+        1.0688525775625033
+      ],
+      "eef_world": [
+        0.04193411262088706,
+        -0.1102587245588993,
+        1.100646847469653
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.02728437631116319,
+        -0.038589578784839304,
+        -0.03179426990714962
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.006795308877689685,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.39072847682119205,
+      "eef_record_l2_error": 0.00023549097115824693,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q10",
+      "contact_sheet": "a-contact-sheet-1.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000016",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl in the top drawer of the wooden cabinet",
+      "question_text": "Where is the black bowl in the top drawer of the wooden cabinet relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "state_row": 17,
+      "observation_row": 16,
+      "object_world": [
+        0.07949308046270086,
+        -0.14632373991061368,
+        1.062559968366514
+      ],
+      "eef_world": [
+        -0.060759678478366136,
+        -0.005506333510484816,
+        1.2019282039842196
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.14025275894106698,
+        -0.14081740640012885,
+        -0.13936823561770573
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.0005646474590618733,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.10596026490066225,
+      "eef_record_l2_error": 0.00047071677617932777,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q11",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000151",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "state_row": 152,
+      "observation_row": 151,
+      "object_world": [
+        0.06210760886974944,
+        0.2126618973654621,
+        0.9024826823462736
+      ],
+      "eef_world": [
+        0.06010310751465397,
+        0.2798476385304687,
+        0.9575789169461778
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.0020045013550954727,
+        -0.06718574116500658,
+        -0.055096234599904204
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.012089506565102381,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 0.00028456643565973424,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q12",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the cookie box",
+      "question_text": "Where is the black bowl next to the cookie box relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "566c65596f3472e752e6522817bff51bbf3ce5159d7bec1d3554e5ead46b1e55",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        0.1434342014749194,
+        -0.07669038263879298,
+        0.8983371888880426
+      ],
+      "eef_world": [
+        -0.21475623956157266,
+        -0.0032179914785684795,
+        1.15932082983739
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.35819044103649206,
+        -0.0734723911602245,
+        -0.26098364094934745
+      ],
+      "dominant_axis_candidate": "+x",
+      "dominance_gap": 0.09720680008714461,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "front",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 9.628021910042405e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q13",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000061",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the cookie box",
+      "question_text": "Where is the black bowl next to the cookie box relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "566c65596f3472e752e6522817bff51bbf3ce5159d7bec1d3554e5ead46b1e55",
+      "state_row": 62,
+      "observation_row": 61,
+      "object_world": [
+        0.13512591148747738,
+        -0.07542924212844586,
+        0.904116609441005
+      ],
+      "eef_world": [
+        0.13535301574131062,
+        -0.036262801948695994,
+        0.9345478888177862
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.00022710425383323796,
+        -0.039166440179749865,
+        -0.03043127937678114
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.008735160802968725,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.5041322314049587,
+      "eef_record_l2_error": 0.00018367679873438703,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q14",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000110",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the cookie box",
+      "question_text": "Where is the black bowl next to the cookie box relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "566c65596f3472e752e6522817bff51bbf3ce5159d7bec1d3554e5ead46b1e55",
+      "state_row": 111,
+      "observation_row": 110,
+      "object_world": [
+        0.04913798957631224,
+        0.19785113692107742,
+        0.9150721387767019
+      ],
+      "eef_world": [
+        0.07417950815571317,
+        0.22874636788620603,
+        0.945177291674226
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.02504151857940093,
+        -0.03089523096512861,
+        -0.030105152897524134
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.0007900780676044772,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.9090909090909091,
+      "eef_record_l2_error": 0.00021641191499473863,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q15",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000121",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "566c65596f3472e752e6522817bff51bbf3ce5159d7bec1d3554e5ead46b1e55",
+      "state_row": 122,
+      "observation_row": 121,
+      "object_world": [
+        0.060240070670951114,
+        0.20691868880118622,
+        0.9023686396900578
+      ],
+      "eef_world": [
+        0.08437888499446299,
+        0.23336846675480763,
+        0.9303211008157914
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.02413881432351187,
+        -0.02644977795362141,
+        -0.027952461125733685
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.0015026831721122735,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 9.117654064475201e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q16",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the plate",
+      "question_text": "Where is the black bowl next to the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the plate and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "c8fbb9effa27b947d04d26862d75273d93cac1806734e53836cd472a08aec1fe",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        -0.0017402415493596066,
+        0.312823416926107,
+        0.8983371888880426
+      ],
+      "eef_world": [
+        -0.20388830609826972,
+        0.005508809485891016,
+        1.1744891064522833
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.2021480645489101,
+        0.307314607440216,
+        -0.27615191756424073
+      ],
+      "dominant_axis_candidate": "+y",
+      "dominance_gap": 0.031162689875975258,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "left",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 4.345097689134793e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q17",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000066",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the plate",
+      "question_text": "Where is the black bowl next to the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the plate and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "c8fbb9effa27b947d04d26862d75273d93cac1806734e53836cd472a08aec1fe",
+      "state_row": 67,
+      "observation_row": 66,
+      "object_world": [
+        0.005176899959592927,
+        0.315524173693288,
+        0.9056994146437374
+      ],
+      "eef_world": [
+        0.0021735772970235268,
+        0.27934102981672876,
+        0.9517581861505106
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.0030033226625694005,
+        0.03618314387655924,
+        -0.04605877150677318
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.009875627630213935,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.584070796460177,
+      "eef_record_l2_error": 0.0002774269429852763,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q18",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000094",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the plate",
+      "question_text": "Where is the black bowl next to the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the plate and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "c8fbb9effa27b947d04d26862d75273d93cac1806734e53836cd472a08aec1fe",
+      "state_row": 95,
+      "observation_row": 94,
+      "object_world": [
+        0.05778284486539687,
+        0.15126631542482244,
+        0.9150156986601397
+      ],
+      "eef_world": [
+        0.05202576760310729,
+        0.11020741383728869,
+        0.95614972801293
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.005757077262289585,
+        0.04105890158753375,
+        -0.04113402935279031
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 7.512776525656073e-05,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.831858407079646,
+      "eef_record_l2_error": 0.0003119923535512239,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q19",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000113",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the plate and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "c8fbb9effa27b947d04d26862d75273d93cac1806734e53836cd472a08aec1fe",
+      "state_row": 114,
+      "observation_row": 113,
+      "object_world": [
+        0.05565982756310901,
+        0.20796158931330852,
+        0.9024788726773663
+      ],
+      "eef_world": [
+        0.05897231743971573,
+        0.15420209612703714,
+        0.9468033186811219
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.0033124898766067196,
+        0.05375949318627138,
+        -0.044324446003755624
+      ],
+      "dominant_axis_candidate": "+y",
+      "dominance_gap": 0.009435047182515754,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "left",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 0.0001922401140766959,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q20",
+      "contact_sheet": "a-contact-sheet-2.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the ramekin",
+      "question_text": "Where is the black bowl next to the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "53a7516571412a2f46a27cbf8482d3b76dbad4221858c8f6b565d506c274e61d",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        -0.1749618706758875,
+        0.30859541554254183,
+        0.8983371888880426
+      ],
+      "eef_world": [
+        -0.20418742028494233,
+        0.018303919762777072,
+        1.1954491071191564
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.029225549609054824,
+        0.29029149577976476,
+        -0.2971119182311138
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.006820422451349062,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 0.0003590594711357974,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q21",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000070",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the ramekin",
+      "question_text": "Where is the black bowl next to the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "53a7516571412a2f46a27cbf8482d3b76dbad4221858c8f6b565d506c274e61d",
+      "state_row": 71,
+      "observation_row": 70,
+      "object_world": [
+        -0.16706676291498784,
+        0.3136677917327862,
+        0.9049308128938096
+      ],
+      "eef_world": [
+        -0.15749639342330862,
+        0.35552176987392553,
+        0.9468167989591365
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.00957036949167922,
+        -0.041853978141139336,
+        -0.0418859860653269
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 3.200792418756038e-05,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.5785123966942148,
+      "eef_record_l2_error": 0.0003826480436158502,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q22",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000001",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl next to the ramekin",
+      "question_text": "Where is the black bowl next to the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "53a7516571412a2f46a27cbf8482d3b76dbad4221858c8f6b565d506c274e61d",
+      "state_row": 2,
+      "observation_row": 1,
+      "object_world": [
+        -0.17496186909034522,
+        0.3085954148762178,
+        0.8983858892454178
+      ],
+      "eef_world": [
+        -0.20432392684705922,
+        0.027783422521061057,
+        1.19692421492989
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.029362057756713994,
+        0.28081199235515675,
+        -0.29853832568447214
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.01772633332931539,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.008264462809917356,
+      "eef_record_l2_error": 0.00038166193069502657,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched; duplicate replaced by next unused observation",
+      "question_id": "Q23",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000121",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "53a7516571412a2f46a27cbf8482d3b76dbad4221858c8f6b565d506c274e61d",
+      "state_row": 122,
+      "observation_row": 121,
+      "object_world": [
+        0.06269700350502586,
+        0.18893045264009237,
+        0.9024765180696296
+      ],
+      "eef_world": [
+        0.06390220255450361,
+        0.23302386114056642,
+        0.9405233190804144
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.0012051990494777592,
+        -0.04409340850047405,
+        -0.038046801010784836
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.006046607489689215,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 0.00017427936484437222,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q24",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the cookie box",
+      "question_text": "Where is the black bowl on the cookie box relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "3d4ccf070c3d9883ae0676f2d888588f98c696ddad71b7694f47c379fc99ef36",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        0.07648154863975924,
+        0.025361044638359403,
+        0.9170835097180682
+      ],
+      "eef_world": [
+        -0.19349055650180624,
+        -0.0073779560369334335,
+        1.1880732401073981
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.2699721051415655,
+        0.03273900067529284,
+        -0.27098973038932994
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.001017625247764442,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 3.533250521808441e-07,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q25",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000056",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the cookie box",
+      "question_text": "Where is the black bowl on the cookie box relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "3d4ccf070c3d9883ae0676f2d888588f98c696ddad71b7694f47c379fc99ef36",
+      "state_row": 57,
+      "observation_row": 56,
+      "object_world": [
+        0.07598324142912895,
+        0.02229088346624152,
+        0.9199845228919739
+      ],
+      "eef_world": [
+        0.06827837820609856,
+        0.06542768449947954,
+        0.957582864814184
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.007704863223030392,
+        -0.043136801033238026,
+        -0.03759834192221012
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.005538459111027905,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.5773195876288659,
+      "eef_record_l2_error": 0.00020077936399272907,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q26",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000090",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the cookie box",
+      "question_text": "Where is the black bowl on the cookie box relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "3d4ccf070c3d9883ae0676f2d888588f98c696ddad71b7694f47c379fc99ef36",
+      "state_row": 91,
+      "observation_row": 90,
+      "object_world": [
+        0.07042628265838594,
+        0.17694287163996872,
+        0.9092462282463917
+      ],
+      "eef_world": [
+        0.06121229529048286,
+        0.21674980316980622,
+        0.949835656646367
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.009213987367903076,
+        -0.0398069315298375,
+        -0.04058942839997537
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.0007824968701378721,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.9278350515463918,
+      "eef_record_l2_error": 9.606174069265959e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q27",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000097",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "3d4ccf070c3d9883ae0676f2d888588f98c696ddad71b7694f47c379fc99ef36",
+      "state_row": 98,
+      "observation_row": 97,
+      "object_world": [
+        0.048219813588516465,
+        0.18946879812334483,
+        0.9024816002467803
+      ],
+      "eef_world": [
+        0.05420771906313074,
+        0.22275459154969046,
+        0.9702384288876557
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.005987905474614273,
+        -0.03328579342634563,
+        -0.0677568286408754
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.034471035214529766,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 0.0002707378047554372,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q28",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the ramekin",
+      "question_text": "Where is the black bowl on the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        -0.22036354028007327,
+        0.2024382529708463,
+        0.9431542962753786
+      ],
+      "eef_world": [
+        -0.21358324927433459,
+        -0.004043091322591297,
+        1.1685575332368117
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.006780291005738681,
+        0.2064813442934376,
+        -0.22540323696143305
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.01892189266799546,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 9.020470411533627e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q29",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000045",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the ramekin",
+      "question_text": "Where is the black bowl on the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "state_row": 46,
+      "observation_row": 45,
+      "object_world": [
+        -0.2107388951213183,
+        0.2449352049873224,
+        0.9347400868704036
+      ],
+      "eef_world": [
+        -0.20477039975897612,
+        0.19849660132824606,
+        0.980926557334789
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.005968495362342174,
+        0.046438603659076344,
+        -0.0461864704643854
+      ],
+      "dominant_axis_candidate": "+y",
+      "dominance_gap": 0.00025213319469094553,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "left",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.3333333333333333,
+      "eef_record_l2_error": 0.00016132960756853217,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q30",
+      "contact_sheet": "a-contact-sheet-3.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000061",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the ramekin",
+      "question_text": "Where is the black bowl on the ramekin relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "state_row": 62,
+      "observation_row": 61,
+      "object_world": [
+        -0.19455690918264573,
+        0.22950456556983656,
+        0.9960298269296847
+      ],
+      "eef_world": [
+        -0.19332485280517447,
+        0.18225652149673802,
+        1.0433823374021287
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.0012320563774712578,
+        0.047248044073098544,
+        -0.04735251047244404
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.00010446639934549862,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.45185185185185184,
+      "eef_record_l2_error": 0.0003945996577225189,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q31",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000135",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "state_row": 136,
+      "observation_row": 135,
+      "object_world": [
+        0.06980775164334978,
+        0.21640431717567019,
+        0.9024832322255697
+      ],
+      "eef_world": [
+        0.060542828299953215,
+        0.162290377102555,
+        1.0252949358988572
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.009264923343396562,
+        0.05411394007311518,
+        -0.12281170367328753
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.06869776360017235,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 0.0003029404882004916,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q32",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the stove",
+      "question_text": "Where is the black bowl on the stove relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the stove and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "dd11837141a30d874ebbbfaae20e91ecc67ec85ab3872ceb4cff3abfcbef7cb0",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        -0.26781105198252037,
+        -0.1430946762466121,
+        0.9254653482370558
+      ],
+      "eef_world": [
+        -0.20080978612435613,
+        0.0014590774179942146,
+        1.1730037894512768
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.06700126585816424,
+        -0.14455375366460632,
+        -0.24753844121422097
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.10298468754961465,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 0.0001133730169257746,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q33",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000070",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the stove",
+      "question_text": "Where is the black bowl on the stove relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the stove and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "dd11837141a30d874ebbbfaae20e91ecc67ec85ab3872ceb4cff3abfcbef7cb0",
+      "state_row": 71,
+      "observation_row": 70,
+      "object_world": [
+        -0.23924464659597766,
+        -0.14622369017408648,
+        0.9855441184028948
+      ],
+      "eef_world": [
+        -0.25148203628118226,
+        -0.10923331080769486,
+        1.0129190751291162
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.012237389685204603,
+        -0.03699037936639163,
+        -0.027374956726221367
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.009615422640170262,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.45751633986928103,
+      "eef_record_l2_error": 0.0003724372789965073,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q34",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000119",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the stove",
+      "question_text": "Where is the black bowl on the stove relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the stove and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "dd11837141a30d874ebbbfaae20e91ecc67ec85ab3872ceb4cff3abfcbef7cb0",
+      "state_row": 120,
+      "observation_row": 119,
+      "object_world": [
+        0.055167161222147335,
+        0.1826480947348224,
+        1.0225971936532814
+      ],
+      "eef_world": [
+        0.06271334327430501,
+        0.21862646463047844,
+        1.058696608316445
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.0075461820521576795,
+        -0.03597836989565603,
+        -0.03609941466316369
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.00012104476750765536,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.7777777777777778,
+      "eef_record_l2_error": 0.00030090806936829996,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q35",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000153",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the stove and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "dd11837141a30d874ebbbfaae20e91ecc67ec85ab3872ceb4cff3abfcbef7cb0",
+      "state_row": 154,
+      "observation_row": 153,
+      "object_world": [
+        0.04491939008598136,
+        0.206205730552616,
+        0.9023462687237628
+      ],
+      "eef_world": [
+        0.06156690042965608,
+        0.2473793008841551,
+        0.9306475759961074
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        -0.016647510343674725,
+        -0.041173570331539094,
+        -0.02830130727234459
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.012872263059194505,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 1.999600283824538e-05,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q36",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000000",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the wooden cabinet",
+      "question_text": "Where is the black bowl on the wooden cabinet relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5293e759381b477e126beaf83d738542bbd4d93f522a3eead1066e612bad4a8c",
+      "state_row": 1,
+      "observation_row": 0,
+      "object_world": [
+        0.014415743723895418,
+        -0.2907189362522433,
+        1.1263999593085126
+      ],
+      "eef_world": [
+        -0.2069295535767686,
+        0.0013382556711289673,
+        1.1671566846450525
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.22134529730066402,
+        -0.29205719192337226,
+        -0.040756725336539956
+      ],
+      "dominant_axis_candidate": "-y",
+      "dominance_gap": 0.07071189462270824,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "right",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.0,
+      "eef_record_l2_error": 0.00011491856072243113,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "earliest observation / manipulated role",
+      "question_id": "Q37",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000061",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the wooden cabinet",
+      "question_text": "Where is the black bowl on the wooden cabinet relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5293e759381b477e126beaf83d738542bbd4d93f522a3eead1066e612bad4a8c",
+      "state_row": 62,
+      "observation_row": 61,
+      "object_world": [
+        -0.00729794417194386,
+        -0.26618226850311677,
+        1.131045145762246
+      ],
+      "eef_world": [
+        -0.013237065419313958,
+        -0.2248707948640584,
+        1.1839784830443623
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.005939121247370098,
+        -0.04131147363905838,
+        -0.052933337282116355
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.011621863643057978,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": true,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.4552238805970149,
+      "eef_record_l2_error": 0.0002283219672797322,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "first observed two-fingerpad contact; otherwise midpoint, no verified phase",
+      "question_id": "Q38",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000059",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 0,
+      "role": "manipulated_object",
+      "referring_expression": "the black bowl on the wooden cabinet",
+      "question_text": "Where is the black bowl on the wooden cabinet relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "offline_instance": "akita_black_bowl_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5293e759381b477e126beaf83d738542bbd4d93f522a3eead1066e612bad4a8c",
+      "state_row": 60,
+      "observation_row": 59,
+      "object_world": [
+        -0.001597028623728103,
+        -0.27407103481133177,
+        1.1280245665798554
+      ],
+      "eef_world": [
+        -0.013745010122104254,
+        -0.22869482060753868,
+        1.1743438247380105
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.012147981498376152,
+        -0.04537621420379309,
+        -0.046319258158155074
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.0009430439543619829,
+      "object_body_name": "akita_black_bowl_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 0.44029850746268656,
+      "eef_record_l2_error": 0.0001799115783551782,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "smallest principal-axis gap, boundary-enriched",
+      "question_id": "Q39",
+      "contact_sheet": "a-contact-sheet-4.png"
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000134",
+      "protocol_version": "direction-draft-20260908-v1",
+      "slot_index": 1,
+      "role": "placement_target",
+      "referring_expression": "the plate",
+      "question_text": "Where is the plate relative to the gripper in the fixed robot base frame?",
+      "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "offline_instance": "plate_1",
+      "binding_evidence": "BDDL goal On operands, fixed per episode",
+      "bddl_sha256": "5293e759381b477e126beaf83d738542bbd4d93f522a3eead1066e612bad4a8c",
+      "state_row": 135,
+      "observation_row": 134,
+      "object_world": [
+        0.05312264527491983,
+        0.18596097865848188,
+        0.9024811771649912
+      ],
+      "eef_world": [
+        0.04640006530065602,
+        0.2252801262320966,
+        1.0274887996940518
+      ],
+      "base_world_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "delta_base": [
+        0.006722579974263815,
+        -0.03931914757361471,
+        -0.1250076225290606
+      ],
+      "dominant_axis_candidate": "-z",
+      "dominance_gap": 0.0856884749554459,
+      "object_body_name": "plate_1_main",
+      "eef_site_name": "gripper0_grip_site",
+      "base_body_name": "robot0_base",
+      "both_fingerpads_contact": false,
+      "geometric_valid": true,
+      "candidate_direction": "down",
+      "candidate_rule_status": "draft_unreviewed_axis_words_and_boundary",
+      "approved_for_training": false,
+      "valid": false,
+      "label": null,
+      "invalid_reason": "protocol_semantics_threshold_grasp_pending_review",
+      "stage_label": "unknown",
+      "trajectory_fraction": 1.0,
+      "eef_record_l2_error": 0.000231936802019219,
+      "reviewer": null,
+      "text_review": null,
+      "instance_review": null,
+      "direction_review": null,
+      "selection_reason": "last action-start observation / placement role",
+      "question_id": "Q40",
+      "contact_sheet": "a-contact-sheet-4.png"
+    }
+  ]
+}

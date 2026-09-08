@@ -1,0 +1,448 @@
+{
+  "status": "REVIEW_ONLY_NO_QUALITY_APPROVAL",
+  "selection_rule": "One per task: first observation in the existing 100-observation selection order with both views of mapping and native depth already present; no success/feature-score selection. Not semantic stage coverage.",
+  "source_selection_sha256": "337c006fa3db2cf52391b7ddff93e589b25604ac3636e2c49d13d9ffc98fa908",
+  "source_mapping_index_sha256": "d577875f753a5b3bb459122ae3408a844fd96d4ccb8943d69bbba64891b5ea4e",
+  "observations": [
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000000",
+      "episode": "demo_0",
+      "observation_row": 0,
+      "state_row": 1,
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "raw_sha256": "ff6f26121653c77280eb40a38773a74141c11a8509f3466058cb56dd2cc60ead",
+      "observation_id": "B01",
+      "source_pilot_index": 0,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "04b6612a881a6ca16939073291b886c8698ee91c2f551729b76f0fe971f54fc3",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-01-v0-rgb.png",
+          "rgb_png_sha256": "a6464d96d6676de4f3780c34586310c574c574bda377e1bdd99df107921eff57",
+          "mapping": "b-01-v0-mapping.png",
+          "mapping_png_sha256": "5a0f5988a9695ac112950db34dc33777193cd2df3385e9e97972cea3e87bb2f2",
+          "depth": "b-01-v0-depth.png",
+          "depth_png_sha256": "925a38de7d12712e4f6abba667264177636df4e632f14d7750d6f5c7ae7ff0aa"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "cf611f977de335083c1ee1f033c5e0550875f4b2b68cfde2eb5ae19a8e5f9cc9",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-01-v1-rgb.png",
+          "rgb_png_sha256": "337786e399d04ea20de471a5b273158a61db1de66285e28e980bce9ac1687b7e",
+          "mapping": "b-01-v1-mapping.png",
+          "mapping_png_sha256": "8660204fea4c9200b996a7b579cdf50554f5d2894c2710e643d4b689c508ebde",
+          "depth": "b-01-v1-depth.png",
+          "depth_png_sha256": "b62a0d17669888093eb1e5fbd95933404ecb8363a6e0733637dd023e6bc22cea"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000000",
+      "episode": "demo_0",
+      "observation_row": 0,
+      "state_row": 1,
+      "instruction": "pick up the black bowl from table center and place it on the plate",
+      "raw_sha256": "75ede0cf5fbfc925093671b55032ad80f1b1f1cf35442ec6c663460d37d3e0b3",
+      "observation_id": "B02",
+      "source_pilot_index": 10,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "14e387dbcae29a52182ff660ab756053e89c75170a0a4f3e0bb7eab1e4b06f70",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-02-v0-rgb.png",
+          "rgb_png_sha256": "82cbe4e564bdf2c758b7207a4e61823ff9755232994799a25d405e9a37eaf4cb",
+          "mapping": "b-02-v0-mapping.png",
+          "mapping_png_sha256": "1540eec5d435cc3c9d5ccc41140eafb2f40982d2a7d389169caecadef84981eb",
+          "depth": "b-02-v0-depth.png",
+          "depth_png_sha256": "2fd297235547721f673de3782312af854ba51f5e71f542380d304e0f62c25fff"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "4a44daa95e1b6a50be871516124afa3b796f876342f8ac069dccc304f7f61c7e",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-02-v1-rgb.png",
+          "rgb_png_sha256": "f237ad64f2c39a4a5da555f1adc82cb4df7a19b287929037f5631ad016db67a0",
+          "mapping": "b-02-v1-mapping.png",
+          "mapping_png_sha256": "ac05c1ab618eb19fe7ebc7705dadc911ca8f17b04f9fb7855bd58c426cde36fc",
+          "depth": "b-02-v1-depth.png",
+          "depth_png_sha256": "d9658f7429babdbd7c9c0527f8e19da6335769ee78168237df277c9066c19af8"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000000",
+      "episode": "demo_0",
+      "observation_row": 0,
+      "state_row": 1,
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "raw_sha256": "7ff1ee60447875c152d8c7819f499d23dbc0eb4d4bf045225d5d87a2cdad99bd",
+      "observation_id": "B03",
+      "source_pilot_index": 20,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "2f0a08f2bef11b72c1d66c30e7ef49e3a31c1c5acc4689e495c3da6aaec472cf",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-03-v0-rgb.png",
+          "rgb_png_sha256": "1d9041ea0536462fc36bb87e2e1ad3229ed3124c95b173af27d0beee256c98fd",
+          "mapping": "b-03-v0-mapping.png",
+          "mapping_png_sha256": "e4f63d97bb9e7fee15c2a2ff5973794688ef4e9a3e71f96ccd9fd1a7bb5a059f",
+          "depth": "b-03-v0-depth.png",
+          "depth_png_sha256": "ef25e3556b4e2ca9323ff8850db5d0e377d309680c0d50cf31eb0457661c8bbc"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "2005796c6fb3bc8825453e96a50eabb441825d1dc6f5e776adcffdd97d0c6e0b",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-03-v1-rgb.png",
+          "rgb_png_sha256": "695e72fd75d984ae17aa9132e7c742d05025f50377369310c39c94a52cc3c1cf",
+          "mapping": "b-03-v1-mapping.png",
+          "mapping_png_sha256": "d406070c5b120d3e135310b7a89cb25d6fb92af0115f58e8dd475fc480cb2512",
+          "depth": "b-03-v1-depth.png",
+          "depth_png_sha256": "26ac81a1fa433a5e520f856a303d49371eab78ebc55f6c60fc941bc4a7252b07"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000000",
+      "episode": "demo_0",
+      "observation_row": 0,
+      "state_row": 1,
+      "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+      "raw_sha256": "9d0b5435b313a8c0d7336b429b5f0f578be6f2a9f5f8a6dd67459ef388f3c74c",
+      "observation_id": "B04",
+      "source_pilot_index": 30,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "5a337f4ca6166f711882e1374602436f6319d7d56bc08c622ae9af7c8fee5485",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-04-v0-rgb.png",
+          "rgb_png_sha256": "b5a57bd74e1b0d8c6c9c1f4a9a62c2c8394607a2ee4958234c1ba7d2baa3b717",
+          "mapping": "b-04-v0-mapping.png",
+          "mapping_png_sha256": "ac51055675e740be9003bcfa4673810a18972aaf57f6f6b27f66a95cdafc0c05",
+          "depth": "b-04-v0-depth.png",
+          "depth_png_sha256": "779676fb062a580c880fba239f48dbfb62da0b32bf5cbd951e0dadb60888cfa9"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "b9b76812f78c5009d69dd726b71e16c448d150b0a22aee702a97aaa56ed8fef7",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-04-v1-rgb.png",
+          "rgb_png_sha256": "8b976cb0e42fced53e6178f803adf4563360a6d1accb75de13f371d1855596b3",
+          "mapping": "b-04-v1-mapping.png",
+          "mapping_png_sha256": "ca21c8398ef3754ce818df437e2f297458cb77b755cc0dc56a93ad9d47ba3872",
+          "depth": "b-04-v1-depth.png",
+          "depth_png_sha256": "566f421e5bbe5aedc710b4d875e6c8c3090f05d3e2c520fb1fd1b2a5b2d4e00c"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000000",
+      "episode": "demo_0",
+      "observation_row": 0,
+      "state_row": 1,
+      "instruction": "pick up the black bowl next to the plate and place it on the plate",
+      "raw_sha256": "3961cb7126eaca47d0f5be29eb297bb62e7591e3c86172c9587c0bf670112f84",
+      "observation_id": "B05",
+      "source_pilot_index": 40,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "eefaec07501f46a55843c24b1e6557431f61254f2bc4fbe73658f96772c2d49f",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-05-v0-rgb.png",
+          "rgb_png_sha256": "a94ddb26c6136b71c92bf2476afdfec743cd7768d38a3aba0e1e677218ae25a2",
+          "mapping": "b-05-v0-mapping.png",
+          "mapping_png_sha256": "998f80c3201d6cdf1fdb0cda8472f17d8bd78ae61851b090d777ccb69f2566b6",
+          "depth": "b-05-v0-depth.png",
+          "depth_png_sha256": "fcebba5faf2eaf1e7ed27d0097d37884ad3482a3d0373761fc89f2276dd8f8a1"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "2f5bad47b188b05b5487e4db0a7428e60d8e298f5b4b6f1e81f0fc28c7ec2368",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-05-v1-rgb.png",
+          "rgb_png_sha256": "989964ff8206c46688160ab33535e967914d3551bb2fcaa32ef26221335f985c",
+          "mapping": "b-05-v1-mapping.png",
+          "mapping_png_sha256": "adbf8fb4a46de11ea21f7febc6ab68ab3ab693041d3fd09eae7a43faa506d621",
+          "depth": "b-05-v1-depth.png",
+          "depth_png_sha256": "9ee8cf4c0b1da0df3b933ae434aef8809db06bb7578ce615102d10aabbbe4f03"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000000",
+      "episode": "demo_1",
+      "observation_row": 0,
+      "state_row": 1,
+      "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+      "raw_sha256": "bf1090dd4826eacb49eb052f17d04798e2a1eb2f74f8d024bc3b9c5d234c25f9",
+      "observation_id": "B06",
+      "source_pilot_index": 50,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "a7fd3ebd2a053a554eb60e7fcbada78df3b21db51b6b0035c6dd1d3da210b2b3",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-06-v0-rgb.png",
+          "rgb_png_sha256": "7177f6e445b998d6cf379b6002d6e9b7c6f4df35ee2fb1256a9d24f0da745194",
+          "mapping": "b-06-v0-mapping.png",
+          "mapping_png_sha256": "41469c61dc1bfa17d53c2a054ca6ac588798f27f63d42fcd95b4130039be8be0",
+          "depth": "b-06-v0-depth.png",
+          "depth_png_sha256": "b5be0d9a2e306b649745154a62f5966ed18379742d4b62a740e0d6aba2ffadb7"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "0166fa4209165d2a470b0ec553bc56bca2788d321bf7775548f71b1ef5104bae",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-06-v1-rgb.png",
+          "rgb_png_sha256": "878d9b53e4d863a063fdf6f2646d885e8eea8dc584b04a4de0c2db427bc4b7e2",
+          "mapping": "b-06-v1-mapping.png",
+          "mapping_png_sha256": "bf8bcd052c1e001c0cca42dd60991ee334f26ec531d6fa7b327d0fece604e243",
+          "depth": "b-06-v1-depth.png",
+          "depth_png_sha256": "9e1b6c0a189aefcbd42b41ad59201fa69fff5398610d99807de371b9d1a7eec5"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000000",
+      "episode": "demo_0",
+      "observation_row": 0,
+      "state_row": 1,
+      "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+      "raw_sha256": "0c053db7317e584632549bddb963bee8a237661b4bd29f0581a245f715e8eb72",
+      "observation_id": "B07",
+      "source_pilot_index": 60,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "93a53951f2e3d59f81ad9ff3051aa513e1fa33983dff739999d94623e883c4a6",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-07-v0-rgb.png",
+          "rgb_png_sha256": "4edb7e3ee9417313595082cd925e908d2cd2c1918bea3645760fba3e4fba241d",
+          "mapping": "b-07-v0-mapping.png",
+          "mapping_png_sha256": "3152556a1321a620a985231735a255718d727b7d9bc8afebaef3d4132ae6da88",
+          "depth": "b-07-v0-depth.png",
+          "depth_png_sha256": "368fc971a888c1e6055922e985d21880e6fc46daa6b37216ccfb85737c6ed6e3"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "0758b39a052627da6f6796d2527bd14506d07bdde5a0c69120b14dc93837d6e1",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-07-v1-rgb.png",
+          "rgb_png_sha256": "d421168100abea3f00a0fcf04418d714b7f1bad2fba53fbbe011a29794e7ef27",
+          "mapping": "b-07-v1-mapping.png",
+          "mapping_png_sha256": "6fc07b79b405f6a7ad5cb0721d1a773ee11d3547cfec0692468b86a8b936e817",
+          "depth": "b-07-v1-depth.png",
+          "depth_png_sha256": "41123202d0cbaa4e16a7ce73dfabfa9299aa1a0fc008c3a390db6d24634d49a1"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_32/000072",
+      "episode": "demo_32",
+      "observation_row": 72,
+      "state_row": 73,
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "raw_sha256": "d9b2da7399a88bea39024c8ef97713a20734e9b765e14b3399e2755890c828b7",
+      "observation_id": "B08",
+      "source_pilot_index": 76,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "2c4855f1e74d8b285953d1d725ba9ad3e134cab56717dae5dfcd73fbace1f6a7",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-08-v0-rgb.png",
+          "rgb_png_sha256": "b243b47c9aa05e4520fb4a2ebc5a1903884913ff227853f088bd270c468b2408",
+          "mapping": "b-08-v0-mapping.png",
+          "mapping_png_sha256": "3949d249c5bb76d3b98e229260b10b7c6586d0bc800c5a46b3b4dc9386fd238d",
+          "depth": "b-08-v0-depth.png",
+          "depth_png_sha256": "0c6f31035c2414f63653dfbff80840e05d2f121dfb8d8ee4e74a07421050e351"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "191e9dd10f5703b61ece28bee656f854b05293ac4c1e1542b67801f9d599aa07",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-08-v1-rgb.png",
+          "rgb_png_sha256": "d36e0c7ef6332e300119cbf47d79ab2e3f243aeb2c891434922b5f51cc76159d",
+          "mapping": "b-08-v1-mapping.png",
+          "mapping_png_sha256": "ae3e984b7b78abe21b48b8394cb43ae230d53846fd749c21ab63fb7c94186e2a",
+          "depth": "b-08-v1-depth.png",
+          "depth_png_sha256": "4be1bcf9c25c236ad15e1116760ad761519f7cf3be5ae54d650c44eb3fd3fb34"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_35/000049",
+      "episode": "demo_35",
+      "observation_row": 49,
+      "state_row": 50,
+      "instruction": "pick up the black bowl on the stove and place it on the plate",
+      "raw_sha256": "1fcb3990cf9fd6185f56531cc9f6dec0a77a59bfa0c7f39dff95b7e43cf6aeaa",
+      "observation_id": "B09",
+      "source_pilot_index": 86,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "c5703ff3b2c4f4ef75a4fc8c26016e2e3b0b1d255789f38aac2b550e4938e28b",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-09-v0-rgb.png",
+          "rgb_png_sha256": "45cd5d0948e08003ad1c657fe4e943db29a52e4c87113b20fec36b15800a64a1",
+          "mapping": "b-09-v0-mapping.png",
+          "mapping_png_sha256": "e6640482bf8d9264bad7a579a08bf56812edf881498dadde4b6dca6cf8351904",
+          "depth": "b-09-v0-depth.png",
+          "depth_png_sha256": "494697229fc66a7436f40fc51bf175af59db86740974c5fc44d0331d22f430a7"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "78c3c5ff0fb6bc98a427775789cf15c8dc892b6a9fda553aeab4b39aeea2354b",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-09-v1-rgb.png",
+          "rgb_png_sha256": "79f95bfce4948184c17b458ab4db526adeda7e00dcd360d15749e49d960cd2ec",
+          "mapping": "b-09-v1-mapping.png",
+          "mapping_png_sha256": "5b2bfe5596d11ee417b9a0458e60ffab62898515ac976a8524ac7df39154401a",
+          "depth": "b-09-v1-depth.png",
+          "depth_png_sha256": "e98a983b15371e49f7228a0f6da5b6533c373270e39b9db59e9d3c6d4761abd7"
+        }
+      ]
+    },
+    {
+      "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_31/000075",
+      "episode": "demo_31",
+      "observation_row": 75,
+      "state_row": 76,
+      "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "raw_sha256": "4d503d447028f437211880bea4ee1a7f6732113ea8560181fcca163251864794",
+      "observation_id": "B10",
+      "source_pilot_index": 96,
+      "reviewer": null,
+      "quality_conclusion": null,
+      "views": [
+        {
+          "name": "base_0_rgb",
+          "source_image_sha256": "49ebda50860f9d0259f03125c9fcd6043b846cee274af779144a36ffc69ea630",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-10-v0-rgb.png",
+          "rgb_png_sha256": "4111ed024033dc140df951aeef270eaa848c32f8c90bb274d77f2f9a7dc69d7d",
+          "mapping": "b-10-v0-mapping.png",
+          "mapping_png_sha256": "de4f4f02e01b8556d97858273b5d2070ba687f3232a22128401086e88067faa6",
+          "depth": "b-10-v0-depth.png",
+          "depth_png_sha256": "3af2b60d606a5bd610955d17757c88a0278d75239e874fef3f044a9329c69470"
+        },
+        {
+          "name": "left_wrist_0_rgb",
+          "source_image_sha256": "a26d7df9991a10f48f13ba7a4558f1f5ff58f91f521726cbbfc3092b2ed3374a",
+          "source_shape": [
+            128,
+            128,
+            3
+          ],
+          "rgb": "b-10-v1-rgb.png",
+          "rgb_png_sha256": "3b2d997da57a90919fd27b9608485dd82b508784ec66ec3cf201598d3aa27456",
+          "mapping": "b-10-v1-mapping.png",
+          "mapping_png_sha256": "ec9b7cba90e5583b16915d5e7784601877b9ee1868a6105d2987bca9f7ef8165",
+          "depth": "b-10-v1-depth.png",
+          "depth_png_sha256": "4ed1d66394c3389bc15d655810873e4b8cbab5032b7b9d7747088e53e45358eb"
+        }
+      ]
+    }
+  ]
+}

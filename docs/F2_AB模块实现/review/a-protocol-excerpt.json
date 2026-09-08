@@ -1,0 +1,26 @@
+{
+  "version": "direction-draft-20260908-v1",
+  "status": "DRAFT_NOT_FOR_TRAINING",
+  "object_point": "sim.data.body_xpos[env.obj_body_id[instance]] (object root body origin)",
+  "eef_point": "sim.data.site_xpos[robot.eef_site_id] (gripper important_sites grip_site)",
+  "base_frame": "robot.robot_model.root_body orientation at restored state; assert fixed within episode",
+  "units": "MuJoCo meters",
+  "restore": "sim.set_state_from_flattened(states[state_row]); sim.forward(); no sim.step or env.step",
+  "axis_words": {
+    "proposal": {
+      "+x": "front",
+      "-x": "back",
+      "+y": "left",
+      "-y": "right",
+      "+z": "up",
+      "-z": "down"
+    },
+    "status": "AWAITING_AXIS_REVIEW"
+  },
+  "boundary_threshold": null,
+  "grasp": "record current two-fingerpad contact evidence only; not accepted as grasped before review",
+  "invalid_policy": "All labels invalid while semantic/threshold/grasp protocol unapproved; action-only for full sample",
+  "question_key": "sample_id + slot_index + version",
+  "reviewed_human_count": 0,
+  "source_protocol_sha256": "c62bf955537185cb37aa99d71f84cbabc653d906523ffbc8197ce0ec4019e555"
+}

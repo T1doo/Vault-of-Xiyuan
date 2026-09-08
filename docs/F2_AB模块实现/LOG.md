@@ -8,9 +8,11 @@
 
 完整恢复材料：本机A试标的selection/protocol草案/labels/review/registration/checksums，B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及KV四份精度对照/registration/summary。精确路径和命令保留本机，公开摘要用占位符；关键hash见文末。已有manifest的prototype拒绝覆写，不能直接重跑生成器假称自动resume。
 
-未决：A的eef参考点与原记录最大0.676毫米差异、轴词/边界/抓持规则、阶段unknown；B第三人称特征高相似度与质量审阅、生产reader/自动续写；S固定样本KV主要残差已有受控精度解释，A新增完整生成仍待回归。40题的4张合图和配套题目表已完成但尚未获本批公开发布确认，未上传，亦无任何人工签收。
+未决：A的eef参考点与原记录最大0.676毫米差异、轴词/边界/抓持规则、阶段unknown；B第三人称高相似度与质量审阅、生产reader/自动续写。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径另做回归。**
 
-下一步：交付首批材料供语义/质量审阅，待本批图片发布申请答复后提供远端可阅副本；后续实施依审阅和既定前置条件推进。本批明确不执行全量train/val缓存或第5节真实小训练，不启动F3/正式作业。
+本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)。审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
+
+下一步：等待对本批具体监督材料的语义/质量审阅；无新任务或审阅结果时不循环检查等待状态。本轮未运行模型、仿真或新缓存，不启动全量、小训练、F3或正式作业。
 
 ## 执行记录
 
@@ -106,3 +108,122 @@ FastVGGT固定commit为`6526e275a29572653a034762bb3c6c9ce280ff55`。之前中断
 本轮验证与发布前检查：实际试标、KV四项、教师smoke/100/1,000及CPU桥接最终均退出0；脚本参数顺序失败和元数据查询中止记录保留。Markdown相对链接、敏感路径扫描和`git diff --check`通过。发布前fetch确认远端仍为`51e53e809cee61a54604e0975ab17db5cdd08d26`；仅提交本次相关文档，不改F1历史或科学协议，发布结果以最终回复中的远端核验为准。
 
 1,000观测分视图收尾：各256,000个目标位置有限且非零；单位方向空间RMS中位为base0.2083/wrist0.4636，跨样本平均方向cosine中位为0.9934/0.8912。全部CPU汇总也已退出0，无后续活跃作业。完整manifest SHA256为`4fa9a0f58b747dd08eea2857906724fcb59d7a2a53d61a3caec66453b3c315dd`；summary SHA256为`7056413e26369695d326750bfd00f92dbb20b77b5c3abd0ed317a32323d05c6f`。
+
+### 2026-09-08｜首批审阅结论、原S缓存事项收口与材料发布
+
+负责人完整审阅`c2880139fc2255e5bf97fbe670bb4dbcaa296625`后认可首批接口/试标/试缓存的限定完成范围，并接受原S固定样本缓存残差解释项收口：修正位置的高精度suffix RMS约2—4×10⁻⁵、27/27 argmax一致，而旧偏移同精度仍明显不一致。审阅依据是既有仓库记录，不是负责人重新运行实验。本轮没有重复KV诊断，不改变生产BF16、checkpoint、F1结果或失败记录；A新增后缀、分段生成和回退缓存的回归属于新增实现测试。
+
+本轮明确授权下列审阅副本。只更新F2 PLAN/LOG并加入review材料，README及两份主文档不改；未发布完整标注、HDF5、权重、特征缓存、私人规则、凭据或完整运行日志。发布与语义/质量采用、人审签收分开，F2尚未完成，G1仍PASS。
+
+#### A：40题草稿与参考点证据
+
+[直接读取40题JSON](review/a-questions.json) · [方向草案协议摘录](review/a-protocol-excerpt.json)。题表保留sample_id、槽位、协议版本、完整指代、固定离线实例、具体参考点/坐标、候选方向、主轴差、当前接触、不确定原因、选例依据及对应合图；reviewer和三层审核结论均为null。只复制原40题，不上传全部12,548槽位。合图与服务器审批候选逐字节一致，未重新生成标签。
+
+参考点来源摘录：当前仿真工具以`sim.data.body_xpos[env.obj_body_id[instance]]`取物体root body原点，以`sim.data.site_xpos[robot.eef_site_id]`取`gripper0_grip_site`，`robot0_base`旋转给定基座轴，单位米。固定环境`SingleArm._setup_observables`中的`eef_pos`也读取`site_xpos[self.eef_site_id]`；这只核实当前源码参考点，不证明原始HDF5采集时的更新时刻/字段提取过程与恢复路径完全相同。既有最大0.676毫米差异仍未归因，不修改时序/参考点、也不要求硬修到零。
+
+当前`_check_grasp`对gripper默认取left_fingerpad和right_fingerpad两组接触几何，并要求**每组至少一个几何体与目标contact_geoms接触**；它没有检验未来抬起/成功，也没有在这条检查中加入持续时间、承载力或稳定抓持判据。本材料据此仅称“双垫接触证据”，不直接采用grasped。+x/front、+y/left、+z/up为待审草案；boundary_threshold仍为null，几何非并列不等于高置信标签。阶段仍unknown，不为覆盖率猜标签。
+
+![A Q01—Q10：DRAFT，审核栏空](review/a-contact-sheet-1.png)
+
+![A Q11—Q20：DRAFT，审核栏空](review/a-contact-sheet-2.png)
+
+![A Q21—Q30：DRAFT，审核栏空](review/a-contact-sheet-3.png)
+
+![A Q31—Q40：DRAFT，审核栏空](review/a-contact-sheet-4.png)
+
+#### B：选样、特征合同和统计定义
+
+[十观测及源图/副本hash对应JSON](review/b-observations.json) · [合同与既有统计JSON](review/b-contract-excerpt.json)。按原100观测清单的任务文件排序，每任务取**第一个同时已有两视图mapping和native-depth输出**的观测，共10个；没有按成功或特征数值选例，不声称语义阶段全覆盖。原始RGB从相同不可变HDF5的既有observation_row导出，逐像素校验；网格/深度PNG从已有文件逐字节复制，没有重跑教师或改变权重。100观测来源图与1,000观测统计的清单/合同hash分别保留，不混为同一分母。
+
+合同摘要：固定FastVGGT commit `6526e275a29572653a034762bb3c6c9ce280ff55`，权重SHA256 `b08a43baa2db1aad9718e71e098831b8ad32f6f6826c802e9eb714aa34420969`；每次B=1/V=2，当前raw 128²图，教师518²/patch14，学生224²/patch14。取教师末端第24层聚合输出（0-based23，返回列表索引3），每视图排除5个特殊token后37²稠密网格，FP32 bilinear/align_corners=False映射16²、存FP16，不预先L2归一化。merging=0表示从首块启用，ratio=0.9，恢复稠密位置不撤销聚合。此处教师第24层不混同学生拟取第12层输出。全部是pilot合同，生产reader与自动精确恢复尚未完成。
+
+以下定义直接摘自既有`feature_qc1000.py`，本轮未重算特征：对每个观测i、固定视图v、256个位置p，读取映射后FP16目标并转FP32为aᵢᵥₚ，令uᵢᵥₚ=aᵢᵥₚ/‖aᵢᵥₚ‖₂，μᵢᵥ=(1/256)Σₚuᵢᵥₚ。
+
+- **空间RMS**：每观测/视图计算sqrt[(1/256)Σₚ‖uᵢᵥₚ−μᵢᵥ‖₂²]；先对2048通道平方求和，再对256位置平均、开根，不再除以通道数。表中中位数取该视图1,000个观测的RMS。
+- **跨样本平均方向cosine**：先将每个μᵢᵥ单位化为mᵢᵥ，再计算mᵢᵥ·mᵢ₋₁,ᵥ。原脚本按分片首次出现及片内manifest顺序收集，当前写入顺序与manifest相同；`np.roll(...,1,axis=0)`使第一条与最后一条也配对。不是全配对或独立随机样本估计，包含时间/任务关联及任务边界，表中为这1,000对的中位数。
+- **补充空间shift127 cosine**：对展平256位置序列，将u循环移动127个位置后与原位置点乘，汇总该视图全部观测/位置的分位数；不代表二维相邻patch相似度。
+
+| 1,000观测既有统计 | 第三人称base | 腕部left_wrist |
+|---|---:|---:|
+| 跨样本平均方向cosine中位数 | 0.9934 | 0.8912 |
+| 单位方向空间RMS中位数 | 0.2083 | 0.4636 |
+
+高平均方向相似度不等于每个位置恒定；非恒定也不证明监督有效。这些描述性指标没有有效性通过阈值，不据此换教师、加权或新增探针。网格图蓝线为原图坐标中的教师37×37边界，红十字为学生16×16中心；保留raw OpenGL方向。已有深度图按**每张图自己的2%/98%分位数**映射灰度，不能跨图比较灰度为统一米制深度，也没有GT深度精度验收。下列源RGB为真实128×128内容，可点击PNG查看；网格512²、深度518²。
+
+**B01｜原100观测索引 0** — pick up the black bowl between the plate and the ramekin and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-01-v0-rgb.png) | ![Grid](review/b-01-v0-mapping.png) | ![Depth](review/b-01-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-01-v1-rgb.png) | ![Grid](review/b-01-v1-mapping.png) | ![Depth](review/b-01-v1-depth.png) |
+
+**B02｜原100观测索引 10** — pick up the black bowl from table center and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-02-v0-rgb.png) | ![Grid](review/b-02-v0-mapping.png) | ![Depth](review/b-02-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-02-v1-rgb.png) | ![Grid](review/b-02-v1-mapping.png) | ![Depth](review/b-02-v1-depth.png) |
+
+**B03｜原100观测索引 20** — pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-03-v0-rgb.png) | ![Grid](review/b-03-v0-mapping.png) | ![Depth](review/b-03-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-03-v1-rgb.png) | ![Grid](review/b-03-v1-mapping.png) | ![Depth](review/b-03-v1-depth.png) |
+
+**B04｜原100观测索引 30** — pick up the black bowl next to the cookie box and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-04-v0-rgb.png) | ![Grid](review/b-04-v0-mapping.png) | ![Depth](review/b-04-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-04-v1-rgb.png) | ![Grid](review/b-04-v1-mapping.png) | ![Depth](review/b-04-v1-depth.png) |
+
+**B05｜原100观测索引 40** — pick up the black bowl next to the plate and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-05-v0-rgb.png) | ![Grid](review/b-05-v0-mapping.png) | ![Depth](review/b-05-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-05-v1-rgb.png) | ![Grid](review/b-05-v1-mapping.png) | ![Depth](review/b-05-v1-depth.png) |
+
+**B06｜原100观测索引 50** — pick up the black bowl next to the ramekin and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-06-v0-rgb.png) | ![Grid](review/b-06-v0-mapping.png) | ![Depth](review/b-06-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-06-v1-rgb.png) | ![Grid](review/b-06-v1-mapping.png) | ![Depth](review/b-06-v1-depth.png) |
+
+**B07｜原100观测索引 60** — pick up the black bowl on the cookie box and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-07-v0-rgb.png) | ![Grid](review/b-07-v0-mapping.png) | ![Depth](review/b-07-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-07-v1-rgb.png) | ![Grid](review/b-07-v1-mapping.png) | ![Depth](review/b-07-v1-depth.png) |
+
+**B08｜原100观测索引 76** — pick up the black bowl on the ramekin and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-08-v0-rgb.png) | ![Grid](review/b-08-v0-mapping.png) | ![Depth](review/b-08-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-08-v1-rgb.png) | ![Grid](review/b-08-v1-mapping.png) | ![Depth](review/b-08-v1-depth.png) |
+
+**B09｜原100观测索引 86** — pick up the black bowl on the stove and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-09-v0-rgb.png) | ![Grid](review/b-09-v0-mapping.png) | ![Depth](review/b-09-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-09-v1-rgb.png) | ![Grid](review/b-09-v1-mapping.png) | ![Depth](review/b-09-v1-depth.png) |
+
+**B10｜原100观测索引 96** — pick up the black bowl on the wooden cabinet and place it on the plate
+
+| 视图 | 原始RGB | 双网格 | 原生深度可视化 |
+|---|---|---|---|
+| base_0_rgb | ![RGB](review/b-10-v0-rgb.png) | ![Grid](review/b-10-v0-mapping.png) | ![Depth](review/b-10-v0-depth.png) |
+| left_wrist_0_rgb | ![RGB](review/b-10-v1-rgb.png) | ![Grid](review/b-10-v1-mapping.png) | ![Depth](review/b-10-v1-depth.png) |
+
+#### 发布核验与恢复边界
+
+本机导出入口`export_review.py`仅处理授权副本，退出0：40题唯一键、审核栏空；10任务各1观测/两视图，20张raw RGB逐像素一致、44张现有PNG逐字节一致（A4+B网格/深度40）。共64个PNG及4份JSON，约7.02MB，无新模型/仿真/GPU作业。原件、完整试标和50个试缓存分片继续保留，不覆盖或搬迁。
+
+本轮下一步仅等待对已发布材料的审阅；A参考点/边界/轴/抓持规则和B质量仍待采用决定。生产reader及自动恢复是全量前工程任务，未实现、不冒充可运行接口。本轮不重复实验，后续无新任务时不循环检查等待状态。文档/副本的格式、敏感内容、Git范围及推送后远端逐文件内容核验结果记最终交接。
+
+发布前实际验证：`export_review.py`与`verify_local.py`均退出0；64张PNG可解码、4份JSON可读取，40题唯一且审核栏空，B十任务来源/两视图文件齐全，导出hash、相对链接和敏感路径扫描通过；`git diff --check`退出0。fetch核对远端与本地起点均为`c2880139fc2255e5bf97fbe670bb4dbcaa296625`。推送后再以固定提交原始文件地址逐文件下载、核对SHA256和实际PNG/JSON内容，结果留本机发布验证回执及最终回复，不把本机检查冒充远端检查。
