@@ -433,3 +433,40 @@ F1计划允许1k—3k开发训练；鉴于2k固定pilot的闭环仍有17/20解�
 3,000 步训练和终点评测结束、确认没有活动作业后，已将此前隔离推理分支中经过验证的 FAST 缓存位置修复合入主工程，当前主分支 commit 为 `16295be`。修复只把自回归首个新 token 的缓存位置对齐到有效 prefix 长度之后，并同步服务元数据版本；不改变训练 checkpoint、数据、协议或成功判据。
 
 在主工程上用 3 个真实训练样本重跑缓存位置一致性回归，旧偏移的 suffix logits RMS 为 2.967—4.256，修正偏移为 0.169—0.876，与此前隔离推理诊断一致，测试退出0。该回归仅验证缓存位置工程修复，不能把离线 logits 一致性当作闭环成功；测试完成后 GPU 已释放。
+
+### 2026-09-08｜最终 3,000 步解码失败逐条审计
+
+复用最终 20 回合评测的原始 server/client 日志，没有重新评测。10 个失败回合与 server log 的 10 条 `DECODE_FAILURE` 逐条对应；每条都有一个 Action span、正常 EOS，EOS 后全为零，均未触及 256 步生成预算。严格 FAST 解码得到的系数数量为 69、71 或 72，而目标为 70，因此错误是模型生成序列长度偏离，不是缺少 Action 边界、EOS 后脏 token 或预算截断。
+
+| task_index | source_row | 失败控制步 / 请求序号 | EOS位置 | 系数数量 | 结果 |
+|---:|---:|---:|---:|---:|---|
+| 0 | 0 | 90 / 19 | 25 | 71 | `invalid_coefficient_length` |
+| 0 | 1 | 65 / 14 | 23 | 71 | `invalid_coefficient_length` |
+| 2 | 0 | 0 / 1 | 18 | 69 | `invalid_coefficient_length` |
+| 2 | 1 | 0 / 1 | 18 | 69 | `invalid_coefficient_length` |
+| 3 | 1 | 95 / 20 | 23 | 71 | `invalid_coefficient_length` |
+| 5 | 0 | 175 / 36 | 24 | 72 | `invalid_coefficient_length` |
+| 7 | 0 | 30 / 7 | 16 | 71 | `invalid_coefficient_length` |
+| 8 | 0 | 0 / 1 | 18 | 69 | `invalid_coefficient_length` |
+| 9 | 0 | 40 / 9 | 30 | 69 | `invalid_coefficient_length` |
+| 9 | 1 | 200 / 41 | 24 | 71 | `invalid_coefficient_length` |
+
+请求级统计为 350/360 合法、10/360 解码失败（2.78%）；回合级统计为 10/20 成功、10/20 失败（50%）。一个回合包含多次动作请求，任意一次长度错误都会终止该回合，所以两种分母不能混用。所有失败仍计入回合分母，没有补零、截断、重试选优或删除。
+
+### 2026-09-08｜最终 checkpoint 的缓存位置数值核对
+
+针对 GPT 复审要求，使用与终点评测相同的 3,000 步 checkpoint、相同真实观测和相同的 8 个 teacher-forced 后缀 token，比较完整前向与 KV-cache 解码在 9 个 logits 位置上的结果。旧实现使用 `prefix_length + step + 1`，修正实现使用 `prefix_length + step`；两者均在同一 FP32 输出和确定性 XLA 设置下计算。
+
+| 样本 | full logits RMS | 旧偏移 suffix RMS | 修正偏移 suffix RMS | 修正整体相对 RMS | argmax 匹配 | 同路径重复 RMS |
+|---|---:|---:|---:|---:|---:|---:|
+| train[0] | 19.0495 | 0.4218 | 0.1180 | 0.934% | 7/9 | full=0，cache=0 |
+| train[50] | 19.2133 | 0.4876 | 0.1688 | 0.839% | 8/9 | full=0，cache=0 |
+| train[12345] | 18.9205 | 0.7785 | 0.1196 | 0.693% | 8/9 | full=0，cache=0 |
+
+旧偏移到修正偏移的 suffix RMS 分别降低约 72%、65% 和 85%。三个样本的完整前向与修正 cache 重复执行均逐元素相同；修正后仍有非零差异，且 prefill 差异在两种偏移下完全相同（约0.079—0.417），因此剩余项是完整前向路径与 KV-cache 路径的确定性数值差异，不是随机漂移，也不据此声称两条路径逐位等价。修复去除了生成 suffix 的系统性位置错位，最终评测中的 `decoder_version=cache_position_v1` 与合入主工程 `16295be` 后的源码哈希一致；评测结果没有被事后换用另一套实现。
+
+### 2026-09-08｜负责人审阅材料已生成
+
+在不改变原 20 回合结果的前提下，使用同一最终 checkpoint 做了 2 个非正式 review 回合：task0 row0 的解码失败回合和 task1 row0 的成功回合，各保存了 agentview/wrist 的并排视频及起始、中间、结束帧。review run 为 2 回合、1 成功、1 解码失败，退出0；不进入任何成功率或训练选择。
+
+服务器审计目录中的材料为 `f1-s-review-capture/s-task00-row0.mp4`、`f1-s-review-capture/s-task01-row0.mp4` 和 `f1-s-review-capture/review-contact-sheet.png`。负责人审阅时请检查相机朝向、对象与指令是否对应、接近/抓持/放置阶段、夹爪开合和失败回合是否出现控制接口或时序异常；同时查看已有专家成功回放及 table-center/demo0 失败例的原始/重渲染对照。视频没有上传公开仓库，G1 仍标记为 `BLOCKED_HUMAN`，等待实际人工确认。
