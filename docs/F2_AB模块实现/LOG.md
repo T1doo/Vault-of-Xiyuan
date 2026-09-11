@@ -353,3 +353,11 @@ SB无教师导出完成：首次运行发现并保留了样本ID应从manifest r
 教师全量缓存已在B质量审阅采纳后启动，未重复既有1,000观测：train作业登记GPU 6、val作业登记GPU 5，分别输出到独立`full-train-v1`/`full-val-v1`目录，使用`probe1000.py --count full --manifest ... --split ... --quality-review ...`和原子可恢复`GenerationShardStore`。启动时 train/val 尚未提交manifest，后续heartbeat显示已写入 train 720/55,682、val 400/6,068 观测（各20行分片）；这只是进行中状态，不是完整缓存通过。两条作业不读A方向标签、不启动学生训练；完成后还需逐ID覆盖、contract/hash、读回和无partial核验，任一失败停止相应作业并保留partial。
 
 本轮没有启动3,000步pilot；需等待train/val缓存完整校验后，按固定500池、有效batch16、B前2,000更新warmup启动一次有边界SA/SB pilot。严格真人QC仍单独保持0；若最终交付要求真人盲审，继续标`BLOCKED_HUMAN`，GPT复核与负责人采纳不替代该事实。
+
+### 2026-09-12｜按后续审阅继续全量缓存并完成SA pilot启动检查
+
+读取负责人对提交`8cc1a08c30f93237fba699a75737eec516fa7d8a`的后续审阅后，按原selection/contract继续既有B全量缓存作业，不重复启动同名任务。val作业已写出完整`manifest.jsonl`（6,068行、304片，最后合法尾片为`0303`且8行）和`summary.json`；独立严格读回校验已在与教师作业相同的项目库路径中启动，未把`heartbeat.completed==count`单独当作通过。train作业仍在原GPU作业中推进，快照为18,680/55,682，尚未产生完整manifest；不覆盖已有分片或补重复尾片。首次从不含教师进程库路径的环境运行val校验时，`torch`导入因`libnvJitLink`读取失败退出1；失败保留，随后改用运行中教师进程的已确认库路径重试，属于环境库路径差异，不修改系统驱动或项目依赖。
+
+固定500动作样本池的SA真实数据合同检查已完成：使用`ab_training_entry.py --config-kind real --mode validate`、pilot manifest、已采纳train方向labels及匹配`approval.json`，physical batch=16、microbatch=4、seed=0、计划2步且不更新模型；退出0。输出`f2-work/interfaces/real-sa-pilot-validation.json`，SHA256=`231c5ee6c5f8a2cd651dd2fb4a72eb0f08d73f1a8b4b9c7290cc7c9c84656985`。结果确认500个动作样本均保留，首个计划批次动作有效token数均为正，方向监督样本与action-only样本按批准版本连接；这不是GPU训练或学习效果证据。SB相同pilot合同检查待train全量缓存严格校验完成后执行。
+
+当前仍未启动3,000步SA/SB pilot、连续训练或F3；待train/val缓存完成并通过逐ID、合同/hash、shape/数值和无partial核验后，在同一固定500池上各运行一次3,000个有效更新，再做相同20个开发单元闭环。上述pilot获得的GPT技术复核采用不改写为真人审核：`gpt_technical_reviewed=300`、`human_reviewed=0`继续保持。
