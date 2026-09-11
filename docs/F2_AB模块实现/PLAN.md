@@ -127,7 +127,7 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
   入口拒绝action mask全零的inference batch；SB的LoRA/projector梯度先统一裁剪后分别更新并共用有效步schedule，checkpoint schema显式区分旧裁剪语义。新语义GPU有限回归已完成；累计训练和正式全数据入口仍待完成。
 
-- [x] 在同一入口增加真实数据模式：从显式manifest/split和稳定seed生成sample_id序列，支持physical batch与microbatch累计；SA只接受`approved_for_training=true`且`valid=true`的统一协议标签，SB在manifest池发现缓存不全时显式拒绝、pilot池必须显式指定；检查点保存完整schedule、cursor、有效步、优化器和监督/缓存合同摘要。CPU SB pilot合同检查通过，未执行模型更新；SA未批准标签和SB不完整manifest的拒绝路径均有退出1证据。
+- [x] 在同一入口增加真实数据模式：从显式manifest/split和稳定seed生成sample_id序列，支持physical batch与microbatch累计；SA要求文件级approval manifest与统一协议版本，已批准版本中`valid=true`的槽位进入方向监督，`valid=false`且明确invalid状态的样本保留动作并采用action-only，未批准/损坏/版本不匹配仍拒绝；SB在manifest池发现缓存不全时显式拒绝、pilot池必须显式指定；检查点保存完整schedule、cursor、有效步、优化器和监督/缓存合同摘要。CPU混合SA batch、SB pilot合同检查通过，未执行模型更新；未批准标签和SB不完整manifest的拒绝路径均有退出1证据。
 
   诊断模式仍固定synthetic/短schedule；真实模式使用正式warmup/λ参数和manifest-driven配置，不能把pilot或action-only回退静默写成正式SA训练。
 
