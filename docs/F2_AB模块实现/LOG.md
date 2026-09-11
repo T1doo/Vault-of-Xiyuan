@@ -2,9 +2,9 @@
 
 ## 当前进展
 
-最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断、公共S回归和SA/SB诊断恢复；共享bounded入口已整理，人工QC、正式全数据训练入口、连续小训练仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并完成真实A生成/回退、SA/SB有限入口及独立恢复。
+最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断、公共S回归、新schema下SA/SB有限run/resume、真实双槽位A路径和SB无教师导出；共享bounded入口已整理，人工QC、正式全数据训练入口、连续小训练仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并补做本次改动影响的有限GPU回归。
 
-活跃GPU/训练作业：无。B真实单批测试及此前SA/SB有限诊断均已退出并释放GPU；没有教师、学生、仿真或无人值守作业。本轮没有连续小训练、全量缓存或可比较模型权重；已有SA/SB诊断checkpoint仅供恢复校验，F1开发checkpoint和已有1,000观测试缓存保持原样。当前会话的宿主没有可用NVIDIA驱动，新增真实GPU回归未运行，不能用CPU静态检查替代。
+活跃GPU/训练作业：无。新版SA/SB有限回归、A双槽位诊断和SB导出均已退出并释放GPU；没有教师、学生、仿真或无人值守作业。本轮没有连续小训练、全量缓存或可比较模型权重；SA/SB checkpoint及SB导出仅供接口/恢复校验，F1开发checkpoint和已有1,000观测试缓存保持原样。一次性访问定位确认：沙箱内设备节点不可见，但同一节点的实际项目执行环境可见驱动与GPU；未修改系统驱动或CUDA/JAX。
 
 完整恢复材料：本机A试标的selection/protocol草案、候选规则版本、candidate_labels、300题QC准备/图文包、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及production_reader/test_production_reader脚本和测试结果；A/B真实诊断、SA/SB三步run与独立resume diagnostics checkpoints、Gemma dirty补丁和KV四份精度对照/registration/summary仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；旧生成器仍拒绝覆写已有manifest，生产reader的精确resume账本已在已有分片上验证但未接入全量生成队列。
 
@@ -304,7 +304,7 @@ A真实路径的原始动作token来自上游采样器的float32容器，但所�
 
 本轮新增诊断回执hash：`train_ab_diagnostic.py`=`bfb7c7224b128b1e931dc2f1a9ed5a7fb52a9314ee5f27b7ad145bc82a13da05`；SA run/resume=`ffb51b1adee76e0a623389d823ad17e7888e07ae319eab68d577f6a190459fb4`/`fd3df2213294cfb0f187fd3defec7588d12e9e1e79714441ab7cdff19b56b00d`；SB run/resume=`e9f7ed63bd99c5a8c8a2d11fad5c943d4aaf19bffcd952c48d1be42520785fb7`/`e3fdabbe28b242b782f7caa1df7943d0484c4545fae8892e781a7c820652d966`；公共S回归脚本/结果=`c789d43058609c559805501c2f7583c26654f60fb8f5e4f71629c60c29ea7848`/`880d143c6db69b54f08c5d6497f1dbb24c72878ce79e12960b26fc9001a5272f`。SA/SB诊断checkpoint目录约266/311 MB，均为本机diagnostics，不进入Git或正式主表；详细registration、失败回执和恢复路径留本机。
 
-### 2026-09-11｜共享入口语义修正、双槽位/导出脚本就绪（真实GPU回归待资源恢复）
+### 2026-09-11｜共享入口语义修正、双槽位/导出脚本就绪（GPU恢复前记录）
 
 依据最新技术审阅，未重新生成300题图文包、未重复B单批梯度或原S KV诊断。将原`train_ab_diagnostic.py`实现整理到本机`f2-work/ab_training_entry.py`，旧文件保留为兼容包装；SA/SB仍由同一variant-dispatch入口调用F1 `init_train_state`、公共pipeline、冻结过滤、损失和保存/恢复代码。该入口当前仍限定三次有效更新及第2步诊断保存，不是连续训练或正式效果模型。
 
@@ -312,6 +312,20 @@ A真实路径的原始动作token来自上游采样器的float32容器，但所�
 
 本机CPU/静态验证：`ab_training_entry.py`与兼容包装的`--help`、全`f2-work`编译检查、A/B合成测试、零action-mask拒绝和联合clip数值fixture均退出0；两槽位Trie的49个有序候选、分隔/结束token和固定样本公开prompt长度检查通过；SB导出脚本的AST导入隔离检查通过，脚本不导入教师reader、cache或方向标签。新增脚本SHA256为：`ab_training_entry.py`=`4680fb3a64ae9f4b3d0b9975084915df5cfd5867cf9d87a3e4ad2b369f9b7ec2`、兼容包装=`ea6269498611346ce79651b274dbdb5f640e0cf6cbc1958f063977ff8078f65f`、A双槽位=`549bd2bcaa0efd49878f867075c89f23682026e1576d87c6ad582cc5ac34e095`、SB导出=`1ae6ad7a82aec0ea0c353141c73492a37221dbf66c832edadbea32053236f178`。这些代码和测试回执只在本机工程目录保存，不上传完整数据、权重、缓存或诊断checkpoint。
 
-当前会话再次检查`nvidia-smi`失败（宿主没有可通信的NVIDIA驱动，JAX仅发现CPU），因此共享入口裁剪语义修改后的SA/SB新run/resume、真实A双槽位自回归和SB无教师导出尚未运行；不把上述CPU检查写成模型通过。此前v5/v3真实GPU回执继续作为旧语义下的历史证据，待恢复获授权空闲GPU后，以新schema重新做每路径不超过5次有效更新的有限回归，再比较保存/恢复。A双槽位脚本在本次CPU探测中按预期登记资源失败，registration保留为未运行证据；没有生成部分checkpoint。
+当时的沙箱会话再次检查`nvidia-smi`失败（该隔离上下文没有可见设备，JAX仅发现CPU），因此共享入口裁剪语义修改后的SA/SB新run/resume、真实A双槽位自回归和SB无教师导出尚未运行；不把上述CPU检查写成模型通过。此前v5/v3真实GPU回执继续作为旧语义下的历史证据，待恢复获授权空闲GPU后，以新schema重新做每路径不超过5次有效更新的有限回归，再比较保存/恢复。A双槽位脚本在本次CPU探测中按预期登记资源失败，registration保留为未运行证据；没有生成部分checkpoint。
 
-固定300题QC图文仍为`review/qc300/`，审核数和训练许可均为0；本批不重新发布、不将GPT/自动检查计作人工三层QC。全量train/val教师缓存、连续小训练、F3/SAB集成和正式作业继续未启动。恢复GPU后下一条已验证命令为分别运行`ab_training_entry.py --variant sa|sb --mode run`及其`resume`，随后运行`test_a_real_two_slot.py`和`test_sb_no_teacher_export.py`；先检查GPU、已有进程和输出目录，禁止覆盖旧diagnostics。
+固定300题QC图文仍为`review/qc300/`，审核数和训练许可均为0；本批不重新发布、不将GPT/自动检查计作人工三层QC。全量train/val教师缓存、连续小训练、F3/SAB集成和正式作业继续未启动。当时记录为“恢复GPU后已准备、待实测”的命令；后续实际结果见本日志的GPU访问定位和新版有限回归一节。启动时先检查GPU、已有进程和输出目录，禁止覆盖旧diagnostics。
+
+### 2026-09-11｜GPU访问定位及新版有限回归完成
+
+一次性只读定位已区分执行上下文：在当前Codex沙箱中，`/usr/bin/nvidia-smi`返回原始错误“无法与NVIDIA驱动通信”并退出9，`/dev/nvidia*`不可见，JAX仅列出CPU；同一节点的实际项目执行环境中，535.274.02内核模块、`nvidia`/`nvidia_modeset`/`nvidia_drm`/`nvidia_uvm`均已加载，8张RTX A6000及设备节点可见，`nvidia-smi`查询退出0，JAX backend=`gpu`且8个设备、Torch CUDA可用。结论是沙箱设备映射限制，不是驱动未安装的证据；未重装驱动、重启或修改全局CUDA/JAX。完整脱敏诊断摘要和时间保留本机`f2-work/interfaces/gpu-access-diagnostic-20260911.json`（SHA256=`8bd2589bfe99a04204c6e0b7402a6801cbe6118a2cd887cab3ac3a43c277ed47`）。
+
+使用实际项目环境空闲GPU 0（启动/结束均核对占用；未触碰当时其他作业）完成了新联合裁剪语义的SA/SB有限回归。SA `run`三次有效更新并在step-2保存`xiyuan-ab-diagnostic-checkpoint-v2`，独立`resume`完成step-3；三步loss/action/direction分别为`21.375/17.0/14.6875`、`19.75/15.5/14.3125`、`18.125/13.875/14.1875`，裁剪前全局范数为29.2257、42.5947、25.0764，缩放为0.034217、0.023477、0.039878。恢复后的sample、指标、LoRA指纹、优化器指纹及裁剪数值与run第3步逐项一致，比较退出0。结果`sa-run-v6.json` SHA256=`6dc8a0009bd80b31f323cc79c2d6ea39da8ed2dd9365dd44060135f5de6f1b26`、`sa-resume-v6.json` SHA256=`d52ae2fe3aaa81aedab00f05dc060297b911f8a75237922f7ae672a9f8cebf1e`。
+
+SB同样三次更新、step-2保存、独立step-3恢复；三步总loss/action/alignment分别为`15.412194/15.3125/0.996945`、`14.099895/14.0/0.998946`、`14.661682/14.5625/0.991820`，联合LoRA+projector裁剪前范数为26.7692、19.9219、17.7917，缩放为0.037356、0.050196、0.056206。动作和对齐损失均实际进入同一更新，LoRA、projector、两个optimizer状态及sample顺序恢复逐项一致，比较退出0。结果`sb-run-v4.json` SHA256=`0945e3b59a82afd5558e5a91c2ff29ae0ee0905a37ebcd244f1263ceba64b152`、`sb-resume-v4.json` SHA256=`4047f062a9b5f45fa8f6adf5fe21f2c4fe4c23bf63a6d04d6d824ad522992d4b`。这些仍是bounded diagnostics，不是连续训练或效果模型。
+
+真实双槽位A路径在同一公开输入上完成一次无更新诊断：模型在一条自回归流中生成`left; up`（49个有序候选中的一项，5个方向token，公开前缀加方向长度90），第二槽位承接第一槽位输出后才进入256步FAST动作段。动作token为float32整数容器，按公共适配显式转int32；FAST结果为`invalid_coefficient_length`，没有补零/截断，也没有因动作失败触发重试。另以独立受控方向格式错误丢弃4个半段token，action-only前缀恢复为原85-token前缀并重新prefill；该回退不是动作失败重试，回退动作同样严格记录其解码状态。脚本SHA256=`9da056b3e131e1025af6a9a257a076d38f93e93f9a1e50192ee7c3dc8c9c9042`，结果`a-real-two-slot-result.json` SHA256=`eebf86ed89b1c4e17157b36eea107b9fc0f635938302ff4a8730a0b99297edd1`，退出0、无checkpoint、无标签读取。
+
+SB无教师导出完成：首次运行发现并保留了样本ID应从manifest record读取的脚本错误，无partial导出；修正后从SB新schema step-2诊断checkpoint导出仅含外部base引用、学生trainable参数和公共logits指纹的导出物。导出公共logits shape为`[1,127,257152]`，fingerprint=`d86e9dab69a87dcfd9a0d3f6fff634f5adfb74c12bd89f012e97e49dc086bc26`；独立新进程在不导入teacher reader、不读取cache/projector/方向标签时加载导出，禁用字段为空，fingerprint逐字节一致，退出0。导出和验证结果SHA256分别为`7ecb9fae365d45378875bb7329001c8298446d09392f7ce867fefa8ef060e6de`与`6fb11d76bc1f928979e6a5f6e5d6d8242d005f8c11f323fc2b1b7a4adc06f670`，脚本SHA256=`407da4ec4772b34cc44ec762401a0d6d0d0ca307e7b71ec7b5c6708e5f8a3b88`。
+
+本次新增实测均为无监督bounded diagnostics：SA/SB各3次有效更新、A双槽位0更新、SB导出0更新；GPU作业结束后已释放，未启动全量缓存、连续小训练、正式效果比较或F3/SAB。固定300题图文包继续保持`human_reviewed=0`、`approved_for_training=0`，人工三层QC仍为BLOCKED_HUMAN。此前记录“已准备、待GPU实测”的命令属于当时状态；本节记录了其后实际执行结果。F2剩余边界是人工QC、完整可信标签/缓存、正式全数据SA/SB入口及小训练，完成后再进入F3。

@@ -4,7 +4,7 @@
 
 实现并独立验证 A（先预测方向、再生成动作）与 B（冻结 FastVGGT 的均匀三维对齐），完成 T03—T06 的监督、模块和小规模验证证据。不要求增强组胜过 S。
 
-**2026-09-11：后续技术审阅通过，G1=PASS。** 已完成2 mm规则候选统计、300题QC准备、A/B独立接口测试、B真实单批梯度/冻结检查，并基于既有50个完整分片验证生产reader与精确恢复；原S固定样本KV排查收口。共享bounded SA/SB入口已整理并补上动作监督和联合裁剪检查，但新语义的真实GPU回归、至少300题人工QC、正式全数据训练入口、连续小训练、全量train/val缓存和F3仍未完成，本轮不启动。下文仅有实际证据的步骤勾选；未勾选仍待完成，不代表已有接口、命令或通过记录。计划获批不等于人工QC或G2自动通过，也不自动进入F3。
+**2026-09-11：后续技术审阅通过，G1=PASS。** 已完成2 mm规则候选统计、300题QC准备、A/B独立接口测试、B真实单批梯度/冻结检查，并基于既有50个完整分片验证生产reader与精确恢复；原S固定样本KV排查收口。共享bounded SA/SB入口、新语义GPU run/resume、真实双槽位A路径和SB无教师导出均已完成限定验证，但至少300题人工QC、正式全数据训练入口、连续小训练、全量train/val缓存和F3仍未完成，本轮不启动。下文仅有实际证据的步骤勾选；未勾选仍待完成，不代表已有接口、命令或通过记录。计划获批不等于人工QC或G2自动通过，也不自动进入F3。
 
 共用技术约束引用 [工程手册](../CODEX_EXECUTION_GUIDE.md) 第4—8节、T03—T07及 [实验计划](../EXPERIMENT_PLAN.md) F2/F3安排；不新增任务、会话、gate或全局状态文件。
 
@@ -107,7 +107,7 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
 - [x] 在真实学生模型上用公开当前RGB/状态/指令完成一次受限方向生成，再将模型生成方向接入FAST动作生成；触发受控方向错误后实际丢弃半段方向并重新action-only prefill。该诊断不读GT方向、不更新参数、不保存checkpoint；动作解码错误按严格状态保留，不能补零或截断。SA诊断入口另以两个synthetic角色槽位检查顺序、分隔和动作边界。
 
-- [ ] 在真实学生模型上用公开当前RGB/状态/指令完成两个角色槽位的一次连续自回归方向生成，再接续原FAST动作段；第二槽位必须承接第一槽位的模型输出，不能注入GT或独立重置。另以受控方向/动作错误核对缓存丢弃和action-only重新prefill；模型动作非法时保留失败，不补零或截断。
+- [x] 在真实学生模型上用公开当前RGB/状态/指令完成两个角色槽位的一次连续自回归方向生成，再接续原FAST动作段；第二槽位必须承接第一槽位的模型输出，不能注入GT或独立重置。对问题解析失败、方向段非法/超长/提前结束，另以受控方向格式错误核对缓存丢弃和action-only重新prefill；若已进入动作段后FAST解码失败，只显式记录策略失败，不再用action-only重试替换该失败。任一动作非法均不补零或截断。真实一次生成得到`left; up`，动作段严格记录`invalid_coefficient_length`，方向回退单独重建action-only前缀且不作为动作失败重试。
 
 - [ ] 完成A的200—500样本池小训练及至少20个开发闭环回合；另行登记实际有效更新数、物理/有效batch、采样、停止条件和版本。
 
@@ -117,17 +117,17 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
   冻结教师，学生隐状态不stop_gradient；按实际有效更新warmup。用单独对齐损失或明确非零λ_B证明选定层上游共享LoRA有梯度和真实更新，不能只看总loss下LoRA变化或projector拟合。验证B关闭、λ_B=0、q=0目标特征不变性、真实视图、因果性、冻结叶子不变及仅新增预期投影头。
 
-- [x] 使用同一`ab_training_entry.py`共享入口（`train_ab_diagnostic.py`仅作兼容包装）分别运行SA/SB有限诊断：SA使用synthetic方向目标，SB使用reader已覆盖的实际sample_id并同时计算动作+对齐损失；各运行3次有效更新，第2步保存diagnostics checkpoint，由独立进程恢复并完成第3步，比较sample_id、loss、LoRA/optimizer及SB projector指纹。该入口不保存正式效果模型；此前v5/v3回执对应旧优化器语义，新的联合裁剪schema需重新做有限GPU回归。
+- [x] 使用同一`ab_training_entry.py`共享入口（`train_ab_diagnostic.py`仅作兼容包装）分别运行SA/SB有限诊断：SA使用synthetic方向目标，SB使用reader已覆盖的实际sample_id并同时计算动作+对齐损失；各运行3次有效更新，第2步保存diagnostics checkpoint，由独立进程恢复并完成第3步，比较sample_id、loss、LoRA/optimizer及SB projector指纹。该入口不保存正式效果模型；此前v5/v3回执对应旧优化器语义，新的联合裁剪schema已完成有限GPU回归。
 
 - [x] 将已验证的A/B损失、动作监督检查、独立optimizer状态和一次联合全局范数裁剪整理到同一bounded入口；CPU合成/静态检查通过，旧诊断包装不再维护另一套训练逻辑。
 
-  入口拒绝action mask全零的inference batch；SB的LoRA/projector梯度先统一裁剪后分别更新并共用有效步schedule，checkpoint schema显式区分旧裁剪语义。真实GPU新语义回归、累计训练和正式数据入口仍待完成。
+  入口拒绝action mask全零的inference batch；SB的LoRA/projector梯度先统一裁剪后分别更新并共用有效步schedule，checkpoint schema显式区分旧裁剪语义。新语义GPU有限回归已完成；累计训练和正式全数据入口仍待完成。
 
-- [ ] 在上述入口新schema上重新完成SA/SB各不超过5次有效更新的真实GPU run/resume回归；只比较采样、联合loss、冻结叶子、LoRA/projector更新和完整恢复，不做连续小训练。
+- [x] 在上述入口新schema上重新完成SA/SB各不超过5次有效更新的真实GPU run/resume回归；只比较采样、联合loss、冻结叶子、LoRA/projector更新和完整恢复，不做连续小训练。SA/SB各3次更新、step-2保存、独立step-3恢复逐项一致。
 
-- [ ] 完成B小训练、实际吞吐及缓存读取验证，并在实际SB路径验证移除教师/缓存/投影头依赖后仍可加载与推理。公共导出接口保留SAB对应要求，SAB组合实际验收留到F3。只声明B无在线教师成本，A方向生成开销另计。
+- [ ] 完成B小训练、实际吞吐及缓存读取验证；正式SB推理继续不加载教师/缓存/projector，公共导出接口的SAB对应要求留到F3。只声明B无在线教师成本，A方向生成开销另计。
 
-- [ ] 复用既有SB diagnostics checkpoint，在独立新进程中导出并加载学生参数；导出物不含教师、缓存、投影头或方向标签，公共输入前向结果与导出前一致。此项只验SB独立性，SAB组合留F3。
+- [x] 复用既有SB diagnostics checkpoint，在独立新进程中导出并加载学生参数；导出物不含教师、缓存、投影头或方向标签，公共输入前向结果与导出前一致。此项只验SB独立性，SAB组合留F3。导出前后公共logits fingerprint一致，禁止字段为空。
 
 ### 6. 低优先级并行项与F3交接
 
