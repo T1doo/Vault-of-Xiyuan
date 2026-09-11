@@ -4,7 +4,7 @@
 
 实现并独立验证 A（先预测方向、再生成动作）与 B（冻结 FastVGGT 的均匀三维对齐），完成 T03—T06 的监督、模块和小规模验证证据。不要求增强组胜过 S。
 
-**2026-09-11：后续技术审阅通过，G1=PASS。** 已完成2 mm规则候选统计、300题QC准备、A/B独立接口测试、B真实单批梯度/冻结检查，并基于既有50个完整分片验证生产reader与精确恢复；原S固定样本KV排查收口。共享bounded SA/SB入口、新语义GPU run/resume、真实双槽位A路径和SB无教师导出均已完成限定验证，但至少300题人工QC、正式全数据训练入口、连续小训练、全量train/val缓存和F3仍未完成，本轮不启动。下文仅有实际证据的步骤勾选；未勾选仍待完成，不代表已有接口、命令或通过记录。计划获批不等于人工QC或G2自动通过，也不自动进入F3。
+**2026-09-11：后续技术审阅通过，G1=PASS。** 已完成2 mm规则候选统计、300题QC准备、A/B独立接口测试、B真实单批梯度/冻结检查，并基于既有50个完整分片验证生产reader与精确恢复；原S固定样本KV排查收口。共享bounded SA/SB入口、新语义GPU run/resume、真实双槽位A路径、SB无教师导出、真实manifest/batch合同检查和生成侧分片恢复组件均已完成限定验证，但至少300题人工QC、正式全数据训练作业、连续小训练、全量train/val缓存和F3仍未完成，本轮不启动。下文仅有实际证据的步骤勾选；未勾选仍待完成，不代表已有接口、命令或通过记录。计划获批不等于人工QC或G2自动通过，也不自动进入F3。
 
 共用技术约束引用 [工程手册](../CODEX_EXECUTION_GUIDE.md) 第4—8节、T03—T07及 [实验计划](../EXPERIMENT_PLAN.md) F2/F3安排；不新增任务、会话、gate或全局状态文件。
 
@@ -80,6 +80,10 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 - [x] 核验试缓存sample_id、split、源图/预处理/教师/映射hash、视图顺序和读回一致性；错ID/hash/损坏/缺失必须显式报错。分片临时写入、校验、同文件系统原子提交，仅从已验证完整分片恢复。
 - [x] 全量缓存前，取试缓存的少量真实batch经过实际学生侧读取接口，核对sample_id、视图顺序、有效mask、patch数量、目标维度与真实学生视觉位置布局；复用已有同路径检查，不要求提前完成B/SAB训练。
 - [x] 基于既有50个完整20-row分片实现并测试索引式生产reader与原子精确恢复账本：每个分片只做一次内容hash/结构校验，`get_many`保持调用方样本顺序（包括A→B→A重复请求），恢复身份绑定合同/manifest hash；验证缺片、partial、坏hash和manifest不一致时显式失败。此项只读既有分片，不重新提取1,000观测；reader完成ID不可替代训练的有效更新/采样位置账本。
+
+- [x] 将同一合同接入教师生成侧：按固定manifest顺序识别完整分片、验证合法partial前缀、原子续写/提升完整partial、拒绝覆盖完整或损坏分片，并在所有计划分片完成后原子写入完整manifest。仅以隔离synthetic fixture验证5行/2片恢复、部分manifest扩展、完整partial提升、坏分片拒绝和完整覆盖检查；不启动全量train/val提取。
+
+  生成器`probe1000.py --resume`现在只接受同selection/contract的输出，完成分片跳过、partial按预期前缀续写，manifest覆盖不完整时继续生成而不改动已完成payload；默认pilot仍拒绝覆盖已有输出。真实生成恢复尚未用于全量作业，原cache1000-v2保持不变。
 - [ ] 首批反馈并完成所需接口/质量审阅后固定特征合同，才分别生成全量train和val缓存；逐ID校验完整覆盖并写完成标记。
 
   本批明确不执行全量缓存；后续按首批结果及既定前置条件推进。全量时间依据1,000观测实测估算，估时不写成已完成benchmark。
@@ -122,6 +126,10 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 - [x] 将已验证的A/B损失、动作监督检查、独立optimizer状态和一次联合全局范数裁剪整理到同一bounded入口；CPU合成/静态检查通过，旧诊断包装不再维护另一套训练逻辑。
 
   入口拒绝action mask全零的inference batch；SB的LoRA/projector梯度先统一裁剪后分别更新并共用有效步schedule，checkpoint schema显式区分旧裁剪语义。新语义GPU有限回归已完成；累计训练和正式全数据入口仍待完成。
+
+- [x] 在同一入口增加真实数据模式：从显式manifest/split和稳定seed生成sample_id序列，支持physical batch与microbatch累计；SA只接受`approved_for_training=true`且`valid=true`的统一协议标签，SB在manifest池发现缓存不全时显式拒绝、pilot池必须显式指定；检查点保存完整schedule、cursor、有效步、优化器和监督/缓存合同摘要。CPU SB pilot合同检查通过，未执行模型更新；SA未批准标签和SB不完整manifest的拒绝路径均有退出1证据。
+
+  诊断模式仍固定synthetic/短schedule；真实模式使用正式warmup/λ参数和manifest-driven配置，不能把pilot或action-only回退静默写成正式SA训练。
 
 - [x] 在上述入口新schema上重新完成SA/SB各不超过5次有效更新的真实GPU run/resume回归；只比较采样、联合loss、冻结叶子、LoRA/projector更新和完整恢复，不做连续小训练。SA/SB各3次更新、step-2保存、独立step-3恢复逐项一致。
 

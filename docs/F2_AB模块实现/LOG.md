@@ -2,7 +2,7 @@
 
 ## 当前进展
 
-最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断、公共S回归、新schema下SA/SB有限run/resume、真实双槽位A路径和SB无教师导出；共享bounded入口已整理，人工QC、正式全数据训练入口、连续小训练仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并补做本次改动影响的有限GPU回归。
+最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断、公共S回归、新schema下SA/SB有限run/resume、真实双槽位A路径、SB无教师导出、真实数据入口合同和生成侧恢复组件；人工QC、获批监督、连续小训练和全量缓存仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并补做本次改动影响的有限GPU回归。
 
 活跃GPU/训练作业：无。新版SA/SB有限回归、A双槽位诊断和SB导出均已退出并释放GPU；没有教师、学生、仿真或无人值守作业。本轮没有连续小训练、全量缓存或可比较模型权重；SA/SB checkpoint及SB导出仅供接口/恢复校验，F1开发checkpoint和已有1,000观测试缓存保持原样。一次性访问定位确认：沙箱内设备节点不可见，但同一节点的实际项目执行环境可见驱动与GPU；未修改系统驱动或CUDA/JAX。
 
@@ -12,7 +12,7 @@
 
 本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)，以及固定300题的[图文QC分组与索引](review/qc300/)。所有300题审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
 
-下一步：完成并记录至少300题真实人工三层QC，整理正式公共SA/SB入口（当前bounded diagnostic CLI和Gemma层捕获补丁仍需合并/审计），再做F3前四组公平性、恢复和无监督推理测试；候选规则、reader、单批和bounded diagnostics不替代这些验收。当前不启动全量缓存、连续小训练、F3或正式作业。
+下一步：完成并记录至少300题真实人工三层QC，依据采用结果生成完整可信标签，按B质量合同准备完整train/val缓存，再在真实数据入口上做获批的有限小训练；候选规则、reader、bounded diagnostics和合同检查不替代这些验收。当前不启动全量缓存、连续小训练、F3或正式作业。
 
 ## 执行记录
 
@@ -328,4 +328,14 @@ SB同样三次更新、step-2保存、独立step-3恢复；三步总loss/action/
 
 SB无教师导出完成：首次运行发现并保留了样本ID应从manifest record读取的脚本错误，无partial导出；修正后从SB新schema step-2诊断checkpoint导出仅含外部base引用、学生trainable参数和公共logits指纹的导出物。导出公共logits shape为`[1,127,257152]`，fingerprint=`d86e9dab69a87dcfd9a0d3f6fff634f5adfb74c12bd89f012e97e49dc086bc26`；独立新进程在不导入teacher reader、不读取cache/projector/方向标签时加载导出，禁用字段为空，fingerprint逐字节一致，退出0。导出和验证结果SHA256分别为`7ecb9fae365d45378875bb7329001c8298446d09392f7ce867fefa8ef060e6de`与`6fb11d76bc1f928979e6a5f6e5d6d8242d005f8c11f323fc2b1b7a4adc06f670`，脚本SHA256=`407da4ec4772b34cc44ec762401a0d6d0d0ca307e7b71ec7b5c6708e5f8a3b88`。
 
-本次新增实测均为无监督bounded diagnostics：SA/SB各3次有效更新、A双槽位0更新、SB导出0更新；GPU作业结束后已释放，未启动全量缓存、连续小训练、正式效果比较或F3/SAB。固定300题图文包继续保持`human_reviewed=0`、`approved_for_training=0`，人工三层QC仍为BLOCKED_HUMAN。此前记录“已准备、待GPU实测”的命令属于当时状态；本节记录了其后实际执行结果。F2剩余边界是人工QC、完整可信标签/缓存、正式全数据SA/SB入口及小训练，完成后再进入F3。
+本次新增实测均为非正式效果比较的有限诊断：SA/SB各3次有效更新、A双槽位0更新、SB导出0更新；其中SA使用合成方向监督，SB使用真实动作和教师特征。GPU作业结束后已释放，未启动全量缓存、连续小训练、正式效果比较或F3/SAB。固定300题图文包继续保持`human_reviewed=0`、`approved_for_training=0`，人工三层QC仍为BLOCKED_HUMAN。此前记录“已准备、待GPU实测”的命令属于当时状态；本节记录了其后实际执行结果。F2剩余边界是人工QC、完整可信标签/缓存、正式全数据SA/SB入口及小训练，完成后再进入F3。
+
+### 2026-09-11｜真实数据入口与教师生成恢复接入（未启动连续训练/全量提取）
+
+根据后续技术审阅，未新增模型诊断或重复GPU补测。现有`f2-work/ab_training_entry.py`（当前SHA256=`981e705f366250bf3d3843f05be46f06a969a862e3d99f916e0aad55190a0574`）继续作为SA/SB唯一训练实现，新增`--config-kind real`和`--mode validate/run/resume`：真实模式从显式manifest与split筛选样本，用稳定seed生成可保存的sample schedule，支持physical batch拆为等大小microbatch后按样本数累计梯度；动作、方向、对齐损失仍分别按有效位置归一化，累计后对LoRA与projector联合全局裁剪，再各自执行一次AdamW更新。诊断模式的synthetic方向、短schedule和固定非零λ不流入真实模式；真实SB的λ_B使用2,000有效更新warmup，SA方向训练必须提供统一协议且逐行`approved_for_training=true`、`valid=true`的标签文件。
+
+真实入口还明确了数据覆盖边界：SB显式`sample_pool=manifest`时若缓存未覆盖整个split会拒绝，不会静默缩小为pilot；只有显式`sample_pool=pilot --max-samples=N`才允许读取已有试缓存子集。CPU `validate`使用2个物理样本、1个microbatch、2步计划和3个cache样本退出0，首个microbatch的动作有效token数为21/18，保存manifest SHA、teacher contract SHA、schedule SHA和累计配置摘要；使用当前未批准candidate标签运行SA被明确拒绝（exit 1），使用不完整cache的SB manifest池也明确拒绝（缺54,682行，exit 1）。验证结果`real-sb-plan-validation.json` SHA256=`feea21bdd3dcd80c0b54550ac76ac4aee811512660ec4bfd0e7d673b5872e11a`，拒绝日志与代码保留本机。
+
+教师侧在既有`production_reader.py`中加入`GenerationShardStore`，而不是另建生成器：它按固定manifest顺序识别完整final、验证partial前缀、允许完整partial原子提升、拒绝完整分片覆盖和损坏payload，并在全部分片完成后原子补全manifest；`probe1000.py --resume`接入同一组件，固定selection/contract不一致时拒绝，默认pilot仍拒绝覆写既有输出。扩展后的`test_production_reader.py`继续验证原有cache1000-v2的50片、逆序/重复读取、坏hash/partial/manifest负面情况，并在隔离synthetic fixture中验证5行/2片的partial续写、完整partial提升、部分manifest扩展、完整覆盖拒绝和损坏final保留，退出0；未重新提取1,000观测或启动全量缓存。结果`production-reader-result-v5.json` SHA256=`0701b5efccee880f421ac945c713d3e65bc22d96b7abf63914e07f45d34b6056`，脚本SHA256分别为`production_reader.py`=`5c08dcf74529d5ba2055d318566680222d3c2ee6cf5cedf4f8ecfb5cafed4eb5`、`test_production_reader.py`=`835f9a9a564e7793469169b54e8ebe0535e091c810c48d5eed69bd0a4a7fe4bb`、`probe1000.py`=`81a6788120ce3cbf54ceae187d2f28a0dde5d59be6cb87c74b1f33bf968b880a`。
+
+本批仅完成入口/恢复能力和CPU合同检查：真实SA方向监督仍因300题QC未完成而不可用；真实SB全manifest也因缺少完整train/val缓存而不可用。没有运行真实模式模型更新，没有生成连续小训练checkpoint，没有生成全量train/val教师缓存，没有进入F3。固定300题继续沿用既有图文材料，人工三层QC和B网格质量采用仍为待人工事项。
