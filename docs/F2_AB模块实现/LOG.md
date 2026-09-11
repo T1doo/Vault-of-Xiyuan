@@ -2,15 +2,15 @@
 
 ## 当前进展
 
-最后核对：2026-09-11。**F2已完成候选规则统计、300题质检准备、A/B独立接口测试和生产reader pilot；人工QC、公共训练入口集成和连续小训练仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并完成一次真实B单批前向/反向。
+最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断和生产reader pilot；人工QC、公共训练入口集成和连续小训练仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并完成一次真实B单批前向/反向、一次真实A生成/回退诊断。
 
 活跃GPU/训练作业：无。B真实单批测试已退出0并释放GPU；没有教师、学生、仿真或无人值守作业。本轮没有新训练checkpoint、全量缓存或可比较模型权重；B测试仅对临时内存模型执行1次更新，F1开发checkpoint和已有1,000观测试缓存保持原样。
 
-完整恢复材料：本机A试标的selection/protocol草案、候选规则版本、candidate_labels、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及production_reader/test_production_reader脚本和测试结果；KV四份精度对照/registration/summary仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；旧生成器仍拒绝覆写已有manifest，生产reader的精确resume账本已在已有分片上验证但未接入全量生成队列。
+完整恢复材料：本机A试标的selection/protocol草案、候选规则版本、candidate_labels、300题QC准备/图文包、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及production_reader/test_production_reader脚本和测试结果；A/B真实诊断、Gemma dirty补丁和KV四份精度对照/registration/summary仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；旧生成器仍拒绝覆写已有manifest，生产reader的精确resume账本已在已有分片上验证但未接入全量生成队列。
 
 未决：A参考点差异保留、至少300题人工三层QC和阶段unknown；2 mm是候选死区而非冻结阈值，当前双侧fingerpad接触是候选grasped代理，候选标签仍未获训练许可。B第三人称特征高相似度仍只作描述性质量材料；全量合同、生产接入和自动续写队列待后续。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径另做回归。**
 
-本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)。审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
+本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)，以及固定300题的[图文QC分组与索引](review/qc300/)。所有300题审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
 
 下一步：完成并记录至少300题真实人工三层QC，接着在同一公共训练入口集成A/B并做F3前四组公平性、恢复和无监督推理测试；候选规则、reader和B单批结果不替代这些验收。当前不启动全量缓存、连续小训练、F3或正式作业。
 
@@ -265,3 +265,17 @@ B独立实现位于本机`f2-work/b_module.py`，只 gather审计的真实视图
 本批A/B测试和实际单批更新均为接口/诊断，未形成可比较模型，未改F1 checkpoint、production BF16或科学协议；GPU5作业结束后的宿主快照为14 MiB/0%/P8，无活跃相关进程。A/B公共训练入口、训练恢复与投影头导出仍待集成；至少300题人工QC、B连续小训练、全量train/val缓存、SB无教师导出和F3仍未完成。
 
 本批新增实现当前hash：`a_module.py`=`9b74c24a294da3ee83ac46b6338099be648a58398d893778aebb6b0cd42ca34d`，A合成测试=`53b4b76e76fae0c4333ad724524ffaf7b838e410b2e03b31aa479af7c2397e10`，A真实tokenizer测试=`6834eb98ac053aaffc214c33f3ad4ca60f65e979064328154a2616d5dcd8e832`；`b_module.py`=`0f1d6812fd7a1b563a1f8a9d61f249203f68901c401935b86369db7e04c059c9`，B合成测试=`171721bf99b67182dd22e20aff88f2fde468af28bfda450509e3dd959c0fdc92`，B真实测试脚本=`802b4cbee49305f251e415b8697d1527bf6622648be7e145e71403bf00bb01d6`，B真实结果=`e7a5faf0f4934df04e7f476579ec45f46babd9fa081d4c3ab95a8ac04c01763b`；dirty Gemma源码=`4b46624557fe4875499bc8599577b3cdebc35880f0ebd67e076861f643aa734f`，其diff证据=`f2-work/interfaces/gemma_fast-layer-capture.patch`（SHA256=`b08a82e5c7fbc15e653d0f6813b0408f6280ac438ba87ec6958439d5a9856003`）。这些实现和原始结果只保留本机，Vault仅发布本阶段文档摘要。
+
+### 2026-09-11｜固定300题图文QC包与真实A生成/回退
+
+按已固定的`qc-300-prep`集合导出F2审阅材料，没有重新选题、重放轨迹或生成新标签。每题从与candidate相同的train manifest `observation_row`读取两路128×128 RGB，按10题一组生成30张可读PNG，并生成一份300行`qc_questions.jsonl`和`index.json`；两路原图逐题读取校验600/600，30组PNG均可解析，所有审核栏为null，`human_reviewed=0`、`approved_for_training=0`、stage继续unknown。输出目录为`review/qc300/`，未包含HDF5、全量标签、权重、教师特征或内部路径。该材料现在可供逐题审阅，但发布不等于QC通过或训练许可。
+
+本机导出验证退出0：固定300题唯一键、40题历史保留、10个任务均有样本、候选状态/接触/参考点字段齐全；30张分组图逐一解码。已抽查首组、中间组和末组，第三人称/腕部图与右侧字段可读，审核空栏和`candidate=invalid/grasped`状态清楚。完整文件hash与来源hash写在`qc300/checksums.json`和`qc300/index.json`，不把27 MB发布包的大小当作质量证据。
+
+A真实模型诊断使用基础权重、固定公共原始指令/两路RGB/8维状态和全七类候选Trie，不读方向标签。模型自回归生成了完整合法方向候选`left`（token IDs `[1672,108]`，末token为答案边界），随后将这段模型自身输出接到256步FAST动作生成。触发受控方向错误后，丢弃3个方向token并重新用原始77-token action-only前缀prefill，再次运行FAST动作生成；`fallback_matches_original_prefix=true`。两次动作解码均为显式`invalid_coefficient_length`，没有补零、截断或送入仿真；这说明真实方向→动作和错误回退路径确实运行，不能当作策略成功或动作格式已稳定。该作业在物理GPU4启动前两次检查，最终退出0、有效更新0、无checkpoint；结束后GPU4回到12 MiB/0%/P8。
+
+A真实路径的原始动作token来自上游采样器的float32容器，但所有值为整数，诊断通过与公共服务相同的显式int32适配后才调用严格FAST解码；非有限或非整数值会直接报错。首次因未做该适配而产生的`invalid_token_shape_or_dtype`已保留，不将适配错误混入模型解码结论。当前模型生成仍有长度错误，后续A回归需修复/报告，不能声称完整A推理通过。
+
+本批新增QC/真实A产物只在本机工程目录保留：`f2-work/annotations/qc-300-prep`为无图片准备索引，`f2-work/publication/export_qc300.py`为可复用导出入口，`f2-work/interfaces/a-real-result.json`和registration为真实生成/回退回执，`f2-work/interfaces/b-real-result.json`为B单批回执。A真实脚本SHA256=`75c8594ee01508dda0d08dd2645ec6425b2d571803cce942498c39b34db8211b`，QC导出包26,081,379字节；精确hash见本机registration，公开文档不上传这些完整运行产物。
+
+本轮状态：A真实模型路径已验证但动作长度仍失败；B真实单批梯度/冻结已验证；固定300题图文材料已发布供人工审阅；A/B公共训练入口、训练恢复、连续小训练、全量train/val缓存、至少300题人工三层QC、SB无教师导出和SAB/F3仍未完成。下一步不重复统计、reader或KV诊断，先处理真实QC反馈并把SA/SB接入同一公共入口，按每条诊断路径最多5次有效更新的边界执行。

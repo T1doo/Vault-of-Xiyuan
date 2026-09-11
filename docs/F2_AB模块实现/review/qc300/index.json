@@ -1,0 +1,2566 @@
+{
+  "status": "QC_MATERIALS_PUBLISHED_NOT_HUMAN_REVIEWED",
+  "rule_version": "direction-candidate-20260911-v2",
+  "questions": 300,
+  "groups": 30,
+  "group_size": 10,
+  "source_qc_prep_sha256": "9bb180777b4b72aa9960ef6c83f6a056210ae8aa695c2fe2c014cd8032c7eced",
+  "source_train_manifest_sha256": "0595c3128b988d97160637a86a02429a8ab3f6a7d993072d418df380bb304ef8",
+  "raw_image_roundtrip_exact": 600,
+  "human_reviewed": 0,
+  "approved_for_training": 0,
+  "new_labels": false,
+  "no_full_hdf5_or_weights": true,
+  "groups_index": [
+    {
+      "group": "qc300-001-010.png",
+      "questions": [
+        {
+          "qc_question_id": "QC001",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "04b6612a881a6ca16939073291b886c8698ee91c2f551729b76f0fe971f54fc3",
+          "wrist_sha256": "cf611f977de335083c1ee1f033c5e0550875f4b2b68cfde2eb5ae19a8e5f9cc9"
+        },
+        {
+          "qc_question_id": "QC002",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8e7b9baed594b7f46191746f80ad7264c04c7f530f50b27322bcc732bbcb2973",
+          "wrist_sha256": "7bd482a42a98a4baf08c2c1bebeecd62c0bdde8016ff13d49a18472b37260b46"
+        },
+        {
+          "qc_question_id": "QC003",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000041",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "5730a426392861249bace39483f383256547a252746ffb68b7f045746019bb08",
+          "wrist_sha256": "7a85d601a7bd701c74a28fac7b10d1b46b4f2f95d817cf0361b84b1c580e138f"
+        },
+        {
+          "qc_question_id": "QC004",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000096",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "68cae9d6b112634d75c43b389e10bddad32b125a7a8bb86d6c370f484daff36f",
+          "wrist_sha256": "9674410502cb6c4c512e2ab81feb02abd3e06e93917c6cbfdec2a0c143652e76"
+        },
+        {
+          "qc_question_id": "QC005",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "14e387dbcae29a52182ff660ab756053e89c75170a0a4f3e0bb7eab1e4b06f70",
+          "wrist_sha256": "4a44daa95e1b6a50be871516124afa3b796f876342f8ac069dccc304f7f61c7e"
+        },
+        {
+          "qc_question_id": "QC006",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000051",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c6af5c6390ded6a4e5e118880add912d125438c427054e842518c45849205079",
+          "wrist_sha256": "3eb9bae3648a3222a5e18c6bc6b7e4bc39734e0a11c5986f93c2bb574d568a4b"
+        },
+        {
+          "qc_question_id": "QC007",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000035",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "466a0ac13e96c41f02ea5e5b9a1243c5526987e084bcd1adf192eaba426bda44",
+          "wrist_sha256": "170649a162536405c269f1f53a39a9da19d92bb6dda3a5f998a999ebdd625127"
+        },
+        {
+          "qc_question_id": "QC008",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000101",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "3a470dae71a89f55a7fca84b4ccd04f2fc2b7766af0b2a74a2d267b6630a21d8",
+          "wrist_sha256": "7c823286cdad33c04665b65622cc82aeb900cace9f97a83d858a7d2eb8790c16"
+        },
+        {
+          "qc_question_id": "QC009",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "2f0a08f2bef11b72c1d66c30e7ef49e3a31c1c5acc4689e495c3da6aaec472cf",
+          "wrist_sha256": "2005796c6fb3bc8825453e96a50eabb441825d1dc6f5e776adcffdd97d0c6e0b"
+        },
+        {
+          "qc_question_id": "QC010",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000059",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "122aaa5b1491dcfcc2fd7aa40fb2bc65cd176e4ba06373b1b086ecb1271d5e71",
+          "wrist_sha256": "72b042f3f0093589df59e3ccfded992c2e988c954e13cef48c1949c25e9df6c2"
+        }
+      ]
+    },
+    {
+      "group": "qc300-011-020.png",
+      "questions": [
+        {
+          "qc_question_id": "QC011",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000016",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "cb8f625282a4215a1cbe655f792f7b05835ad75d21ffef6145a08c04f9521067",
+          "wrist_sha256": "27d10608b0fae9b75a88124cca2e3346f75d6fae0480c909733a8d07c9db0bba"
+        },
+        {
+          "qc_question_id": "QC012",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000151",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "b97fb149a3b95e3e82a68ade59c89782125169f4673bf5a57123c455a39d3fdc",
+          "wrist_sha256": "ff2df9c01da43a263cc19009acf973e1a3c230cbf8ff8bc726b0919c57b7cdac"
+        },
+        {
+          "qc_question_id": "QC013",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "5a337f4ca6166f711882e1374602436f6319d7d56bc08c622ae9af7c8fee5485",
+          "wrist_sha256": "b9b76812f78c5009d69dd726b71e16c448d150b0a22aee702a97aaa56ed8fef7"
+        },
+        {
+          "qc_question_id": "QC014",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000061",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "56f4dc2646688e6cc2fbbbafa502f1f787939ae772c1194a53d9fb3fb5163972",
+          "wrist_sha256": "ebdc1e562aedeb3334fe12eac0bc6bff6ccb3fb60dd7c4b19b7a41a5d9b70d77"
+        },
+        {
+          "qc_question_id": "QC015",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000110",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "41c4ff153a01b52692420927a8d623f2377d9008fde667c67edbae988444f2ab",
+          "wrist_sha256": "aafff491506e6995a53294e0a2c8306c65c3118ea6f91b10bf2f14c9aa8b8962"
+        },
+        {
+          "qc_question_id": "QC016",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000121",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "c8d348835b46332ffdc167e84c300d6626b4d8dbbe22f2c53b88d7f0490bf563",
+          "wrist_sha256": "b477db87af4c4b2ff5c31026919b6acfb71a7355da3f867b00dc074a78efdc34"
+        },
+        {
+          "qc_question_id": "QC017",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "eefaec07501f46a55843c24b1e6557431f61254f2bc4fbe73658f96772c2d49f",
+          "wrist_sha256": "2f5bad47b188b05b5487e4db0a7428e60d8e298f5b4b6f1e81f0fc28c7ec2368"
+        },
+        {
+          "qc_question_id": "QC018",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000066",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "3fea7a889d50041de2407454b1e871bc1a7d67c3996002a692427f9ae742dce9",
+          "wrist_sha256": "c8f4fdd5ceb76399f5ef88b68a91f42d17238f73d49f28491f16381d8d51cd60"
+        },
+        {
+          "qc_question_id": "QC019",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000094",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "fb968901f511e6e0e11e4e75765cbfcdec9fc89475fb18fdb8d27b26366e5481",
+          "wrist_sha256": "7684e24ea6506cdc5c040f5a8adaa730b7b2c0133edf818ad1308929c9a5ba67"
+        },
+        {
+          "qc_question_id": "QC020",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000113",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "4b40eaedd9986f4e824b56bff60bfe66c0dcd00d5602aa4c8e9e6f48be675fd2",
+          "wrist_sha256": "995587f35de50d4472133297ab6a7ff30c5b8e4c5962516c4ed9892ea3e3272d"
+        }
+      ]
+    },
+    {
+      "group": "qc300-021-030.png",
+      "questions": [
+        {
+          "qc_question_id": "QC021",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "a7fd3ebd2a053a554eb60e7fcbada78df3b21db51b6b0035c6dd1d3da210b2b3",
+          "wrist_sha256": "0166fa4209165d2a470b0ec553bc56bca2788d321bf7775548f71b1ef5104bae"
+        },
+        {
+          "qc_question_id": "QC022",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000070",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "0bf33579eef8d348eba69a207bfa5de8764253a41c751117bbb07783b93f50a4",
+          "wrist_sha256": "fa508fee427237836506c9473a6e2afc15759eb6c8f55de60da97a5363b3d806"
+        },
+        {
+          "qc_question_id": "QC023",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000001",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "637627468663b52292ea167249e1d745c5154dc93b559695f291bacbc093aea6",
+          "wrist_sha256": "bc1dc2f9a483ec90b6bfb39ac3e6ca61fe1c4fd4e09b3aa57cd7674c4104c1e0"
+        },
+        {
+          "qc_question_id": "QC024",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000121",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "90a0c2615ba8b607dfe3b20197429df22788e9c9745d347242ed361de32610dd",
+          "wrist_sha256": "634d108f939f052cd9aa4ed4885817be7021b6e55952972494b5bfe79aed1ffd"
+        },
+        {
+          "qc_question_id": "QC025",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "93a53951f2e3d59f81ad9ff3051aa513e1fa33983dff739999d94623e883c4a6",
+          "wrist_sha256": "0758b39a052627da6f6796d2527bd14506d07bdde5a0c69120b14dc93837d6e1"
+        },
+        {
+          "qc_question_id": "QC026",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000056",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f35cc6055ac01979d2e16400228dd5e1aff175454e7ac7366ba98a03fdcb25ee",
+          "wrist_sha256": "6c53c74f586fa6bebc9467cd6d5aeadc4532cf5aa415c9f7e51c75bd8f462a7c"
+        },
+        {
+          "qc_question_id": "QC027",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000090",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "05b9b9f18b90b9625e515c1564e7ec3dd43764727b026287f9642758101930ac",
+          "wrist_sha256": "a96f618d595ccc728e8175c629363c2ab73649a723cccdf90fccfa6190e88359"
+        },
+        {
+          "qc_question_id": "QC028",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000097",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "00ab7daa785758c7f2351dc035f0bad74062612f95519141dd602b4dcf3ad2d9",
+          "wrist_sha256": "6125a9dc660e465c1bced87ab5d4e3cd5506741897a7edabfe8644164394f789"
+        },
+        {
+          "qc_question_id": "QC029",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8646111cd657f72806b0f7f75927caa5576d1face88ff9c103eb8732b8b2e683",
+          "wrist_sha256": "ad764eb39a7cde042b1fcb7d1efaf23fee4eef2e1390a8fec0ec8a5891d62dce"
+        },
+        {
+          "qc_question_id": "QC030",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000045",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d6f8745f86118e8db86d7895316e41aca78e3a05879d4b9ffb32aa7bb915685a",
+          "wrist_sha256": "324ab13911e401af177511f9f16fed0566d9e961d0010eec0d53d75743e1ada6"
+        }
+      ]
+    },
+    {
+      "group": "qc300-031-040.png",
+      "questions": [
+        {
+          "qc_question_id": "QC031",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000061",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f403bd1403024e775e5b8f51c70288279ecb282480836d9d6932f8e70bc9f7fa",
+          "wrist_sha256": "5cc3cfd9241e5ea64a1608859c8f6b0bd68d03385c7e0d1f65765f8367a7819d"
+        },
+        {
+          "qc_question_id": "QC032",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000135",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "bcdc4c50c8f39f9c5489160b347a5a0a9e7ed8075f852078b156395528f4aac1",
+          "wrist_sha256": "123a757363d3503a013cf22c5dd51c8272db165f1ba82db47c4b1616bc29600b"
+        },
+        {
+          "qc_question_id": "QC033",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "186a8ac363b5cba734b3055089f5ebb8adefd3342839d4595ba8e815b10e1853",
+          "wrist_sha256": "2c78e6d94b2a2d928dd455314e363571788982c00b717126b46c481a137e8d7b"
+        },
+        {
+          "qc_question_id": "QC034",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000070",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f866a86ec3ff7e74eb3142d920d8d47e52d46e41a2a9f7372efacb623b8a9237",
+          "wrist_sha256": "87cb8a62a0d0c659cb9df13d84ec1f96db97219ab1fe77738abd11daf94b14bd"
+        },
+        {
+          "qc_question_id": "QC035",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000119",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "acc961f133d7b6a7a9d731e980349b6aa270222877d45f6c17c22f1695ac436e",
+          "wrist_sha256": "d324514be917c0082d9bcc31bc32e3e0f096890600b98fcf7ac6799a385831e3"
+        },
+        {
+          "qc_question_id": "QC036",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000153",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "31f91aa2b7b4482b3baeedde5cdd2151b7d52658cb60a36ae6ebff066730a113",
+          "wrist_sha256": "0823ce18d6d7d742bc43639d5d1817733b36586e02e50c82315c3d9e2d3e29c7"
+        },
+        {
+          "qc_question_id": "QC037",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ee620143a089a8921c61f43d8e5cc7acf8038d23bc101c09f55d3150c008cda7",
+          "wrist_sha256": "3861efae64a0d8a81348b5ed2d2ba21fa884278f905417b3c69433cb3127a2c6"
+        },
+        {
+          "qc_question_id": "QC038",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000061",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8eaecebf7678cb674a7815381a321f7c443047e05d6b7e338dc487ece96e1f2c",
+          "wrist_sha256": "63122e9aba0e0e47fc7f0f1282412881b397586391e07eb0776ef5e4a5ffafdd"
+        },
+        {
+          "qc_question_id": "QC039",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000059",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "04da41e5a76a64d14aa5a5e18626604149a5360342be521a29d6869f7a1ed074",
+          "wrist_sha256": "e3c5a3a72bfdaa6dc3305e90829485be487c1dc9d7b40971c29bf27b3c2e687f"
+        },
+        {
+          "qc_question_id": "QC040",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000134",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "3a2a3774187a2f56a12640e32a640cc9acee6ca5f282da1339fa0f58f84650fe",
+          "wrist_sha256": "22c3f45b36029ee4fce03289aa501cc1412c637c1d3b8ed5816c3476dc6a56f3"
+        }
+      ]
+    },
+    {
+      "group": "qc300-041-050.png",
+      "questions": [
+        {
+          "qc_question_id": "QC041",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000080",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d0e456e90b45da671a461252420499521deecde4a6504f58b2fa0f70ddda04b1",
+          "wrist_sha256": "76d50bd44cd354bc18d3da75742a839d1863638165773c2aae195872ecf779e4"
+        },
+        {
+          "qc_question_id": "QC042",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_2/000035",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "44182e42883ebc04df9c83ff7c50c3e447d721ebebb7e2cb9a4467c8f3b3c230",
+          "wrist_sha256": "fa2d0e95454fa2a305b1e91c0c74ce35784b992803fb3ad2cee05c31ec80b391"
+        },
+        {
+          "qc_question_id": "QC043",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000050",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "258a45523a25cc0aeb9664ce61549273e2accf0dbb5dcfb8947cf45313f29910",
+          "wrist_sha256": "a034ecc1fa69de4903db2a0410b2f9cb115ac7205a54ab6dea9feb1e2de3acce"
+        },
+        {
+          "qc_question_id": "QC044",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_4/000023",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "0f44c8b3658de122236657a1405eeb66c7c334388ebb664606166b9874e8d2ba",
+          "wrist_sha256": "e7b30b2f14909e725501eff78f0a229b17474795902bd4a75fc40f820a9c2734"
+        },
+        {
+          "qc_question_id": "QC045",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_2/000086",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "95d9f0a9904ecdb5745f48e33ee751b636b28fa3e77b14685980a1d86c4b5115",
+          "wrist_sha256": "9736c13b33f1b1f95539b17112e41173787b7433e86cd0c019cc6efd11cc81a4"
+        },
+        {
+          "qc_question_id": "QC046",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000006",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "9455773d4828009471ed02466c950865f9a85cf529144c12ea147c76e7e6ec4a",
+          "wrist_sha256": "4a640b9468b09dddb8dd0ea5a72edfefa51d96f58207f8ccf18582cf9111f172"
+        },
+        {
+          "qc_question_id": "QC047",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000060",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "57b2db4368b77321df0f3da28c1583b6b57feae6dad95410f94d8e69efce0205",
+          "wrist_sha256": "e834435c06a596dc311a19ada5fd2a78b62bfa91ee513c4e4a075e3042121fd8"
+        },
+        {
+          "qc_question_id": "QC048",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_3/000090",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c85251c2e3f7a5ebe4d396f8019b174f583eb0903b874bcc0310be5653c351ab",
+          "wrist_sha256": "d969cf1a7b6a69cf72434b7bfca3d342e062b9cc8e12f4b875f4a115b28cbbfb"
+        },
+        {
+          "qc_question_id": "QC049",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000046",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "2532d47a67455cd983ba63b2b8ac195d31cbddce5d9882cd034d32ed7ee03ada",
+          "wrist_sha256": "db998c954dddf86c3df9cf75d26ef03d5aac09ebcebdfc3dc2d0259b4bae3403"
+        },
+        {
+          "qc_question_id": "QC050",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000112",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "11fb6fd982bf2dce6bf0cd195743b743a99e16ade6ab3695a98584eb1582282b",
+          "wrist_sha256": "9104be04120dfc7d9e9fa4db4a724e1e621c3c2aba1994ffa7cdbf7ff6d4167c"
+        }
+      ]
+    },
+    {
+      "group": "qc300-051-060.png",
+      "questions": [
+        {
+          "qc_question_id": "QC051",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "0385ad682e27eba355785b92c99098804d99c4f591c3718b9d09d4cea2a692d6",
+          "wrist_sha256": "7120d9a372be7455ff485f5a80db303f17572a6e03d4c8d1ec7b47a3d94fc990"
+        },
+        {
+          "qc_question_id": "QC052",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000039",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8eb0806337d1050cf8fa8e10ed2bb066580f1985c39feb5102d8485995a2610f",
+          "wrist_sha256": "b7d00ee387049d874bbbd5c0e0447e355d346bb62792264c2e1f0feee18d0184"
+        },
+        {
+          "qc_question_id": "QC053",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000116",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "cc3adf53596532067f2717dc2455cd2c34261c983349bc62e463ef10abd4f317",
+          "wrist_sha256": "2548e7b340e63e868ea1aeed7c46731d8ab6b3f4fa5a17e85dc05c40eb36f641"
+        },
+        {
+          "qc_question_id": "QC054",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000074",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "26a9fd3e0ce0cb1c14e909a97e26fae0327cbe8330089c466aba42f5d2630e95",
+          "wrist_sha256": "d17e6a0e072b3a3062ad287986a173cae8fe6efcf8bef6ede4e18332247a15e3"
+        },
+        {
+          "qc_question_id": "QC055",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000068",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "5d158348de25991149d62033588a42d76ab5ee2bf091f30cb9d44f3337955dc0",
+          "wrist_sha256": "aad57de40f6921e9c13d174e1a76cd1dd1ddaaf4a082354b11ab156d8f146efe"
+        },
+        {
+          "qc_question_id": "QC056",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_3/000102",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "2cb70ce98d2a66ea7dd0e6d7abcc65e724aa75ff6d00ca6d56315e3230704092",
+          "wrist_sha256": "d23324efb9ba3ee58da64e61f23c0f9fabbc9f2f3fea6cb9c3b33eb5c5afb04e"
+        },
+        {
+          "qc_question_id": "QC057",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000121",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c8d348835b46332ffdc167e84c300d6626b4d8dbbe22f2c53b88d7f0490bf563",
+          "wrist_sha256": "b477db87af4c4b2ff5c31026919b6acfb71a7355da3f867b00dc074a78efdc34"
+        },
+        {
+          "qc_question_id": "QC058",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_1/000086",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c91177c525798df79bdf363368c1af46936213d4ecc4f82e24f78cb8846ef98c",
+          "wrist_sha256": "cde8c59b2c40210ef585da95061fa9bcfd06f03046a4a483e0d2335bc5e34e0f"
+        },
+        {
+          "qc_question_id": "QC059",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_3/000088",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "545232c50abad218c1a8ead34ecaac18d6025688b1aff8777a0a767798475e66",
+          "wrist_sha256": "1b37df1055d25fd093a51f657419c4fb10062f427ddf1ac2477fc95a0ff2ede6"
+        },
+        {
+          "qc_question_id": "QC060",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_4/000115",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "ce4dd7e616a295fe38d8256c1c33c24b76321f0e8ac97fbd2d259ae621c8e047",
+          "wrist_sha256": "b67f37ae96228bf40cd6eeebc09bd33bb17bad3883e75e71b78bd4f82064ceaa"
+        }
+      ]
+    },
+    {
+      "group": "qc300-061-070.png",
+      "questions": [
+        {
+          "qc_question_id": "QC061",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000104",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "36c0a261df873fc8cac496a77696f27b8389ac482b1f3fa354f0db9d8dd0d80f",
+          "wrist_sha256": "1ab7222eef7f7ab272c02e39f83f8a199558686a213b46bda31d7aac112fd6a7"
+        },
+        {
+          "qc_question_id": "QC062",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000065",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "e4ba9cfcd63c93c88a818c2370921587e33441243410be7a0d30cfbd84b58a6a",
+          "wrist_sha256": "8536ddbbffa766a760178ca9eb0c64208d9c7d37208dd9f49f2441f9482944c1"
+        },
+        {
+          "qc_question_id": "QC063",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_3/000131",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "899b7ba5efac0ba77f7207b32ac9b166aa3bcb0b015bd9f05de0c7df24a0cb4e",
+          "wrist_sha256": "dc9758948a01fe2c272121dde155f03f8ed4b0981c05f527d5a43a39cbec3307"
+        },
+        {
+          "qc_question_id": "QC064",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000025",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "04c2474e222f7b6d4ff7e9d24048a927fed6b227fb775866c311c38e9182e44e",
+          "wrist_sha256": "c2a81c771279a7edeadbdba5bf37c82932cfb4286aa6ee74691dc62cfb026b35"
+        },
+        {
+          "qc_question_id": "QC065",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_2/000127",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "eb997dab36b09f6e2008a60fa87cb7525facbc10f060c7468c51647f626b8017",
+          "wrist_sha256": "cc99da6650295572c639bf7e97d650e9395555decf0d709c92610211a932e5cb"
+        },
+        {
+          "qc_question_id": "QC066",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000049",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "49f37d6cfe85c04dec954baeb11b512477d8a5ead40198715a4a113639bb4da0",
+          "wrist_sha256": "9daf6020672e05e19ac9957b713ce80e360f4407ba409dabb180da99998d90ed"
+        },
+        {
+          "qc_question_id": "QC067",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000083",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "5cb35d2a3be720622d329c9bb50efe53f936dfd2fb95e8a3898fe1d406cf5e81",
+          "wrist_sha256": "5a82ae1569b05de56017a37d8f4c24620df11aa9fef8e2f94bbad55652a71f9f"
+        },
+        {
+          "qc_question_id": "QC068",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_4/000114",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "268ed0bf25c46a454988fd3409fc48b166473cda5daf7294c5057a5a31cd5da4",
+          "wrist_sha256": "71ef83deef04c1c9a315509fb5522ae7785bd794b90c0724ee9649aa4c230bac"
+        },
+        {
+          "qc_question_id": "QC069",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000108",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "cf999ff2f4e4aea1fad6a9da922c9ffb845922003bbc343f1bf5c1d32ec619a5",
+          "wrist_sha256": "868cd064b2ac9adcde26e5e34119576d0f06c30f18feefe5fb992891491527ed"
+        },
+        {
+          "qc_question_id": "QC070",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_2/000023",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "10edf9f13f346b188d497802d6eae9224c18c5b01600e872493b9a14fc91d721",
+          "wrist_sha256": "6ba51d3aebcfd6fd2fdb0d82bcc88b96d81a197ecd98c48b2afc26ab57309375"
+        }
+      ]
+    },
+    {
+      "group": "qc300-071-080.png",
+      "questions": [
+        {
+          "qc_question_id": "QC071",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_3/000020",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "fab08af75b96ca689d1d7b0463b623d807e0dcf85678251f93645bd9a8c12637",
+          "wrist_sha256": "6a74030e8c36b37975837968797dfd5c6cddf484591d9846f5aa495f0d0cfb24"
+        },
+        {
+          "qc_question_id": "QC072",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_2/000045",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "01a1f3ed69706c7bea6a395038c45b27f861d7e925faa79c70ef3715a0f1810f",
+          "wrist_sha256": "aa09677bc30c61e5de0a96e351dbfe0f87cd1ef4255f798df8b8d09d10dad62f"
+        },
+        {
+          "qc_question_id": "QC073",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_4/000073",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "cd362d4cd69e816cafa05e931e3f64f9fb211837f6a6a91c662fca19aa6d66ac",
+          "wrist_sha256": "d7d6dfbdc69c7ea2b2ca43e5ff9dc0f65b33388bbebc6db41bbf778cb588c496"
+        },
+        {
+          "qc_question_id": "QC074",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_2/000072",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "f5a223be788fa9ee351bf2cd9ef5336c5c63da44d5e4bfd530a2fcf64c7733f4",
+          "wrist_sha256": "98145945a8c5a3dc3d893dd45fc0df33967bdbbf0d4e5c15ade961454aa9ae0e"
+        },
+        {
+          "qc_question_id": "QC075",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_2/000030",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "30e93a639e709510d5848bbb28919350dd12c597d32ca3e87c639d4fe84bd115",
+          "wrist_sha256": "761f7abe759056361d0b02afb89f11994cad1910a6337471f8b01b11d3bbf153"
+        },
+        {
+          "qc_question_id": "QC076",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_3/000112",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ebf6f19b93fc0ba49d253a7ca9de26bcae27bc32410e5e7a0fe73bb19af9f1ac",
+          "wrist_sha256": "b4ad43ca4b1bf27f901133911a19fba39fba85f130bdd60803b8f0c9e4daf991"
+        },
+        {
+          "qc_question_id": "QC077",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_2/000030",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "be049d1b7e5dac88a69c53f4797bfdab46db796069d9a364c05e6c75ec929bf3",
+          "wrist_sha256": "2f160e0b1683d6c7f63f78dd909a155ea4fcdd6b50845d41ae14cfdbfe6e5161"
+        },
+        {
+          "qc_question_id": "QC078",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_2/000067",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "2a43dcaf297c4660f0cb03e64d5071ac539bfd481688d56755796532373bf37f",
+          "wrist_sha256": "35e9636611d69df9a93eb23b70ac092f7fd2343afb3439127ed32cc602240eb7"
+        },
+        {
+          "qc_question_id": "QC079",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000096",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "3ec4afef773bb3edec5bd95562a89765fb749b26a9795d445b7e251042916715",
+          "wrist_sha256": "4b55afe6f2676482ee28390cc824d17b9f9ebfa9a0303bbd064e6f98ab707707"
+        },
+        {
+          "qc_question_id": "QC080",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_1/000097",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "a0d7eb8bef5421fb2e5907b05564528be6fb977837f89fae4fc28448813f2d96",
+          "wrist_sha256": "8caa179385a279be2c90f1be0266f2e5914d183f1d63d88b7f85911dc74669b3"
+        }
+      ]
+    },
+    {
+      "group": "qc300-081-090.png",
+      "questions": [
+        {
+          "qc_question_id": "QC081",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_3/000059",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "cfe6ba2c0cc28f90a44e250947e4c557a6bb6ab1aab9e85ce21e4941b383a513",
+          "wrist_sha256": "f658421742957ffd26350699c218040a2e360e23f3aa69bf9fb12c456cd3e3a3"
+        },
+        {
+          "qc_question_id": "QC082",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000053",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "73f691ab3181e86355f967e2751fc4d0259f6d65c42039c1b984d320c7ad77c6",
+          "wrist_sha256": "101d26b5ee24dcbaabaeb9d20834cdf9bdb85f5565ac67f03b4ff977ce31c01d"
+        },
+        {
+          "qc_question_id": "QC083",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_4/000076",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "5ca37bf605a48eb6114179092ecaa75f3cc9b28fa7a8f4f6fb81b3d7f3535031",
+          "wrist_sha256": "8f37f94654d3d458b2887c6a3a3f13232b432e1bf33d4ab2a4ee47352609cd02"
+        },
+        {
+          "qc_question_id": "QC084",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_2/000113",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "72060ec2efb090cdd6efcdfec2cb5b1dc664469de00e72f6ad2d7e57b76e7251",
+          "wrist_sha256": "2c02a4d62814331395b478c76a5b06e98553db3d6da730310a144bbadf10868f"
+        },
+        {
+          "qc_question_id": "QC085",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_4/000004",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "f91a0b509d96cb0dbf017f987b21479bfc505459822d78d03f42616bb0c08404",
+          "wrist_sha256": "09e503fad8a86d106cf3c382cf7165644ac3b3ea953e3135dbd4b0f0a0620d1e"
+        },
+        {
+          "qc_question_id": "QC086",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000124",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "2863a696f361ff7069478e00f3e3f02c45a6aecb16ede2f7df2c7ea682af29d1",
+          "wrist_sha256": "25e9be5948cfed8fa26f2617c88fd9496fd151db1a7b0b2a2871be63f7536163"
+        },
+        {
+          "qc_question_id": "QC087",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000125",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c55e5f9ed7740107579aadd546c10abaede01c5fdb35fce2f60a2323a12b169e",
+          "wrist_sha256": "5d6f3113ab47b0766b4669c61448afd16d2005eb47e03ae4e6bd38264ed09787"
+        },
+        {
+          "qc_question_id": "QC088",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000062",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d9b26a621be0ffd10ea182203a0f507dcbc72a3bc16ee057608c04ca898971e6",
+          "wrist_sha256": "359984d5ec8c553da903ce463a36e602cd563b2781b18484a1a7d64cf8cc4ce2"
+        },
+        {
+          "qc_question_id": "QC089",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000004",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "d94e426fafe77d2f76537dfccb0fc4e2f61719561d69c66aa7f4220acc957b8e",
+          "wrist_sha256": "4e26049906554427a37607f1c2451144a440ff3c83e097c9dd8ea33df23816bf"
+        },
+        {
+          "qc_question_id": "QC090",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000002",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "56b543a76bea10b061d35e07bd89ac4af9c177da835625836314b82bbe897503",
+          "wrist_sha256": "5985b0393ab690c82dbf7ca75455d52e33dcb5452f29b60d0ee1bfa8fc7446bb"
+        }
+      ]
+    },
+    {
+      "group": "qc300-091-100.png",
+      "questions": [
+        {
+          "qc_question_id": "QC091",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_3/000004",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "6c4b97415586313ba47a6f6cced48b90651c9868969a8b2f17a7d6fc492e5970",
+          "wrist_sha256": "3e2c94badd0b89996f86c1b22b803fce06258a6471fe20666b77f8843e02138d"
+        },
+        {
+          "qc_question_id": "QC092",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_4/000045",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "34d1a3ef9e33865a82cab4c8ff3dade9a9d7697a1518bc4fb961d7cbd230158c",
+          "wrist_sha256": "f43a21b6f946519443034290a9b4720c5a134d9eece566fedfa2440848e1c3a2"
+        },
+        {
+          "qc_question_id": "QC093",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_2/000069",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f4567bd94ebcce1df017a2afffe8f0af33e1d5138f821ddddc268edba901ea36",
+          "wrist_sha256": "5e5d10defc2ae302ab08c6d19f49c88ab7643747b3bf2c83f97e62639231e78e"
+        },
+        {
+          "qc_question_id": "QC094",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000048",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "8e7b9baed594b7f46191746f80ad7264c04c7f530f50b27322bcc732bbcb2973",
+          "wrist_sha256": "7bd482a42a98a4baf08c2c1bebeecd62c0bdde8016ff13d49a18472b37260b46"
+        },
+        {
+          "qc_question_id": "QC095",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_4/000071",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "1f9532fff8005c634525ce06d1c0f3a5cbdfa26c303dc1eb348f56dcf6709a24",
+          "wrist_sha256": "4bcac01f6c1071bf3e91c5e6d5f7908d388ac2223a3b8ad78c089f8f65fe607a"
+        },
+        {
+          "qc_question_id": "QC096",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000034",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ce31b1b3bc1e793274c2eb7026296f02ecac8dbe3c2b0a6a652964949eb28266",
+          "wrist_sha256": "27450c6ea77136b8d7e67d14fae22070df1ca3c9594af2ff8fe927537dcfb021"
+        },
+        {
+          "qc_question_id": "QC097",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_4/000038",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "439e3b18eea779364015bdebe0676fe5afe9a8eba08399cac5ddefd5bf613f63",
+          "wrist_sha256": "554d606cbff995e10abbaf706b6241305afb9458c07894f558e850c38106f9d1"
+        },
+        {
+          "qc_question_id": "QC098",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_3/000045",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "03e20e73913846e16328650308d6aadafe24b0dd4d3388a10d1f7dae59898b94",
+          "wrist_sha256": "7c5c8b77913bb78c6350d35977bcf9981dd417996978f22c47e08f1839107754"
+        },
+        {
+          "qc_question_id": "QC099",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000049",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "86ccce1f277c023d7e943073d1335963342f5b51a002194e62e6c74da8681227",
+          "wrist_sha256": "b054ea290cd5584f6f169501c2cf1f59f0faf4674a79e4a1bd3c29afc3dc6a0d"
+        },
+        {
+          "qc_question_id": "QC100",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000055",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "188184ddf4f7860cd6f8f3fe791f3919e98f8a0251c394ab1bfbf6426e7a9fa0",
+          "wrist_sha256": "dd35189443e1bded9c1eed161dbdd0c81b25a4ae1dc2b62005022dc7ff8cd8a9"
+        }
+      ]
+    },
+    {
+      "group": "qc300-101-110.png",
+      "questions": [
+        {
+          "qc_question_id": "QC101",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_4/000035",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "1bfc2fdec9d4bc68d8e6e0a4194ed8bbbb9c9db3e195d03aa844e8a52b920456",
+          "wrist_sha256": "a18f2a9da28a7a0bff7c244454acc58855a35c1a38b7637d8a68b7211e17cff0"
+        },
+        {
+          "qc_question_id": "QC102",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "79ef3547dc3166fdd3fd2031c64ba116d82767144b825aac61020a4b9147a030",
+          "wrist_sha256": "ad98970ba005f009accda6e48484d3c4ce496500b5f8b262c277a5fd862a2f9e"
+        },
+        {
+          "qc_question_id": "QC103",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000133",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d80deeebb8fde8108b6137e3ca14a38bd113c0960eec8e77ab4812fccf27e720",
+          "wrist_sha256": "2ad99a004e2016e67f71c5bca55962a4193c0518b07cee2c49f5091773558985"
+        },
+        {
+          "qc_question_id": "QC104",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000133",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "6dd60ec608b2a600e112f808dee4a0de26447bff84fc26a3f0e71960e4b7d9cd",
+          "wrist_sha256": "e5d5dd6a333fa9f64cd57f88a88e925b2eb351c41c40499603403f0b446e0ed0"
+        },
+        {
+          "qc_question_id": "QC105",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000127",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "99beb12041e73fc36c61edeeb3b071d724d28d5b33cc5e7a491ddfec746a255f",
+          "wrist_sha256": "0f501a1c487ce7603567e651c832c61b9d063b38a75a4aede1318d41e1605bb9"
+        },
+        {
+          "qc_question_id": "QC106",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000023",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "0d4f85a4242839d77adbca920efe0c9538b834f0ad111423eb33f2ffd3be9b35",
+          "wrist_sha256": "7d17f92e597c839192b310285e200fcbd3264404434567cfd3066564bcf6c5ab"
+        },
+        {
+          "qc_question_id": "QC107",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000111",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "77424872f511313b25d5e24085d4627ca3f88c74820cab06b9a01d0134a19a6a",
+          "wrist_sha256": "a75d8bd3718e09d5cbda9cd94c4bbc22e8a0ae441fac111b759332fcaacce8f1"
+        },
+        {
+          "qc_question_id": "QC108",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000082",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "e73d6b71f044637e4b13b585313b5592d704ce54686d8c46ba659aef86f4ec9b",
+          "wrist_sha256": "3229bc78f72ce0afd8d41d923b66ce94a3df045d215572c8a72e64abcf237fd0"
+        },
+        {
+          "qc_question_id": "QC109",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_1/000109",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "2134f49fa2d87d8b0bf3de894775298437287810c9e6ca90af9c40eba108e11a",
+          "wrist_sha256": "8df8b45a2f56b581750f2f52711b61157af75ea078a88035aa4a7b7839034496"
+        },
+        {
+          "qc_question_id": "QC110",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000120",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "4edebfe55c3ee90947a9b7e14b2f8c93e01b324e777152544d15d2cdeb79b12f",
+          "wrist_sha256": "57fdf4c4c4f46487f42f00f686c896f7e0c25059fa51252377419bb55a14b14d"
+        }
+      ]
+    },
+    {
+      "group": "qc300-111-120.png",
+      "questions": [
+        {
+          "qc_question_id": "QC111",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_1/000012",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "72994c5e7dc2ffd9c557595e84be877c9016417466a8eeea010a62393caefb4e",
+          "wrist_sha256": "f52a4e25269691b87ef4a0f4276b2319557a002c9422532ae0184a81254c1524"
+        },
+        {
+          "qc_question_id": "QC112",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_2/000054",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "53fe3a64ed074175f8e7beda059d6e0900aadd59486539be4f0c5518b2c8c870",
+          "wrist_sha256": "2c0951422d517e0dff18840cfc9d1658717b518cf08a572f578940c3ade94bd6"
+        },
+        {
+          "qc_question_id": "QC113",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_3/000117",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "9f1d81b33d0dbab2a47822333748c858aa560e43cd1cd9841e8c369aa38e9e00",
+          "wrist_sha256": "65f43908f654878a9fc8c05e73c555ba9d5cf5750be64ec297a138d3ce25e6fc"
+        },
+        {
+          "qc_question_id": "QC114",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_2/000027",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "d4efb281c8c933532dec6492a87641f86c4b2d30af7f80cc58eef1083882b9e9",
+          "wrist_sha256": "89649cd891f12a0a0ea6f2acb87e9ed96ffbede14433d024f54a5770db88c41c"
+        },
+        {
+          "qc_question_id": "QC115",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_4/000115",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "35fb3ca74b29847e5da977c2e2fc0e2da26b6fd310785434169fc9ec4a082ee0",
+          "wrist_sha256": "26d0e621ab4bfe6b52a10b69dd0e50378c0ed9025d8a9b543faafa18b623abd4"
+        },
+        {
+          "qc_question_id": "QC116",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000152",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "e39e5c49a7ef84285d8ea91c5bc264ce5fe2aaabe91b09b9a4adc7f334eee2f4",
+          "wrist_sha256": "7bc81e85e37b6bbec8a4b22ff61f93ae0059cc5720e2cba2dd4a99c8333a0c15"
+        },
+        {
+          "qc_question_id": "QC117",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000055",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "386135dc6292020bdd0ccf65e429340465d8df793127f5accc6aaae7507e3d55",
+          "wrist_sha256": "2eefbc14a5e1234939d09b6e27d6399308271084d69f74815400d587571a55db"
+        },
+        {
+          "qc_question_id": "QC118",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_2/000073",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "37c1be4e3e8eec95a6079deb7bf3a9eb3b8bef8635b08732b91f93509a162206",
+          "wrist_sha256": "2badfc61b9cee84048f6cd54afa55e4f0cba9d30fe94c9957700846527dae55a"
+        },
+        {
+          "qc_question_id": "QC119",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000072",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "21597fe1d5c74fc33e2910f5bfd751e6997415ba3ef1394cc021da33d4602bcd",
+          "wrist_sha256": "e2d243a0c8f2ae9b6f4a7f1494972e62a7f233ef25c68f3c250bd6a6d1ea2218"
+        },
+        {
+          "qc_question_id": "QC120",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_2/000026",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "cadd6b77c018237ca6382e8058f313e3862268ca5296a09945107f77f7baa045",
+          "wrist_sha256": "0916a11b553d8db9974c9ad5705493c57bd4a768f7b08e5f19a8a4a4b01dc789"
+        }
+      ]
+    },
+    {
+      "group": "qc300-121-130.png",
+      "questions": [
+        {
+          "qc_question_id": "QC121",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_3/000008",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "e6fe45820d64b45ccb62980d6de9b6eeece38270f980655883888f66f2ee457b",
+          "wrist_sha256": "8ffa9b0adbf40c59094d9494bba4ef14bb1c93f53f765f0254af104cb196f65d"
+        },
+        {
+          "qc_question_id": "QC122",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000049",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "e05cfe04a16586463d96c0026c4347303544d6fcad753d472e076775bd6096c3",
+          "wrist_sha256": "160d7d0b5ffbdefb8c405804b956030dd22950a7703e260a35e138c65cc9714a"
+        },
+        {
+          "qc_question_id": "QC123",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000067",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ccc1f776b14d08021f952135ba15db0dad20abec87cfbb2fa7fd738976768daa",
+          "wrist_sha256": "2087532c06af33971eaa6840126b645373c7eaa801ac556b9117db1eeb9b9780"
+        },
+        {
+          "qc_question_id": "QC124",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000029",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "fadeb0ea23b7ac9b325f82db38e39ed1dfb530383218e84794e9c79d8c819ee9",
+          "wrist_sha256": "5c0f5cebcf0fb57f32b570c708fee8b523112ed23181234355417a57b22deced"
+        },
+        {
+          "qc_question_id": "QC125",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000038",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "935aa5926c9c630e772cf262af2fd64faf354616a40c36ab6312401f232fcd1a",
+          "wrist_sha256": "492041972f57f00ab8d66a31f69ab9e5956c2e7e317dda0ab0684298bc8b62a2"
+        },
+        {
+          "qc_question_id": "QC126",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_2/000027",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c93ce0665cdaaef5bd065dd5e8232d11eb159cea84a4fd6935d361ddb684f893",
+          "wrist_sha256": "fa91f9ae75bfdbe0d0d3b33f8b9a88c6b023aeec17dfce7452642cd6811e20d8"
+        },
+        {
+          "qc_question_id": "QC127",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000036",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "5de7a1b1d07d90363db71fc56659deced073edab69268cf2daed24f31e9faa6f",
+          "wrist_sha256": "54e15316e4a4978d8a016d799e44a9839c2aed8b9f51805d56718f7389536bf2"
+        },
+        {
+          "qc_question_id": "QC128",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000098",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "79bcf5b67f1647b75973ff7632d7e3685ed0cfbbf7949d566b3e56107bceebcf",
+          "wrist_sha256": "317617ce6dcaa05db8f7365f08890bd28858858df04bb44d8b8fc9c7f7c8761a"
+        },
+        {
+          "qc_question_id": "QC129",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000056",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "925229038d8eb25c5954c8b71670a59f5e1239dfced97b914ff6c78d8708b3d4",
+          "wrist_sha256": "8e18001ff8c37d3c651b736df19d122f645784b677452c6be25a2c83259ebbe1"
+        },
+        {
+          "qc_question_id": "QC130",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000101",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "18de697bf6442e4ceea77dd797b2e620d8f1b51cba53e71c65fd9d141ed78a62",
+          "wrist_sha256": "96a7e0510187ff3f9ac98c8bd99b703a37884a0ae791802a06a58c67471399bb"
+        }
+      ]
+    },
+    {
+      "group": "qc300-131-140.png",
+      "questions": [
+        {
+          "qc_question_id": "QC131",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_4/000010",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "05db8f0aca5cced9028e13f5d8f1db18d332a38ccf72424f9714e6ec51c89ed0",
+          "wrist_sha256": "47cdbf4f9361a72d363276b0f9d9d054cf256da19ba8f3b824d98c1cd39e175f"
+        },
+        {
+          "qc_question_id": "QC132",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_4/000029",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "9b7470b01ada854e226a9d150cdeea14b0aa6581c07886fe1cc9a7c73b777192",
+          "wrist_sha256": "55eb12031bce45fa71ed9cacefc558543a7edae6d50fd75bf732bcf7aa55e3c1"
+        },
+        {
+          "qc_question_id": "QC133",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000095",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "6ea7b04268bb3cd12c023d311dd2ffce45dc947654a15259b9c7fe04eb6e6a26",
+          "wrist_sha256": "08822798ebea9c3b1b5ae6c5eac1275bb53e665f6f598c1c419cb63009c23a42"
+        },
+        {
+          "qc_question_id": "QC134",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_3/000164",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "44dfe9ba387f9e16a1d12f45724eb0628584dc2ec399b80728f94338645bc0c0",
+          "wrist_sha256": "9575660a69fdcae29a5a31fcb01553db77f900ed84cc9d1070722612b19770f9"
+        },
+        {
+          "qc_question_id": "QC135",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_3/000002",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "1fed2db62d03521f812b0b5311c12dd693e25384ba83476fb2a6e556ef68e978",
+          "wrist_sha256": "82899358f3bd890a99cde6948e912421cd050f5cad08f006adf9a3d31cdff57b"
+        },
+        {
+          "qc_question_id": "QC136",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "62d68bc74756057d59b1b01c1404b51183195c952d90ca74478aded981308c7a",
+          "wrist_sha256": "914b08ffbc40071df3d97b402eb193f66c645ec7617d0eec5b9e483edec97853"
+        },
+        {
+          "qc_question_id": "QC137",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000049",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8932dae1f3275254d103e97dce727ef283b26f90b30c7aa05a9e4fbbad061914",
+          "wrist_sha256": "e05d5f4c84c48b7a0399ac74efed4b77e47a6e9afc253078d533848cb863f4f6"
+        },
+        {
+          "qc_question_id": "QC138",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_4/000087",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "2b752c08365e5a9e762ba7cafd0bd9e07784148832bc7db1868f3619e9604240",
+          "wrist_sha256": "b66664ad539529168e0c42832e87883e05ec8c1adbbc92e029784c14d3fe0863"
+        },
+        {
+          "qc_question_id": "QC139",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000036",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "0c73d819220c5caf5d0e3caab4acda048ce7476816fc02b1f324efa32a2d1037",
+          "wrist_sha256": "56fd008ff566f298c135ba568153561179b7acc7cd1b912118bef0fc9356970a"
+        },
+        {
+          "qc_question_id": "QC140",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_4/000073",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "2773fc7bb9abc81abdcff16c942aca2c00502bc86ebd04fcdb39f8702d4c767e",
+          "wrist_sha256": "de8403cc6c97d83c22a11beca4a84486d7785e8174b8163c3c152df3fe8cf28b"
+        }
+      ]
+    },
+    {
+      "group": "qc300-141-150.png",
+      "questions": [
+        {
+          "qc_question_id": "QC141",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_2/000082",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "6bc1a43b458f455bf569e9d1ca0d97856016246f5bbe44b90c6a9cd21657beff",
+          "wrist_sha256": "5e9ad4b4b9ab54453ff13fe8cb5789090797b8a49b4e305f70105afa5246d96c"
+        },
+        {
+          "qc_question_id": "QC142",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_3/000087",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f98c2d3c73b8928d399151d2c7c6228963c7f39d4797f7903422a0f255d0050c",
+          "wrist_sha256": "95d750505149c3c754645dd9117be452d0fa05930425d7c8778e514ed0c64e95"
+        },
+        {
+          "qc_question_id": "QC143",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000064",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c8bcbea6fa0ce2c33162cf7df96a2971b834907d478e7d83cbfdf94e9e9099dc",
+          "wrist_sha256": "0aa61aaead1e1f85a18df014c76e5746e09cec7b638bab899e64203d6b5c6098"
+        },
+        {
+          "qc_question_id": "QC144",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_4/000008",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "2a57d21f04017019824cfb3ad06dbb85ea0372b33b086757d08ccb0572b308cf",
+          "wrist_sha256": "6562fb20291975684731a7493c9f8099e9a119dedfe167214225a21b7b6e4c40"
+        },
+        {
+          "qc_question_id": "QC145",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_3/000086",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "ba7e0532c794548fcd65a562629d9b9da25528f655fac85010fa55a783541986",
+          "wrist_sha256": "9996abe822325e283d28a8d1b6eb5c73e56dbd430117ee32f85418e679441e12"
+        },
+        {
+          "qc_question_id": "QC146",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000014",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c0ffddcea7af6b80d67cbd2c2c8552188a834f691aa102741aa62e0286f969ac",
+          "wrist_sha256": "3c199cd67b4115cd2556711ecf92da83d777e10a591519aeb7a151a5b8dbc398"
+        },
+        {
+          "qc_question_id": "QC147",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000054",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "1a235265ea2d7dbe4d54c82b36f47ea064b1fbc6069aa5de3a4a902839cc4776",
+          "wrist_sha256": "814162083d1aa0c8b6554a8633d9437f7d72efff6e5635252f9af3598e1ab143"
+        },
+        {
+          "qc_question_id": "QC148",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000095",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "32c4644e448b6e032d0532f29b3fe362beb32562a6b100602700f667b4bfe318",
+          "wrist_sha256": "2b13b934769ab1bd9cd207b5978eee99930397e0311f6fa3556d87940332a3e4"
+        },
+        {
+          "qc_question_id": "QC149",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000054",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "1a235265ea2d7dbe4d54c82b36f47ea064b1fbc6069aa5de3a4a902839cc4776",
+          "wrist_sha256": "814162083d1aa0c8b6554a8633d9437f7d72efff6e5635252f9af3598e1ab143"
+        },
+        {
+          "qc_question_id": "QC150",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_4/000039",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "a418e83ad390499b66def5dfd0acad6ddf67133dc7b09c33a2a15679a0308d4f",
+          "wrist_sha256": "92eb60452cd605666064a15d75d2e6d1e230cff5e6d4faf8e4b073d4bfe8ecd9"
+        }
+      ]
+    },
+    {
+      "group": "qc300-151-160.png",
+      "questions": [
+        {
+          "qc_question_id": "QC151",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ca3590ddf6fe02ea4c1d277bfc4be46e1d28f4a6f652cdfc81de4fcae142d66a",
+          "wrist_sha256": "ca35d76e1dc8e3a25ba41bad6c570154d8fa2d4453f64d9f726bb39940efd62c"
+        },
+        {
+          "qc_question_id": "QC152",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000010",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c4ffec51b8f5320d0053b88e04c3e6157e37401582b6790e00f1980311e4e7e3",
+          "wrist_sha256": "f2f24d39dff79d1e1b7f54f5667e645d6e2f83a981d08c8227be74c1e1780211"
+        },
+        {
+          "qc_question_id": "QC153",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000089",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "739c1c090c25f5fabfdefe39c97654b923dd89653fc7905312b721bc12f92ac3",
+          "wrist_sha256": "02142bb57da07f07b55771fdc2087a66319d9081cfb1b140bcb80c2574539281"
+        },
+        {
+          "qc_question_id": "QC154",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000030",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "bbed02014d72d140183fc0901d667009b261d4949aa7de3c7da533b56fa212f5",
+          "wrist_sha256": "0adbf6e7ba0be7c4d6480900472ebb6515f0981bb04a3350d89b588236683bf0"
+        },
+        {
+          "qc_question_id": "QC155",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_4/000139",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "e32d970bdc83476b4b4590da5b0e81a02e886fee397c53b0ccda72b5f2d44113",
+          "wrist_sha256": "9dd74ddb2a6c30b565d9a62faf2446600e24b9672a516a58fdb1b235c3947f30"
+        },
+        {
+          "qc_question_id": "QC156",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000004",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "cdf0e7f9f6fa09b7258c54f4575d91e892252da24807ad8504ff85359899c05e",
+          "wrist_sha256": "e8e2fcf97dc8c6c38f54fd879a28844c4b7734bbec8b1309d59d3ed28cb0536c"
+        },
+        {
+          "qc_question_id": "QC157",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000109",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "61861d2b36c2c0a2863ce3d27bd7644decec520c70cae9a975007267c673c4c0",
+          "wrist_sha256": "107a5b6ae6d56d75ef5fc2b525b18276e0a98b6200eab3849c6b98a4cb151c62"
+        },
+        {
+          "qc_question_id": "QC158",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_1/000065",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "26a22599da58dbbf52661c56e8d2a9be19452a2568559088530a73a13db185ce",
+          "wrist_sha256": "94c21e55f2a3b86ce2b3aa55ff25c512ea58926366dd3c2b3da4f8c5884dffe4"
+        },
+        {
+          "qc_question_id": "QC159",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000040",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "f61c7935f1e3d4d098aca83a6add15aa8f701bb03ac10116e7b4c6859bbbb956",
+          "wrist_sha256": "b46f3f7029dd70fdd6020b704b56a43631981893ba54111ca126a79b1ad7b6a7"
+        },
+        {
+          "qc_question_id": "QC160",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000097",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "55543b90859e9b28a043ef5ce3369528e5e49af87eb65e6dd12f5be162b973bc",
+          "wrist_sha256": "9793f178b3441dac567192dcf9d0001388e1265bef5d8533cef68ea2c6f4a4d9"
+        }
+      ]
+    },
+    {
+      "group": "qc300-161-170.png",
+      "questions": [
+        {
+          "qc_question_id": "QC161",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_3/000094",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "37e2bf120e306fce7d0aa9a35426f87eb6a65d5f8723b1310b6d55b83bd89ced",
+          "wrist_sha256": "6a8a12c2a8cc0134e11a85d9ae2367f6fd52499a99525f562d27099b32a55f12"
+        },
+        {
+          "qc_question_id": "QC162",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_3/000136",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "5d602baa49cf1fbf71031b67db31a9990bac9af8e6af7214d0ecf39f7bec62c3",
+          "wrist_sha256": "89464bf6bf26fc10b303551646f55474524630da6a819bbf399d984d06ae78c6"
+        },
+        {
+          "qc_question_id": "QC163",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_1/000075",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "48e1777d2c5f0f3ecddac9eb6891e01d4861ac01615df181985e5f5eded0ad69",
+          "wrist_sha256": "9c251954351cbb1207b41e5a4caa47368266b3e8b3d3e1ca8e8fb2f3653b029f"
+        },
+        {
+          "qc_question_id": "QC164",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_1/000073",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "87fc82585c137657570277f760a9d0cfb2e9c28a23ec2dfc8b449983c522c525",
+          "wrist_sha256": "00aa71367024a7009d345a5ef8acb9c9a3700bc1a10dc81680ec535f9ece1aa8"
+        },
+        {
+          "qc_question_id": "QC165",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_3/000095",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "cd341a1cf1015c12e0e78cd7d3f4a817bd05eb0a86b43dc5490961c00956ffa3",
+          "wrist_sha256": "8907ead0029d0ae8924518cfb448dc3dbe0a2db4dd442dc8106f1f91666d8f3d"
+        },
+        {
+          "qc_question_id": "QC166",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000093",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "1cdfb4c9b31298d9073fb4bd5c0608ffff37e3190ff8486592adab789245921f",
+          "wrist_sha256": "e2c5d8d245a31bf7b36698685d79c5db78a29fccec6fd8826a13c7255ddb6b62"
+        },
+        {
+          "qc_question_id": "QC167",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "6cfdbe576348339aabad89b306afdf5ff30a3936fc079f468d9e63a28c023e6e",
+          "wrist_sha256": "06d0c31bb88a08cd7d329f676adaa3c008e5b0178f98c3e018df21a1103916e0"
+        },
+        {
+          "qc_question_id": "QC168",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_3/000144",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d03ac7029ce9030a4ee58b003003564ce217086de3e4709bc6c24d3882803dc6",
+          "wrist_sha256": "671442de998613ca764685874e070fba658c8adbc437fb96c121b9c62e28a805"
+        },
+        {
+          "qc_question_id": "QC169",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_2/000104",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "f7355360987608ee7551333499c2555e6a24f58b846c5d600cc889a426c1f759",
+          "wrist_sha256": "3e875905f685fb6bc5067ef1ca0a144053de52e96b9647f78458548e118d24d5"
+        },
+        {
+          "qc_question_id": "QC170",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_4/000024",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "e391d5ca8fa335ca5abda54c80d053a5d9ee70957275558ec774859670b93f5e",
+          "wrist_sha256": "90bc2b597345f4778aecf922129b7774c8072d2bafb7302adc4fe043ebf9ae17"
+        }
+      ]
+    },
+    {
+      "group": "qc300-171-180.png",
+      "questions": [
+        {
+          "qc_question_id": "QC171",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_3/000034",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "1263355325b113c4ac76f0459a15057145531362b312f38c219be5d2d52cf01a",
+          "wrist_sha256": "61f832f402d15acfe40600e879c8146badf6dd1f8145e23377c509417be74ae8"
+        },
+        {
+          "qc_question_id": "QC172",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_4/000003",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "41ca474784854d7139b54b50a874bf2fe10d33a2de820f6aea7a1d51c164db7f",
+          "wrist_sha256": "c0b0e966bedd3ab332e7e368ac82849c9639bce64708cf16a3ec6ba52093051a"
+        },
+        {
+          "qc_question_id": "QC173",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000072",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "26cf9d50d742f1071bb14e73cea250d83fcb1409bbc8bab04bc584b4ff63eceb",
+          "wrist_sha256": "c1c26339120f38a7dd0aa014d72899be03508fa6396747c1d5d0778befa7b42a"
+        },
+        {
+          "qc_question_id": "QC174",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_2/000055",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "c74674ae17139bb9be6929f9e079a31b5b6186a161bdf054d3ce609a827f5f68",
+          "wrist_sha256": "f0b41e9fa3fdad73bcf05049f4328df68d91ba4baf55a987bda532fadfa7d899"
+        },
+        {
+          "qc_question_id": "QC175",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_3/000107",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "30e21ea924a184689a7d21271a6b0f6c73d54ebba45aab4fcb6c450c9965248d",
+          "wrist_sha256": "2450f97ca4ecfaba420738ac1973258d5f0345043b1163e84f7c9bb6b0a1066e"
+        },
+        {
+          "qc_question_id": "QC176",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_3/000010",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "56d6b0301435b971472a2c0c111f17ebc94cf5ba74f9373a22bcd6dff94f0680",
+          "wrist_sha256": "174235ea3d7a0134368fa4a34f096140e22f16616adbcc69d28d25b939536419"
+        },
+        {
+          "qc_question_id": "QC177",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_2/000032",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "1fcda392ef2f48dbe607807c7d34f8231c197a40d11209c3cf83952b879a2448",
+          "wrist_sha256": "ddedf17998b26a8f5af5dcda5530b3b291b640c6212989d694c41115c9d6592e"
+        },
+        {
+          "qc_question_id": "QC178",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000054",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "4501db1737034caa4a206a55d57ef9f5fc5b74812fadd963f1cd943c3dd5d16b",
+          "wrist_sha256": "d8e15eb32009d5e7535001d48fbfadc183cc76063626760c1e180fdbc7269704"
+        },
+        {
+          "qc_question_id": "QC179",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000070",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "830d422104f06442aefbece2f245b5647b71a913c50f3848fd508360fa6e60a2",
+          "wrist_sha256": "09024cceace03d437f5268c7d2e85000e47663f3aa85462cb28cf9f49d2154ea"
+        },
+        {
+          "qc_question_id": "QC180",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_0/000124",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "21a496c6ec60ffdecb39901b86e90e2247f58d328132c1ce1f0ae3136649d33f",
+          "wrist_sha256": "a40b23a92bd2195e01ae63162c0f2fe9dda988e36458c287544f02297fe3fb28"
+        }
+      ]
+    },
+    {
+      "group": "qc300-181-190.png",
+      "questions": [
+        {
+          "qc_question_id": "QC181",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_2/000015",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "09665df544d5badf9cddfc86b2b8a4fb7e78e447147163f95174169d54507ffe",
+          "wrist_sha256": "5a2f70cb676d946853283b59b9f32f1f4dbfa6f10e422a0ce3c6618d46d82af2"
+        },
+        {
+          "qc_question_id": "QC182",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_3/000096",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "dcff01bc601916b2eeb99a7d8f3891ac0859c831b1e2c4acfdbebca4d4d65b89",
+          "wrist_sha256": "0825edc29a50530b4315e1c3c11fbc6aeccf3e9be0eb8b0c05b48fa3886ec4fd"
+        },
+        {
+          "qc_question_id": "QC183",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000126",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "b8534044cbbdbb8d123ecb1842dbc832ed4c82a660275da1aed88f8e6414f4a9",
+          "wrist_sha256": "9caedcc3b58032abde6fde8b905a67f2c475698ff0cea229d7bc89cf79c3966c"
+        },
+        {
+          "qc_question_id": "QC184",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_2/000035",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "ae8c8ec8366d659ab5850feb1eea5d9e3a49318df43834ffdf00686e8483ba18",
+          "wrist_sha256": "fef7cce5e39663385bcf3cc9f3a4b8a1e12d47ef0c6215c9fe5fcb9d830cce15"
+        },
+        {
+          "qc_question_id": "QC185",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_3/000087",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "a574c19e61dfcf744f313e98bf0eba28c9cde961509cc41ec757f956b00d14da",
+          "wrist_sha256": "b887a2f6ffb89936fc2843d7faa886066339a2348c201ebdfde8df4d3d08b6e8"
+        },
+        {
+          "qc_question_id": "QC186",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000056",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ea0f75a9f507e230d68d20a22eb82500e4a49cda22a7757f928fd175e424aa06",
+          "wrist_sha256": "61f503f25cb8ed83aa8df58f043ce714adb1bb010ea3f408126b3c36f58f603b"
+        },
+        {
+          "qc_question_id": "QC187",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000051",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "cf5e13b010701dc86239d301344144cac4996f4a7254ce32f4de18c965641364",
+          "wrist_sha256": "85c8895cb0ce91ce7f253edc52086b9fe5cb9ee67cf4c138e78080b6d9dcfbcb"
+        },
+        {
+          "qc_question_id": "QC188",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000099",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c5b4b11067953452c9d33748e7f960880a3dee8600aebc11a75a8b71b00982df",
+          "wrist_sha256": "3c1def177d2e5fbb9bc9fa6d9c21eac0ec47accbd49d0df6fca0db269683b099"
+        },
+        {
+          "qc_question_id": "QC189",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000094",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "a4438df5c45ca8db00313d2065c1874a692461686a8aa1f68935b84997516eca",
+          "wrist_sha256": "f4e5eae7c5cb507162d834ee9918a431f04795ebb8559fdf9fa753f48d9bd93e"
+        },
+        {
+          "qc_question_id": "QC190",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000071",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "6061ffbb7e3c9ff28e9eaea613719ec3722b210fed0ce6394021dfb8f63584ff",
+          "wrist_sha256": "e5fc6bceb57f74037162149aa0d7e327aa11970e7f62bb10556dc9f21dac3ac6"
+        }
+      ]
+    },
+    {
+      "group": "qc300-191-200.png",
+      "questions": [
+        {
+          "qc_question_id": "QC191",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_1/000035",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "9bc0ea11562f42d31ca229d0227d8403bf0990bd720e8356fcb2f46e23b23ae7",
+          "wrist_sha256": "3ff4d68d2ccb09915ae4efd81092f1559c4856669fc74284e50b4ab275803aef"
+        },
+        {
+          "qc_question_id": "QC192",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000088",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "68128295705b444ef3ff3ce35511c1f5a0ffb65198062af03c1c04e5ac7fd8aa",
+          "wrist_sha256": "2ff834d881a2b3ba8defac67ce052db4cd4d9afc3c4b3ab0cb1a189056952a4f"
+        },
+        {
+          "qc_question_id": "QC193",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_1/000054",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "6c0758af727566e6db05ff1535f66c47efcc40dd03856fadda424f9757f84007",
+          "wrist_sha256": "ce81b456720ba22b4ddda9763b260234b9d7ab9d3ff8b8acea1ad12a6dd7ad32"
+        },
+        {
+          "qc_question_id": "QC194",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_1/000040",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "2cec85c604756f3eb1bc9f4aeb3308f1688a9450301ad31ecdad0f840cacc277",
+          "wrist_sha256": "156f637640ad108cf7e2b959b19a66a5593dfd495f14c7665945e1fb14804c30"
+        },
+        {
+          "qc_question_id": "QC195",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_3/000004",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "6c4b97415586313ba47a6f6cced48b90651c9868969a8b2f17a7d6fc492e5970",
+          "wrist_sha256": "3e2c94badd0b89996f86c1b22b803fce06258a6471fe20666b77f8843e02138d"
+        },
+        {
+          "qc_question_id": "QC196",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000112",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "11fb6fd982bf2dce6bf0cd195743b743a99e16ade6ab3695a98584eb1582282b",
+          "wrist_sha256": "9104be04120dfc7d9e9fa4db4a724e1e621c3c2aba1994ffa7cdbf7ff6d4167c"
+        },
+        {
+          "qc_question_id": "QC197",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000053",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "2ebb4dcee6b5cfe9895a006c6c465f944bd47820f5a1b4179dc4b6c87c12e700",
+          "wrist_sha256": "17723a03a64ee3383a50a0eb98992a5c9591cfad2280e4ef19f877826dbc45f7"
+        },
+        {
+          "qc_question_id": "QC198",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000073",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "dd5da333acf55994c77102d801ebd845c3c0e1b12283ba09b77a2ab85123aeb1",
+          "wrist_sha256": "d69c56a544c088ec8a64d4c1909aff923be649b88c43293a4cdb5618b08b6d85"
+        },
+        {
+          "qc_question_id": "QC199",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000023",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "bf4ccb409f8f7f0a5bf630e6f82bd57640f9e1ab2a46d1a38c6e76624d165229",
+          "wrist_sha256": "e54002a3f78e7292d26d2e2c081ae557a5ed107f7dafcb9d987727c7924f7c57"
+        },
+        {
+          "qc_question_id": "QC200",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000002",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "4829306ef587999b3f1d72f7b9c9402917de0441cad0e9f4a69280236a7f8013",
+          "wrist_sha256": "9679a1913705c830a5c1bdd3e2e959d16f2645dd9dec5754d96130c386d631b4"
+        }
+      ]
+    },
+    {
+      "group": "qc300-201-210.png",
+      "questions": [
+        {
+          "qc_question_id": "QC201",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000151",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "b97fb149a3b95e3e82a68ade59c89782125169f4673bf5a57123c455a39d3fdc",
+          "wrist_sha256": "ff2df9c01da43a263cc19009acf973e1a3c230cbf8ff8bc726b0919c57b7cdac"
+        },
+        {
+          "qc_question_id": "QC202",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000072",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "dbd19e98d672c5d5bb5616042f680e3b94e2cdcb0db7cb26771e6869a356bd02",
+          "wrist_sha256": "eb69f52ce87c27a3a16ee48dda136e5137fc8d563af3c2ffc652810be4a1f0d9"
+        },
+        {
+          "qc_question_id": "QC203",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000077",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "2138c9743b65dc5f8db8dfe8f90c00414c9f4c7d0f27f071a111f942bb8be114",
+          "wrist_sha256": "0aed609e0064396911c59e2704ca9c2fac02fa06c43af64fb3d60211894af5f5"
+        },
+        {
+          "qc_question_id": "QC204",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000022",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "75f1dc2243c9ed2183e1f48d6350dc75d9c3f94e902ae92488700c40656cb8b7",
+          "wrist_sha256": "4e3629d6462c12ccb974335c0027e9ddf4daded85875fe3d3c8a3d8226424cba"
+        },
+        {
+          "qc_question_id": "QC205",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000000",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "2f0a08f2bef11b72c1d66c30e7ef49e3a31c1c5acc4689e495c3da6aaec472cf",
+          "wrist_sha256": "2005796c6fb3bc8825453e96a50eabb441825d1dc6f5e776adcffdd97d0c6e0b"
+        },
+        {
+          "qc_question_id": "QC206",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000009",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "1b11e44f4d17c24b785bf132e614a614b17986b34978b3a0a3828a31bfe5d310",
+          "wrist_sha256": "1ced5b25f17a42ed7a4ed5f782707568d03ee628230ae9cb9824882a8d529384"
+        },
+        {
+          "qc_question_id": "QC207",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000013",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "929bd52e30a0071ed4e5c8e7bfb38c264151cb42e81f446a25cd7c8bb5a250b7",
+          "wrist_sha256": "80eff598c07e7074026ad5c0959aac868978b0830ccb4bdb7c480fd6bc759871"
+        },
+        {
+          "qc_question_id": "QC208",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_4/000075",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "a1acfad0df14f44d7b345708136d29230d53d440e829c22b0a90cf4c29054de9",
+          "wrist_sha256": "0d5c9a735621e4345097ac11e84c0c18dd9ba1fa6849cd42978ef775a00c848a"
+        },
+        {
+          "qc_question_id": "QC209",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000100",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "b52151695ac4a9ca2fa2099d1740ae673ad91512407b729ac7208533ed1a2767",
+          "wrist_sha256": "fb1d1a3e43b500dbccc10992fa8d86f66b8b4d9301a594c2329baecca2f04df7"
+        },
+        {
+          "qc_question_id": "QC210",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000099",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "10774296b39e430943cee8b18e0e108287b38e1eefccfcfa99bb618e8c519fa6",
+          "wrist_sha256": "3b57f2aa3e5356df260129105ff4dceab5e68e80a10ffece10c4e3a864888e22"
+        }
+      ]
+    },
+    {
+      "group": "qc300-211-220.png",
+      "questions": [
+        {
+          "qc_question_id": "QC211",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_4/000046",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "841ec9c1ce2d6d8371ad26816cbd53e6efab6a5ed0b402a62b8269c2eb3dba25",
+          "wrist_sha256": "dcb34fd9df0ad2cd166d656d319a37f19a6627b44a2167f5da22630922437b3d"
+        },
+        {
+          "qc_question_id": "QC212",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_4/000132",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "7618228242a522905adccd7a530125226c106d73580ac5935b5da0908d40e349",
+          "wrist_sha256": "5cb6bcf3acaf82a0e29121bad62dfb2f5e6f74cfbcffc61f401fd1d273ec9448"
+        },
+        {
+          "qc_question_id": "QC213",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_0/000076",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "50ddf7ab7a5499616f1d44d07612889c0fdb9cd5ff1800375c1c32a0d2cccd3a",
+          "wrist_sha256": "4a6a61b89c919e4b93b94088af64eea47efaee4581e45516cf3a7e8336ac10d9"
+        },
+        {
+          "qc_question_id": "QC214",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_1/000065",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "00da4c8da4ea89f6963e8fda74b9042944fef6a7776492ff2452fe4491c2b615",
+          "wrist_sha256": "c7e6ad7867dc6d0658a83cf614aff29825182efbffe722ee80e533ddefb6d65a"
+        },
+        {
+          "qc_question_id": "QC215",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_2/000099",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "254190bdc091acfb7aaa2f9c535467955f89e0ed3bea1eaa0b4d53f340748530",
+          "wrist_sha256": "94c26a1d4b91c9b0dd865b86254890782af345dd5ff63966a1c1e904fc4ccf12"
+        },
+        {
+          "qc_question_id": "QC216",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_3/000064",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "4b5dedc35bd1030559e4635e9bcc0bb9ea72e002276edebf6cb36b5a69943b64",
+          "wrist_sha256": "124c7ca490f6ce131aaa0dfe1b5129acecd7a22e91d85efb33bbbb129906f65c"
+        },
+        {
+          "qc_question_id": "QC217",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_4/000133",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "68581f6fa482c880ffc53d1ac9dee8cc1fab256ef0a6e6197579c228856ad487",
+          "wrist_sha256": "79e23283eb6a72405f056fdab036e2a6f911b0183c055fde3daf137477a9c3b8"
+        },
+        {
+          "qc_question_id": "QC218",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000132",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "15bddf1f60d3abf6a785c4e9c7d1682a6a8dff40a1cedc70815678760044eeb8",
+          "wrist_sha256": "91db436be1036b6508539251140fcaed35120213209686769badcbad853a420a"
+        },
+        {
+          "qc_question_id": "QC219",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_2/000130",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "68f7ed27d04f2d32cc855736617683db3cea199ba70a3d0f3d4e613a455b547b",
+          "wrist_sha256": "16a0fcb6827c903168ab1b919cb2a3c5c4d723b8ea4bba96dc03bcaf112cdd80"
+        },
+        {
+          "qc_question_id": "QC220",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_4/000127",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "d98b5b8d49408b3e6659017dfed108befe8047be7f5348804a1b95bb5160a2ec",
+          "wrist_sha256": "e2ea9b82a9e63fbcb22d7f57c7c0c368d1baff3ac587bf33f0bcc3264437e717"
+        }
+      ]
+    },
+    {
+      "group": "qc300-221-230.png",
+      "questions": [
+        {
+          "qc_question_id": "QC221",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_1/000096",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "37a6d6b54f9f21b003674296701795d5f039d32d2d481a4f86e1744eb089d1c8",
+          "wrist_sha256": "05c2cec1a0535498e6d947c5ffcac0255344fa6871130e7db02646ab8f03befb"
+        },
+        {
+          "qc_question_id": "QC222",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_3/000052",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "b9635736dd88fb6f3016e97a0f619f434b862ec86f83e11c385304bf6d3989dd",
+          "wrist_sha256": "1f1724498a4407fcf8697686fc4aa3e716b77e36a0ae260f4040acde2264281c"
+        },
+        {
+          "qc_question_id": "QC223",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000081",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ceffe02668c22f65cdd1a0266e4916574408cd2af8e20d0a4225bfa58598bf5a",
+          "wrist_sha256": "d5243fc32311bb51dea165a708fe6215c2acd0a2bad39ba65061082e915ad866"
+        },
+        {
+          "qc_question_id": "QC224",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000015",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "ed0b64f78f13be92317f4c4ffbcdf263c65252019be29b199bac3e8b5c8e993b",
+          "wrist_sha256": "1db57fb9cad405f2e588a0d99325f1d9e711eb4126491dfd2ff50d6c9e78cbef"
+        },
+        {
+          "qc_question_id": "QC225",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_2/000085",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "1afad007bfcc9170cd970285f89f67ba2bbcfa03bc11ab964b0ce03478b526f8",
+          "wrist_sha256": "64d5fc27eb63aa31cb9ba0f494def8cf6f485755f9b9b97c57d9b0e7a5ecffa5"
+        },
+        {
+          "qc_question_id": "QC226",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_1/000118",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "490094b7927cb84c7dd4293ff8984bdd5bee8774060877636eb3e56e8cd4b374",
+          "wrist_sha256": "e7613c411090d0e0c037e3eda68dbc96bb0d623582289d79257d6d507e85ad7c"
+        },
+        {
+          "qc_question_id": "QC227",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_3/000109",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8449524fad286aaf9ff73b681363ace3714bcb4a9d87f6d8488056401697660d",
+          "wrist_sha256": "f33cbfed89d1e76105f7fa5e75f2dc0d0ef27d39f7f816e306c8d41bf889545a"
+        },
+        {
+          "qc_question_id": "QC228",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000082",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ae2d6604e29731a6e8edcf276f78d09138a2ca35d812f4a5283ce3ee11c5b5c0",
+          "wrist_sha256": "f5aa6104537a816b25b23264353a4a57763b729e3437fd499c9c32ccefd33986"
+        },
+        {
+          "qc_question_id": "QC229",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_1/000127",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "734fb2676457ce8ae041b4b04aef95d2ddb8ea4319f6b691fbc3b7859ed69b5d",
+          "wrist_sha256": "b427c1b0f365920df3e877f58ca940ab5317195f44e9d9f00460cb4daaf9df55"
+        },
+        {
+          "qc_question_id": "QC230",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000103",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "dcb06a180d5721e032bdbf270f4e47e49a6b96dd7f18754725e8ae4594d30cfc",
+          "wrist_sha256": "cb7b58f4015ed079eed8737b2723723cfc88be3a780b6bc823b73b7d436a1baf"
+        }
+      ]
+    },
+    {
+      "group": "qc300-231-240.png",
+      "questions": [
+        {
+          "qc_question_id": "QC231",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_1/000018",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "348e25dffed814ceba5247fc010094fdd2187fb630e75d6c07e0863187de79dd",
+          "wrist_sha256": "6eb523b362699147adf1b0a373b6826a42d26328c3dd353ba2e70ee295dbb0c0"
+        },
+        {
+          "qc_question_id": "QC232",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000052",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "a9cff7bb6df9904f345c81409f4106294077798f8eafe0aed3b1826a1e8fea3c",
+          "wrist_sha256": "cbf95a9e51dbf259b947eda76ca01fc0867dfc2555c7497d5cb611ffbfd3f21f"
+        },
+        {
+          "qc_question_id": "QC233",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_1/000096",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "704997180503bca14b579ee8be4be9a95c8e32f59e8b54c00951d8e341832dac",
+          "wrist_sha256": "789c4076778ad739a3cc94e4f70c03a9f7853cc5b31c0fa3ef3875c66d2f2051"
+        },
+        {
+          "qc_question_id": "QC234",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_1/000031",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "7b6315a6ebaff1970b31c60f9e27c15f25c5ff7a8b483eca8745f5ff8429d98b",
+          "wrist_sha256": "cc7b1b486ee6b1ffae94495a0d2092776171f5cc3c769c9441e052c01af35795"
+        },
+        {
+          "qc_question_id": "QC235",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_1/000119",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "32b97f643434669dde7d1de18a615f5c4df6e45783b008bbd10a35be8ace1c29",
+          "wrist_sha256": "0cee5bfc1048bee581cb24546667b752d76acc7db8468a2d138462d6421b218e"
+        },
+        {
+          "qc_question_id": "QC236",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000026",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "4074c6392c0ccdde1aaa9abeed3a72a1b153e4f96ffbeb8d5c734cfe2e1156d2",
+          "wrist_sha256": "6b2247485849b1d78f335ca95b96a2f2d2314210405330478a97d59ad95d392e"
+        },
+        {
+          "qc_question_id": "QC237",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000058",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8d61e62e5fbc7bfdad9a40244f424e070d9509597671f298a4d3adec1eb49695",
+          "wrist_sha256": "efc666d27e4b021fda71ebd6e31f1f3ae8d045e21e35512d575ba5d2ef341e1c"
+        },
+        {
+          "qc_question_id": "QC238",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000097",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "3aff3eb72e545ee4e8326e6eea3583af565e75594a7336b5f034f8394a25cbf5",
+          "wrist_sha256": "b06b3100ffb2a8265021b6f651f8b176591d45ba062ca2a9e9627573e5d388a9"
+        },
+        {
+          "qc_question_id": "QC239",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000126",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "0f581bdfc65a4f74675790dde5b30780d2fe5ac3a23eb6f56a436f639237b08f",
+          "wrist_sha256": "9644df6fc2926d66ecbdbcc559b87d8eeae9449e1595f56fc46aeed17ed294e0"
+        },
+        {
+          "qc_question_id": "QC240",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_4/000030",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "6ed73b9f39a70e180d799cdd1281d1e863d71f37788923eb7e80ad4db545f774",
+          "wrist_sha256": "c2da1924236be5c0aeedd12360f4c735b96cd2674e367e328e8ab9a040870b15"
+        }
+      ]
+    },
+    {
+      "group": "qc300-241-250.png",
+      "questions": [
+        {
+          "qc_question_id": "QC241",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_4/000053",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "eb188d377475859f1756696deadef92f170fc66cd3f51691055c5ae295874b8a",
+          "wrist_sha256": "2f2e990223a79a32d62aa73e675b5c80423788d340587dba61c2eea8f7ead438"
+        },
+        {
+          "qc_question_id": "QC242",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000063",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "830223afd96cabd8a53c9fc93b479e39e2d9686864432094041dce1df87c401a",
+          "wrist_sha256": "a9bc53b8f73018d6a985a40ea8b71305d75d21c207b4cb39165d60759b5604bf"
+        },
+        {
+          "qc_question_id": "QC243",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_2/000065",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "b5472f732d3ebcc00bde75d703c276603e4c6fcf002318a9c96ef3506f5de6b4",
+          "wrist_sha256": "d216075761c1ad4094b88cca82748d40bcc9b2d36343dca8562ae99216c69d49"
+        },
+        {
+          "qc_question_id": "QC244",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_3/000034",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "3fe7092aed47ff4c0d448e1929ca614504ff501ab31d0c7da1a8edf98a482afc",
+          "wrist_sha256": "8e44734f2f0d6b3f98934bed449c87def1e41194a4779bc132c1fb88d43d60ae"
+        },
+        {
+          "qc_question_id": "QC245",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000018",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d27be4a0a5efda7b850a6cdf5e9d14005bb9001dcb1cb0d72bf547615498397f",
+          "wrist_sha256": "241924000c3c4adbc83eb25e02650f46ea7dfad8dd1aab626ce1a97e0517a996"
+        },
+        {
+          "qc_question_id": "QC246",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_1/000056",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d61afa2618458060e34b4ec183d10015e50b0748efaa661a310590374a000e09",
+          "wrist_sha256": "1d2966e4bdf17754b6ac0d33d804fb04da660279655605626943bf2030fbb3b3"
+        },
+        {
+          "qc_question_id": "QC247",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000067",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "8c06821ee45eabc65f3479c8b5e4feeb02e91863e940003d03fb6d8d51c4458b",
+          "wrist_sha256": "a77094f55a1e0fa963f8eceb283a138eaf1531bbdb545055df370044574b87b6"
+        },
+        {
+          "qc_question_id": "QC248",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_4/000048",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "9c5051236617cba490b90f5ffb5c538c8071e885444c2d36258bf4532c7d75eb",
+          "wrist_sha256": "c5f422a521d9753181ce85c2cbb50e0048c234007f1fa920c11375783e003eb3"
+        },
+        {
+          "qc_question_id": "QC249",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_4/000100",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "9f26bc5227c2552994d5c4ee3ab6706b14f1a00dcf3e22095cb2cad15532099a",
+          "wrist_sha256": "8805ef787672277150e5253a4d40cf406c2f354215bdc7ce27303f34d29dd694"
+        },
+        {
+          "qc_question_id": "QC250",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000003",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "26f21d676b7e290e05d966eb50a9077753e3ee412f22e8a15d0186c49add1157",
+          "wrist_sha256": "20eda88ef7ad53faa0ba24e834c76710d0de721f47e20f9c07db25581ec75e0f"
+        }
+      ]
+    },
+    {
+      "group": "qc300-251-260.png",
+      "questions": [
+        {
+          "qc_question_id": "QC251",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_4/000043",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "7652af9a4cdc2be9383fad4fcdf3daf5d4f8d3064c15c8bfcfa34018539e54ca",
+          "wrist_sha256": "14213eb8e1926ba18f259be1dcafb104570b4687a9bdb64303bd423f246581d0"
+        },
+        {
+          "qc_question_id": "QC252",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000056",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "6c242f2a5b51bed4eae860b00928bffdaa8259c272ee5cf02d61392a3980433c",
+          "wrist_sha256": "b6a645a4536bbd692515dfab05725400e3be10cdd2cca2029139faaa708328c9"
+        },
+        {
+          "qc_question_id": "QC253",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_0/000002",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "817e43f8591322d408d17985fd540ecb0d7af16e1ff2727e38e6c80139e0aa72",
+          "wrist_sha256": "450cf1532edc5375b2abb7f71a6f99a60b6d22369552abfc80b4fb635a7474c4"
+        },
+        {
+          "qc_question_id": "QC254",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_4/000140",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "fc0cbbb67f018a4bae5d8bf8d6395ed6decf17dd9eac4bc6cc2ce178ab5f6fed",
+          "wrist_sha256": "d09729dadd441176ca828656ef831dec39658b69d1aa1a4f6b548c1b6c051e0b"
+        },
+        {
+          "qc_question_id": "QC255",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_0/000087",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d312f9ed23fa011ea2b607197888655ba3eb9a590e8eb51264fc80e8d6b5d94b",
+          "wrist_sha256": "2480109ce75604aa39d6c7a63501dbc41eaef84eabfbe877770485e5bd68d5b7"
+        },
+        {
+          "qc_question_id": "QC256",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_4/000056",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "7d9cf53440f4b8147f96d035bc4c214975090bcd6172c538e0f90d306bf150f3",
+          "wrist_sha256": "4297470e3ff6c497adee8e94a3fe6a0dfc0444556e249c750043158f70c6a916"
+        },
+        {
+          "qc_question_id": "QC257",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_1/000075",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f44c99af0eb188034d5558679519aeefc908a8a546b4112626ae7fa6ca20a8b2",
+          "wrist_sha256": "fbe16087304c50119038850405117430256c65b09a1decc888b92773b8856dd1"
+        },
+        {
+          "qc_question_id": "QC258",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_1/000118",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "71e37c959aafd7dff82abb0afa0d202d810727e4b85b37302b361b6950e9a802",
+          "wrist_sha256": "ef1a4dd6be53bdf3cee7300bdc607682d709090b09a6afd92156da7629b7fe24"
+        },
+        {
+          "qc_question_id": "QC259",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate/demo_2/000025",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "f3e6ceb56bdef0e116cd27a4646dd10f993ea2ea9a58656cc8f411b1afabe6a8",
+          "wrist_sha256": "d07bc6f2a669670096682cd3e164045998a6ea8d9442357309022d919558ca2a"
+        },
+        {
+          "qc_question_id": "QC260",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_4/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "98253bd2e3bb164e0fd2a92c14b6bd4aabbb772dfcf5a3ad5d2241d79bb4595c",
+          "wrist_sha256": "85f3a94e89c67e5f344ce0456ebeb58349166461adde42691d1d7ec582aac158"
+        }
+      ]
+    },
+    {
+      "group": "qc300-261-270.png",
+      "questions": [
+        {
+          "qc_question_id": "QC261",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_1/000099",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "0a0707f1e1da8b720dac35c6c499071504fb7f282dc51585e2f6dd219e4ed731",
+          "wrist_sha256": "aaf1cfcacb11f3b8af7071d4a943307a5a4fbef81f5f902ebee11a24253adc09"
+        },
+        {
+          "qc_question_id": "QC262",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_1/000094",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f44c231221f7db62a7e05418dad986d783d5cae01fb5b5b49cd7cd39ea0fdcbd",
+          "wrist_sha256": "6367805f1bd8b702389ebc682900a59f43d8bdc745387212af21a987609b586b"
+        },
+        {
+          "qc_question_id": "QC263",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_4/000100",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "e5a7c9dcbceacbea5bc98a0f1df257de90482afc9f29cd30cf11a1e57204d0cb",
+          "wrist_sha256": "56b9d72064105cc2594c8121e703024e8802111e42e46bcdc375cc8c527d7560"
+        },
+        {
+          "qc_question_id": "QC264",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate/demo_2/000069",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "679a88a1dc191eb4a64341d910e3431898ddc615910ec5967c71c80ee75de47e",
+          "wrist_sha256": "68e4658a3f80aaac5be192dead99eafd127964c82f4b3f5934577ae3801af913"
+        },
+        {
+          "qc_question_id": "QC265",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_1/000058",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "ea59faf398f549aa5ad5602de0477a2f9ae6c35eca7e56b383114a6837a8f6df",
+          "wrist_sha256": "35988c6edce812d0af3606bee99388395c7bb9e74a9784752325f62f43ab2704"
+        },
+        {
+          "qc_question_id": "QC266",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_3/000090",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "e3240a11fda6a4d9c39a229ece2df12a7a504023e7ce2f488082fb4173a3bfb8",
+          "wrist_sha256": "af30273d6531435a1714c28a03ecb8c837c9308ef2fc5da0f5604e0bfb2af052"
+        },
+        {
+          "qc_question_id": "QC267",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_5/000108",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f875fa79739937c93e50ea29cfdfb075cf01446f2805bd30ae883d10094b5b5e",
+          "wrist_sha256": "68a442527afff5280b047fb06316641d8516901327d30b1cb8f3f60168b9ca3c"
+        },
+        {
+          "qc_question_id": "QC268",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_4/000043",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "5a8e091fa896cde0da86d6ab459480bebbd934f92d19e7a7d46aba63b96be6dd",
+          "wrist_sha256": "34f2ecc9697dc4dcc68edc0daa2fd71381e92e267a0a662dbed3897166c72073"
+        },
+        {
+          "qc_question_id": "QC269",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate/demo_4/000023",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "183e604900579f0ea84cf9b6e640da12c1262bff2357181b14514d9a8ef1903d",
+          "wrist_sha256": "8d7918554143b45293e2d64339a3911917b55c3993938cb3b7d7aa272499cebf"
+        },
+        {
+          "qc_question_id": "QC270",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_2/000083",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "6be5f6dc0c996ab4075ab07b288062aaf724f01f63b080ff01fc8598f3721fae",
+          "wrist_sha256": "236ae38ca9a967978e5e3a8bc6837277d561ada24ae766fe33e2c8083a2ad0ea"
+        }
+      ]
+    },
+    {
+      "group": "qc300-271-280.png",
+      "questions": [
+        {
+          "qc_question_id": "QC271",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000050",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "74f7e581459062ef2511bbb4a58f28f70f331a97127b156a7fc7f6cbb1042bea",
+          "wrist_sha256": "795b019c03278f643e30b806d4dd4c44df77182d0b25be603ef1719ebaf7d70c"
+        },
+        {
+          "qc_question_id": "QC272",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_3/000078",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "1c43036e3ac8d94da0683808fce28df561fc05a0ea9a5aab516744e17892f296",
+          "wrist_sha256": "b8a7d60c058f1b4d09e11290fb0f6de12a33584870c2c699f7fc5d881c819656"
+        },
+        {
+          "qc_question_id": "QC273",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000070",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "444634ecf4d3072012abbc93e498d0ed366de4d3a06ca1adb7361f2399e89b64",
+          "wrist_sha256": "f1ec8f71a32fecfce2973551c434438729d7ac3029dde38bf3c7b39fe9d9c064"
+        },
+        {
+          "qc_question_id": "QC274",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate/demo_0/000062",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "e2e03be99f4ca9177c605515df2429e96e3954060e32982170647496c3814bf7",
+          "wrist_sha256": "3b308650f61bb1e7c1fa2e08e25b8674c36473f9eadbe7f996278146a4492481"
+        },
+        {
+          "qc_question_id": "QC275",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000116",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "7d5b927e4b18eabdff1698c9f717f1a19515b745e112a3c61d967a6e16615159",
+          "wrist_sha256": "171b920839e98f3119b47e279f825e6c70b8ff6a62d8c58b11283289b35be118"
+        },
+        {
+          "qc_question_id": "QC276",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000099",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "67ebb17167f92f62355a7d9c618eaff42de2748bb818adbc89a0b90f57e06552",
+          "wrist_sha256": "411b654f3ba341a75097434d7973bda44eac1460c43da8b576ac616eeef9802a"
+        },
+        {
+          "qc_question_id": "QC277",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_4/000071",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "a89e303c68705d5014060347a5f6f9ad7c55245bff7f0c88c9426549a7135e4a",
+          "wrist_sha256": "bc41f3f048805b49bee297153f4cd1a49f09ee6a1e81faabac1eebfc2764dc9e"
+        },
+        {
+          "qc_question_id": "QC278",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_1/000089",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "b973973bc3e8a69f29bf13ba49b92bafbe945412824df354c22a92d8bc113c20",
+          "wrist_sha256": "c3a6312055592f3e413179fd1f12ee0535f1c21d8850a90a0d4ceaa140b4301d"
+        },
+        {
+          "qc_question_id": "QC279",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate/demo_1/000118",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "490094b7927cb84c7dd4293ff8984bdd5bee8774060877636eb3e56e8cd4b374",
+          "wrist_sha256": "e7613c411090d0e0c037e3eda68dbc96bb0d623582289d79257d6d507e85ad7c"
+        },
+        {
+          "qc_question_id": "QC280",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_4/000020",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "f7d1f4d9886c7483627ddb387d37fb52d59ec7fe021321473bef7f4ba6171f8d",
+          "wrist_sha256": "86f2dc3cbb7af93250ff9681728f57c6569343998ef3cb2966641e0bfc5b0183"
+        }
+      ]
+    },
+    {
+      "group": "qc300-281-290.png",
+      "questions": [
+        {
+          "qc_question_id": "QC281",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_0/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "36d528e941f9e1b4165e7374b9138d81d5e43a812a37574b56cd19a7e9859ab8",
+          "wrist_sha256": "086250f289377fbf6dd304fa139aebea9a113490839978ea1411e135fbe8b632"
+        },
+        {
+          "qc_question_id": "QC282",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_2/000088",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "5d0c75044d9f5f00dc230e8026daa3b181201ce5d51c63de785804a79ae24965",
+          "wrist_sha256": "a0f61c5c9cd9e75f8e657d2204ce20dd87d84814fb1b6d798a79a5c12dd58ff2"
+        },
+        {
+          "qc_question_id": "QC283",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_1/000082",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "c4cb5663c8b09eebb3364557dbd65970d77f5350f3c9debd33d482169c137077",
+          "wrist_sha256": "6c34fef1226139c939289fa48f2c15591dd16bbf488aab77b817362580bc4686"
+        },
+        {
+          "qc_question_id": "QC284",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate/demo_3/000078",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "a5ee632a8771f34f37d61195dfcc68e3e13ec5fcc0da31eb9f6e751700edc7cd",
+          "wrist_sha256": "37d60be55d5e156bdb06d9c5232d5877904cfbc308ffd808d9d2c0cd3c7541b8"
+        },
+        {
+          "qc_question_id": "QC285",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000128",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "72020087ccf5d99d802e0acb95d2e108f14025a70d639e47fdf82cfcfeed8e41",
+          "wrist_sha256": "39bc6dd52c41794cbd1f0dd32014764e9a4d9cace19404937d3c621e0b7649ae"
+        },
+        {
+          "qc_question_id": "QC286",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_1/000023",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "0f80a8784e0ea3cafc7775a9ecdad1da606efd66694815374f5a9d9421731515",
+          "wrist_sha256": "45cd2a5a668111a5294df0fda9cdd18f400863c9c4ade37608d088ca30459cdd"
+        },
+        {
+          "qc_question_id": "QC287",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000116",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "78542a1e3475712c1137413a0a52b79c25d249ae9484bc44bb049804df4ca307",
+          "wrist_sha256": "f2351b49d11d73215f6d1604310955670329060def82f5d16e21c26b44adf8cc"
+        },
+        {
+          "qc_question_id": "QC288",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000072",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "b0a97c6b80c039db4056ccdc7799a8773759d5d2ce1d3fd4831256a06e2a3385",
+          "wrist_sha256": "bda50a6b757a96657f889c943822727df65c39b2fb11ae3033612e7004fdfd48"
+        },
+        {
+          "qc_question_id": "QC289",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000023",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "c25ae1335f8940ef0dcea7e00b5d2eef7910c50c070f57cef4a64869454913b2",
+          "wrist_sha256": "01c775cb840a2dced7e1fe45cc7e1466ad787ce80f53c6170a0b119ec104915b"
+        },
+        {
+          "qc_question_id": "QC290",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_1/000021",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "c1410bfbb583f0ab69cf2ae5e0f86e8363a18ad61e514ef696fee576298abd45",
+          "wrist_sha256": "462f7e91f51833edfff88163a687cc7a70b534a3c7d2756b1b16f0d0ae7b46ae"
+        }
+      ]
+    },
+    {
+      "group": "qc300-291-300.png",
+      "questions": [
+        {
+          "qc_question_id": "QC291",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_2/000062",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "791b0a877cc32797dbc688d5a93f690fcee2a108a733df527f6f186c8ad38552",
+          "wrist_sha256": "ffd94622172e833c2caf2438b7959e6b89e7114cdfd622f0ac9d9d2a35eea94c"
+        },
+        {
+          "qc_question_id": "QC292",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_0/000036",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "5eae026dbdbfc9ca3df5dd8f3863bc1379fadd3be235a7119e0940e3d8a38239",
+          "wrist_sha256": "770241b3a6add152acae27da53a057ae8c47ba378be85d6283716dd76b419eff"
+        },
+        {
+          "qc_question_id": "QC293",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate/demo_4/000007",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "a7c767956a2f5dcd05cfc51afd7631f856a998cf418db4dbf19dc6909456d11c",
+          "wrist_sha256": "0744390d44a15e0bca8b46c5a9fb8e7a9c2a985ea0d615cf36d6377aaa394fe7"
+        },
+        {
+          "qc_question_id": "QC294",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000000",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "d14b2a763f1ec33e1aa58a65288d60da50ec8a954085460c6e0f305ad1bf64e6",
+          "wrist_sha256": "d0dc71b9d51a20b6bd203a89cc863662233c223acddb677817c26465028e490d"
+        },
+        {
+          "qc_question_id": "QC295",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_3/000035",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "7187b2c21ef0b6ccc050521400e39df2dee47d6524913b4d1beec08ca37891fb",
+          "wrist_sha256": "08b10e0ddca76d270ed38dfcd5de58be5d2e78464a697725219bd5c7691ba837"
+        },
+        {
+          "qc_question_id": "QC296",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_3/000048",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "4835952e838c1c1d0016e971a1c1692c5d2fc0dec4f3f4d1c705a4b1fabe6024",
+          "wrist_sha256": "2f2292ed391e63538ab38c3b30fae2716c710053a43eef03489dc89056603154"
+        },
+        {
+          "qc_question_id": "QC297",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_2/000003",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "4cd9a75cbb73b3c9a3c2f6a57dc8ab2b40c2b90401d7aacc489c8d48f211e405",
+          "wrist_sha256": "811a952ffc44f52a7d24f968fe1543b3ad2a2b534f6652fd051fb3bd5c41fd1d"
+        },
+        {
+          "qc_question_id": "QC298",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate/demo_0/000037",
+          "slot_index": 1,
+          "role": "placement_target",
+          "agentview_sha256": "79d6423bb953e0c7a42045d71782fbcb5890c8ca9dfa92966870f11563d93fc7",
+          "wrist_sha256": "cc1bc38e0174191fa59be78fab18dd3d91c9b48f7fcd79ba4b02d5984429d88c"
+        },
+        {
+          "qc_question_id": "QC299",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_2/000004",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "3a7a7fd7dda6e5a555c37ca8092ca9b159cf98cc554326c0957a51283993a648",
+          "wrist_sha256": "5575f552848782fe6b3e65f0bfb506dbcaec23178c063a9082867df82acd8a3f"
+        },
+        {
+          "qc_question_id": "QC300",
+          "sample_id": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate/demo_3/000037",
+          "slot_index": 0,
+          "role": "manipulated_object",
+          "agentview_sha256": "05b75bcd6485428f02a9a0629b8d75f75157d4b6ccb3d68c6b16e8d08b131fcc",
+          "wrist_sha256": "c77838e736da7fab0e0b1790b8b53ad87deecad337c79a6df92e5459f7e657cb"
+        }
+      ]
+    }
+  ]
+}
