@@ -2,17 +2,17 @@
 
 ## 当前进展
 
-最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断和生产reader pilot；人工QC、公共训练入口集成和连续小训练仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并完成一次真实B单批前向/反向、一次真实A生成/回退诊断。
+最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断、公共S回归和SA/SB诊断恢复；人工QC、正式公共训练入口集成和连续小训练仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并完成真实A生成/回退、SA/SB有限入口及独立恢复。
 
 活跃GPU/训练作业：无。B真实单批测试已退出0并释放GPU；没有教师、学生、仿真或无人值守作业。本轮没有新训练checkpoint、全量缓存或可比较模型权重；B测试仅对临时内存模型执行1次更新，F1开发checkpoint和已有1,000观测试缓存保持原样。
 
-完整恢复材料：本机A试标的selection/protocol草案、候选规则版本、candidate_labels、300题QC准备/图文包、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及production_reader/test_production_reader脚本和测试结果；A/B真实诊断、Gemma dirty补丁和KV四份精度对照/registration/summary仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；旧生成器仍拒绝覆写已有manifest，生产reader的精确resume账本已在已有分片上验证但未接入全量生成队列。
+完整恢复材料：本机A试标的selection/protocol草案、候选规则版本、candidate_labels、300题QC准备/图文包、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及production_reader/test_production_reader脚本和测试结果；A/B真实诊断、SA/SB三步run与独立resume diagnostics checkpoints、Gemma dirty补丁和KV四份精度对照/registration/summary仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；旧生成器仍拒绝覆写已有manifest，生产reader的精确resume账本已在已有分片上验证但未接入全量生成队列。
 
 未决：A参考点差异保留、至少300题人工三层QC和阶段unknown；2 mm是候选死区而非冻结阈值，当前双侧fingerpad接触是候选grasped代理，候选标签仍未获训练许可。B第三人称特征高相似度仍只作描述性质量材料；全量合同、生产接入和自动续写队列待后续。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径另做回归。**
 
 本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)，以及固定300题的[图文QC分组与索引](review/qc300/)。所有300题审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
 
-下一步：完成并记录至少300题真实人工三层QC，接着在同一公共训练入口集成A/B并做F3前四组公平性、恢复和无监督推理测试；候选规则、reader和B单批结果不替代这些验收。当前不启动全量缓存、连续小训练、F3或正式作业。
+下一步：完成并记录至少300题真实人工三层QC，整理正式公共SA/SB入口（当前bounded diagnostic CLI和Gemma层捕获补丁仍需合并/审计），再做F3前四组公平性、恢复和无监督推理测试；候选规则、reader、单批和bounded diagnostics不替代这些验收。当前不启动全量缓存、连续小训练、F3或正式作业。
 
 ## 执行记录
 
@@ -266,6 +266,24 @@ B独立实现位于本机`f2-work/b_module.py`，只 gather审计的真实视图
 
 本批新增实现当前hash：`a_module.py`=`9b74c24a294da3ee83ac46b6338099be648a58398d893778aebb6b0cd42ca34d`，A合成测试=`53b4b76e76fae0c4333ad724524ffaf7b838e410b2e03b31aa479af7c2397e10`，A真实tokenizer测试=`6834eb98ac053aaffc214c33f3ad4ca60f65e979064328154a2616d5dcd8e832`；`b_module.py`=`0f1d6812fd7a1b563a1f8a9d61f249203f68901c401935b86369db7e04c059c9`，B合成测试=`171721bf99b67182dd22e20aff88f2fde468af28bfda450509e3dd959c0fdc92`，B真实测试脚本=`802b4cbee49305f251e415b8697d1527bf6622648be7e145e71403bf00bb01d6`，B真实结果=`e7a5faf0f4934df04e7f476579ec45f46babd9fa081d4c3ab95a8ac04c01763b`；dirty Gemma源码=`4b46624557fe4875499bc8599577b3cdebc35880f0ebd67e076861f643aa734f`，其diff证据=`f2-work/interfaces/gemma_fast-layer-capture.patch`（SHA256=`b08a82e5c7fbc15e653d0f6813b0408f6280ac438ba87ec6958439d5a9856003`）。这些实现和原始结果只保留本机，Vault仅发布本阶段文档摘要。
 
+### 2026-09-11｜固定300题图文审阅与SA/SB入口恢复回归
+
+本轮不重新生成或发布QC图片；固定的300题图文包仍为`review/qc300/`，当前审核数保持0。只在阶段日志明确审阅列：后续QC使用`qc_rule_version`及其`candidate_label/candidate_status`，旧`protocol_version/candidate_direction`仅作历史追溯，不可直接作为训练标签。已核对的分项口径保持：非接触操作对象4,125个，其中3,969个候选接受、156个进入2 mm死区；不修改原始labels或上一轮统计。
+
+**SA/SB可执行诊断入口：**新增本机`f2-work/train_ab_diagnostic.py`，复用F1的`init_train_state`、数据pipeline、冻结过滤和Optax超参，并按`--variant sa|sb --mode run|resume`做输入校验。SA在固定三步schedule上使用synthetic方向`left,grasped`，真实模型前向中两槽位的顺序/分隔/动作段均进入同一loss；不读取A candidate/QC标签。SB使用已有cache覆盖的实际schedule `[0,44,89]`，同时计算非零动作loss与`0.1 * alignment_loss`，投影头与共享LoRA分别进入临时优化器；不扩充cache或读取未来信息。该CLI是F2 bounded diagnostics，不是正式效果训练入口。
+
+SA `run`在第1—3次有效更新均完成，第2步保存完整诊断检查点；独立`resume`进程从第2步恢复并完成第3步。恢复后的sample index/ID、action/direction loss、LoRA trainable fingerprint和model optimizer fingerprint与run第3步逐项相同，外部比较脚本退出0。SA有效更新总数3，checkpoint写入1，resume执行1；无真实标签、无正式模型。
+
+SB `run`在第1—3次有效更新均完成，第2步保存包含LoRA、projector、两个optimizer状态、step、schedule和RNG的诊断检查点；独立`resume`从第2步完成第3步。恢复后的sample index/ID、动作loss、alignment loss、LoRA/模型optimizer/projector/projector optimizer fingerprint逐项相同，比较退出0。SB第1步动作loss=15.3125、alignment=0.996945；第2步14.0/0.998881；第3步14.5625/0.991707；这些是接口诊断数值，不是收敛或效果结论。SA/SB检查点分别约266 MB/311 MB，均不进入正式主表、不覆盖F1 checkpoint。
+
+恢复实现过程中保留并修复了真实阻断：SA首次保存使用相对路径被Orbax拒绝；随后发现Optax内部NNX State和namedtuple经直接恢复丢失类型，最终改为纯数组叶子加当前tree definition重建，v5恢复通过。SB首次使用cache未覆盖的索引50/12345而显式KeyError；第二次误用inference_batch使动作mask全0，动作loss=0，均未计为通过；改为带真实动作后缀的training_batch并按实际缓存sample_id重跑v3后通过。失败registration和不完整目录保留，不把失败尝试隐藏成成功。
+
+**受影响公共S路径回归：**`test_public_layer_regression.py`在同一基础权重/真实训练样本上比较Gemma层捕获关闭与开启但不引入B损失的完整路径，最终pre-logits/logits/action loss差异均为0；替换一个有效动作后缀token后，层12视觉prefix 512 token最大差异和RMS也均为0。捕获输出为`[1,895,2048]`（前向去掉最后预测位），退出0；不读标签、不更新参数、不保存checkpoint。该结果支持当前可选层捕获不改变公共S路径，同时A/B正式入口仍需统一集成回归。
+
+**A真实路径补充：**此前真实模型诊断继续保留一个公开前缀→受限七类方向生成→动作生成，以及受控错误→新action-only prefill；本轮没有重复同一生成。现有结果仅支持方向候选`left`和回退确实执行，正常/回退动作均返回严格`invalid_coefficient_length`；该错误按策略失败记录，不补零、不截断，不声称A完整推理通过。SA三步入口的两个synthetic槽位进一步覆盖了真实模型输入顺序和动作边界，但不替代自回归双槽位方向预测验收。
+
+本轮实际验证：A/B helper合成测试、固定tokenizer smoke、QC准备包唯一性、生产reader回归、SA/SB三步run/resume、公共S层捕获回归均有退出0记录；所有GPU作业结束后宿主快照回到低占用，未留下本任务进程。当前剩余任务是：至少300题真实人工三层QC；将bounded诊断逻辑整理进正式共享SA/SB训练入口并保留动作/方向/对齐独立分母；A正式双槽位生成/回退回归；SB无教师导出；连续小训练；全量train/val缓存；F3四组集成与G2冻结。当前不启动正式长训练。
+
 ### 2026-09-11｜固定300题图文QC包与真实A生成/回退
 
 按已固定的`qc-300-prep`集合导出F2审阅材料，没有重新选题、重放轨迹或生成新标签。每题从与candidate相同的train manifest `observation_row`读取两路128×128 RGB，按10题一组生成30张可读PNG，并生成一份300行`qc_questions.jsonl`和`index.json`；两路原图逐题读取校验600/600，30组PNG均可解析，所有审核栏为null，`human_reviewed=0`、`approved_for_training=0`、stage继续unknown。输出目录为`review/qc300/`，未包含HDF5、全量标签、权重、教师特征或内部路径。该材料现在可供逐题审阅，但发布不等于QC通过或训练许可。
@@ -283,3 +301,5 @@ A真实路径的原始动作token来自上游采样器的float32容器，但所�
 本轮新增本机产物hash：`test_a_real.py`=`75c8594ee01508dda0d08dd2645ec6425b2d571803cce942498c39b34db8211b`，A真实结果=`cffb1caa938db1e41bfcf8c946370a11bf834b34702ae47c01daea12743a01ee`，QC导出脚本=`d0e4852d3aa1c70aeede8e2c5414a25508b7a523b3fce81338415e17176b8ec6`，QC300 JSONL=`c7d5ed972bb084df51b36ad27fc484c63a5c158ab5c6f7c78611b2ed6e2c876e`，QC300 index=`9e08658e89c9a13113154f9f0dbd0d93c882b5681441626b889e764fd90279fa`。A首次动作解码适配错误保留在历史registration，修正后最终诊断退出0。
 
 发布核验：固定提交`db7db0044f342bf1913aa8090c8a1763e6a90a53`推送成功，远端`main`指向该SHA；从GitHub raw地址实际下载F2 PLAN/LOG及review下全部文件共103个，合计33,166,692字节，逐文件SHA256与本地提交内容一致，退出0。QC300 30张分组PNG、300行JSONL、index/checksums均包含在这103个文件中；审核栏仍空，发布不等于人工QC或训练许可。
+
+本轮新增诊断回执hash：`train_ab_diagnostic.py`=`bfb7c7224b128b1e931dc2f1a9ed5a7fb52a9314ee5f27b7ad145bc82a13da05`；SA run/resume=`ffb51b1adee76e0a623389d823ad17e7888e07ae319eab68d577f6a190459fb4`/`fd3df2213294cfb0f187fd3defec7588d12e9e1e79714441ab7cdff19b56b00d`；SB run/resume=`e9f7ed63bd99c5a8c8a2d11fad5c943d4aaf19bffcd952c48d1be42520785fb7`/`e3fdabbe28b242b782f7caa1df7943d0484c4545fae8892e781a7c820652d966`；公共S回归脚本/结果=`c789d43058609c559805501c2f7583c26654f60fb8f5e4f71629c60c29ea7848`/`880d143c6db69b54f08c5d6497f1dbb24c72878ce79e12960b26fc9001a5272f`。SA/SB诊断checkpoint目录约266/311 MB，均为本机diagnostics，不进入Git或正式主表；详细registration、失败回执和恢复路径留本机。
