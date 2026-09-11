@@ -2,17 +2,17 @@
 
 ## 当前进展
 
-最后核对：2026-09-08。**F2首批接口/材料与100/1,000观测试缓存已完成，监督质量仍待审；G1=PASS。** A方向语义/抓持/边界及至少300问题人工QC为BLOCKED_HUMAN，本批未训练、未生成全量缓存、未进入F3。
+最后核对：2026-09-11。**F2候选规则统计与生产reader pilot已完成，A/B独立模块和人工QC仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试。
 
-活跃GPU/训练作业：无。A试标使用CPU，KV诊断和教师试缓存均已退出0并释放GPU；没有无人值守后续队列。1,000试缓存已提交50个完整分片、逐ID读回通过；本轮没有新训练checkpoint，F1开发checkpoint保持原样。
+活跃GPU/训练作业：无。候选统计和reader测试均CPU-only；没有教师、学生、仿真或无人值守作业。本轮没有新训练checkpoint、全量缓存或模型参数变化；F1开发checkpoint和已有1,000观测试缓存保持原样。
 
-完整恢复材料：本机A试标的selection/protocol草案/labels/review/registration/checksums，B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及KV四份精度对照/registration/summary。精确路径和命令保留本机，公开摘要用占位符；关键hash见文末。已有manifest的prototype拒绝覆写，不能直接重跑生成器假称自动resume。
+完整恢复材料：本机A试标的selection/protocol草案、候选规则版本、candidate_labels、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及production_reader/test_production_reader脚本和测试结果；KV四份精度对照/registration/summary仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；旧生成器仍拒绝覆写已有manifest，生产reader的精确resume账本已在已有分片上验证但未接入全量生成队列。
 
-未决：A的eef参考点与原记录最大0.676毫米差异、轴词/边界/抓持规则、阶段unknown；B第三人称高相似度与质量审阅、生产reader/自动续写。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径另做回归。**
+未决：A参考点差异保留、至少300题人工三层QC和阶段unknown；2 mm是候选死区而非冻结阈值，当前双侧fingerpad接触是候选grasped代理，候选标签仍未获训练许可。B第三人称特征高相似度仍只作描述性质量材料；全量合同、生产接入和自动续写队列待后续。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径另做回归。**
 
 本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)。审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
 
-下一步：等待对本批具体监督材料的语义/质量审阅；无新任务或审阅结果时不循环检查等待状态。本轮未运行模型、仿真或新缓存，不启动全量、小训练、F3或正式作业。
+下一步：将候选统计和reader测试结果交给本轮审阅；若无新审阅结果，不循环检查等待状态。后续依序完成A规则采用前的人工QC、B生产reader接入/恢复检查和A/B独立实现；本轮不启动全量、小训练、F3或正式作业。
 
 ## 执行记录
 
@@ -227,3 +227,23 @@ FastVGGT固定commit为`6526e275a29572653a034762bb3c6c9ce280ff55`。之前中断
 本轮下一步仅等待对已发布材料的审阅；A参考点/边界/轴/抓持规则和B质量仍待采用决定。生产reader及自动恢复是全量前工程任务，未实现、不冒充可运行接口。本轮不重复实验，后续无新任务时不循环检查等待状态。文档/副本的格式、敏感内容、Git范围及推送后远端逐文件内容核验结果记最终交接。
 
 发布前实际验证：`export_review.py`与`verify_local.py`均退出0；64张PNG可解码、4份JSON可读取，40题唯一且审核栏空，B十任务来源/两视图文件齐全，导出hash、相对链接和敏感路径扫描通过；`git diff --check`退出0。fetch核对远端与本地起点均为`c2880139fc2255e5bf97fbe670bb4dbcaa296625`。推送后再以固定提交原始文件地址逐文件下载、核对SHA256和实际PNG/JSON内容，结果留本机发布验证回执及最终回复，不把本机检查冒充远端检查。
+
+### 2026-09-11｜后续技术审阅、2 mm候选统计与生产reader pilot
+
+负责人审阅共享交接后确认：原S固定样本KV排查正式收口，不重复同样本/同精度对照；现有物体root body原点、`gripper0_grip_site`、固定基座轴和米制单位作为标签定义采用；`+x/front、+y/left、+z/up`及相反方向作为命名约定采用。采用约定不等于40题或全量方向标签已通过视觉/人工QC，G1保持PASS。
+
+对既有`f2-work/annotations/trial-50-v1/labels.jsonl`执行CPU-only派生程序`boundary_candidate.py`，没有重放轨迹、推进物理时间、访问未来成功或改写原draft。新版本`direction-candidate-20260911-v2`按“身份/状态有效 → 已绑定操作对象当前双侧fingerpad接触候选grasped → 六方向主轴gap”判定，2 mm（0.002 m）仅为审阅提出的candidate dead zone：gap小于阈值才判candidate invalid，接触优先于该死区。原始`labels.jsonl`未覆盖，新candidate全部`approved_for_training=false`、`valid=false`、`label=null`。
+
+输入12,548个槽位/6,274个样本唯一键检查通过。候选结果为12,181/12,548槽位`candidate_accepted`、367个槽位进入`invalid_boundary_dead_zone`；其中操作对象6,118接受（4,125非接触六方向、2,149双垫接触grasped），放置目标6,063接受；样本层按任一槽位无效回退为action-only候选，5,925样本两槽位均接受、349样本action-only。受影响367个题键及任务/角色/接触分布在本机`boundary-candidate-v2/summary.json`，该文件较大且不发布。候选类别计数为down5,488、grasped2,149、left1,573、right1,553、front1,411、back7、invalid367；这不是最终训练分布，也不构成类别平衡依据。synthetic接触优先/阈值边界fixture退出0；全量派生退出0。阶段unknown、人工审核0、获准训练标签0保持不变。
+
+上述实现保留了待解释的恢复eef与原记录差异（最大0.676 mm），不把它硬修为零；接触代理不证明稳定承载或未来成功。后续至少300题人工三层QC仍为BLOCKED_HUMAN，需按`sample_id+slot_index+协议版本`去重，并分别审文本指代、实例绑定、方向标签。
+
+B生产reader新增本机`f2-teacher/production_reader.py`，测试入口为`f2-teacher/test_production_reader.py`。它对现有cache1000-v2的50个20-row分片按唯一shard只计算一次hash和结构校验，按manifest row_index核对payload ID/shape/dtype/q/非有限值，`get_many`保持调用方请求顺序；reader不加载教师模型、不重提特征。原子`ExactResumeState`绑定contract SHA和manifest SHA，完成ID只在调用方成功读取后写入`.partial`再rename；恢复时完成集和待处理序列不能重排。对已有1,000行、50片完整校验以及逆序5样本读取通过：hash计算50次、payload加载51次、教师提取调用0次。实际结果`f2-work/interfaces/production-reader-result.json`，测试退出0。
+
+### 2026-09-11｜候选标签统计与生产reader精确恢复
+
+reader负面fixture均通过：错误shard hash、`.partial`引用和篡改manifest hash均显式失败；首次恢复测试发现并修复了待处理列表被错误改成manifest顺序的问题，修复后保持显式请求顺序，失败记录保留在本机命令日志。该reader是pilot级读取/恢复实现，不宣称已接入全量生成、train/val生产缓存或A/B训练；没有重新生成1,000观测，没有全量缓存，没有GPU作业。
+
+本轮实际验证命令与结果：`boundary_candidate.py --self-test`退出0；固定50轨迹候选派生退出0；`test_production_reader.py --cache-root f2-teacher/cache1000-v2 --output <本机结果>`最终退出0；`python3 -m py_compile`对新增脚本退出0；文档`git diff --check`待发布前执行。新增脚本/候选结果仅在工作区工程目录，不上传完整标注或特征分片。下一步等待本轮候选规则/材料审阅后，再决定人工QC登记和B生产接入；本阶段仍不启动真实小训练、全量缓存或F3。
+
+本轮最终产物摘要：候选规则脚本SHA256=`ca1867d7eaecb828a7d923654fd1047a168d35ebcf5a7dacf610dd36cefedefa`，候选协议SHA256=`db00be577d5593956c791914fae632b13eaf3544c43e66517613e936c38cb1bb`，candidate_labels SHA256=`8d844391caa85bb37df517fbcedd1338885285a3dd829b2635a21007f26ec71e`，候选summary SHA256=`8801f4b9ed1d715894e09bbe8c0fd28887ca7f7c91e4b0708fa7f7863b2b71c2`；reader脚本SHA256=`9df6ad1581ba9313752612c5d6fb6b42243af61f6a5596fa61e6229f609eb711`，reader测试SHA256=`7bf3d033388b3fba0d19fe4876513e836cf733e361fb536d02537505eb67588d`，测试结果SHA256=`a3af00fa379ff0fcd2da3a94a65befb73e7e9efd2d65658b1ba3b7bfd1ab8cf1`。最终GPU只读快照显示0—7均14/15 MiB、0%利用率，所有F2子作业已退出；没有活跃训练/教师/仿真进程。初次reader测试的两个失败（恢复顺序断言、临时目录mkdir）均保留于本机命令历史，修复后回归退出0。
