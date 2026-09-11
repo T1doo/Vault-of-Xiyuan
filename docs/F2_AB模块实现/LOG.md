@@ -2,13 +2,13 @@
 
 ## 当前进展
 
-最后核对：2026-09-11。**F2已完成候选规则统计、300题图文QC包、A/B独立接口诊断、公共S回归、新schema下SA/SB有限run/resume、真实双槽位A路径、SB无教师导出、真实数据入口合同和生成侧恢复组件；人工QC、获批监督、连续小训练和全量缓存仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查，也未重新提取1,000观测；只对已有A试标和B分片做派生统计/读取恢复测试，并补做本次改动影响的有限GPU回归。
+最后核对：2026-09-11。**F2已完成候选规则统计、固定300题GPT图文技术复核与负责人采纳、完整train/val A监督、A序列长度审计、A/B独立接口诊断、公共S回归、新schema下SA/SB有限run/resume、真实双槽位A路径和SB无教师导出；共享bounded/真实数据入口和生成侧恢复组件已整理，B完整train/val缓存正在生成；真人审核、连续小训练和F3仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查或既有1,000观测提取；只执行完整状态标注、候选/采用派生、序列审计、混合监督合同检查和已授权缓存作业。
 
-活跃GPU/训练作业：无。新版SA/SB有限回归、A双槽位诊断和SB导出均已退出并释放GPU；没有教师、学生、仿真或无人值守作业。本轮没有连续小训练、全量缓存或可比较模型权重；SA/SB checkpoint及SB导出仅供接口/恢复校验，F1开发checkpoint和已有1,000观测试缓存保持原样。一次性访问定位确认：沙箱内设备节点不可见，但同一节点的实际项目执行环境可见驱动与GPU；未修改系统驱动或CUDA/JAX。
+活跃作业：完整 train/val 教师缓存分别在 GPU 6/5 运行，其他本任务训练/仿真作业无；新版SA/SB有限回归、A双槽位诊断和SB导出均已退出并释放GPU。本轮没有连续小训练或可比较模型权重；A监督checkpoint和SB导出仅供接口/恢复校验，F1开发checkpoint和已有1,000观测试缓存保持原样。一次性访问定位确认：沙箱内设备节点不可见，但同一节点的实际项目执行环境可见驱动与GPU；未修改系统驱动或CUDA/JAX。
 
-完整恢复材料：本机A试标的selection/protocol草案、候选规则版本、candidate_labels、300题QC准备/图文包、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance，以及production_reader/test_production_reader脚本和测试结果；A/B真实诊断、SA/SB三步run与独立resume diagnostics checkpoints、Gemma dirty补丁和KV四份精度对照/registration/summary仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；旧生成器仍拒绝覆写已有manifest，生产reader的精确resume账本已在已有分片上验证但未接入全量生成队列。
+完整恢复材料：本机A试标/候选规则、固定300题GPT技术复核记录、完整train/val draft与adopted labels、A序列长度审计、500动作pilot清单、300题QC图文包、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance、B质量审阅记录、当前train/val生成目录及registration，以及production_reader/生成器恢复测试结果；A/B真实诊断、SA/SB bounded run与独立resume checkpoints、Gemma dirty补丁和KV精度对照仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；生成器已接入固定selection/contract的精确resume。
 
-未决：A参考点差异保留、至少300题人工三层QC和阶段unknown；2 mm是候选死区而非冻结阈值，当前双侧fingerpad接触是候选grasped代理，候选标签仍未获训练许可。B第三人称特征高相似度仍只作描述性质量材料；全量合同、生产接入和自动续写队列待后续。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径另做回归。**
+未决：A参考点差异、严格真人盲审和阶段unknown；GPT固定300题技术复核已完成并由负责人采纳，仍不宣称真人准确率。2 mm是采用的规则死区，双侧fingerpad接触是候选grasped代理。B二十视图GPT质量审阅接受当前合同但保留深度细节偏弱；train/val全缓存正在生成，完成后再做覆盖校验和500样本pilot。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径已完成回归。**
 
 本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)，以及固定300题的[图文QC分组与索引](review/qc300/)。所有300题审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
 
@@ -341,3 +341,15 @@ SB无教师导出完成：首次运行发现并保留了样本ID应从manifest r
 本批仅完成入口/恢复能力和CPU合同检查：真实SA方向监督仍因300题QC未完成而不可用；真实SB全manifest也因缺少完整train/val缓存而不可用。没有运行真实模式模型更新，没有生成连续小训练checkpoint，没有生成全量train/val教师缓存，没有进入F3。固定300题继续沿用既有图文材料，人工三层QC和B网格质量采用仍为待人工事项。
 
 按交接请求将现有`review/`目录原样压缩为本机`F2-review-20260911.tar.gz`（103个条目、30,865,103 bytes，SHA256=`80f3aaea9d9081d77236870db3c3dc21ff5b9ff8584a03e4bda838455e7898d5`），包含`qc300/`、对应JSONL及既有B图像/合同；未重新生成或修改其中材料，也未提交压缩包到公开仓库。
+
+### 2026-09-11｜GPT技术复核采纳、完整A监督与B全缓存启动
+
+负责人提供的审阅记录确认：固定300题已完成逐题GPT图文技术复核，规则计算与图文对应未发现共性错误；复核集合包含292个观测、50条演示、10个任务，操作对象186题、放置目标114题，候选`down/grasped/right/front/left/invalid`计数为72/63/25/16/14/110。`up`和`back`在该富集审阅集合中没有出现，不能宣称真实类别覆盖完整；QC037保留有限实例可见性；`grasped`仍仅是当前双侧fingerpad接触代理。B二十个视图（10观测×两视图）网格位置未见明显交换/翻转/裁剪错位，深度图仅支持粗结构可见、细粒度几何偏弱，不更换当前FastVGGT合同。该结论记录为AI辅助技术质检：`gpt_technical_reviewed=300`、`human_reviewed=0`，不写成真人盲审或真人准确率；完整摘要在本机`f2-work/annotations/qc-300-prep/gpt_technical_review.json`与`b_teacher_gpt_review.json`。
+
+按已采纳规则，使用现有`trial.py`对原始data-v2完整manifest逐记录恢复`states[i+1]`并提取当前状态，train 450条episode/55,682个动作样本/111,364个槽位，val 50条episode/6,068个动作样本/12,136个槽位；两个split均原子提交`labels.jsonl`，时序错误为0，原draft不覆盖。`boundary_candidate.py --adopt`生成`direction-adopted-20260911-v1`版本：train有效方向槽位108,210、invalid槽位3,154、action-only样本3,071；val有效11,833、invalid303、action-only296。文件级`approval.json`绑定candidate/label/review hash并标记负责人采纳，invalid槽位`valid=false,label=null`但`approved_for_training=true`，训练入口按整样本action-only保留动作。完整A序列审计通过：train/val最大总长度均100（上限128）、无溢出、动作尾部0 mismatch；采用标签哈希分别为`5a2f86b6539bc478ce860af0bb5ffc26eba146434b4edff07259515eabdb5b81`和`d6e1677b338f2eedded7fc7d76b7eaae320deca01528bc57206fe751f4211fe0`，序列审计结果`a-sequence-length-audit-full-v1.json` SHA256=`8433744602cc54ab92c35080ca2ca8bb5f77379ff1345c3268a8bbe99b0fd6c9`。
+
+为后续有限pilot固定500动作样本池：10个任务各50条，按完整train manifest稳定linspace选取，不因invalid删除动作；其中方向监督样本475、action-only样本25。清单`pilot-500-manifest.jsonl` SHA256=`67c8aa68036bf27468350f0c26998355f7462e58d8354767a2a1b534b2e632f6`，摘要`pilot-500-summary.json` SHA256=`710fe0dd924e6bbcae84bed50ad7ed690593caca3556356743df91080d028215`。该清单是pilot固定池，不进入formal主表。
+
+教师全量缓存已在B质量审阅采纳后启动，未重复既有1,000观测：train作业登记GPU 6、val作业登记GPU 5，分别输出到独立`full-train-v1`/`full-val-v1`目录，使用`probe1000.py --count full --manifest ... --split ... --quality-review ...`和原子可恢复`GenerationShardStore`。启动时 train/val 尚未提交manifest，后续heartbeat显示已写入 train 720/55,682、val 400/6,068 观测（各20行分片）；这只是进行中状态，不是完整缓存通过。两条作业不读A方向标签、不启动学生训练；完成后还需逐ID覆盖、contract/hash、读回和无partial核验，任一失败停止相应作业并保留partial。
+
+本轮没有启动3,000步pilot；需等待train/val缓存完整校验后，按固定500池、有效batch16、B前2,000更新warmup启动一次有边界SA/SB pilot。严格真人QC仍单独保持0；若最终交付要求真人盲审，继续标`BLOCKED_HUMAN`，GPT复核与负责人采纳不替代该事实。
