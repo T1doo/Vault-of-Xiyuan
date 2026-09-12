@@ -386,6 +386,14 @@ SB无教师导出完成：首次运行发现并保留了样本ID应从manifest r
 
 真实入口当前代码hash：`ab_training_entry.py`=`71f832c9736c3a2a37c429c68a2c9fe1e2a7f61d70de5fd1306fee810583eed4`、`a_module.py`=`fca3d2fc5e218f24198bbb56ba7608377dcd3af4ea4620f4c2fafd7a0031e96b`、`test_a_real.py`=`3847452e674f9535c2a9b7c772a08094ea5dd7f745c37cd97f97d4cce4523405`、`test_a_real_two_slot.py`=`7f4d73f4ea9c28a8ba339238fbe816a5642d5c5eac84df6a3eb84253812731a9`。当前学生 pilot 仍为0次更新，等待 train cache 最终manifest及逐ID/contract/shape/value读回校验；随后先执行 SB固定500池合同检查，再按批准配置启动 SA/SB各3,000有效更新。原始 train cache 续跑仍由已登记作业负责，不因本轮代码修复重新启动或改变教师输入。
 
+### 2026-09-12｜invalid 方向样本恢复基础 S action-only 打包
+
+根据最新审阅，核对并修复 `_make_sa_observation` 的缺标分支。有效方向样本继续使用统一问题前缀、方向后缀和动作；任一必需槽位invalid/合法缺标时，分支现在直接保留原始指令调用项目S的action-only训练打包，不携带空间问题、空`Answer`或假方向。该修复没有改变sample_id、原始动作、approval或标签有效性，也没有改推理方向错误回退（仍从原始S action-only前缀重新prefill）。
+
+在固定train真实观测上使用144容量和相同动作目标，对invalid样本的实际SA入口与`ProjectSPipeline.training_batch`逐字段比较：`tokenized_prompt`、`tokenized_prompt_mask`、`token_ar_mask`、`token_loss_mask`均完全一致；方向mask=0、动作mask=25，prompt不含问题或`Answer:`。结果`f2-work/interfaces/sa-invalid-action-only-baseline-regression-v1.json` SHA256=`7c60b62c441eb185d1d93421cccfeec7a5b197dfc4c3f7a9e811a2dcd587da63`，修复时`ab_training_entry.py` SHA256=`b076a77cf5e96bf0544468892feea13833829c12941a84207ecfc2ef48332579`，CPU命令退出0。此证据覆盖一个真实invalid样本和完整S打包字段，未重做GPU生成、QC、标签或教师缓存。
+
+由于invalid分支的前缀从问题版变回S版，先前基于“所有样本保留问题前缀”的全量长度统计只保留为旧实现审计；train/val受影响打包长度将在缓存完成后按当前分支重新汇总。当前学生pilot仍为0次更新，train全量生成器继续做最终manifest/读回，完成后再运行SB 500池合同检查并启动原定SA/SB各3,000有效更新。
+
 ### 2026-09-12｜修复A公共前缀、缓存接续和真实配置，完成受影响回归
 
 依照本轮审阅，未改A标签、方向语义、B教师合同或原S KV结论。`f2-work/a_module.py`新增唯一的`build_direction_prompt(instruction)`：只由当前原始指令生成两个固定角色问题，不带`Answer:`；训练`_make_sa_observation`与真实单/双槽位推理均调用它，`Answer:`、分隔和换行只由同一`DirectionSequenceBuilder`/候选Trie放在状态前缀之后。无效标签训练仍保留问题前缀并采用action-only；推理方向错误则另用原始指令构造S action-only前缀。
