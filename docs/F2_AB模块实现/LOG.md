@@ -2,15 +2,15 @@
 
 ## 当前进展
 
-最后核对：2026-09-12。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；val全缓存已通过完整覆盖核验，train仍在同一可恢复作业中生成。A共享问题前缀、一次prefill接续、S回退及真实优化配置已局部修复并通过受影响回归；SA/SB尚未启动3,000步pilot，仅等待train最终manifest和SB固定池合同检查。** 不是等待重复启动授权，也不重开原S KV事项。
+最后核对：2026-09-13。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；train/val全缓存均已通过完整生成、manifest、分片和严格读回核验。A共享问题前缀、一次prefill接续、S回退及invalid训练分支已通过受影响回归，144容量和真实优化配置已固定；SA/SB 3,000步pilot已按授权启动，目前各完成前2个有效更新。** 不是等待重复启动授权，也不重开原S KV事项。
 
-活跃作业：仅train教师缓存续跑；限时16小时、单张启动时确认空闲的GPU，原输出目录和分片保留，退出码写入本机运行目录，无自动重试或学生训练队列。旧作业设置8小时时限，退出原因和退出码没有捕获，不能把时间上符合时限写成已证实根因。恢复时磁盘有1,659个final分片（每片预期20行；恢复程序逐片校验），旧heartbeat为33,160/55,682；不能以较旧心跳覆盖已提交分片，也不能把文件数当作已验证完整缓存。当前仍在恢复校验阶段，尚未声称新特征已提取。
+活跃作业：SA pilot 在一张登记空闲的GPU、SB pilot 在另一张登记空闲的GPU运行；两组均为同一500动作样本池、seed0、有效batch16/microbatch4、3,000有效更新，分别独立写metrics、heartbeat、registration和step-1000/2000/3000 checkpoint。教师生成器已退出0，后续没有教师作业。旧train作业的8小时时限退出码缺失事实保留；恢复作业随后以16小时时限完成，未覆盖原run.log或旧分片。
 
-完整恢复材料：既有A标签/approval、固定500动作样本清单和QC材料、历史诊断检查点保留；val的`completion-verification.json`登记6,068行、304片、8行尾片、原data-v2 ID/元数据精确覆盖及既有严格读回证据。train恢复命令、库路径、进程、时限、日志及退出码位置写入原`registration.json`。A入口和生成代码的本次审计前源码副本、实际tokenizer对照和配置对照保留在既有本机接口产物目录；不向上游推送。
+完整恢复材料：既有A标签/approval、固定500动作样本清单和QC材料、历史诊断检查点保留；val的`completion-verification.json`登记6,068行、304片、8行尾片，train的`completion-verification-v2.json`登记55,682行、2,785片、2行尾片，均有原data-v2 ID/元数据精确覆盖及生成器严格读回证据。SA/SB pilot的launch registration、resolved config、逐步metrics和heartbeat留本机运行目录；A入口修复前后源码hash、tokenizer/长度/invalid对照留本机接口产物目录；不向上游推送。
 
 技术质检采用：`gpt_technical_reviewed=300`、`human_reviewed=0`。当前结论在本机`f2-work/annotations/qc-300-prep/gpt_technical_review.json`，绑定`direction-candidate-20260911-v2`；完整采用标签为`direction-adopted-20260911-v1`。原始[300题图文包](review/qc300/)的空审核栏是历史快照，不表示当前GPT审阅为零。2 mm已采用用于F2，非最优性结论；正式协议仍待G2冻结。接触代理、QC037可见性、缺少up/back审阅样例和阶段unknown限制保持。
 
-下一步：健康的train缓存续跑继续；学生侧先局部修复已证实的A共享问题前缀、正常缓存续写及原始指令回退，落实已有学习率/优化器配置和逐步记录，再纳入受影响路径核验。缓存完整校验和入口修复通过后，使用同一500动作样本池、同seed/顺序、有效batch16，SA/SB各一次3,000步并在step-3000各完成相同20个开发单元；不另开替代模型，不自动进入F3。授权持续有效；本次尚未产生pilot曲线或闭环结果。
+下一步：继续监控两组pilot至各3,000有效更新，核对首步真实监督、学习率、辅助权重、累计和增量落盘；异常只停止受影响作业并保留现场。完成后使用各自step-3000检查点，在同一20个开发单元上完成闭环，保留所有失败；不另开替代模型，不自动进入F3。授权持续有效，F2仍待pilot和开发闭环结果。
 
 ## 执行记录
 
@@ -405,3 +405,15 @@ CPU真实tokenizer/入口验证：固定pilot 500池在统一问题前缀下训�
 修复后的真实模型单槽位和双槽位回归均在空闲GPU各执行一次，0次更新、无checkpoint、不读取方向GT。单槽位生成`up`（5个方向token），双槽位生成`up; up`（8个方向token，49个有序组合之一）；两者均记录`cache_returned=true`、`normal_path_cache_reused=true`、`second_prefill=false`，动作阶段实际接续方向阶段返回的KV状态，动作生成预算为256。严格FAST仍报告基础模型的`invalid_coefficient_length`，没有补零、截断或动作失败重试；受控方向错误另用原始S 55-token前缀重新prefill，`fallback_matches_original_s_action_only_prefix=true`。结果分别为`a-real-result-v2.json` SHA256=`075d93fb6c71d3ad76fbb06d6e23d823aeb6c926a0eca9ce4e4078df1c541710`和`a-real-two-slot-result-v2.json` SHA256=`13734215c6af665672791b4f5bddc02ee7bbeeecfd695ca4758b9cb1cbfabb0b`；这证明结构、缓存和回退规则已复回归，不证明未训练基础模型的动作格式成功。
 
 本轮没有启动真实SA/SB pilot。原因从“接口不符合协议”缩小为两个待完成前置：train教师缓存仍在同一可恢复作业生成，及需要再次检查B真实pilot cache contract；此前健康分片、val完整验收和当前train恢复作业均保留。进入pilot前还需用修复后的入口启动一次SB数据合同校验，确认train缓存完整且实际student loader读取；随后才可使用同一500池、seed/顺序、有效batch16各执行3,000有效更新。旧错误审计、失败和耗时缺口不覆盖。
+
+### 2026-09-13｜缓存验收、SB合同检查与SA/SB pilot启动
+
+train全量教师缓存生成器已自然退出0。`manifest.jsonl`共55,682行、2,785个分片，最后分片`2784.npz`按合同保留2行；无partial。生成器自身已执行`ProductionTeacherCache.validate_all()`及逐选定ID读回，summary状态为`INTERFACE_AND_READBACK_TESTED_NOT_HUMAN_QC`、pending=0、missing/wrong-hash/wrong-split负面检查均为true。独立轻量验收进一步确认manifest与data-v2 train ID顺序和元数据逐项一致，结果`f2-teacher/full-train-v1/completion-verification-v2.json` SHA256=`858300241fa08712afe30bea3b7b8b723e6843a59d0a63789167e9871fc2bb72`；registration已更新为`COMPLETE_VERIFIED`。val的6,068行/304片完整验收直接复用既有通过记录。
+
+SB固定500动作池经过实际`ab_training_entry.py --config-kind real --mode validate`检查，使用完整train教师合同、`sample_pool=pilot --max-samples=500`、144 token、physical batch=16/microbatch=4、seed=0，方向标签未读取、有效更新0、退出0。结果`f2-work/interfaces/real-sb-pilot-validation-v2.json` SHA256=`02bf94677b09c6a1f5890504976715b22ed95ea878dc19de20acfca14366bb21`；schedule SHA与SA相同为`d503545a9c5e6e549bae3e347fa674cf970dc10ffa23204f25c34007e1ed3b50`。当前版本的invalid分支/144容量受影响审计结果为`a-sequence-length-audit-current-v1.json` SHA256=`6120e8ed6d2b80c4c63d0ed528a9833117f6b00f5af36dff0206466b9d774672`：train/val各2条达到129、144下0溢出、动作尾部0 mismatch，invalid方向mask均0。
+
+上述条件满足后，按持续授权在空闲GPU0/1启动两个独立F2 pilot：SA `runs/pilot/f2-sa-pilot-20260913-s0`，SB `runs/pilot/f2-sb-pilot-20260913-s0`。两组均从同一`pi0_fast_base`和seed0开始，500动作样本、有效batch16（microbatch4、累计4）、144 token、3,000有效更新、保存1000/2000/3000；SA读取已采纳方向labels/approval并保留25个action-only样本，SB读取完整train教师缓存且不读取方向labels。启动registration记录代码/输入hash、GPU、环境和停止条件；两组schedule SHA相同。
+
+前两个有效更新均已落盘并通过启动检查。SA update1/2总loss为20.84375/20.65625，动作loss为17.09375/16.5，方向loss为12.4765625/13.84375，方向有效样本14/16；SB总loss为14.7031745911/13.8438498974，动作loss为14.703125/13.84375，对齐loss为0.9989122152/0.9993028641，alignment有效位置512，B实际权重λ_B为0.00005/0.0001。两组实际学习率为`2.9969669e-08`/`5.9939339e-08`，联合裁剪、累计4次和heartbeat均已记录；未发现监督、数值、缓存或样本顺序错误。pilot仍在运行，尚未有3,000步终点检查点或20个开发回合结果。
+
+当前真人审核仍为0；GPT技术质检采用保持`gpt_technical_reviewed=300`、`human_reviewed=0`，不改写为真人盲审。F2不因pilot已启动自动通过，不启动SAB/F3或正式四组长训练。
