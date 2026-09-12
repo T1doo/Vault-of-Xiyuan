@@ -2,17 +2,15 @@
 
 ## 当前进展
 
-最后核对：2026-09-11。**F2已完成候选规则统计、固定300题GPT图文技术复核与负责人采纳、完整train/val A监督、A序列长度审计、A/B独立接口诊断、公共S回归、新schema下SA/SB有限run/resume、真实双槽位A路径和SB无教师导出；共享bounded/真实数据入口和生成侧恢复组件已整理，B完整train/val缓存正在生成；真人审核、连续小训练和F3仍待完成；G1=PASS。** 本轮依据后续技术审阅，未重复原S KV排查或既有1,000观测提取；只执行完整状态标注、候选/采用派生、序列审计、混合监督合同检查和已授权缓存作业。
+最后核对：2026-09-12。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；val全缓存已通过完整覆盖核验。train原进程退出后已按相同代码/selection/contract启动续跑。SA/SB尚未启动3,000步pilot：本轮启动前核对发现A训练/推理前缀和缓存接续不符合既定要求，以及真实训练配置与F1/手册不一致，按负责人“正确性异常停止受影响作业”边界暂停学生训练。** 不是等待重复启动授权，也不重开原S KV事项。
 
-活跃作业：完整 train/val 教师缓存分别在 GPU 6/5 运行，其他本任务训练/仿真作业无；新版SA/SB有限回归、A双槽位诊断和SB导出均已退出并释放GPU。本轮没有连续小训练或可比较模型权重；A监督checkpoint和SB导出仅供接口/恢复校验，F1开发checkpoint和已有1,000观测试缓存保持原样。一次性访问定位确认：沙箱内设备节点不可见，但同一节点的实际项目执行环境可见驱动与GPU；未修改系统驱动或CUDA/JAX。
+活跃作业：仅train教师缓存续跑；限时16小时、单张启动时确认空闲的GPU，原输出目录和分片保留，退出码写入本机运行目录，无自动重试或学生训练队列。旧作业设置8小时时限，退出原因和退出码没有捕获，不能把时间上符合时限写成已证实根因。恢复时磁盘有1,659个final分片（每片预期20行；恢复程序逐片校验），旧heartbeat为33,160/55,682；不能以较旧心跳覆盖已提交分片，也不能把文件数当作已验证完整缓存。当前仍在恢复校验阶段，尚未声称新特征已提取。
 
-完整恢复材料：本机A试标/候选规则、固定300题GPT技术复核记录、完整train/val draft与adopted labels、A序列长度审计、500动作pilot清单、300题QC图文包、summary和checksums；B试缓存的contract/manifest/50分片/summary/cost_report/provenance、B质量审阅记录、当前train/val生成目录及registration，以及production_reader/生成器恢复测试结果；A/B真实诊断、SA/SB bounded run与独立resume checkpoints、Gemma dirty补丁和KV精度对照仍作历史依据。精确路径和命令保留本机，公开摘要用占位符；生成器已接入固定selection/contract的精确resume。
+完整恢复材料：既有A标签/approval、固定500动作样本清单和QC材料、历史诊断检查点保留；val的`completion-verification.json`登记6,068行、304片、8行尾片、原data-v2 ID/元数据精确覆盖及既有严格读回证据。train恢复命令、库路径、进程、时限、日志及退出码位置写入原`registration.json`。A入口和生成代码的本次审计前源码副本、实际tokenizer对照和配置对照保留在既有本机接口产物目录；不向上游推送。
 
-未决：A参考点差异、严格真人盲审和阶段unknown；GPT固定300题技术复核已完成并由负责人采纳，仍不宣称真人准确率。2 mm是采用的规则死区，双侧fingerpad接触是候选grasped代理。B二十视图GPT质量审阅接受当前合同但保留深度细节偏弱；train/val全缓存正在生成，完成后再做覆盖校验和500样本pilot。**原S固定样本KV残差解释经负责人审阅正式收口，不再重复测试；A新增生成路径已完成回归。**
+技术质检采用：`gpt_technical_reviewed=300`、`human_reviewed=0`。当前结论在本机`f2-work/annotations/qc-300-prep/gpt_technical_review.json`，绑定`direction-candidate-20260911-v2`；完整采用标签为`direction-adopted-20260911-v1`。原始[300题图文包](review/qc300/)的空审核栏是历史快照，不表示当前GPT审阅为零。2 mm已采用用于F2，非最优性结论；正式协议仍待G2冻结。接触代理、QC037可见性、缺少up/back审阅样例和阶段unknown限制保持。
 
-本轮已授权并整理[审阅副本](review/)：A四张合图、[40题表](review/a-questions.json)、[草案协议摘录](review/a-protocol-excerpt.json)，B十观测双视图RGB/网格/深度、[对应表](review/b-observations.json)与[合同及统计摘录](review/b-contract-excerpt.json)，以及固定300题的[图文QC分组与索引](review/qc300/)。所有300题审核栏仍空，发布不等于获准训练或质量通过。图片与定义见文末；原始服务器材料保留。
-
-下一步：完成并记录至少300题真实人工三层QC，依据采用结果生成完整可信标签，按B质量合同准备完整train/val缓存，再在真实数据入口上做获批的有限小训练；候选规则、reader、bounded diagnostics和合同检查不替代这些验收。当前不启动全量缓存、连续小训练、F3或正式作业。
+下一步：健康的train缓存续跑继续；学生侧先局部修复已证实的A共享问题前缀、正常缓存续写及原始指令回退，落实已有学习率/优化器配置和逐步记录，再纳入受影响路径核验。缓存完整校验和入口修复通过后，使用同一500动作样本池、同seed/顺序、有效batch16，SA/SB各一次3,000步并在step-3000各完成相同20个开发单元；不另开替代模型，不自动进入F3。授权持续有效；本次尚未产生pilot曲线或闭环结果。
 
 ## 执行记录
 
@@ -361,3 +359,19 @@ SB无教师导出完成：首次运行发现并保留了样本ID应从manifest r
 固定500动作样本池的SA真实数据合同检查已完成：使用`ab_training_entry.py --config-kind real --mode validate`、pilot manifest、已采纳train方向labels及匹配`approval.json`，physical batch=16、microbatch=4、seed=0、计划2步且不更新模型；退出0。输出`f2-work/interfaces/real-sa-pilot-validation.json`，SHA256=`231c5ee6c5f8a2cd651dd2fb4a72eb0f08d73f1a8b4b9c7290cc7c9c84656985`。结果确认500个动作样本均保留，首个计划批次动作有效token数均为正，方向监督样本与action-only样本按批准版本连接；这不是GPU训练或学习效果证据。SB相同pilot合同检查待train全量缓存严格校验完成后执行。
 
 当前仍未启动3,000步SA/SB pilot、连续训练或F3；待train/val缓存完成并通过逐ID、合同/hash、shape/数值和无partial核验后，在同一固定500池上各运行一次3,000个有效更新，再做相同20个开发单元闭环。上述pilot获得的GPT技术复核采用不改写为真人审核：`gpt_technical_reviewed=300`、`human_reviewed=0`继续保持。
+
+### 2026-09-12｜val验收、train续跑与学生启动前发现的实际阻断
+
+本轮按负责人后续审阅先查原作业，没有重新提取val或启动重复train。实际服务器上旧train/val进程均已退出；train旧启动器使用`timeout 28800`，无退出码文件或异常日志，停在1,659个final分片、旧heartbeat 33,160；不声称确定为超时或OOM。对照代码hash与原合同一致后，用同一`probe1000.py --count full --split train --resume`、原selection/contract/输出目录和已确认teacher环境恢复，当前限时57,600秒，日志及退出码单独保存，不覆盖原run.log。源码SHA256仍为`f50057d49fa04bf284e4a13d5a6df9b7dc637e2b4add77ca4fb77e17b294fcfa`；进程和精确环境留本机registration。
+
+**val完成范围：**上轮启动的complete-resume已留下`RESUMED_COMPLETE_NO_TEACHER_EXTRACTION`、6,068观测、pending=0、重新提取0次。该分支调用既有`ProductionTeacherCache.validate_all()`；本轮复用该严格hash/shape/数值/读回证据，另与原data-v2逐ID比较file/episode/obs/state/action/raw hash和split、contract，6,068行全部一致，304片、最后8行及无partial检查通过，CPU命令退出0。manifest SHA256=`c7281cdf024ebc019ecfa4857a6cb58de6b103100401cec89554476e588c1bdb`，contract SHA256=`dfc72346e8e1d38a3cce3702d2cc7e51258f1ff7d9ff4a328a7a5e052bb38c40`。原registration已更新COMPLETE_VERIFIED。必须披露记录缺口：上轮complete-resume把原生成summary替换成恢复摘要，当前文件已无原逐样本耗时；本轮不再覆盖它，不凭恢复耗时推算原生成成本，也不伪造旧进程退出码。原始库路径失败保留。
+
+**A受影响路径：**在固定pilot首样本上，调用真实`ProjectSPipeline`与现有`_make_sa_observation`做tokenizer对照（方向`left/up`明确synthetic，0模型更新），训练前缀55 token仅含原Task/State；双槽位推理脚本前缀85 token含两个问题和置于State之前的Answer标记。两者实际token不一致；训练Answer段位于因果后缀，但训练中没有对应问题。进一步按实际源码核对：`_constrained_direction_generation`仅返回tokens/meta，丢失所用cache；调用者随后调用`sample_actions`，后者执行新的prefill，而非接续原cache。错误回退传入的`prefix_tokens`也来自带问题的85-token前缀，所谓“与原前缀一致”只对比自身，并非原始指令下55-token的S前缀。
+
+这三项违反已有训练/推理一致、一次prefill续写和真正action-only回退要求。因此历史`left; up`以及显式FAST错误仍是真实执行结果，但**不能再据此声称完整A路径符合协议**；F2相应待修复项恢复未勾选，G1和原S KV结论不动。实际对照退出0表示成功记录了不一致，不是A回归通过。审计结果`pilot-prelaunch-a-contract-audit.json` SHA256=`13c521fc8f00feb32067f00064cea36c4c3f72e154151a047f47efcff881ff14`；源入口SHA256=`8b04497f90ddf950525e90f73cc966a1c193d9c60f3caeeddac3aaa672f3236c`。原代码副本已按hash保留。旧最大长度100审计仍对旧打包成立，修复实际问题前缀后需检查受影响长度，不能直接复用旧结论。
+
+**共享训练配置：**现有real分支为LR warmup=2,000、peak/end=`2.5e-5/2.5e-6`、weight_decay=`1e-10`；F1实际resolved config及现手册对应为1,000、`3e-5/3e-6`、`0.01`。B辅助损失的2,000步warmup与学习率warmup是两回事。现有真实入口还仅把训练行保留在内存，结束才写result，未落实本次要求的逐步落盘、心跳和耗时。配置对照`pilot-prelaunch-config-audit.json` SHA256=`80a35b46869c52f6b16460cdbb026d160e73f338acf8afbc4a9186936349ab03`；本轮没有悄悄改超参或启动学生模型。上述为现有入口的具体修复项，不新增方法、审阅数量或诊断模型。
+
+统计口径同步：train样本级方向监督52,611/55,682（94.48%），action-only 3,071；标注有效槽位108,210，但整样本回退后实际使用105,222个方向槽位，另2,988个有效槽位随同伴invalid一起不参与方向损失。val对应5,772/6,068（95.12%）、296 action-only，实际方向槽位11,544，另289个有效槽位被整样本回退排除。500池是每任务50个动作起点，475样本方向监督、25 action-only；每模型3,000×16=48,000次曝光，平均96次/独立样本。这些均非准确率。
+
+当前按“发现正确性异常，停止受影响学生作业并报告”执行：train教师恢复继续，val通过，学生0次真实pilot更新、0个本轮学习checkpoint、0个pilot开发回合。没有启动SAB/F3或正式作业，没有重复原S KV、旧三步GPU诊断或QC图文生成；本轮交接是具体阻断及恢复点，尚不是用户要求的pilot最终结果。
