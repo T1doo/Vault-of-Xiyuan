@@ -375,3 +375,15 @@ SB无教师导出完成：首次运行发现并保留了样本ID应从manifest r
 统计口径同步：train样本级方向监督52,611/55,682（94.48%），action-only 3,071；标注有效槽位108,210，但整样本回退后实际使用105,222个方向槽位，另2,988个有效槽位随同伴invalid一起不参与方向损失。val对应5,772/6,068（95.12%）、296 action-only，实际方向槽位11,544，另289个有效槽位被整样本回退排除。500池是每任务50个动作起点，475样本方向监督、25 action-only；每模型3,000×16=48,000次曝光，平均96次/独立样本。这些均非准确率。
 
 当前按“发现正确性异常，停止受影响学生作业并报告”执行：train教师恢复继续，val通过，学生0次真实pilot更新、0个本轮学习checkpoint、0个pilot开发回合。没有启动SAB/F3或正式作业，没有重复原S KV、旧三步GPU诊断或QC图文生成；本轮交接是具体阻断及恢复点，尚不是用户要求的pilot最终结果。
+
+### 2026-09-12｜修复A公共前缀、缓存接续和真实配置，完成受影响回归
+
+依照本轮审阅，未改A标签、方向语义、B教师合同或原S KV结论。`f2-work/a_module.py`新增唯一的`build_direction_prompt(instruction)`：只由当前原始指令生成两个固定角色问题，不带`Answer:`；训练`_make_sa_observation`与真实单/双槽位推理均调用它，`Answer:`、分隔和换行只由同一`DirectionSequenceBuilder`/候选Trie放在状态前缀之后。无效标签训练仍保留问题前缀并采用action-only；推理方向错误则另用原始指令构造S action-only前缀。
+
+训练入口的real配置恢复为已批准公共设置：学习率`3e-5→3e-6`、学习率warmup 1,000、AdamW weight decay 0.01、β=(0.9,0.95)、eps=`1e-8`、累计后联合全局裁剪1.0；B辅助权重仍独立按前2,000次有效更新升至0.1。真实模式强制统一`max_token_len=144`，因为共享问题前缀下完整train/val审计各有2条129-token样本，旧128会溢出，144下0溢出。训练real入口新增resolved-config、逐更新metrics JSONL、atomic heartbeat和registration；这些诊断/试验产物留本机，不覆盖既有F1 checkpoint。
+
+CPU真实tokenizer/入口验证：固定pilot 500池在统一问题前缀下训练/推理前缀84 token逐项一致，原始S action-only回退前缀55 token且与问题前缀区分；SA real `--mode validate`使用`max_token_len=144`退出0，结果`real-sa-pilot-validation-v2.json` SHA256=`de2350f76fd9f7c12e097915e6abf8ae33740332a150b519507a66cc83a4aae6`；A合成测试和全文件py_compile退出0。全量A打包长度审计使用同一真实tokenizer、train/val adopted labels及实际动作尾段，结果`a-sequence-length-audit-question-prefix-v2.json` SHA256=`15b7b437434a6b4387f9587c3c77d136b276821d7e309bef974f3e0a809397ab`：train 55,682/52,611方向监督/3,071 action-only，max/p50/p95/p99=129/109/120/123；val 6,068/5,772/296，max/p50/p95/p99=129/109/120/124；两 split 各2条超过128、各0条超过144，动作尾段0 mismatch。该审计覆盖完整清单，旧128报告保留为历史版本，不再冒充当前容量。
+
+修复后的真实模型单槽位和双槽位回归均在空闲GPU各执行一次，0次更新、无checkpoint、不读取方向GT。单槽位生成`up`（5个方向token），双槽位生成`up; up`（8个方向token，49个有序组合之一）；两者均记录`cache_returned=true`、`normal_path_cache_reused=true`、`second_prefill=false`，动作阶段实际接续方向阶段返回的KV状态，动作生成预算为256。严格FAST仍报告基础模型的`invalid_coefficient_length`，没有补零、截断或动作失败重试；受控方向错误另用原始S 55-token前缀重新prefill，`fallback_matches_original_s_action_only_prefix=true`。结果分别为`a-real-result-v2.json` SHA256=`075d93fb6c71d3ad76fbb06d6e23d823aeb6c926a0eca9ce4e4078df1c541710`和`a-real-two-slot-result-v2.json` SHA256=`13734215c6af665672791b4f5bddc02ee7bbeeecfd695ca4758b9cb1cbfabb0b`；这证明结构、缓存和回退规则已复回归，不证明未训练基础模型的动作格式成功。
+
+本轮没有启动真实SA/SB pilot。原因从“接口不符合协议”缩小为两个待完成前置：train教师缓存仍在同一可恢复作业生成，及需要再次检查B真实pilot cache contract；此前健康分片、val完整验收和当前train恢复作业均保留。进入pilot前还需用修复后的入口启动一次SB数据合同校验，确认train缓存完整且实际student loader读取；随后才可使用同一500池、seed/顺序、有效batch16各执行3,000有效更新。旧错误审计、失败和耗时缺口不覆盖。

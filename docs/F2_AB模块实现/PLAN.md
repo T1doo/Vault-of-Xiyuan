@@ -113,11 +113,11 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
   真实方向/动作均在因果后缀，next-token targets与两类mask同步移位；改GT后缀不影响视觉prefix。正式推理先由模型生成完整方向，再生成动作，不能注入GT；非法方向记录后用action-only前缀重新prefill。验证A结构关闭等价S、合法FAST动作段不变、多token/多槽位、缺标保留动作、语言透传和无GT请求。
 
-  重新实测A序列长度；F1的128仅验证S。训练溢出报错，不能截动作尾部，方向不能挤占动作生成预算。若需扩大公共容量，记录证据并在正式四组统一验证，保留原F1记录。
+  重新实测A序列长度；F1的128仅验证S。共享问题前缀加入后，train/val各有2条达到129，144容量下均无溢出、动作尾部0 mismatch；故真实pilot及后续统一四组配置采用`max_token_len=144`，保留原F1的128记录。训练溢出仍报错，不能截动作尾部，方向不能挤占动作生成预算。
 
 - [x] 在真实学生模型上用公开当前RGB/状态/指令完成一次受限方向生成，再将模型生成方向接入FAST动作生成；触发受控方向错误后实际丢弃半段方向并重新action-only prefill。该诊断不读GT方向、不更新参数、不保存checkpoint；动作解码错误按严格状态保留，不能补零或截断。SA诊断入口另以两个synthetic角色槽位检查顺序、分隔和动作边界。
 
-- [ ] 在真实学生模型上用公开当前RGB/状态/指令完成两个角色槽位的一次连续自回归方向生成，再接续原FAST动作段；第二槽位必须承接第一槽位的模型输出，不能注入GT或独立重置。对问题解析失败、方向段非法/超长/提前结束，另以受控方向格式错误核对缓存丢弃和action-only重新prefill；若已进入动作段后FAST解码失败，只显式记录策略失败，不再用action-only重试替换该失败。任一动作非法均不补零或截断。历史一次生成得到`left; up`，动作段记录`invalid_coefficient_length`；2026-09-12源码与真实tokenizer对照发现正常动作重新prefill、方向回退保留问题前缀、训练/推理问题不一致，完整路径待局部修复，见LOG。
+- [x] 在真实学生模型上用公开当前RGB/状态/指令完成两个角色槽位的一次连续自回归方向生成，再接续原FAST动作段；第二槽位必须承接第一槽位的模型输出，不能注入GT或独立重置。对问题解析失败、方向段非法/超长/提前结束，另以受控方向格式错误核对缓存丢弃和action-only重新prefill；若已进入动作段后FAST解码失败，只显式记录策略失败，不再用action-only重试替换该失败。任一动作非法均不补零或截断。修复后实际生成`up; up`，方向缓存被动作阶段复用，动作仍严格记录`invalid_coefficient_length`；受控方向错误回退前缀与原始S action-only前缀一致，见LOG与本机v2回执。方向预测正确性和动作解码成功率仍不属于此接口通过条件。
 
 - [ ] 完成A的200—500样本池小训练及至少20个开发闭环回合；另行登记实际有效更新数、物理/有效batch、采样、停止条件和版本。
 
@@ -137,7 +137,7 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
 - [x] 在同一入口增加真实数据模式：从显式manifest/split和稳定seed生成sample_id序列，支持physical batch与microbatch累计；SA要求文件级approval manifest与统一协议版本，已批准版本中`valid=true`的槽位进入方向监督，`valid=false`且明确invalid状态的样本保留动作并采用action-only，未批准/损坏/版本不匹配仍拒绝；SB在manifest池发现缓存不全时显式拒绝、pilot池必须显式指定；检查点保存完整schedule、cursor、有效步、优化器和监督/缓存合同摘要。CPU混合SA batch、SB pilot合同检查通过，未执行模型更新；未批准标签和SB不完整manifest的拒绝路径均有退出1证据。
 
-  诊断模式仍固定synthetic/短schedule；真实模式使用正式warmup/λ参数和manifest-driven配置，不能把pilot或action-only回退静默写成正式SA训练。
+  诊断模式仍固定synthetic/短schedule；真实模式使用正式warmup/λ参数和manifest-driven配置，统一`max_token_len=144`，不能把pilot或action-only回退静默写成正式SA训练。
 
 - [x] 在上述入口新schema上重新完成SA/SB各不超过5次有效更新的真实GPU run/resume回归；只比较采样、联合loss、冻结叶子、LoRA/projector更新和完整恢复，不做连续小训练。SA/SB各3次更新、step-2保存、独立step-3恢复逐项一致。
 
