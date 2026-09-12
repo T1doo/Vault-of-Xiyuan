@@ -2,7 +2,7 @@
 
 ## 当前进展
 
-最后核对：2026-09-12。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；val全缓存已通过完整覆盖核验。train原进程退出后已按相同代码/selection/contract启动续跑。SA/SB尚未启动3,000步pilot：本轮启动前核对发现A训练/推理前缀和缓存接续不符合既定要求，以及真实训练配置与F1/手册不一致，按负责人“正确性异常停止受影响作业”边界暂停学生训练。** 不是等待重复启动授权，也不重开原S KV事项。
+最后核对：2026-09-12。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；val全缓存已通过完整覆盖核验，train仍在同一可恢复作业中生成。A共享问题前缀、一次prefill接续、S回退及真实优化配置已局部修复并通过受影响回归；SA/SB尚未启动3,000步pilot，仅等待train最终manifest和SB固定池合同检查。** 不是等待重复启动授权，也不重开原S KV事项。
 
 活跃作业：仅train教师缓存续跑；限时16小时、单张启动时确认空闲的GPU，原输出目录和分片保留，退出码写入本机运行目录，无自动重试或学生训练队列。旧作业设置8小时时限，退出原因和退出码没有捕获，不能把时间上符合时限写成已证实根因。恢复时磁盘有1,659个final分片（每片预期20行；恢复程序逐片校验），旧heartbeat为33,160/55,682；不能以较旧心跳覆盖已提交分片，也不能把文件数当作已验证完整缓存。当前仍在恢复校验阶段，尚未声称新特征已提取。
 
@@ -375,6 +375,16 @@ SB无教师导出完成：首次运行发现并保留了样本ID应从manifest r
 统计口径同步：train样本级方向监督52,611/55,682（94.48%），action-only 3,071；标注有效槽位108,210，但整样本回退后实际使用105,222个方向槽位，另2,988个有效槽位随同伴invalid一起不参与方向损失。val对应5,772/6,068（95.12%）、296 action-only，实际方向槽位11,544，另289个有效槽位被整样本回退排除。500池是每任务50个动作起点，475样本方向监督、25 action-only；每模型3,000×16=48,000次曝光，平均96次/独立样本。这些均非准确率。
 
 当前按“发现正确性异常，停止受影响学生作业并报告”执行：train教师恢复继续，val通过，学生0次真实pilot更新、0个本轮学习checkpoint、0个pilot开发回合。没有启动SAB/F3或正式作业，没有重复原S KV、旧三步GPU诊断或QC图文生成；本轮交接是具体阻断及恢复点，尚不是用户要求的pilot最终结果。
+
+### 2026-09-12｜局部修复后的 A 回归与共享容量审计
+
+依照后续审阅，在 train 教师缓存继续生成期间完成局部修复与 CPU/GPU 受影响回归。`a_module.py` 新增共享 `build_direction_prompt`，训练 `_make_sa_observation`、单槽位和双槽位真实推理统一调用；训练/推理都把 `Answer:` 放在状态前缀之后的因果方向段。真实方向生成现在返回完整 decode state（KV、有效长度、位置和容量），动作阶段通过同一缓存继续，不再重新调用原始 `sample_actions` 做第二次公共 prefill；方向错误回退改为重新构造原始指令的 S action-only observation。动作段 FAST 解码失败仍只登记失败，不触发额外重试。
+
+共享问题前缀下的全量 train/val 真实 tokenizer 分块审计完成，输出 `f2-work/interfaces/a-sequence-length-audit-question-prefix-v2.json`（SHA256=`15b7b437434a6b4387f9587c3c77d136b276821d7e309bef974f3e0a809397ab`）：train 55,682（52,611 方向监督、3,071 action-only），val 6,068（5,772、296）；两 split 最大长度均129、p50/p95/p99分别为109/120/123与109/120/124，旧128各有2条溢出，统一144容量为0溢出；动作尾部 mismatch均0。由此真实 pilot及后续统一四组 resolved config 使用 `max_token_len=144`，旧 F1 128 审计保留为历史 S 结果。固定500池 CPU 前缀回归输出 `a-shared-prefix-regression-v1.json`（SHA256=`1b9d2ca746387be01d8b91d2d9a8f482e48abba187f00ad34cdcd813b8a7da27`）：训练/推理方向前缀均84 token逐项一致，原始S action-only前缀55 token且明确不同。
+
+真实 SA pilot 数据合同在144容量下重新 `--mode validate` 退出0，输出 `real-sa-pilot-validation-v2.json`（SHA256=`de2350f76fd9f7c12e097915e6abf8ae33740332a150b519507a66cc83a4aae6`）；A 合成测试、real配置断言和全文件py_compile均退出0。真实单槽位和双槽位模型回归分别在空闲GPU各执行一次、0次更新、无checkpoint：单槽位生成`up`，双槽位生成`up; up`；均记录 `cache_returned=true`、`normal_path_cache_reused=true`、`second_prefill=false`，方向错误回退与原始S action-only前缀一致，结果均保留基础模型 `invalid_coefficient_length`，没有补零/截断或动作失败重试。v2结果SHA256分别为 `075d93fb6c71d3ad76fbb06d6e23d823aeb6c926a0eca9ce4e4078df1c541710` 与 `13734215c6af665672791b4f5bddc02ee7bbeeecfd695ca4758b9cb1cbfabb0b`。
+
+真实入口当前代码hash：`ab_training_entry.py`=`71f832c9736c3a2a37c429c68a2c9fe1e2a7f61d70de5fd1306fee810583eed4`、`a_module.py`=`fca3d2fc5e218f24198bbb56ba7608377dcd3af4ea4620f4c2fafd7a0031e96b`、`test_a_real.py`=`3847452e674f9535c2a9b7c772a08094ea5dd7f745c37cd97f97d4cce4523405`、`test_a_real_two_slot.py`=`7f4d73f4ea9c28a8ba339238fbe816a5642d5c5eac84df6a3eb84253812731a9`。当前学生 pilot 仍为0次更新，等待 train cache 最终manifest及逐ID/contract/shape/value读回校验；随后先执行 SB固定500池合同检查，再按批准配置启动 SA/SB各3,000有效更新。原始 train cache 续跑仍由已登记作业负责，不因本轮代码修复重新启动或改变教师输入。
 
 ### 2026-09-12｜修复A公共前缀、缓存接续和真实配置，完成受影响回归
 

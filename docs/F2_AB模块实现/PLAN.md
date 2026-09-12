@@ -83,7 +83,7 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
 - [x] 将同一合同接入教师生成侧：按固定manifest顺序识别完整分片、验证合法partial前缀、原子续写/提升完整partial、拒绝覆盖完整或损坏分片，并在所有计划分片完成后原子写入完整manifest。仅以隔离synthetic fixture验证5行/2片恢复、部分manifest扩展、完整partial提升、坏分片拒绝和完整覆盖检查；不启动全量train/val提取。
 
-  生成器`probe1000.py --resume`现在只接受同selection/contract的输出，完成分片跳过、partial按预期前缀续写，manifest覆盖不完整时继续生成而不改动已完成payload；默认pilot仍拒绝覆盖已有输出。真实生成恢复尚未用于全量作业，原cache1000-v2保持不变。
+  生成器`probe1000.py --resume`现在只接受同selection/contract的输出，完成分片跳过、partial按预期前缀续写，manifest覆盖不完整时继续生成而不改动已完成payload；默认pilot仍拒绝覆盖已有输出。train全量作业已实际使用该恢复路径，val完整resume校验通过；原cache1000-v2保持不变。
 - [ ] 首批反馈并完成所需接口/质量审阅后固定特征合同，分别生成全量train和val缓存；逐ID校验完整覆盖并写完成标记。当前生成作业已按负责人采纳的B合同启动，完成状态仍以逐ID校验、分片hash、严格读回和无partial证据为准。
 
   首批交接时暂缓全量缓存的限制已解除；当前 train/val 作业沿用同一 selection/contract 和可恢复分片路径。未提交完整manifest前不视为完成，不用重复样本或零向量填充尾片；全量成本以本次实际记录为准，不把旧的1,000观测估算写成benchmark。
@@ -107,7 +107,7 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
 - [x] 按采用规则从完整train/val manifest生成版本化A标签：可靠槽位进入方向+动作监督，任一必需槽位invalid/合法缺标的样本保留动作并采用action-only；文件级approval与行级valid分开，旧draft/candidate不覆盖。完整train/val标签数量、覆盖、invalid分布和协议/来源hash已记录。
 
-- [x] 对完整train/val采用标签执行A序列长度与动作尾部审计；128上限下train/val最大长度均100、无溢出、动作尾部0 mismatch，action-only样本分别3071/296。该审计不等于方向语义准确率或闭环成功率。
+- [x] 对完整train/val采用标签执行A序列长度与动作尾部审计；旧原始打包在128上限下最大长度均100、动作尾部0 mismatch（历史证据）。统一问题前缀后重新审计，train/val各2条达到129，采用144容量后均无溢出、动作尾部0 mismatch，action-only样本分别3071/296。该审计不等于方向语义准确率或闭环成功率。
 
 - [x] 等待QC期间可用明确synthetic fixture推进A序列单元测试，不把未确认标签用于可信真实训练。实现A独立序列/mask/损失、完整候选方向序列受限自回归、FAST动作隔离及错误回退；另用固定本地tokenizer做一次真实打包smoke。
 
@@ -163,4 +163,4 @@ F1 已完成，证据及已知限制见 [F1 LOG](../F1_基线与数据/LOG.md)�
 
 F2结束需具备：A/B独立实现与关键测试、小训练和必要闭环证据；可信方向协议、完整标注与固定300题独立GPT图文技术复核及负责人采纳（`gpt_technical_reviewed=300`、`human_reviewed=0`，不宣称真人准确率）；通过质量/网格核验的教师合同及完整train/val缓存；单项吞吐和可恢复产物。若最终交付仍要求真人盲审，则在该证据补齐前继续标`BLOCKED_HUMAN`。第一批材料、脚本存在或loss下降不能单独替代上述完成条件。
 
-后续技术审阅已通过，本轮执行边界见顶部。参考点和轴词约定已采用；2 mm死区是候选规则，抓持是当前双侧fingerpad接触代理，均不等于全量标签通过。固定300题GPT图文技术复核和负责人采纳已记录，`human_reviewed=0`；严格真人条款若仍适用则保留`BLOCKED_HUMAN`，不把GPT复核写成真人签收。B质量结论已接受当前固定合同但保留深度细节偏弱；生产reader已完成pilot级验证，全量train/val生成进行中。原S固定样本KV解释项已收口，A新增生成路径已完成双槽位接口回归；G1=PASS保持不变。F3完整集成与G2冻结另有阶段边界，F2通过不自动授权正式长训练。
+后续技术审阅已通过，本轮执行边界见顶部。参考点和轴词约定已采用；2 mm死区已采用用于F2，抓持是当前双侧fingerpad接触代理，均不等于全量标签通过。固定300题GPT图文技术复核和负责人采纳已记录，`human_reviewed=0`；严格真人条款若仍适用则保留`BLOCKED_HUMAN`，不把GPT复核写成真人签收。B质量结论已接受当前固定合同但保留深度细节偏弱；生产reader已完成pilot级验证，全量train/val生成进行中。原S固定样本KV解释项已收口，A新增生成路径已完成双槽位接口回归；G1=PASS保持不变。F3完整集成与G2冻结另有阶段边界，F2通过不自动授权正式长训练。

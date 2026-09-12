@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**F2：AB模块实现 — GPT技术质检及完整A标签已采用，val缓存已核验，train缓存按原合同续跑。** 启动前发现A训练／推理前缀与缓存接续、真实训练配置不符合既定要求，SA/SB pilot暂未启动，先修复受影响入口。G1=PASS。具体证据及恢复点见 [F2 LOG](docs/F2_AB模块实现/LOG.md)，剩余步骤见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)。各3,000步pilot和20个开发单元的授权持续有效，F2尚未通过，不自动进入F3。
+**F2：AB模块实现 — GPT技术质检及完整A标签已采用，val缓存已核验，train缓存按原合同续跑；A入口修复已通过受影响回归。** SA/SB pilot 尚未启动，待 train 最终manifest和SB固定池合同检查完成后运行。G1=PASS。具体证据及恢复点见 [F2 LOG](docs/F2_AB模块实现/LOG.md)，剩余步骤见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)。各3,000步pilot和20个开发单元的授权持续有效，F2尚未通过，不自动进入F3。
 
 ## 完整方案
 
