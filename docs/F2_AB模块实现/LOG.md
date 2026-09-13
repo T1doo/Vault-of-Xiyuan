@@ -425,3 +425,49 @@ SB固定500动作池经过实际`ab_training_entry.py --config-kind real --mode 
 暂停核验结果：两组 `result-metrics.jsonl` 均为 1,000 行，最后一条 `effective_update=1000`；各自 `step-1000/_CHECKPOINT_METADATA` 存在，SA checkpoint 包含18个文件、SB包含20个文件。实际服务器进程状态均为 stopped（父 `timeout` 仍保持等待），无新的错误文件或失败 registration。heartbeat 有意保留 `status=RUNNING` 与 `effective_update=1000`，因为作业是暂停而非完成，不能据此写成 3,000 步完成。
 
 本次只完成并验证 1,000 步暂停里程碑；没有生成 step-2000/step-3000，没有写最终 `result.json`，也没有进行开发闭环。恢复时应从两组各自完整 `step-1000` checkpoint 使用原 registration/resolved-config 和同一 schedule 执行 `--mode resume`，该命令本次未执行；恢复后继续至3,000有效更新，再分别完成相同20个开发单元。F2仍未通过，不进入F3或正式四组训练。
+
+### 2026-09-13｜供 GPT 审阅的 SA/SB 1,000 步 pilot 报告
+
+#### 审阅范围与阶段结论
+
+这份报告只请求审阅 F2 当前两个独立 pilot 的配置、训练入口、1,000 步证据和暂停/恢复条件。它不请求批准 SAB、F3、正式四组长训练或新的研究分支。当前阶段结论是：**两组 pilot 已各完成并保存 1,000 个有效更新，随后暂停；F2 仍未完成。**尚未运行到 3,000 步，也没有执行 20 个开发闭环，因此不能从本报告得出 SA/SB 的控制效果或相对 S 的收益结论。
+
+#### 固定输入与公平性合同
+
+两组都从同一个 `pi0_fast_base`、seed 0 和同一个 500 动作样本池开始，manifest hash=`67c8aa68036bf27468350f0c26998355f7462e58d8354767a2a1b534b2e632f6`，sample schedule hash=`d503545a9c5e6e549bae3e347fa674cf970dc10ffa23204f25c34007e1ed3b50`。公共训练设置为 physical batch=16、microbatch=4、累计4次、`max_token_len=144`、目标3,000个有效更新；AdamW 为 β=(0.9,0.95)、weight decay=0.01、全局裁剪范数=1.0，学习率从`3e-5`线性 warmup 1,000 步后降至`3e-6`。`lambda_A=0.3`；`lambda_B=0.1`，前2,000个有效更新递增。
+
+SA 读取已采纳的方向标签和 approval（标签 hash=`5a2f86b6539bc478ce860af0bb5ffc26eba146434b4edff07259515eabdb5b81`，approval hash=`1617d183f8ad872ac63ae097b0557f273085cb84ba9bfb312fc7be5b948de062`），500个动作样本中保留25个 action-only 样本。SB 读取固定教师缓存合同 hash=`6de0a7572ac45d080eb37338a2676f14eec1935c29d8d06c9c67d9ca436c8c2d`，不读取方向标签。两组使用同一入口脚本 hash=`b076a77cf5e96bf0544468892feea13833829c12941a84207ecfc2ef48332579`；pilot registration、resolved config、metrics 和 checkpoint 原件留在本机 run 目录。
+
+#### 1,000 步实际训练证据
+
+| 项目 | SA | SB |
+|---|---:|---:|
+| 有效更新 | 1,000 | 1,000 |
+| metrics 行数 | 1,000 | 1,000 |
+| 第一步总损失 | 20.84375 | 14.70317 |
+| 第1,000步总损失 | 1.85938 | 1.54765 |
+| 全程平均总损失 | 5.94207 | 4.35650 |
+| 最后100步平均总损失 | 1.78920 | 1.44036 |
+| 第1,000步动作损失 | 1.85156 | 1.54297 |
+| 第1,000步辅助损失 | 方向 0.02621 | 对齐 0.09360 |
+| 辅助损失全程平均 | 方向 4.05782 | 对齐 0.36152 |
+| 辅助损失最后100步平均 | 方向 0.03385 | 对齐 0.08955 |
+| 第一步学习率 → 第1,000步 | `2.997e-8 → 2.997e-5` | `2.997e-8 → 2.997e-5` |
+
+SA 的方向监督在1,000次更新中累计15,168个样本曝光，平均每次更新15.168/16个，单次范围11—16；这与固定池中保留 action-only 样本的合同一致。SB 每次更新的对齐有效位置均为512。上述损失下降只说明入口在这批训练数据上进行了有效更新，**不是方向准确率、教师质量、仿真成功率或相对基线收益**。训练中没有发现全零动作 mask、缺缓存、非有限损失、冻结参数变化或 sample schedule 改写记录。
+
+#### checkpoint 与暂停证据
+
+两组均在写入完整 `step-1000/_CHECKPOINT_METADATA` 后暂停：SA checkpoint 目录约266 MB、18个文件；SB约310 MB、20个文件；两边均无 `.partial` 文件，最后一条 metrics 的 `effective_update` 都是1000。服务器侧两个训练子进程状态为 stopped，父 `timeout` 只保持等待；registration 仍写 `RUNNING` 是因为作业暂停而非完成，不能把它解释成已完成3,000步。当前没有 step-2000、step-3000 或最终 `result.json`。
+
+本轮另做了 CPU Orbax 只读恢复探针，尝试直接加载两个 `step-1000` 目录；240秒后退出码124且没有输出。因此当前证据足以证明分片写入完成和指标边界正确，但**还不能把“独立恢复已验证”写成通过**。真正恢复时应使用原 resolved config、schedule 和 `--mode resume`，并在 GPU 上核对从1000步继续的 sample cursor、optimizer/projector 状态和下一批样本；本次没有发送恢复命令，也没有改变暂停作业。
+
+#### GPT 请重点审阅的事项
+
+1. 这套配置、同池 sample schedule、SA action-only 保留和 SB 无方向读取，是否满足继续到3,000步前的公平性与监督合同。
+2. 训练曲线的下降、辅助损失和梯度裁剪比例是否显示需要在恢复前停止或修正的异常；请不要把它们当作效果结论。
+3. checkpoint 目录标记完整但 CPU 恢复探针超时，是否应在恢复前增加一次针对真实入口的最小加载检查，或可直接用 GPU `--mode resume` 验证。
+4. 继续运行至3,000步后，SA/SB 是否应严格使用相同的20个开发单元、同一失败分母和既定推理隔离；SB 推理不得加载教师、缓存或投影头。
+5. 在完成终点 checkpoint 与两组20回合闭环之前，是否还有必须保持在 F2 的审阅项；无明确批准前不进入 SAB、F3 或正式长训。
+
+当前建议保持暂停，等待 GPT 审阅后再决定是否恢复。无论审阅意见如何，F2 日志继续保留 `gpt_technical_reviewed=300`、`human_reviewed=0`，不把 GPT 技术复核改记为真人 QC。
