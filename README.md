@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**F2：AB模块实现 — GPT技术质检及完整A标签已采用，train/val 教师缓存已完成严格核验，A 入口和 invalid action-only 分支已通过回归；SA/SB 3,000 步 pilot 正在运行。** G1=PASS。具体证据及恢复点见 [F2 LOG](docs/F2_AB模块实现/LOG.md)，剩余步骤见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)。pilot 完成后还需各自 20 个开发单元，F2 尚未通过，不自动进入 F3。
+**F2：AB模块实现 — GPT技术质检及完整A标签已采用，train/val 教师缓存已完成严格核验，A 入口和 invalid action-only 分支已通过回归；SA/SB 3,000 步 pilot 已各完成并暂停在第 1,000 步完整 checkpoint。** G1=PASS。具体证据及恢复点见 [F2 LOG](docs/F2_AB模块实现/LOG.md)，剩余步骤见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)。恢复后仍需完成至 3,000 步及各自 20 个开发单元，F2 尚未通过，不自动进入 F3。
 
 ## 完整方案
 

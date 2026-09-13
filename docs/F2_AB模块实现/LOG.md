@@ -2,15 +2,15 @@
 
 ## 当前进展
 
-最后核对：2026-09-13。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；train/val全缓存均已通过完整生成、manifest、分片和严格读回核验。A共享问题前缀、一次prefill接续、S回退及invalid训练分支已通过受影响回归，144容量和真实优化配置已固定；SA/SB 3,000步pilot已按授权启动，目前各完成前6个有效更新并持续运行。** 不是等待重复启动授权，也不重开原S KV事项。
+最后核对：2026-09-13。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；train/val全缓存均已通过完整生成、manifest、分片和严格读回核验。A共享问题前缀、一次prefill接续、S回退及invalid训练分支已通过受影响回归，144容量和真实优化配置已固定；SA/SB 3,000步pilot已各运行至1,000个有效更新，并在完整`step-1000` checkpoint写入后按负责人要求暂停。** 不是等待重复启动授权，也不重开原S KV事项。
 
-活跃作业：SA pilot 在一张登记空闲的GPU、SB pilot 在另一张登记空闲的GPU运行；两组均为同一500动作样本池、seed0、有效batch16/microbatch4、3,000有效更新，分别独立写metrics、heartbeat、registration和step-1000/2000/3000 checkpoint。教师生成器已退出0，后续没有教师作业。旧train作业的8小时时限退出码缺失事实保留；恢复作业随后以16小时时限完成，未覆盖原run.log或旧分片。
+暂停作业：SA pilot 和 SB pilot 分别占用原登记的两张GPU并已在各自1,000步checkpoint处停止；两组均为同一500动作样本池、seed0、有效batch16/microbatch4、目标3,000有效更新，分别保留metrics、heartbeat、registration和step-1000/2000/3000 checkpoint路径。教师生成器已退出0，后续没有教师作业。旧train作业的8小时时限退出码缺失事实保留；恢复作业随后以16小时时限完成，未覆盖原run.log或旧分片。
 
 完整恢复材料：既有A标签/approval、固定500动作样本清单和QC材料、历史诊断检查点保留；val的`completion-verification.json`登记6,068行、304片、8行尾片，train的`completion-verification-v2.json`登记55,682行、2,785片、2行尾片，均有原data-v2 ID/元数据精确覆盖及生成器严格读回证据。SA/SB pilot的launch registration、resolved config、逐步metrics和heartbeat留本机运行目录；A入口修复前后源码hash、tokenizer/长度/invalid对照留本机接口产物目录；不向上游推送。
 
 技术质检采用：`gpt_technical_reviewed=300`、`human_reviewed=0`。当前结论在本机`f2-work/annotations/qc-300-prep/gpt_technical_review.json`，绑定`direction-candidate-20260911-v2`；完整采用标签为`direction-adopted-20260911-v1`。原始[300题图文包](review/qc300/)的空审核栏是历史快照，不表示当前GPT审阅为零。2 mm已采用用于F2，非最优性结论；正式协议仍待G2冻结。接触代理、QC037可见性、缺少up/back审阅样例和阶段unknown限制保持。
 
-下一步：继续监控两组pilot至各3,000有效更新，核对首步真实监督、学习率、辅助权重、累计和增量落盘；异常只停止受影响作业并保留现场。完成后使用各自step-3000检查点，在同一20个开发单元上完成闭环，保留所有失败；不另开替代模型，不自动进入F3。授权持续有效，F2仍待pilot和开发闭环结果。
+下一步：在用户要求恢复后，从各自`step-1000`完整checkpoint精确续跑至3,000有效更新，核对采样、损失、学习率、辅助权重、累计和恢复状态；异常只停止受影响作业并保留现场。完成后使用各自step-3000检查点，在同一20个开发单元上完成闭环，保留所有失败；不另开替代模型，不自动进入F3。当前两个子进程均为服务器侧stopped，1000步指标各1000行、checkpoint完整标记存在；恢复命令已登记但本次未执行。授权持续有效，F2仍待pilot和开发闭环结果。
 
 ## 执行记录
 
@@ -417,3 +417,11 @@ SB固定500动作池经过实际`ab_training_entry.py --config-kind real --mode 
 前6个有效更新均已增量落盘并通过启动检查。SA update1/2总loss为20.84375/20.65625，update6为20.125；动作loss为17.09375/16.5/16.171875，方向loss为12.4765625/13.84375/13.21875，方向有效样本14/16/15；SB update1/2总loss为14.7031745911/13.8438498974，update6为13.7346746922，动作loss为14.703125/13.84375/13.734375，对齐loss为0.9989122152/0.9993028641/0.9987078309，alignment有效位置均512。B实际权重λ_B在update1/2/6为0.00005/0.0001/0.0003；两组实际学习率为`2.9969669e-08`/`5.9939339e-08`/`1.7981984e-07`。联合裁剪、累计4次、相同sample_id顺序和heartbeat均已记录；未发现监督、数值、缓存或采样错误。pilot仍在运行，尚未有3,000步终点检查点或20个开发回合结果。
 
 当前真人审核仍为0；GPT技术质检采用保持`gpt_technical_reviewed=300`、`human_reviewed=0`，不改写为真人盲审。F2不因pilot已启动自动通过，不启动SAB/F3或正式四组长训练。
+
+### 2026-09-13｜按负责人要求暂停 SA/SB pilot 于 1,000 步
+
+负责人要求两组 pilot 到达 1,000 步后暂停。本轮在实际服务器环境监控既有 `f2-sa-pilot-20260913-s0` 与 `f2-sb-pilot-20260913-s0`，未重新启动、换参数、换样本池或改变 GPU 分配。服务器侧监视器等待各自保存点完成后发送停止信号；SA 与 SB 均在写入完整 `step-1000` checkpoint 后暂停，没有停在半写分片或跨过目标后继续运行。
+
+暂停核验结果：两组 `result-metrics.jsonl` 均为 1,000 行，最后一条 `effective_update=1000`；各自 `step-1000/_CHECKPOINT_METADATA` 存在，SA checkpoint 包含18个文件、SB包含20个文件。实际服务器进程状态均为 stopped（父 `timeout` 仍保持等待），无新的错误文件或失败 registration。heartbeat 有意保留 `status=RUNNING` 与 `effective_update=1000`，因为作业是暂停而非完成，不能据此写成 3,000 步完成。
+
+本次只完成并验证 1,000 步暂停里程碑；没有生成 step-2000/step-3000，没有写最终 `result.json`，也没有进行开发闭环。恢复时应从两组各自完整 `step-1000` checkpoint 使用原 registration/resolved-config 和同一 schedule 执行 `--mode resume`，该命令本次未执行；恢复后继续至3,000有效更新，再分别完成相同20个开发单元。F2仍未通过，不进入F3或正式四组训练。
