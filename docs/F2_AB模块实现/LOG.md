@@ -543,3 +543,11 @@ SA缓存候选与原版五步的分项指标、参数/optimizer、原始/裁剪�
 原始证据增加：`<PERF_DIAG>/sb-measurements/`、`sb-profile-summary.json`、两组`*-cache-candidate-measurements/compare-P0-reference-P0-candidate.json`、`*-candidate-resume-comparison.json`、`*-input-contract.json`、`performance-summary.json`、`production-resume-start-verification.json`及`harness-source-versions.json`。真实续训命令/环境、进程和恢复身份位于各原run的`resume-cache-v1-launch.json`、`execution-migration-cache-v1.json`和`resume-cache-v1.log`；原始trace、数组与权重留本机，不公开上传。GPT技术QC采纳和`human_reviewed=0`均保持，未重开原S KV、教师缓存或标签审核。
 
 发版前补核：实际续训1001—1005两组均与对应五步参考逐行一致，原1,000行prefix hash不变，步号连续；快照SA=1011、SB=1010，两组唯一写入进程实际存活，heartbeat为RUNNING。证据`<PERF_DIAG>/production-resume-live-verification.json`。当前完整磁盘恢复点仍为原step-1000，2000/3000及开发闭环尚未完成；没有将诊断checkpoint作为真实初始化源。
+
+### 2026-09-14｜性能优化验收通过，保持原 pilot 继续运行
+
+负责人审阅本轮性能报告后确认：重复后端编译为主要瓶颈；保持原计算图的私有编译缓存方案通过；较大JIT边界候选因更新差异被拒绝。两组五步数值、独立恢复和实际1001—1005续接证据足以支持这次迁移，不再暂停、重复性能诊断或重开原S KV/监督质检。G1保持PASS，F2仍未完成。
+
+按最新决定，SA/SB继续使用唯一写入进程、原sample schedule、学习率及B权重日程，总目标各3,000个有效更新。当前性能诊断输出和被拒候选不进入pilot；私有编译缓存保持不清理，代码/数据/检查点身份核验继续执行。后续只汇总实际metrics的100—300步窗口，区分预热、稳态、保存和异常等待；不为正常波动重启或另开测速作业。
+
+下一反馈节点为两组完整step-2000/step-3000 checkpoint及各自相同20个开发单元。heartbeat步数不能代替完整磁盘恢复点；不自动追加训练、不进入SAB/F3、不宣布F2通过。控制性能结论与本次执行提速分开报告，诊断成本保留在资源账本中。
