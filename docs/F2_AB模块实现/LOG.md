@@ -548,6 +548,12 @@ SA缓存候选与原版五步的分项指标、参数/optimizer、原始/裁剪�
 
 本条只登记 SA 的阶段性完整保存证据，不表示 SA 训练已结束，也不改变 SB 的唯一写入作业。两组继续沿用已验收的编译缓存、原 sample schedule、唯一写入进程和总目标 3,000；不暂停、不重启、不追加更新。下一里程碑为 SB 的完整 `step-2000`，随后两组各自完整 `step-3000` 及相同20个开发单元评测。原始运行目录、heartbeat 和检查点元数据留在服务器，未将诊断结果混入正式效果结论。
 
+### 2026-09-14｜SA/SB step-2000 完整检查点均已形成
+
+实时核对（2026-09-14T21:59:04+08:00）确认：SA heartbeat 为 `RUNNING`、`effective_update=2100`，完整检查点包含 `step-2000`；SB heartbeat 为 `RUNNING`、`effective_update=2000`，也已出现完整磁盘检查点 `runs/pilot/f2-sb-pilot-20260913-s0/checkpoints/step-2000/_CHECKPOINT_METADATA`。两组此前的完整 `step-1000` 均保留。
+
+本条登记两组的阶段性保存证据，不表示pilot已结束或F2已通过。两组继续使用原sample schedule、编译缓存、唯一写入进程和总目标3,000，下一里程碑为两组各自完整`step-3000`检查点，随后才进行相同20个开发单元评测。heartbeat步数与完整磁盘恢复点继续分开记录，训练中不进入SAB/F3。
+
 发版前补核：实际续训1001—1005两组均与对应五步参考逐行一致，原1,000行prefix hash不变，步号连续；快照SA=1011、SB=1010，两组唯一写入进程实际存活，heartbeat为RUNNING。证据`<PERF_DIAG>/production-resume-live-verification.json`。当前完整磁盘恢复点仍为原step-1000，2000/3000及开发闭环尚未完成；没有将诊断checkpoint作为真实初始化源。
 
 ### 2026-09-14｜性能优化验收通过，保持原 pilot 继续运行
