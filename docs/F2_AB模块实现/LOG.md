@@ -6,9 +6,9 @@
 
 训练终点：SA运行目录为`runs/pilot/f2-sa-pilot-20260913-s0`，step-3000元数据SHA256=`cc4cfcd22f8a6166df61ebed439bb85aae89d3b5be19ef02aa3c4e5f15de5185`，heartbeat为`COMPLETE/effective_update=3000`；SB运行目录为`runs/pilot/f2-sb-pilot-20260913-s0`，step-3000元数据SHA256=`6afba1dca53d9c9f8b0017c44faf192fd66ccd3bce07a6e7edd487b58797c717`，heartbeat同为`COMPLETE/effective_update=3000`。训练墙钟按运行结果分别约56,793秒（SA）和62,398秒（SB）；不把这两个数写成GPU纯计算时间。
 
-固定20个开发单元已各完成一轮**action-only诊断**，没有活跃评测服务器。两组均为20/20策略解码失败、0成功；这批结果验证了终点checkpoint能加载并接收公共RGB/状态/原始指令请求，但不构成完整A路径或正式效果比较。SA诊断服务器没有实现“模型预测方向→动作”，SB诊断不加载教师、缓存或投影头；完整结果和限制见本日志末尾的2026-09-15记录。
+固定20个开发单元已各完成一轮诊断，没有活跃评测服务器。SA已实际执行完整两槽位“模型预测方向→动作”路径，20/20回合失败、0成功；SB执行不加载教师/缓存/projector的action-only路径，20/20回合失败、0成功。失败均是严格FAST动作解码失败，保留在分母，不构成方法效果比较；完整结果和限制见本日志末尾的2026-09-15记录。
 
-恢复与性能证据：两组step-1000恢复、五步同状态更新对照、独立恢复和1001—1005真实续接均通过；只采用保持原计算图的本地XLA编译缓存，拒绝数值差异过大的更大JIT边界候选。GPT技术质检采用`gpt_technical_reviewed=300`、`human_reviewed=0`继续保持；F2仍需完整A方向自回归开发闭环，不进入F3/SAB，也不把action-only失败写成方法效果结论。
+恢复与性能证据：两组step-1000恢复、五步同状态更新对照、独立恢复和1001—1005真实续接均通过；只采用保持原计算图的本地XLA编译缓存，拒绝数值差异过大的更大JIT边界候选。GPT技术质检采用`gpt_technical_reviewed=300`、`human_reviewed=0`继续保持；完整A路径现已有20回合结构执行证据，但全部动作解码失败，F2阶段总结/审阅未自动通过，不进入F3/SAB，也不把失败写成方法效果结论。
 
 完整恢复材料：既有A标签/approval、固定500动作样本清单和QC材料、历史诊断检查点保留；val的`completion-verification.json`登记6,068行、304片、8行尾片，train的`completion-verification-v2.json`登记55,682行、2,785片、2行尾片，均有原data-v2 ID/元数据精确覆盖及生成器严格读回证据。SA/SB pilot的launch registration、resolved config、逐步metrics和heartbeat留本机运行目录；A入口修复前后源码hash、tokenizer/长度/invalid对照留本机接口产物目录；不向上游推送。
 
@@ -582,3 +582,13 @@ SA缓存候选与原版五步的分项指标、参数/optimizer、原始/裁剪�
 SA结果文件为`runs/eval/f2-sa-dev-20260915-action-only/result.json`（SHA256=`19cfd26179a6a0f5038a1d486b66897167e408685c0088aaa11616bfe4477942`），SB结果文件为`runs/eval/f2-sb-dev-20260915-action-only/result.json`（SHA256=`082c62ad27216cd474667b9296648394028e8b70f3c332188f7aefd7dc3e3499`），合并摘要为`runs/eval/f2-dev-20260915-summary.json`（SHA256=`c451953e4631bf3b0e3baafdcc5a6d42364b2c74bff365fb9f07bd4704d9393f`）。所有失败均发生在严格FAST动作解码阶段，未发送动作目标；没有补零、截断或动作失败后额外action-only重试。
 
 本条完成了两组pilot终点保存和固定20回合的**action-only诊断**，不等同于完整A闭环：SA的“模型预测方向→动作”服务路径尚未在这20回合中实现，因此不能把SA结果称为A完整推理验收；SB结果只证明无教师/缓存/projector的公共推理入口能够加载并进入严格解码，不能证明控制收益。解码失败按失败分母保留，不从正式比较中挑除。F2尚未通过，下一项仍是完成A完整方向自回归开发闭环并汇总F2遗留，不启动SAB或F3。
+
+### 2026-09-15｜补齐SA完整两槽位方向→动作开发诊断
+
+为补齐上一条记录的A路径缺口，使用SA step-3000 checkpoint启动只读服务`f2-work/serve_sa_full_a_dev.py`（最终脚本SHA256=`d635be1fdb77b64a6a283ee8fb2bdf2377f7a15a95bcee5ef6876c0943427a7d`）。服务只接收固定开发客户端发送的当前RGB、腕部RGB、本体状态和原始指令；不加载方向labels、教师特征、未来状态或projector。每次请求由同一公开前缀开始，使用49个有序方向对Trie完成两个槽位的连续自回归生成，再从返回KV状态继续原FAST动作生成；动作段进入严格解码后若失败只记录失败，不改走action-only重试。
+
+固定合同仍为10任务×每任务2个官方初态，共20个不同`unit_fingerprint`，`max_steps=220`、`warmup_steps=10`、`execution_horizon=5`。客户端实际完成20/20回合、26次公开请求；SA方向路径均能返回到动作阶段，未注入GT答案。6次动作请求解码为`ok`并执行了5或10步，20次动作请求返回`invalid_coefficient_length`；因此20回合最终均为`POLICY_DECODE_FAILURE`、0成功、20失败。没有补零、截断、删除失败或额外动作重试。
+
+SA完整A结果写入`runs/eval/f2-sa-dev-20260915-full-a/result.json`，SHA256=`134d15e7d11cd96c01dd7644d55c744ca218add8c10cfda00f8817295b0f5cf8`；服务元数据声明`direction_inference_path=REAL_TWO_SLOT_AUTOREGRESSIVE`、`ordered_pair_candidate_count=49`、`direction_labels_loaded=false`。请求耗时中位数约21.907秒、均值约22.189秒。与此前SB action-only结果合并的最终摘要为`runs/eval/f2-dev-20260915-final-summary.json`，SHA256=`c385380da926377cd9a05ffe2e9a807f07102e1da9281d582ac8cd1a8a171e72`。
+
+这项完成了A要求的“完整路径实际执行”开发诊断，但没有证明控制成功或方向语义正确；解码失败是当前step-3000模型的真实策略失败，不能在增强组获得额外动作重试。SA/SB的终点checkpoint、训练metrics、完整20回合记录和失败分母均保留。F2现有实现、缓存、终点pilot和两条独立推理诊断证据已齐；阶段是否收尾仍需按计划汇总遗留、供GPT复核，不自动进入F3或正式四组训练。

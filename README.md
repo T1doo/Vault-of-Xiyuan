@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**F2：AB模块实现 — GPT技术质检及完整A标签已采用，train/val 教师缓存已完成严格核验，A 入口和 invalid action-only 分支已通过回归；SA/SB 已各完成 3,000 步并形成终点检查点，固定20回合 action-only 诊断已完成。** G1=PASS。具体证据及结果见 [F2 LOG](docs/F2_AB模块实现/LOG.md)，剩余步骤见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)。完整 A 方向自回归开发闭环仍未完成，F2 尚未通过，不自动进入 F3。
+**F2：AB模块实现 — GPT技术质检及完整A标签已采用，train/val 教师缓存已完成严格核验，A 入口和 invalid action-only 分支已通过回归；SA/SB 已各完成 3,000 步并形成终点检查点，SA完整两槽位方向→动作和SB action-only的固定20回合诊断均已完成。** G1=PASS。具体证据及结果见 [F2 LOG](docs/F2_AB模块实现/LOG.md)，剩余步骤见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)。两组诊断均没有成功回合，SA仍需把严格解码失败作为未训练/未适配模型现象分析；F2尚未自动通过，不进入 F3。
 
 ## 完整方案
 
