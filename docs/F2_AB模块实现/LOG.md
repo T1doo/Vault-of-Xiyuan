@@ -2,15 +2,17 @@
 
 ## 当前进展
 
-最后核对：2026-09-13。**G1=PASS，F2尚未通过。固定300题GPT技术复核及负责人采用、完整A标签保留；train/val全缓存均已通过完整生成、manifest、分片和严格读回核验。A共享问题前缀、一次prefill接续、S回退及invalid训练分支已通过受影响回归，144容量和真实优化配置已固定；SA/SB 3,000步pilot已各运行至1,000个有效更新，并在完整`step-1000` checkpoint写入后按负责人要求暂停。** 不是等待重复启动授权，也不重开原S KV事项。
+最后核对：2026-09-14。**G1=PASS，F2尚未通过。性能诊断已完成，SA/SB已从原step-1000恢复，继续原3,000步pilot。** 两组各五步输入、分项指标、原始/裁剪后梯度、参数更新量和optimizer均逐项一致，候选独立恢复通过；只采用保持原计算图的本地XLA编译缓存及显式当前设备sharding恢复。较大JIT边界候选因数值差异拒绝。监督、microbatch4×累计4、144容量、BF16及所有原训练日程保持不变。
 
-暂停作业：SA pilot 和 SB pilot 分别占用原登记的两张GPU并已在各自1,000步checkpoint处停止；两组均为同一500动作样本池、seed0、有效batch16/microbatch4、目标3,000有效更新，分别保留metrics、heartbeat、registration和step-1000/2000/3000 checkpoint路径。教师生成器已退出0，后续没有教师作业。旧train作业的8小时时限退出码缺失事实保留；恢复作业随后以16小时时限完成，未覆盖原run.log或旧分片。
+当前作业：两组各在一张实测空闲GPU上，由新登记的唯一写入者使用原run与sample schedule从第1,001步续训；发版前核对快照SA=1011、SB=1010，实际1001—1005行与对应诊断参考逐行一致，原1,000行prefix hash不变，无重复/跳步。原暂停子进程和父timeout已不存在，无退出码不能确定历史退出原因。本轮诊断占卡窗口保守计6,524.52秒=1.812 GPU·小时，未超2小时，诊断进程全部退出；当前消耗属于已授权原pilot续训。精确PID/GPU、30小时时限、环境及命令在本机resume launch和execution migration记录。
+
+恢复证据：两组原step-1000完整文件hash核对并保留。GPU零更新恢复、五步数值对照，以及候选1003保存→独立恢复1004—1005均通过；没有从诊断模型初始化真实续训。下一完整保存点为原定step-2000，再到step-3000。
 
 完整恢复材料：既有A标签/approval、固定500动作样本清单和QC材料、历史诊断检查点保留；val的`completion-verification.json`登记6,068行、304片、8行尾片，train的`completion-verification-v2.json`登记55,682行、2,785片、2行尾片，均有原data-v2 ID/元数据精确覆盖及生成器严格读回证据。SA/SB pilot的launch registration、resolved config、逐步metrics和heartbeat留本机运行目录；A入口修复前后源码hash、tokenizer/长度/invalid对照留本机接口产物目录；不向上游推送。
 
 技术质检采用：`gpt_technical_reviewed=300`、`human_reviewed=0`。当前结论在本机`f2-work/annotations/qc-300-prep/gpt_technical_review.json`，绑定`direction-candidate-20260911-v2`；完整采用标签为`direction-adopted-20260911-v1`。原始[300题图文包](review/qc300/)的空审核栏是历史快照，不表示当前GPT审阅为零。2 mm已采用用于F2，非最优性结论；正式协议仍待G2冻结。接触代理、QC037可见性、缺少up/back审阅样例和阶段unknown限制保持。
 
-下一步：在用户要求恢复后，从各自`step-1000`完整checkpoint精确续跑至3,000有效更新，核对采样、损失、学习率、辅助权重、累计和恢复状态；异常只停止受影响作业并保留现场。完成后使用各自step-3000检查点，在同一20个开发单元上完成闭环，保留所有失败；不另开替代模型，不自动进入F3。当前两个子进程均为服务器侧stopped，1000步指标各1000行、checkpoint完整标记存在；恢复命令已登记但本次未执行。授权持续有效，F2仍待pilot和开发闭环结果。
+下一步：保持已授权原pilot运行至总计3,000个有效更新并核验终点checkpoint，再分别执行相同20个开发单元。原始指标与失败追加保留，异常停止受影响作业，不改样本、参数、预算或checkpoint选择。当前没有3,000步结果与开发闭环结果；不因性能修复宣布F2通过，不进入SAB/F3。
 
 ## 执行记录
 
@@ -471,3 +473,73 @@ SA 的方向监督在1,000次更新中累计15,168个样本曝光，平均每次
 5. 在完成终点 checkpoint 与两组20回合闭环之前，是否还有必须保持在 F2 的审阅项；无明确批准前不进入 SAB、F3 或正式长训。
 
 当前建议保持暂停，等待 GPT 审阅后再决定是否恢复。无论审阅意见如何，F2 日志继续保留 `gpt_technical_reviewed=300`、`human_reviewed=0`，不把 GPT 技术复核改记为真人 QC。
+
+### 2026-09-14｜真实恢复、SA性能定位与候选验证（SB验证进行中）
+
+本轮按负责人完整性能方案执行：只用一张额外空闲RTX A6000，诊断累计上限2 GPU·小时，恢复/编译/测试均计入；独立源码快照和输出使用`<PERF_DIAG>`，原pilot源checkpoint和前1,000行metrics只读。文档起点`f8946964f8ab2303ed1009fb56eee628fb2f7b22`；原入口hash仍为`b076a77cf5e96bf0544468892feea13833829c12941a84207ecfc2ef48332579`；本机openpi为`16295beccf737e1e180718fe78af963cd8707999`加既有Gemma层捕获改动，完整文件与patch快照已保留。固定JAX 0.5.3、Flax 0.10.2、Orbax 0.11.13，未升级依赖或改变BF16/确定性设置。
+
+**恢复实际证据。** 实际`PyTreeCheckpointer`继承同步`Checkpointer`；安装版本的`save`执行handler保存、finalize与提交同步后返回，项目随后将`.partial`重命名。因此本轮不只依赖marker存在。源SA/SB两组训练进程与父timeout当前均已不存在，本轮未终止它们；无实际退出码，保留“原启动时限86,400秒但退出原因未确认”。在当前可见GPU显式指定恢复sharding，复用原入口初始化/恢复语句并于更新循环前退出；SA初次全流程70.86秒、其中checkpoint元数据/数组恢复1.07秒，SB44.79秒、其中0.25秒。LoRA/optimizer及SB projector/optimizer与第1,000步指纹匹配；完整schedule、loop cursor、RNG和原resolved config核对通过，参数更新0次。后续热环境恢复另记各日志，不与初次耗时混用。原CPU240秒无输出的具体原因未复现，不能据此归因NFS读取慢。
+
+原恢复代码把已恢复optimizer与`start_step`留在独立循环变量，`TrainState.step/opt_state`容器在第一次更新前仍为初始化值。实际原循环按恢复cursor和恢复optimizer继续，不因此重启warmup；独立诊断导出的容器显式同步到恢复值，未重建动量或改变参数。该表示差异保留为实现事实。
+
+**源码排除项与热点。** `_loss_with_public_model`（原入口230—269行）每微批次共用一次Transformer前向，词表投影已截取143个文本目标位置；`_accumulate_real_gradients`（533—602行）在求导前使用`nnx.DiffState(...trainable_filter)`，SB另对projector求导，microbatch4没有拆成四次模型调用。故“整主干求梯度再丢弃”“视觉位置也投影词表”和“辅助loss重复完整前向”均不是本次根因。实际循环没有稳定外层JIT；每次有效更新4次求导，loss/metrics逐微批次取回、裁剪范数转float，SA/SB每步分别5/7次完整指纹（含冻结主干）。HDF5句柄已复用，编码/打包仍反复执行；教师reader只保留两个解压分片，hash已验证集合与解压payload缓存分开。
+
+| SA实测对照（同step-1000、同schedule的1001—1005） | 中位秒/有效更新 | 范围 |
+|---|---:|---:|
+| P0 原版端到端 | 63.116 | 62.538—64.618 |
+| P0 原版重复 | 62.853 | 62.566—63.257 |
+| P1 主机预准备输入 | 62.225 | 61.970—63.098 |
+| P2 输入预驻留GPU | 62.317 | 62.025—63.316 |
+| P3 分离完整指纹审计 | 55.540 | 54.977—56.868 |
+
+计时等待新参数、optimizer、projector及指标完成；参考数组导出和额外核验在计时外。P3仍保留原数学计算和标量落盘，是定位对照，不代表生产取消审计。原版五步重复的保存数组全部一致。五批SA方向监督样本数15/14/16/15/13，包含真实action-only混合，未替换采样。
+
+首次默认Python trace达到1,000,000事件截断，只覆盖开头约0.74秒，保留但不用于整步归因。补采一条完整更新时使用安装版本的ProfilerOptions降低Python追踪粒度，并记录cProfile及编译日志：约71.998秒的带profile更新中，20次`jit(scan)`后端编译累计45.385秒；GPU活动区间并集6.672秒，完整指纹7.278秒。上述有嵌套/重叠关系，不能直接相加为吞吐；无profile P0用于速度比较。完整trace为306,127事件、33,056个GPU事件；D2H约334 MB，不能把每步主干指纹直接解释成每步重新传输整个冻结主干。代码位置、重复编译日志和P0—P3共同支持：**反复编译是主要瓶颈，完整审计是次要成本，SA读取/打包不是主要原因。**
+
+**候选及采用纪律。** 首先测试稳定编译微批次求导、保留原累计和更新的候选；同状态梯度最大绝对差0.0340424，LoRA更新最大差2.27625e-5，部分更新相对L2差约8.8%—10.7%，超出现有判据，单步后停止，不做五步或恢复、不采用。不能把它归为可自动接受的BF16微差。
+
+随后只启用项目私有的本地XLA持久编译缓存，保留原计算图/融合边界、四次顺序累计、loss/optimizer和每步完整审计。缓存是编译程序，不是教师或学生特征，不改变数据。SA冷缓存首步46.813秒；预热后五步端到端中位26.184秒（25.515—26.835），比P0快约2.41倍、每步节约36.932秒。第一次参考输入预准备11.177秒，后续缓存候选输入准备4.214秒，均为额外诊断准备且不隐藏在速度比里；候选每步计时仍实际读取和打包。
+
+SA缓存候选与原版五步的分项指标、参数/optimizer、原始/裁剪后梯度及参数更新量均逐项一致，最大差0；在独立诊断目录同步保存1003步，再由新进程复用原恢复逻辑执行1004—1005，两步全部保存数组及指标与不中断分支一致。原run仍各1,000步，未被这些诊断增加。SB正在同一GPU顺序测量；两组均满足采用条件前，不迁移原pilot。
+
+原始证据：`<PERF_DIAG>/source-inventory.json`、`source-audit.json`、`sa-restore.log`/`sb-restore.log`、`sa-measurements/*-timing.json`、`sa-profile-summary.json`及trace/cProfile、`sa-candidate-measurements/single-step-comparison.json`（拒绝候选）、`sa-cache-candidate-measurements/compare-P0-reference-P0-candidate.json`、`sa-candidate-resume-comparison.json`。精确路径、GPU和命令留本机registration。依据同时核对了固定安装源码与[JAX编译缓存文档](https://docs.jax.dev/en/latest/persistent_compilation_cache.html)、[Orbax显式sharding恢复说明](https://orbax.readthedocs.io/en/stable/guides/checkpoint/checkpointing_pytrees.html)；未拿网上新版本覆盖本机实现。
+
+### 2026-09-14｜两组性能结论、精确执行迁移与真实续训
+
+**结论：重复编译是主要原因；已采用保持原计算图的XLA编译缓存，真实续训已启动并核对。** 不采用数值不符的较大JIT边界候选，不改变训练数学、batch、精度、审计频率或监督。以下原版与候选步时均是不带profiler的完整有效更新，采用同一step-1000与原schedule的1001—1005；额外数组导出、输入指纹和checkpoint验证不算作生产稳态计算。
+
+| 项目 | SA | SB |
+|---|---:|---:|
+| 原step-1000首次GPU零更新恢复，全流程 | 70.86秒，通过 | 44.79秒，通过 |
+| 其中checkpoint元数据/数组恢复 | 1.07秒 | 0.25秒 |
+| 原版端到端，中位秒/更新 | 63.116 | 66.286 |
+| 原版五步重复，中位秒/更新 | 62.853 | 64.910 |
+| 主机预准备输入，中位秒/更新 | 62.225 | 未单独运行；用端到端/设备驻留差值检查额外读取 |
+| 原版设备驻留输入，中位秒/更新 | 62.317 | 62.817 |
+| 分离完整指纹审计，中位秒/更新 | 55.540 | 56.275 |
+| 完整profile中的后端编译 | 20次scan，45.385秒 | 20次scan，44.727秒 |
+| profile中的GPU活动区间并集 | 6.672秒 | 6.712秒 |
+| 候选实际改动 | 原图XLA编译缓存 | 原图XLA编译缓存 |
+| 候选冷缓存首更新，含编译 | 46.813秒 | 62.189秒 |
+| 候选前一次性诊断输入准备 | 4.214秒 | 50.795秒 |
+| 候选端到端，中位秒/更新 | 26.184 | 28.589 |
+| 候选五步步时范围 | 25.515—26.835秒 | 27.879—30.350秒 |
+| 原版/候选端到端比值 | 2.41倍 | 2.32倍 |
+| 原版五步重复/候选五步数值对照 | 全部保存数组、指标及Δθ逐项一致 | 全部保存数组、指标及Δθ逐项一致 |
+| 候选1003保存→独立恢复1004—1005 | 全部数组及指标一致 | 全部数组及指标一致 |
+| 缓存关闭/开启的输入与预处理合同 | 五批逐项一致，0模型更新 | 五批逐项一致，0模型更新 |
+| 是否采用、实际生效步 | 已采用，从原pilot的1001步 | 已采用，从原pilot的1001步 |
+
+冷缓存首更新是完整更新加编译，不能写成纯编译耗时；准备时间属于诊断阶段且另列，候选五步计时仍包含原reader/打包和完整审计。SB额外教师读取/解压仍存在，未以新增数据缓存消除；主要共同开销已由trace、源码和编译复用对照定位。按这五步中位数外推，两组各剩2,000步预计合计节省约41.46 GPU·小时，这是估计，真实续训/评测成本另记。不能从loss或提速推断控制收益。
+
+采用设置为固定JAX版本支持的`jax_compilation_cache_dir=<PRIVATE_NODE_LOCAL_DIR>`、`jax_persistent_cache_min_compile_time_secs=0.0`、`jax_persistent_cache_min_entry_size_bytes=-1`。本地目录已核对容量与权限，编译结果不公开；没有缓存学生特征、梯度或logits，也未重新提取教师特征。原入口与A/B数学实现hash未变；新增`resume_ab_pilot_cache_v1.py`执行适配器SHA256=`cc367bc2a78398a8f0f1d6de51b6fb8c0bbfef91a874279e7ff948621b944fca`，调用原`ab_training_entry.py`的真实`--mode resume`入口。适配器只加已验证的编译缓存、显式目标设备sharding、采用证据/源hash检查和唯一写入锁；原resolved config、数据、标签与教师合同检查仍执行，未用忽略代码身份来强行加载。
+
+迁移前核对两组原run无训练写入者，原暂停PID与父进程均已不存在，本轮无需发送终止或恢复信号。逐文件核对原step-1000 hash；前1,000行metrics和原launch/resolved config保留。新执行记录关联旧入口hash、新适配器hash、检查点hash、验证依据与唯一写入者；两组使用原500池、seed、完整schedule、microbatch4×累计4、144容量、原BF16/矩阵精度/确定性及日程，从1001开始，总目标3,000，不重启学习率或B的warmup。按照实测余量登记每组30小时时限（只扩充启动器时间余量，不增加更新预算）；目标预计约14.5/15.9 GPU小时/组，属按隔离五步测速的估计，并发与I/O变化需从实际续训记录核对。
+
+真实启动核对快照：SA已到1004、SB到1003，1001开始的已写行与相应候选/原版诊断参考逐行一致（含sample_id顺序、分项loss/有效计数、实际lr/λ、裁剪、LoRA/optimizer及SB projector指纹）。两份原metrics前缀hash均不变，步号从1连续，无重复或跳步。源checkpoint不被诊断覆盖；下次保存仍是2000、3000。此项证明本次安全续接，不等于3,000步终点、两组20个开发单元或F2已完成。
+
+诊断总预算按首个GPU探针启动到最后输入合同探针退出的整段窗口保守计6,524.52 GPU秒（1.812 GPU·小时），中间CPU分析与空闲也计入，未超过2 GPU·小时；全程最多一张额外GPU。诊断更新均在独立输出，不加到真实pilot。SB候选第一次启动因自动审批连接中断被拒绝，核对没有启动日志/状态改变后，同一有限请求重试通过；没有绕过审批或运行重复作业。首次`trace`事件截断和较大JIT边界的数值失败均保留，未据退出0冒充验证成功。
+
+原始证据增加：`<PERF_DIAG>/sb-measurements/`、`sb-profile-summary.json`、两组`*-cache-candidate-measurements/compare-P0-reference-P0-candidate.json`、`*-candidate-resume-comparison.json`、`*-input-contract.json`、`performance-summary.json`、`production-resume-start-verification.json`及`harness-source-versions.json`。真实续训命令/环境、进程和恢复身份位于各原run的`resume-cache-v1-launch.json`、`execution-migration-cache-v1.json`和`resume-cache-v1.log`；原始trace、数组与权重留本机，不公开上传。GPT技术QC采纳和`human_reviewed=0`均保持，未重开原S KV、教师缓存或标签审核。
+
+发版前补核：实际续训1001—1005两组均与对应五步参考逐行一致，原1,000行prefix hash不变，步号连续；快照SA=1011、SB=1010，两组唯一写入进程实际存活，heartbeat为RUNNING。证据`<PERF_DIAG>/production-resume-live-verification.json`。当前完整磁盘恢复点仍为原step-1000，2000/3000及开发闭环尚未完成；没有将诊断checkpoint作为真实初始化源。
