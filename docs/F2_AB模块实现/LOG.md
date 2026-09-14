@@ -542,6 +542,12 @@ SA缓存候选与原版五步的分项指标、参数/optimizer、原始/裁剪�
 
 原始证据增加：`<PERF_DIAG>/sb-measurements/`、`sb-profile-summary.json`、两组`*-cache-candidate-measurements/compare-P0-reference-P0-candidate.json`、`*-candidate-resume-comparison.json`、`*-input-contract.json`、`performance-summary.json`、`production-resume-start-verification.json`及`harness-source-versions.json`。真实续训命令/环境、进程和恢复身份位于各原run的`resume-cache-v1-launch.json`、`execution-migration-cache-v1.json`和`resume-cache-v1.log`；原始trace、数组与权重留本机，不公开上传。GPT技术QC采纳和`human_reviewed=0`均保持，未重开原S KV、教师缓存或标签审核。
 
+### 2026-09-14｜SA step-2000 完整检查点形成，SB pilot 继续
+
+实时核对（2026-09-14T21:12:16+08:00）确认：SA heartbeat 为 `RUNNING`、`effective_update=2000`，并已出现完整磁盘检查点 `runs/pilot/f2-sa-pilot-20260913-s0/checkpoints/step-2000/_CHECKPOINT_METADATA`；此前完整 `step-1000` 仍保留。SB heartbeat 为 `RUNNING`、`effective_update=1908`，当前完整磁盘检查点仍为 `step-1000`，未把 heartbeat 步数当作恢复点。
+
+本条只登记 SA 的阶段性完整保存证据，不表示 SA 训练已结束，也不改变 SB 的唯一写入作业。两组继续沿用已验收的编译缓存、原 sample schedule、唯一写入进程和总目标 3,000；不暂停、不重启、不追加更新。下一里程碑为 SB 的完整 `step-2000`，随后两组各自完整 `step-3000` 及相同20个开发单元评测。原始运行目录、heartbeat 和检查点元数据留在服务器，未将诊断结果混入正式效果结论。
+
 发版前补核：实际续训1001—1005两组均与对应五步参考逐行一致，原1,000行prefix hash不变，步号连续；快照SA=1011、SB=1010，两组唯一写入进程实际存活，heartbeat为RUNNING。证据`<PERF_DIAG>/production-resume-live-verification.json`。当前完整磁盘恢复点仍为原step-1000，2000/3000及开发闭环尚未完成；没有将诊断checkpoint作为真实初始化源。
 
 ### 2026-09-14｜性能优化验收通过，保持原 pilot 继续运行
