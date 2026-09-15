@@ -1,6 +1,6 @@
 {
   "docs_baseline": "381bfae52c493747ac78ee0a26bc423b3631ca4c",
-  "status": "DONE_ENGINEERING_PILOT_NOT_STABLE_CONTROL",
+  "status": "IN_PROGRESS_FUNCTIONAL_ACCEPTANCE_PENDING",
   "training_windows": {
     "sa": {
       "1": {
@@ -578,8 +578,23 @@
         "new_dtype_error": 2,
         "not_full_same_weight_gpu_regression": true
       }
+    },
+    "acceptance_revoked_20260915": {
+      "old_status": "DONE_ENGINEERING_PILOT_NOT_STABLE_CONTROL",
+      "superseded_baseline": "782ccc395dbefa420adf0fbedf54a7fee0223ad7",
+      "reason": "User revoked F2 overall acceptance/F3 prerequisite; functional closed-loop reliability unmet; completed runs and service regression remain valid"
     }
   },
   "current_service_regression_ref": "service_fix.regression",
-  "current_service_fix_cost_ref": "service_fix.cost"
+  "current_service_fix_cost_ref": "service_fix.cost",
+  "stage_acceptance": {
+    "F1_G1": "PASS",
+    "F2": "IN_PROGRESS",
+    "F2_accepted": false,
+    "F3": "TODO_PLANNED",
+    "F3_execution_authorized": false,
+    "SAB_execution_authorized": false,
+    "formal_queue_authorized": false,
+    "scope": "Only CPU/read-only analysis and plan drafting authorized this round"
+  }
 }

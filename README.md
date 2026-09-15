@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**当前为 F3 计划待审（TODO / PLANNED），尚未执行。** F2 的工程实现与小样本验证已获最终认可，稳定控制目标未达成；有效结果为 SA full-A 原结果与 SB 修复服务v1结果，两者均0/20成功。G1=PASS，G2未通过。下一步只审阅 [F3 PLAN](docs/F3_集成与协议冻结/PLAN.md)，计划状态见 [F3 LOG](docs/F3_集成与协议冻结/LOG.md)；F2依据见 [F2 LOG](docs/F2_AB模块实现/LOG.md)及[聚合结果](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。本批不启动模型更新、SAB或正式队列。
+**当前回到 F2：IN_PROGRESS，整体验收未通过，闭环可靠性尚未满足。** 已完成的A/B工程、监督/缓存、两组3,000步、有效负结果、服务修复及回归全部保留；SA full-A与修复SB均0/20成功。G1=PASS；F3前置未满足，400步/24 GPU小时/最多四卡执行许可撤回，仅保留TODO/PLANNED计划。当前只做现有文件CPU分析与后续F2验证提案，待技术审阅批准后再执行。见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)、[F2 LOG](docs/F2_AB模块实现/LOG.md)、[F3保留计划](docs/F3_集成与协议冻结/PLAN.md)、[聚合证据](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。
 
 ## 完整方案
 
