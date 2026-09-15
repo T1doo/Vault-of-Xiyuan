@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**F2 已按“独立工程实现与小样本验证”限定范围完成；稳定控制目标未达成。** 实际action-only服务类型适配已修复，同权重144容量端到端回归精确一致；SB原20单元重评0/20成功（31请求、11合法），SA full-A原0/20结果保留。两组3,000步和全部监督/检查点保留，负结果不写成控制PASS。详见 [F2 LOG](docs/F2_AB模块实现/LOG.md)、[F2 PLAN](docs/F2_AB模块实现/PLAN.md)与[聚合结果](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。G1=PASS，G2未通过，当前未进入F3。
+**当前为 F3 计划待审（TODO / PLANNED），尚未执行。** F2 的工程实现与小样本验证已获最终认可，稳定控制目标未达成；有效结果为 SA full-A 原结果与 SB 修复服务v1结果，两者均0/20成功。G1=PASS，G2未通过。下一步只审阅 [F3 PLAN](docs/F3_集成与协议冻结/PLAN.md)，计划状态见 [F3 LOG](docs/F3_集成与协议冻结/LOG.md)；F2依据见 [F2 LOG](docs/F2_AB模块实现/LOG.md)及[聚合结果](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。本批不启动模型更新、SAB或正式队列。
 
 ## 完整方案
 

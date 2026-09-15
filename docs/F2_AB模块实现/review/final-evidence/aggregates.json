@@ -327,13 +327,6 @@
       101
     ]
   },
-  "service_replay": {
-    "new_gpu_generations": 0,
-    "same_saved_F1_outputs": 2,
-    "old_ok": 2,
-    "new_dtype_error": 2,
-    "not_full_same_weight_gpu_regression": true
-  },
   "cost": {
     "sa": {
       "result_mode": "resume",
@@ -359,7 +352,6 @@
     "No step-time plot: per-update timestamps unavailable in metrics; no fabricated distribution",
     "Request latency under different failure lengths is not a controlled inference-cost ratio"
   ],
-  "new_gpu_seconds": 0,
   "backup_independent": "unconfirmed; new source/evidence additive same-NFS archive verified",
   "source_hashes": {
     "serve_s.py_0": {
@@ -572,5 +564,22 @@
     ],
     "result_sha256": "26870bba4f64012a43348566f782d7ea8600f1486f6454237f4fbb4f4ceaf107",
     "SA_fullA_unaffected": true
-  }
+  },
+  "history": {
+    "f2_final_check_before_service_fix": {
+      "docs_baseline": "381bfae52c493747ac78ee0a26bc423b3631ca4c",
+      "published_commit": "ae6f908035fdf4df2c25b114171b54a7f10fd47d",
+      "scope": "CPU保存输出重放批次；不描述后续真实服务修复回归",
+      "new_gpu_seconds": 0,
+      "service_replay": {
+        "new_gpu_generations": 0,
+        "same_saved_F1_outputs": 2,
+        "old_ok": 2,
+        "new_dtype_error": 2,
+        "not_full_same_weight_gpu_regression": true
+      }
+    }
+  },
+  "current_service_regression_ref": "service_fix.regression",
+  "current_service_fix_cost_ref": "service_fix.cost"
 }
