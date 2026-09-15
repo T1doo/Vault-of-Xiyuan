@@ -8,13 +8,13 @@
 
 固定20个开发单元已各完成一轮诊断，没有活跃评测服务器。SA已实际执行完整两槽位“模型预测方向→动作”路径，20/20回合失败、0成功；SB执行不加载教师/缓存/projector的action-only路径，20/20回合失败、0成功。失败均是严格FAST动作解码失败，保留在分母，不构成方法效果比较；完整结果和限制见本日志末尾的2026-09-15记录。
 
-恢复与性能证据：两组step-1000恢复、五步同状态更新对照、独立恢复和1001—1005真实续接均通过；只采用保持原计算图的本地XLA编译缓存，拒绝数值差异过大的更大JIT边界候选。GPT技术质检采用`gpt_technical_reviewed=300`、`human_reviewed=0`继续保持；完整A路径现已有20回合结构执行证据，但全部动作解码失败，F2阶段总结/审阅未自动通过，不进入F3/SAB，也不把失败写成方法效果结论。
+恢复与性能证据：两组step-1000恢复、五步同状态更新对照、独立恢复和1001—1005真实续接均通过；只采用保持原计算图的本地XLA编译缓存，拒绝数值差异过大的更大JIT边界候选。GPT技术质检采用`gpt_technical_reviewed=300`、`human_reviewed=0`继续保持；完整A路径现已有20回合结构执行证据，另有固定10 train/10 val的raw token、严格解码和teacher-forcing审计。接口合同与终点指纹在本轮范围内通过，但自由生成的train/val落差仍待阶段审阅，不进入F3/SAB，也不把解码失败写成方法效果结论。
 
 完整恢复材料：既有A标签/approval、固定500动作样本清单和QC材料、历史诊断检查点保留；val的`completion-verification.json`登记6,068行、304片、8行尾片，train的`completion-verification-v2.json`登记55,682行、2,785片、2行尾片，均有原data-v2 ID/元数据精确覆盖及生成器严格读回证据。SA/SB pilot的launch registration、resolved config、逐步metrics和heartbeat留本机运行目录；A入口修复前后源码hash、tokenizer/长度/invalid对照留本机接口产物目录；不向上游推送。
 
 技术质检采用：`gpt_technical_reviewed=300`、`human_reviewed=0`。当前结论在本机`f2-work/annotations/qc-300-prep/gpt_technical_review.json`，绑定`direction-candidate-20260911-v2`；完整采用标签为`direction-adopted-20260911-v1`。原始[300题图文包](review/qc300/)的空审核栏是历史快照，不表示当前GPT审阅为零。2 mm已采用用于F2，非最优性结论；正式协议仍待G2冻结。接触代理、QC037可见性、缺少up/back审阅样例和阶段unknown限制保持。
 
-下一步：保留两组终点checkpoint、完整metrics和action-only诊断失败，补齐A的完整“模型预测方向→动作”20回合开发闭环并汇总F2遗留。原始指标与失败追加保留，不重跑已完成的pilot、缓存或性能诊断；不因训练完成或action-only诊断宣布F2通过，不进入SAB/F3。
+下一步：保留两组终点checkpoint、完整metrics和三批开发结果，提交本日志末尾的解码故障定点审计供F2收尾审阅。原始指标与失败追加保留，不重跑已完成的pilot、缓存或性能诊断；不因训练完成或解码诊断宣布F2通过，不进入SAB/F3。
 
 ## 执行记录
 
@@ -592,3 +592,41 @@ SA结果文件为`runs/eval/f2-sa-dev-20260915-action-only/result.json`（SHA256
 SA完整A结果写入`runs/eval/f2-sa-dev-20260915-full-a/result.json`，SHA256=`134d15e7d11cd96c01dd7644d55c744ca218add8c10cfda00f8817295b0f5cf8`；服务元数据声明`direction_inference_path=REAL_TWO_SLOT_AUTOREGRESSIVE`、`ordered_pair_candidate_count=49`、`direction_labels_loaded=false`。请求耗时中位数约21.907秒、均值约22.189秒。与此前SB action-only结果合并的最终摘要为`runs/eval/f2-dev-20260915-final-summary.json`，SHA256=`c385380da926377cd9a05ffe2e9a807f07102e1da9281d582ac8cd1a8a171e72`。
 
 这项完成了A要求的“完整路径实际执行”开发诊断，但没有证明控制成功或方向语义正确；解码失败是当前step-3000模型的真实策略失败，不能在增强组获得额外动作重试。SA/SB的终点checkpoint、训练metrics、完整20回合记录和失败分母均保留。F2现有实现、缓存、终点pilot和两条独立推理诊断证据已齐；阶段是否收尾仍需按计划汇总遗留、供GPT复核，不自动进入F3或正式四组训练。
+
+### 2026-09-15｜F2终点解码故障定点审计（零更新）
+
+本轮按“先查合同和服务、再区分训练/泛化”的顺序执行，未修改训练协议、权重、标签、缓存或正式checkpoint，也未追加更新。三批原始评测保持独立：SA action-only为额外诊断，SB action-only为主要B开发结果，SA full-A为主要A开发结果；没有合并为40回合。固定逐请求表见`runs/audit/f2-decode-20260915-v1/request-table.jsonl`，最终汇总`summary-v3.json`（SHA256=`926ad8f705902bbd91dec0b84dafcfd2e3f6c1f29f3c3cafd8edbcaabf141d93`）。原20回合服务没有保存raw token，因此对应字段按缺失登记；本轮少量零更新审计补齐了raw token/EOS/Action边界/FAST span/系数数量。
+
+**实际调用关系与版本。** action-only服务为`ProjectSPipeline.inference_batch`→`model.sample_actions`→浮点整数token的显式int32适配→`ProjectSPipeline.unpack`；脚本SHA256=`3e1fecb499cadb5510f7ba3e6003ab4178c634bbfd73209ee4f414a615a10522`。full-A服务为公开原始指令→`build_direction_prompt`→一次方向前缀prefill→49种有序两槽位Trie约束生成→同一KV状态的FAST动作续写→同一严格解码器；脚本SHA256=`d635be1fdb77b64a6a283ee8fb2bdf2377f7a15a95bcee5ef6876c094342a7d`。两个终点服务均只加载对应step-3000 trainable参数，不加载GT方向/教师特征/projector（SB action-only推理也不加载projector）。
+
+**结果与请求分母。** 原始full-A评测仍是20回合、26次请求，其中6次`ok`、20次`invalid_coefficient_length`；20回合最终均失败，未发送动作的回合和已执行5/10步后再次失败的回合均保留。SB action-only原评测20回合、20次请求均返回通用`FastDecodeError`，原服务没有把底层子错误写入结果；SA action-only额外诊断同为20/20通用`FastDecodeError`。这三批路径没有覆盖或重试。
+
+**专家动作完整回环（CPU）。** 从固定train/val样本的真实动作目标出发，经当前`ProjectSPipeline.pack`、FAST到语言模型token映射、当前严格Action/EOS抽取，再经`ProjectSPipeline.unpack`，6/6样本通过。每个样本均为唯一EOS、Action边界有效、预测合同为10×7、解码系数恰为70；执行horizon=5仅用于环境执行，不改变70系数合同。动作压缩token数按Action span内FAST token计数（不含Action marker和EOS），分别为16/26/28/17/25/12；最大反变换误差约0.0653，未出现补零/截断。证据`runs/audit/f2-decode-20260915-v1/expert-roundtrip.json`（SHA256=`29f3b6bfd8bad7bd46f92bce1af8b7f507d7ea68f3f031fc6809da174239a73e`）。
+
+**终点模型的raw token审计。** 固定每任务一例，共10个train和10个独立val观测；生成预算256，所有已捕获序列均在预算内出现EOS，EOS后没有非零token，不能归因于预算耗尽。结果如下：
+
+| 变体/集合 | 合法动作解码 | 严格错误分解 | 解码后系数（错误样本） |
+|---|---:|---|---|
+| SA train（full-A） | 8/10 | 1 `invalid_action_boundary`，1 `invalid_coefficient_length` | 71 |
+| SA val（full-A） | 5/10 | 1 `invalid_action_boundary`，4 `invalid_coefficient_length` | 72、69、76、865 |
+| SB train（action-only） | 10/10 | 0 | — |
+| SB val（action-only） | 2/10 | 2 `invalid_action_boundary`，6 `invalid_coefficient_length` | 73、69、75、71、52、73 |
+
+这批raw审计的SA train/val文件分别为`sa-train-10-model-audit.json`（SHA256=`acf36981031c9f0a44c716cb72dbbc37f1bae82c77b771e4f53f30eb536c156a`）和`sa-val-10-model-audit.json`（SHA256=`5010c7019a48ffcbb1d5a4427e8b3e4a7ff687e3c562a2bcf3f164f933d8d4d3`）；SB分别为`sb-train-10-model-audit.json`（SHA256=`ff3e0b503196590730ecc5ff5fd14da0bbe4deaa6d870291fdcf3e1df942d701`）和`sb-val-10-model-audit.json`（SHA256=`241c947f7d9786ca7ea1e847ac3963745714193093df5f3053463a4f1505301e`）。每个终点审计都核对了checkpoint trainable fingerprint与最后一行metrics；SA匹配且无projector，SB的LoRA与projector均匹配。
+
+**F1公共路径对照。** 在两个固定val输入上，F1已审计S checkpoint的旧action路径两次均为`ok`；当前SB step-3000 action-only路径一次为`ok`、一次为`invalid_coefficient_length`（73个系数）。两套pipeline对同一原始输入的真实前缀token和mask均逐项一致（true prefix长度分别55和50）；F1与SB是不同checkpoint/容量，这只是定位公共服务差异的回归，不是效果比较。证据`runs/audit/f2-decode-20260915-v1/sb-vs-f1-public-path.json`（SHA256=`170946ed39a74b6385906e591ba0939ee50e72fb3cbdf6c6c344cc4a00b73fd3`）。在这两个样本上没有看到新的前缀/归一化错位，不能把它扩大成所有输入的等价证明。
+
+**teacher-forcing与方向诊断。** 同一终点参数、固定10 train/10 val样本的一次前向结果：
+
+| 变体/集合 | 动作teacher-forcing | 方向teacher-forcing | 自回归方向（SA） |
+|---|---:|---:|---:|
+| SA train | 187/187 = 1.00 | 64/64 = 1.00（8个可评分样本） | 16/16槽位、8/8 pair（2个样本GT invalid不计） |
+| SA val | 74/200 = 0.37 | 74/80 = 0.925 | 14/20槽位、5/10 pair |
+| SB train | 187/187 = 1.00 | 不适用 | 不适用 |
+| SB val | 80/200 = 0.40 | 不适用 | 不适用 |
+
+teacher-forcing证据为`sa-teacher-forcing-audit.json`（SHA256=`179392a90ae688f509c8dae586641f033bed4c7103b03208bf8dc4f0fe28aa97`）及`sb-teacher-forcing-audit.json`（SHA256=`6e226adf529c655e3a648916d30210f6c140707bd9e79b4e6d0ddcac40320a05`）；SA方向离线评分为`sa-direction-scoring.json`（SHA256=`b9b8de362b7dccff296dbfd390ce9e180161ec74fa88fc76cc43b119b6f485d8`），只对两个槽位都可靠有效的样本计分，GT没有进入自然生成请求。终点metrics另显示SA step-3000 action/direction loss=`0.04248/0.001293`、末100步动作loss均值=`0.03743`，SB step-3000 action/alignment loss=`0.06134/0.05708`、末100步均值=`0.05716/0.06124`；两组1—3000行均连续。
+
+**审计结论。** 专家序列、EOS/Action合同和当前严格解码器通过；终点服务实际加载的LoRA（以及SB projector）与训练终点指纹一致；F1与SB固定输入的公共前缀也一致。因而本轮没有足够证据支持“服务加载或FAST合同存在共同实现错误”，不做生产修复，不重跑原20回合。自然生成在训练池与独立val之间出现明显落差（SA 8/10→5/10，SB 10/10→2/10），并伴随teacher-forcing到自由生成的差距；这与训练池覆盖/自由生成泛化不足相容，但仅是固定20个观测的诊断，不能写成正式泛化结论或A/B无效结论。保留所有失败、raw审计和旧版本；F2维持待审，不训练、不放宽FAST、不追加动作重试、不进入SAB/F3。
+
+本轮成功GPU审计（含加载/编译/推理及一次F1对照）约1,043秒、0.29 GPU·小时，未超过2 GPU·小时；第一次审计器因动态jit参数和SA的`projector=None`字段出现的工具层错误已保留并排除，修正版结果才进入上述结论。完整原始代码、token和JSON均留在实际工程目录，未上传权重或数据。
