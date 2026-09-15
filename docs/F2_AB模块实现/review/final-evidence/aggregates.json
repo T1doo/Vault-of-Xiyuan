@@ -583,6 +583,10 @@
       "old_status": "DONE_ENGINEERING_PILOT_NOT_STABLE_CONTROL",
       "superseded_baseline": "782ccc395dbefa420adf0fbedf54a7fee0223ad7",
       "reason": "User revoked F2 overall acceptance/F3 prerequisite; functional closed-loop reliability unmet; completed runs and service regression remain valid"
+    },
+    "midpoint_authorization_20260915": {
+      "previous_execution_scope": "Only CPU/read-only analysis and plan drafting authorized this round",
+      "scope_change": "only 4 existing checkpoint loads / 80 natural / 8 TF within 3600 GPU seconds approved; delivered partial 60/6; no future compute authorized"
     }
   },
   "current_service_regression_ref": "service_fix.regression",
@@ -595,6 +599,1367 @@
     "F3_execution_authorized": false,
     "SAB_execution_authorized": false,
     "formal_queue_authorized": false,
-    "scope": "Only CPU/read-only analysis and plan drafting authorized this round"
+    "scope": "Midpoint diagnostic partially delivered, zero training/rollouts; additional loading, training, rollouts and F3 require new approval"
+  },
+  "midpoint_diagnostic_v1": {
+    "status": "PARTIAL_SA1000_NOT_EXECUTED_AFTER_LOAD_FAILURE",
+    "phase_state": "F2_IN_PROGRESS_NOT_ACCEPTED",
+    "new_model_loads": 4,
+    "new_generations": 60,
+    "new_teacher_forcing_batches": 6,
+    "missing_generations": 20,
+    "missing_tf_batches": 2,
+    "stages": {
+      "sa": {
+        "1000": {
+          "execution_status": "FAILED",
+          "splits": {
+            "train": {
+              "planned": 10,
+              "executed": 0,
+              "not_executed": 10,
+              "legal": 0,
+              "errors": {},
+              "teacher_forcing": null,
+              "direction": {
+                "scored_samples": 0,
+                "slots_correct": 0,
+                "slots_total": 0,
+                "pairs_correct": 0
+              },
+              "train_condition_groups": {
+                "direction_supervised": {
+                  "n": 0,
+                  "legal": 0,
+                  "errors": {}
+                },
+                "action_only_train_full_A_infer": {
+                  "n": 0,
+                  "legal": 0,
+                  "errors": {}
+                }
+              }
+            },
+            "val": {
+              "planned": 10,
+              "executed": 0,
+              "not_executed": 10,
+              "legal": 0,
+              "errors": {},
+              "teacher_forcing": null,
+              "direction": {
+                "scored_samples": 0,
+                "slots_correct": 0,
+                "slots_total": 0,
+                "pairs_correct": 0
+              }
+            }
+          },
+          "checkpoint_lr_lambda": {
+            "learning_rate": 2.9970031391712837e-05,
+            "lambda_a": 0.3,
+            "lambda_b": 0.05,
+            "raw_action_loss": 1.8515625,
+            "raw_direction_loss": 0.026214599609375,
+            "raw_alignment_loss": null
+          }
+        },
+        "2000": {
+          "execution_status": "COMPLETE",
+          "splits": {
+            "train": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 8,
+              "errors": {
+                "ok": 8,
+                "invalid_coefficient_length": 2
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    19,
+                    14,
+                    17,
+                    19,
+                    19,
+                    21
+                  ],
+                  "correct_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    18,
+                    14,
+                    17,
+                    19,
+                    18,
+                    21
+                  ],
+                  "accuracy_per_sample": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.9473684430122375,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.9473684430122375,
+                    1.0
+                  ],
+                  "total_valid_tokens": 187,
+                  "total_correct_tokens": 185,
+                  "accuracy": 0.9893048128342246,
+                  "per_sample_loss": [
+                    0.099609375,
+                    0.0771484375,
+                    0.1591796875,
+                    0.07080078125,
+                    0.12353515625,
+                    0.10986328125,
+                    0.07666015625,
+                    0.09423828125,
+                    0.07080078125,
+                    0.05419921875
+                  ],
+                  "loss_mean_per_sample": 0.09375
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8
+                  ],
+                  "correct_tokens_per_sample": [
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8
+                  ],
+                  "accuracy_per_sample": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "total_valid_tokens": 64,
+                  "total_correct_tokens": 64,
+                  "accuracy": 1.0,
+                  "per_sample_loss": [
+                    0.00579833984375,
+                    0.0029144287109375,
+                    0.0,
+                    0.0076904296875,
+                    0.01043701171875,
+                    0.011474609375,
+                    0.0,
+                    0.01129150390625,
+                    0.003875732421875,
+                    0.000972747802734375
+                  ],
+                  "loss_mean_per_sample": 0.00543212890625
+                }
+              },
+              "direction": {
+                "scored_samples": 8,
+                "slots_correct": 16,
+                "slots_total": 16,
+                "pairs_correct": 8
+              },
+              "train_condition_groups": {
+                "direction_supervised": {
+                  "n": 8,
+                  "legal": 8,
+                  "errors": {
+                    "ok": 8
+                  }
+                },
+                "action_only_train_full_A_infer": {
+                  "n": 2,
+                  "legal": 0,
+                  "errors": {
+                    "invalid_coefficient_length": 2
+                  }
+                }
+              }
+            },
+            "val": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 6,
+              "errors": {
+                "ok": 6,
+                "invalid_coefficient_length": 2,
+                "invalid_action_boundary": 2
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    22,
+                    18,
+                    18,
+                    19,
+                    18,
+                    18,
+                    23,
+                    20,
+                    19,
+                    25
+                  ],
+                  "correct_tokens_per_sample": [
+                    9,
+                    8,
+                    7,
+                    9,
+                    8,
+                    9,
+                    9,
+                    8,
+                    8,
+                    7
+                  ],
+                  "accuracy_per_sample": [
+                    0.40909093618392944,
+                    0.4444444477558136,
+                    0.3888888955116272,
+                    0.4736842215061188,
+                    0.4444444477558136,
+                    0.5,
+                    0.3913043439388275,
+                    0.4000000059604645,
+                    0.42105263471603394,
+                    0.2800000011920929
+                  ],
+                  "total_valid_tokens": 200,
+                  "total_correct_tokens": 82,
+                  "accuracy": 0.41,
+                  "per_sample_loss": [
+                    5.46875,
+                    8.5625,
+                    9.0625,
+                    6.1875,
+                    4.09375,
+                    6.6875,
+                    5.90625,
+                    6.4375,
+                    6.0,
+                    10.5625
+                  ],
+                  "loss_mean_per_sample": 6.90625
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "correct_tokens_per_sample": [
+                    7,
+                    8,
+                    8,
+                    8,
+                    7,
+                    7,
+                    7,
+                    8,
+                    8,
+                    7
+                  ],
+                  "accuracy_per_sample": [
+                    0.875,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.875,
+                    0.875,
+                    0.875,
+                    1.0,
+                    1.0,
+                    0.875
+                  ],
+                  "total_valid_tokens": 80,
+                  "total_correct_tokens": 75,
+                  "accuracy": 0.9375,
+                  "per_sample_loss": [
+                    0.2138671875,
+                    0.00579833984375,
+                    0.1162109375,
+                    0.07861328125,
+                    1.1953125,
+                    1.0,
+                    0.5234375,
+                    0.0,
+                    0.0019378662109375,
+                    0.87890625
+                  ],
+                  "loss_mean_per_sample": 0.40234375
+                }
+              },
+              "direction": {
+                "scored_samples": 10,
+                "slots_correct": 14,
+                "slots_total": 20,
+                "pairs_correct": 5
+              }
+            }
+          },
+          "checkpoint_lr_lambda": {
+            "learning_rate": 1.6521204088348895e-05,
+            "lambda_a": 0.3,
+            "lambda_b": 0.1,
+            "raw_action_loss": 0.2252197265625,
+            "raw_direction_loss": 0.004138946533203125,
+            "raw_alignment_loss": null
+          }
+        },
+        "3000": {
+          "execution_status": "REUSED_STEP3000",
+          "splits": {
+            "train": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 8,
+              "errors": {
+                "ok": 8,
+                "invalid_action_boundary": 1,
+                "invalid_coefficient_length": 1
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    19,
+                    14,
+                    17,
+                    19,
+                    19,
+                    21
+                  ],
+                  "correct_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    19,
+                    14,
+                    17,
+                    19,
+                    19,
+                    21
+                  ],
+                  "accuracy_per_sample": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "total_valid_tokens": 187,
+                  "total_correct_tokens": 187,
+                  "accuracy": 1.0
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8
+                  ],
+                  "correct_tokens_per_sample": [
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8,
+                    0,
+                    8,
+                    8,
+                    8
+                  ],
+                  "accuracy_per_sample": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "total_valid_tokens": 64,
+                  "total_correct_tokens": 64,
+                  "accuracy": 1.0
+                }
+              },
+              "direction": {
+                "scored_samples": 8,
+                "slots_correct": 16,
+                "slots_total": 16,
+                "pairs_correct": 8
+              },
+              "train_condition_groups": {
+                "direction_supervised": {
+                  "n": 8,
+                  "legal": 8,
+                  "errors": {
+                    "ok": 8
+                  }
+                },
+                "action_only_train_full_A_infer": {
+                  "n": 2,
+                  "legal": 0,
+                  "errors": {
+                    "invalid_action_boundary": 1,
+                    "invalid_coefficient_length": 1
+                  }
+                }
+              }
+            },
+            "val": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 5,
+              "errors": {
+                "invalid_coefficient_length": 4,
+                "ok": 5,
+                "invalid_action_boundary": 1
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    22,
+                    18,
+                    18,
+                    19,
+                    18,
+                    18,
+                    23,
+                    20,
+                    19,
+                    25
+                  ],
+                  "correct_tokens_per_sample": [
+                    8,
+                    6,
+                    7,
+                    9,
+                    8,
+                    8,
+                    7,
+                    8,
+                    7,
+                    6
+                  ],
+                  "accuracy_per_sample": [
+                    0.3636363744735718,
+                    0.3333333432674408,
+                    0.3888888955116272,
+                    0.4736842215061188,
+                    0.4444444477558136,
+                    0.4444444477558136,
+                    0.30434784293174744,
+                    0.4000000059604645,
+                    0.3684210479259491,
+                    0.23999999463558197
+                  ],
+                  "total_valid_tokens": 200,
+                  "total_correct_tokens": 74,
+                  "accuracy": 0.37
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "correct_tokens_per_sample": [
+                    7,
+                    8,
+                    8,
+                    8,
+                    7,
+                    7,
+                    6,
+                    8,
+                    8,
+                    7
+                  ],
+                  "accuracy_per_sample": [
+                    0.875,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.875,
+                    0.875,
+                    0.75,
+                    1.0,
+                    1.0,
+                    0.875
+                  ],
+                  "total_valid_tokens": 80,
+                  "total_correct_tokens": 74,
+                  "accuracy": 0.925
+                }
+              },
+              "direction": {
+                "scored_samples": 10,
+                "slots_correct": 14,
+                "slots_total": 20,
+                "pairs_correct": 5
+              }
+            }
+          },
+          "checkpoint_lr_lambda": {
+            "learning_rate": 3.0000169317645486e-06,
+            "lambda_a": 0.3,
+            "lambda_b": 0.1,
+            "raw_action_loss": 0.04248046875,
+            "raw_direction_loss": 0.0012929439544677734,
+            "raw_alignment_loss": null
+          }
+        }
+      },
+      "sb": {
+        "1000": {
+          "execution_status": "COMPLETE",
+          "splits": {
+            "train": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 5,
+              "errors": {
+                "ok": 5,
+                "invalid_coefficient_length": 4,
+                "missing_eos": 1
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    19,
+                    14,
+                    17,
+                    19,
+                    19,
+                    21
+                  ],
+                  "correct_tokens_per_sample": [
+                    12,
+                    13,
+                    12,
+                    14,
+                    15,
+                    9,
+                    9,
+                    13,
+                    11,
+                    13
+                  ],
+                  "accuracy_per_sample": [
+                    0.5714285969734192,
+                    0.6842105388641357,
+                    0.6315789222717285,
+                    0.7368420958518982,
+                    0.7894737124443054,
+                    0.6428571939468384,
+                    0.529411792755127,
+                    0.6842105388641357,
+                    0.5789473652839661,
+                    0.6190476417541504
+                  ],
+                  "total_valid_tokens": 187,
+                  "total_correct_tokens": 121,
+                  "accuracy": 0.6470588235294118,
+                  "per_sample_loss": [
+                    1.0625,
+                    0.875,
+                    1.3828125,
+                    1.171875,
+                    0.86328125,
+                    0.78515625,
+                    1.5078125,
+                    0.90625,
+                    1.2890625,
+                    1.1796875
+                  ],
+                  "loss_mean_per_sample": 1.1015625
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "correct_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "accuracy_per_sample": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "total_valid_tokens": 0,
+                  "total_correct_tokens": 0,
+                  "accuracy": 0.0,
+                  "per_sample_loss": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "loss_mean_per_sample": 0.0
+                }
+              }
+            },
+            "val": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 3,
+              "errors": {
+                "ok": 3,
+                "invalid_coefficient_length": 5,
+                "invalid_action_boundary": 2
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    22,
+                    18,
+                    18,
+                    19,
+                    18,
+                    18,
+                    23,
+                    20,
+                    19,
+                    25
+                  ],
+                  "correct_tokens_per_sample": [
+                    8,
+                    8,
+                    7,
+                    9,
+                    9,
+                    10,
+                    8,
+                    8,
+                    9,
+                    8
+                  ],
+                  "accuracy_per_sample": [
+                    0.3636363744735718,
+                    0.4444444477558136,
+                    0.3888888955116272,
+                    0.4736842215061188,
+                    0.5,
+                    0.5555555820465088,
+                    0.3478260934352875,
+                    0.4000000059604645,
+                    0.4736842215061188,
+                    0.3199999928474426
+                  ],
+                  "total_valid_tokens": 200,
+                  "total_correct_tokens": 84,
+                  "accuracy": 0.42,
+                  "per_sample_loss": [
+                    2.609375,
+                    3.4375,
+                    4.28125,
+                    3.625,
+                    1.9296875,
+                    2.578125,
+                    3.40625,
+                    4.40625,
+                    3.203125,
+                    5.4375
+                  ],
+                  "loss_mean_per_sample": 3.484375
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "correct_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "accuracy_per_sample": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "total_valid_tokens": 0,
+                  "total_correct_tokens": 0,
+                  "accuracy": 0.0,
+                  "per_sample_loss": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "loss_mean_per_sample": 0.0
+                }
+              }
+            }
+          },
+          "checkpoint_lr_lambda": {
+            "learning_rate": 2.9970031391712837e-05,
+            "lambda_a": 0.3,
+            "lambda_b": 0.05,
+            "raw_action_loss": 1.54296875,
+            "raw_direction_loss": null,
+            "raw_alignment_loss": 0.09360349178314209
+          }
+        },
+        "2000": {
+          "execution_status": "COMPLETE",
+          "splits": {
+            "train": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 10,
+              "errors": {
+                "ok": 10
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    19,
+                    14,
+                    17,
+                    19,
+                    19,
+                    21
+                  ],
+                  "correct_tokens_per_sample": [
+                    19,
+                    19,
+                    19,
+                    19,
+                    17,
+                    12,
+                    17,
+                    16,
+                    18,
+                    19
+                  ],
+                  "accuracy_per_sample": [
+                    0.9047619104385376,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.8947368264198303,
+                    0.8571429252624512,
+                    1.0,
+                    0.8421052694320679,
+                    0.9473684430122375,
+                    0.9047619104385376
+                  ],
+                  "total_valid_tokens": 187,
+                  "total_correct_tokens": 175,
+                  "accuracy": 0.9358288770053476,
+                  "per_sample_loss": [
+                    0.2470703125,
+                    0.0595703125,
+                    0.10498046875,
+                    0.07666015625,
+                    0.59765625,
+                    0.30859375,
+                    0.1123046875,
+                    0.3359375,
+                    0.185546875,
+                    0.185546875
+                  ],
+                  "loss_mean_per_sample": 0.2216796875
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "correct_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "accuracy_per_sample": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "total_valid_tokens": 0,
+                  "total_correct_tokens": 0,
+                  "accuracy": 0.0,
+                  "per_sample_loss": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "loss_mean_per_sample": 0.0
+                }
+              }
+            },
+            "val": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 4,
+              "errors": {
+                "ok": 4,
+                "invalid_coefficient_length": 5,
+                "invalid_action_boundary": 1
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    22,
+                    18,
+                    18,
+                    19,
+                    18,
+                    18,
+                    23,
+                    20,
+                    19,
+                    25
+                  ],
+                  "correct_tokens_per_sample": [
+                    12,
+                    7,
+                    6,
+                    8,
+                    8,
+                    8,
+                    7,
+                    8,
+                    7,
+                    9
+                  ],
+                  "accuracy_per_sample": [
+                    0.5454545617103577,
+                    0.3888888955116272,
+                    0.3333333432674408,
+                    0.42105263471603394,
+                    0.4444444477558136,
+                    0.4444444477558136,
+                    0.30434784293174744,
+                    0.4000000059604645,
+                    0.3684210479259491,
+                    0.35999998450279236
+                  ],
+                  "total_valid_tokens": 200,
+                  "total_correct_tokens": 80,
+                  "accuracy": 0.4,
+                  "per_sample_loss": [
+                    4.0625,
+                    8.5,
+                    7.28125,
+                    5.28125,
+                    4.875,
+                    5.46875,
+                    7.65625,
+                    8.1875,
+                    6.6875,
+                    7.5625
+                  ],
+                  "loss_mean_per_sample": 6.5625
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "correct_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "accuracy_per_sample": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "total_valid_tokens": 0,
+                  "total_correct_tokens": 0,
+                  "accuracy": 0.0,
+                  "per_sample_loss": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "loss_mean_per_sample": 0.0
+                }
+              }
+            }
+          },
+          "checkpoint_lr_lambda": {
+            "learning_rate": 1.6521204088348895e-05,
+            "lambda_a": 0.3,
+            "lambda_b": 0.1,
+            "raw_action_loss": 0.182373046875,
+            "raw_direction_loss": null,
+            "raw_alignment_loss": 0.06243377737700939
+          }
+        },
+        "3000": {
+          "execution_status": "REUSED_STEP3000",
+          "splits": {
+            "train": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 10,
+              "errors": {
+                "ok": 10
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    19,
+                    14,
+                    17,
+                    19,
+                    19,
+                    21
+                  ],
+                  "correct_tokens_per_sample": [
+                    21,
+                    19,
+                    19,
+                    19,
+                    19,
+                    14,
+                    17,
+                    19,
+                    19,
+                    21
+                  ],
+                  "accuracy_per_sample": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "total_valid_tokens": 187,
+                  "total_correct_tokens": 187,
+                  "accuracy": 1.0
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "correct_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "accuracy_per_sample": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "total_valid_tokens": 0,
+                  "total_correct_tokens": 0,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "val": {
+              "planned": 10,
+              "executed": 10,
+              "not_executed": 0,
+              "legal": 2,
+              "errors": {
+                "invalid_coefficient_length": 6,
+                "ok": 2,
+                "invalid_action_boundary": 2
+              },
+              "teacher_forcing": {
+                "action": {
+                  "valid_tokens_per_sample": [
+                    22,
+                    18,
+                    18,
+                    19,
+                    18,
+                    18,
+                    23,
+                    20,
+                    19,
+                    25
+                  ],
+                  "correct_tokens_per_sample": [
+                    12,
+                    8,
+                    6,
+                    7,
+                    8,
+                    8,
+                    8,
+                    8,
+                    7,
+                    8
+                  ],
+                  "accuracy_per_sample": [
+                    0.5454545617103577,
+                    0.4444444477558136,
+                    0.3333333432674408,
+                    0.3684210479259491,
+                    0.4444444477558136,
+                    0.4444444477558136,
+                    0.3478260934352875,
+                    0.4000000059604645,
+                    0.3684210479259491,
+                    0.3199999928474426
+                  ],
+                  "total_valid_tokens": 200,
+                  "total_correct_tokens": 80,
+                  "accuracy": 0.4
+                },
+                "direction": {
+                  "valid_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "correct_tokens_per_sample": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "accuracy_per_sample": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "total_valid_tokens": 0,
+                  "total_correct_tokens": 0,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          },
+          "checkpoint_lr_lambda": {
+            "learning_rate": 3.0000169317645486e-06,
+            "lambda_a": 0.3,
+            "lambda_b": 0.1,
+            "raw_action_loss": 0.06134033203125,
+            "raw_direction_loss": null,
+            "raw_alignment_loss": 0.05707548372447491
+          }
+        }
+      }
+    },
+    "transitions": {
+      "sa/train/1000->3000": {
+        "counts": {},
+        "matched": 0,
+        "not_executed": 10
+      },
+      "sa/train/2000->3000": {
+        "counts": {
+          "legal -> legal": 8,
+          "illegal -> illegal": 2
+        },
+        "matched": 10,
+        "not_executed": 0
+      },
+      "sa/val/1000->3000": {
+        "counts": {},
+        "matched": 0,
+        "not_executed": 10
+      },
+      "sa/val/2000->3000": {
+        "counts": {
+          "legal -> illegal": 2,
+          "legal -> legal": 4,
+          "illegal -> illegal": 3,
+          "illegal -> legal": 1
+        },
+        "matched": 10,
+        "not_executed": 0
+      },
+      "sb/train/1000->3000": {
+        "counts": {
+          "legal -> legal": 5,
+          "illegal -> legal": 5
+        },
+        "matched": 10,
+        "not_executed": 0
+      },
+      "sb/train/2000->3000": {
+        "counts": {
+          "legal -> legal": 10
+        },
+        "matched": 10,
+        "not_executed": 0
+      },
+      "sb/val/1000->3000": {
+        "counts": {
+          "legal -> illegal": 3,
+          "illegal -> legal": 2,
+          "illegal -> illegal": 5
+        },
+        "matched": 10,
+        "not_executed": 0
+      },
+      "sb/val/2000->3000": {
+        "counts": {
+          "legal -> illegal": 4,
+          "illegal -> legal": 2,
+          "illegal -> illegal": 4
+        },
+        "matched": 10,
+        "not_executed": 0
+      }
+    },
+    "gpu_budget_window_seconds": 382.13650608062744,
+    "gpu_process_phase_seconds": 303.6200008392334,
+    "step3000_reused": true,
+    "new_training_updates": 0,
+    "new_rollouts": 0,
+    "reason_for_missing": "Harness guard mistakenly blocked production_reader.py import after SA1000 model load; no extra load or retry",
+    "comparison_sha256": "9295c07710280c2062f01c0639ea7b552f610ca0a81e59db2ab6d05a11d9449e"
   }
 }
