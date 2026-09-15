@@ -1,6 +1,6 @@
 {
   "docs_baseline": "381bfae52c493747ac78ee0a26bc423b3631ca4c",
-  "status": "F2_TECHNICAL_DIFFERENCE_FOUND_NOT_CLOSED",
+  "status": "DONE_ENGINEERING_PILOT_NOT_STABLE_CONTROL",
   "training_windows": {
     "sa": {
       "1": {
@@ -219,7 +219,8 @@
       "request_delay_mean": 1.1973152971826493,
       "errors": {
         "FastDecodeError": 20
-      }
+      },
+      "validity": "invalid extra diagnostic; not repeated"
     },
     "sb-action-only": {
       "episodes": 20,
@@ -232,7 +233,8 @@
       "request_delay_mean": 1.1012578321620823,
       "errors": {
         "FastDecodeError": 20
-      }
+      },
+      "validity": "superseded for model evaluation: confirmed missing token adapter"
     },
     "sa-full-a": {
       "episodes": 20,
@@ -247,6 +249,23 @@
         "invalid_coefficient_length": 20,
         "ok": 6
       }
+    },
+    "sb-service-fixed-v1": {
+      "episodes": 20,
+      "requests": 31,
+      "legal": 11,
+      "failed_requests": 20,
+      "successes": 0,
+      "executed_steps": 55,
+      "errors": {
+        "invalid_coefficient_length": 18,
+        "ok": 11,
+        "invalid_action_boundary": 2
+      },
+      "request_delay_median": 0.6323305927217007,
+      "request_delay_mean": 0.6414970655835444,
+      "result_sha256": "26870bba4f64012a43348566f782d7ea8600f1486f6454237f4fbb4f4ceaf107",
+      "same_original_unit_manifest": true
     }
   },
   "majority": {
@@ -341,7 +360,7 @@
     "Request latency under different failure lengths is not a controlled inference-cost ratio"
   ],
   "new_gpu_seconds": 0,
-  "backup_independent": "unconfirmed",
+  "backup_independent": "unconfirmed; new source/evidence additive same-NFS archive verified",
   "source_hashes": {
     "serve_s.py_0": {
       "sha256": "7ccd2278a2f0d094a17a3cd669724846cff0e0dcc6d30117dc6aa25ee0dfc6e3",
@@ -519,5 +538,39 @@
   "scripts_sha256": {
     "final_check.py": "882ea39a099ed7a2d6ae32116aa50fd7ecab4ab57bbdd52ad7f49b8df93e247a",
     "render_final.py": "5b6344e313cda7f417d2c7b6c616de02ed1c76c16a3347fa13402d37c41dd1cd"
+  },
+  "latest_sb_evaluation": "sb-service-fixed-v1",
+  "service_fix": {
+    "source_sha256": "d3c6d74aef2b422ed12cde47022ece8b0091858b3c1f9f5df7b9b7a929f64cef",
+    "regression": {
+      "checkpoint": "F1 step3000",
+      "val_indices": [
+        0,
+        591
+      ],
+      "capacity": 144,
+      "status": "PASS_EXACT_INPUT_PARAMS_FIRST_LOGITS_TOKENS_ACTIONS",
+      "old_capacity_override": "test-only in-memory resolved config; original file unchanged",
+      "parameter_fingerprint": "a4b726d8828dc963dbceb3969a0e7295d7917d8360ebb9995eb316c1b708916e",
+      "exact_inputs_first_logits_positions_attention_tokens_actions": true,
+      "websocket": true
+    },
+    "cost": {
+      "same_weight_regression_seconds": 110.20829939842224,
+      "failed_startup_seconds": 10.015151739120483,
+      "sb_startup_seconds": 28.86546277999878,
+      "regression_total_seconds": 149.0889139175415,
+      "regression_budget_seconds": 3600,
+      "reevaluation_seconds": 58.19113254547119,
+      "sb_total_wall_seconds": 87.5253655910492,
+      "total_gpu_wall_seconds": 207.74881672859192,
+      "cpu_sandbox_probe": "no output; stopped exact identified PID; not proof of failed GPU restore"
+    },
+    "actual_sb_lora_leaves_exact": 10,
+    "restored_keys": [
+      "trainable_params"
+    ],
+    "result_sha256": "26870bba4f64012a43348566f782d7ea8600f1486f6454237f4fbb4f4ceaf107",
+    "SA_fullA_unaffected": true
   }
 }

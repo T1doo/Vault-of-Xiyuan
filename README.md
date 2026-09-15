@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**F2：最终补核发现实际 action-only 服务缺少整数 token 适配，当前 BLOCKED。** SA/SB各3,000步、检查点和三批开发结果保留；原SB评测受服务缺陷影响，不能作为可靠模型负结果。六张聚合表、三张曲线和来源/备份限制已整理，见 [F2 LOG](docs/F2_AB模块实现/LOG.md) 与 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)。G1保持PASS，控制目标未达成；本轮不重训、不重评、不进入F3。
+**F2 已按“独立工程实现与小样本验证”限定范围完成；稳定控制目标未达成。** 实际action-only服务类型适配已修复，同权重144容量端到端回归精确一致；SB原20单元重评0/20成功（31请求、11合法），SA full-A原0/20结果保留。两组3,000步和全部监督/检查点保留，负结果不写成控制PASS。详见 [F2 LOG](docs/F2_AB模块实现/LOG.md)、[F2 PLAN](docs/F2_AB模块实现/PLAN.md)与[聚合结果](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。G1=PASS，G2未通过，当前未进入F3。
 
 ## 完整方案
 
