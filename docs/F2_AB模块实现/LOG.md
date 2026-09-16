@@ -1031,3 +1031,11 @@ S-500 匹配对照继续使用同一单卡、固定 500 样本池和原 sample s
 本节点保存的固定诊断已完成：10 个 train + 10 个 val 自然生成（20 条请求）和各一批 teacher-forcing。原始结果位于 `runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-1000/`，`result.json` 状态为 `COMPLETE`，自然生成含 20 条逐样本状态、`requests.jsonl` 20 行；teacher-forcing train 为 123/187 token、val 为 85/200 token。该诊断只走结构关闭 A/B 的公共 S 动作路径，不更新参数，不进入正式效果表。
 
 step-1000 更新耗时约 37.74 秒（含保存前后运行开销），诊断耗时约 30.88 秒；实际总成本继续以运行目录 registration/心跳为准。训练进程已从该检查点继续，后续目标仍为 step-2000、step-3000 及终点固定 20 个 clean 开发单元；不补 SA-1000、不训练 SA/SAB、不进入 F3，不自动将诊断结果解释为方法效果或阶段验收。
+
+### 2026-09-17｜S-500 step-2000 检查点与第二个诊断完成
+
+S-500 匹配对照继续使用同一单卡、固定 500 样本池和原 sample schedule。有效更新已到 2000/3000；`checkpoints/step-2000/` 含 `_CHECKPOINT_METADATA`，诊断完成后训练已继续到 step-2005，心跳仍为 `RUNNING`，未启动第二个写入者。
+
+step-2000 的固定诊断已完成：10 个 train + 10 个 val 自然生成（20 条请求）和 train/val 各一批 teacher-forcing。原始结果位于 `runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-2000/`，`result.json` 状态为 `COMPLETE`；自然生成统计为 train 10/10 合法、val 2/10 合法（7 条 `invalid_coefficient_length`、1 条 `invalid_action_boundary`）。teacher-forcing 为 train 183/187 token、val 75/200 token。该诊断只走结构关闭 A/B 的公共 S 动作路径，不更新参数，不进入正式效果表。
+
+step-2000 训练更新耗时约 29.05 秒；诊断结果包含检查点元数据 SHA256=`e89ab0a0f7f97c7b561be5284c8f3dc40bdfb403836c5cc99d37c31ade5534dc`。实际总成本继续以运行目录 registration/心跳为准。训练进程已从该检查点继续，后续目标仍为 step-3000 及终点固定 20 个 clean 开发单元；不补 SA-1000、不训练 SA/SAB、不进入 F3，不自动将诊断结果解释为方法效果或阶段验收。
