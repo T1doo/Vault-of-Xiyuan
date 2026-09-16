@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**当前回到 F2：IN_PROGRESS，整体验收未通过，闭环可靠性尚未满足。** 已完成的A/B工程、监督/缓存、两组3,000步、有效负结果、服务修复及回归全部保留；SA full-A与修复SB均0/20成功。G1=PASS；F3前置未满足，400步/24 GPU小时/最多四卡执行许可撤回，仅保留TODO/PLANNED计划。当前只做现有文件CPU分析与后续F2验证提案，待技术审阅批准后再执行。见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)、[F2 LOG](docs/F2_AB模块实现/LOG.md)、[F3保留计划](docs/F3_集成与协议冻结/PLAN.md)、[聚合证据](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。
+**F2：IN_PROGRESS／未验收，当前已获批并启动S-500匹配对照。** 共享初始化、500池全部采样顺序、优化/batch和动作合同前检通过；单卡30 GPU小时内训练3000步，在1000/2000/3000固定离线诊断，终点原20clean一次评测。尚未完成，不自动通过F2。原SA/SB训练、有效负结果、服务修复及回归保留；G1=PASS，F3/SAB和四组400步/24 GPU小时仍未授权。见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)、[F2 LOG](docs/F2_AB模块实现/LOG.md)及[既有聚合证据](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。
 
 ## 完整方案
 

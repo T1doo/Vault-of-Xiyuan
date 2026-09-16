@@ -587,6 +587,10 @@
     "midpoint_authorization_20260915": {
       "previous_execution_scope": "Only CPU/read-only analysis and plan drafting authorized this round",
       "scope_change": "only 4 existing checkpoint loads / 80 natural / 8 TF within 3600 GPU seconds approved; delivered partial 60/6; no future compute authorized"
+    },
+    "s500_authorization_20260916": {
+      "previous_execution_scope": "Midpoint diagnostic partially delivered, zero training/rollouts; additional loading, training, rollouts and F3 require new approval",
+      "decision": "User approved one matched S500 run, 3000 updates and 3-point diagnostics + terminal20, one GPU30h; no F2/F3 acceptance"
     }
   },
   "current_service_regression_ref": "service_fix.regression",
@@ -599,7 +603,7 @@
     "F3_execution_authorized": false,
     "SAB_execution_authorized": false,
     "formal_queue_authorized": false,
-    "scope": "Midpoint diagnostic partially delivered, zero training/rollouts; additional loading, training, rollouts and F3 require new approval"
+    "scope": "Only approved S-500 matched experiment running under one-GPU30h cap; F2 not accepted, F3/SAB unauthorized"
   },
   "midpoint_diagnostic_v1": {
     "status": "PARTIAL_SA1000_NOT_EXECUTED_AFTER_LOAD_FAILURE",
@@ -1961,5 +1965,29 @@
     "new_rollouts": 0,
     "reason_for_missing": "Harness guard mistakenly blocked production_reader.py import after SA1000 model load; no extra load or retry",
     "comparison_sha256": "9295c07710280c2062f01c0639ea7b552f610ca0a81e59db2ab6d05a11d9449e"
+  },
+  "s500_matched_control": {
+    "status": "RUNNING_STARTUP_VERIFIED",
+    "target_updates": 3000,
+    "budget_gpu_hours": 30,
+    "max_gpus": 1,
+    "shared_schedule_sha256": "d503545a9c5e6e549bae3e347fa674cf970dc10ffa23204f25c34007e1ed3b50",
+    "initial_lora_fingerprint": "2f86409ca081f3a222e1fe652ffd2de6e833927e1e4e43b8aa9ea3223259ac1a",
+    "initial_parameter_comparison": "exact against archived SB initialization code, same key101",
+    "first_action_loss_equal_SB": 14.703125,
+    "no_teacher_or_projector_or_alignment": true,
+    "checkpoints_planned": [
+      1000,
+      2000,
+      3000
+    ],
+    "diagnostics_per_checkpoint": {
+      "natural": 20,
+      "TF_batches": 2
+    },
+    "terminal_clean_episodes_planned": 20,
+    "completed_evaluation": null,
+    "F2_accepted": false,
+    "source_sha256": "1707fd325296470b24eeffca7858f3cb0b1da10c32c17cd523e6725041bb14a5"
   }
 }
