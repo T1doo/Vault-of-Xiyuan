@@ -1023,3 +1023,11 @@ SB val中，1000的3个合法、2000的4个合法到3000都变为非法，而终
 源代码、CPU前检、初始化原件、启动核查及运行身份见本机`<S500_AUDIT>/preflight.json`、`train_with_checks.py`、`run.py`和`<S500_RUN>/initialization-check.json`、`startup-verification.json`、`orchestration.json`、resolved-config/metrics/heartbeat。实际checkpoint/诊断回调复用既有保存、模型与TF函数，后续执行结果会追加；新长作业已真实启动，不以文档计划冒充后台运行。该队列仅本S对照，不恢复任何F3队列授权。
 
 本次交接仅说明前检通过及S训练启动，尚无三个中间/终点诊断或20clean结果。F2仍IN_PROGRESS，旧SA/SB、监督/QC/缓存和历史缺口不变。
+
+### 2026-09-16｜S-500 step-1000 检查点与首个诊断完成
+
+S-500 匹配对照继续使用同一单卡、固定 500 样本池和原 sample schedule。有效更新已到 1000/3000；`checkpoints/step-1000/` 含 `_CHECKPOINT_METADATA`，心跳仍为 `RUNNING`，未启动第二个写入者。
+
+本节点保存的固定诊断已完成：10 个 train + 10 个 val 自然生成（20 条请求）和各一批 teacher-forcing。原始结果位于 `runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-1000/`，`result.json` 状态为 `COMPLETE`，自然生成含 20 条逐样本状态、`requests.jsonl` 20 行；teacher-forcing train 为 123/187 token、val 为 85/200 token。该诊断只走结构关闭 A/B 的公共 S 动作路径，不更新参数，不进入正式效果表。
+
+step-1000 更新耗时约 37.74 秒（含保存前后运行开销），诊断耗时约 30.88 秒；实际总成本继续以运行目录 registration/心跳为准。训练进程已从该检查点继续，后续目标仍为 step-2000、step-3000 及终点固定 20 个 clean 开发单元；不补 SA-1000、不训练 SA/SAB、不进入 F3，不自动将诊断结果解释为方法效果或阶段验收。
