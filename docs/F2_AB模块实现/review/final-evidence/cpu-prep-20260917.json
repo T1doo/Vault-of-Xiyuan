@@ -1,0 +1,166 @@
+{
+  "scope": "F2 CPU preparation only; no F2 acceptance or F3 main execution",
+  "evidence_types": {
+    "candidate_counts": "real existing inventory, draft source rows; no verified full unit fingerprints",
+    "tests": "synthetic_fixture",
+    "legacy": "read-only historical schema compatibility; no new results",
+    "configuration": "draft static fixture only",
+    "budget": "assumptions, not measurements or authorization"
+  },
+  "docs_baseline": "50e2149c5236a5201e1ab85bb9c3127d95b89cbe",
+  "implementation_base_commit": "16295beccf737e1e180718fe78af963cd8707999",
+  "implementation_dirty_patch_preserved": true,
+  "candidate_summary": {
+    "inventory_configs": 2402,
+    "inventory_stored_rows": 101235,
+    "inventory_within_config_duplicate_rows": 0,
+    "candidate_rows": 1577,
+    "static_identity_unique": 1577,
+    "full_unit_fingerprint_verified": 0,
+    "known_development_source_overlaps": 0,
+    "known_development_cluster_overlap_count": 0,
+    "candidate_known_source_clusters": 1400,
+    "candidate_unknown_clusters": 177,
+    "demonstration_lineage_unknown_candidates": 1577,
+    "by_dimension": {
+      "background": 200,
+      "camera": 200,
+      "clean": 200,
+      "language": 200,
+      "layout": 177,
+      "light": 200,
+      "noise": 200,
+      "robot_initial": 200
+    },
+    "layout_shortfall_to_20": 23,
+    "selected_config_count": 247,
+    "development_source_units": 63,
+    "development_offline_unique_samples": 25
+  },
+  "layout_candidate_counts_by_task_index": [
+    20,
+    17,
+    19,
+    13,
+    18,
+    19,
+    20,
+    16,
+    16,
+    19
+  ],
+  "limitations": [
+    "static source identity is not full effective-unit uniqueness",
+    "unknown lineage is neither independent nor one fabricated cluster",
+    "candidate core only; extension not selected or authorized",
+    "development sources cover identified F1/F2 receipts and locked S-full inputs; no claim of undiscovered usages",
+    "all candidate reset/randomization/control contracts need later verification; not a G2 lock",
+    "Legacy unit_fingerprint is a stored-state hash, not an effective-unit identity.",
+    "All candidate demonstration/evaluation lineage remains unknown.",
+    "Existing 300 GPT technical reviews remain distinct from human_reviewed=0.",
+    "Independent backup remains unconfirmed."
+  ],
+  "test_summary": {
+    "evidence_kind": "synthetic_fixture",
+    "run": 38,
+    "failures": 0,
+    "errors": 0,
+    "max_bootstrap_repetitions_per_call": 50,
+    "no_real_bootstrap": true
+  },
+  "hand_calculated_fixtures": {
+    "config_weight": {
+      "expected": 0.5,
+      "actual": 0.5
+    },
+    "interaction": {
+      "expected_percentage_points": -5,
+      "actual_percentage_points": -4.999999999999993
+    },
+    "g_drop": {
+      "expected_percentage_points": 0,
+      "actual_percentage_points": -1.1102230246251565e-14
+    },
+    "invalid_A_SAB": {
+      "action": 3.0,
+      "direction": 10.0,
+      "alignment": 0.30000000000000004,
+      "total": 6.03,
+      "packing": [
+        "action-only",
+        "direction+action"
+      ],
+      "teacher_read_required": true,
+      "direction_read_required": true
+    }
+  },
+  "static_config": {
+    "allowed_differences": [
+      "plan.variant",
+      "plan.lambda_a",
+      "plan.lambda_b",
+      "plan.teacher_contract_sha256",
+      "plan.direction_labels_sha256",
+      "plan.direction_approval_sha256",
+      "auxiliary.lambda_a",
+      "auxiliary.lambda_b"
+    ],
+    "observed_differences": {
+      "s": [],
+      "sa": [
+        "auxiliary.lambda_a",
+        "plan.direction_approval_sha256",
+        "plan.direction_labels_sha256",
+        "plan.lambda_a",
+        "plan.variant"
+      ],
+      "sb": [
+        "auxiliary.lambda_b",
+        "plan.lambda_b",
+        "plan.teacher_contract_sha256",
+        "plan.variant"
+      ],
+      "sab": [
+        "auxiliary.lambda_a",
+        "auxiliary.lambda_b",
+        "plan.direction_approval_sha256",
+        "plan.direction_labels_sha256",
+        "plan.lambda_a",
+        "plan.lambda_b",
+        "plan.teacher_contract_sha256",
+        "plan.variant"
+      ]
+    },
+    "status": "PASS_STATIC_ONLY",
+    "actual_model_behavior_verified": false
+  },
+  "resource": {
+    "gpu_jobs": 0,
+    "major_cpu_processes": 1,
+    "threads_limit": 2,
+    "address_space_limit_bytes": 2147483648,
+    "max_rss_kib": 66776,
+    "elapsed_seconds": 1.0353218279778957,
+    "source_bytes_read": 14986152
+  },
+  "code_sha256": {
+    "test_cpu.py": "226aee45488b158beb7097cbba6529e828fb7ac95185dace4bfcc02710e142e6",
+    "statistics_cpu.py": "a6f11d8a1fce280bda46c2e55ac200fc37d8e78b477bd39d9904f99d36d303ed",
+    "run_checks.py": "42181da83359b213109997e12b6e53bf5267cd932e0586eca39559b668bcaf5f",
+    "candidates.py": "326aa452470ccb75eaebeba361058ad3ed95029d55870138cb8107bd12a08fa2",
+    "static_budget.py": "db185b46977bfa3bb5c6fe7d752224235daecd402fbdd793fdbf1fcc4a16e6b0"
+  },
+  "candidate_content_sha256": "50e67a89b6dd1b7d49345bb89ea751ff0168079f0f8402a4261c8126532b445e",
+  "stages": {
+    "F2": "IN_PROGRESS_NOT_ACCEPTED",
+    "F3": "TODO_MAIN_NOT_STARTED",
+    "G2": false,
+    "SAB_execution_authorized": false
+  },
+  "protected_source_changes": 0,
+  "budget": {
+    "candidate_model_episodes_for_4_groups_3_seeds": 18924,
+    "status": "draft assumptions only; SAB throughput and real full-episode rate unmeasured; unknown inputs yield null total"
+  },
+  "publication": "aggregate receipt only; full manifest, real identities, original records and implementation stay local"
+}
