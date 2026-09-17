@@ -2,7 +2,7 @@
 
 ## 当前进展
 
-最后核对：2026-09-17（S-500匹配对照及终点评测已完成）。**F2=IN_PROGRESS／未验收，G1=PASS；F3、SAB及四组400步/24 GPU小时仍未授权。** 已完成一个与既有SB严格匹配的S-500：基础权重、LoRA初始化流、500池全schedule、microbatch4×累计4、有效batch16、144容量及优化/LR日程一致，结构关闭A/B。三点诊断、step-3000 checkpoint和原20-clean评测均有原件；终点评测0/20成功，不能据此放行F2。
+最后核对：2026-09-17（S-500匹配对照及终点评测已完成；S-full已完成step-1000诊断并续接至1001）。**F2=IN_PROGRESS／未验收，G1=PASS；F3、SAB及四组400步/24 GPU小时仍未授权。** 已完成一个与既有SB严格匹配的S-500：基础权重、LoRA初始化流、500池全schedule、microbatch4×累计4、有效batch16、144容量及优化/LR日程一致，结构关闭A/B。三点诊断、step-3000 checkpoint和原20-clean评测均有原件；终点评测0/20成功，不能据此放行F2。
 
 训练前CPU全48,000 sample_id顺序与SB一致，配置及未改变的初始化/累计/优化函数AST相同；实际GPU初始化中10个共享LoRA叶子及全部初始模型参数与原SB固定源码重建结果精确一致。第一更新动作loss=14.703125，与原SB第一更新动作项相同；方向/对齐项均None，冻结不变/LoRA更新断言逐步执行。新模型无teacher读取、无projector创建/更新，S没有通过λB=0残留对齐分支。
 
@@ -1128,3 +1128,10 @@ S-full已完成前100次有效更新，`result-metrics.jsonl`连续100行且samp
 本批结束于CPU前置交付；原S-full继续原授权。后续只复用这些证据，等待原维护路径完成S-full及新的技术决定；真正reset/初态血缘、功能验收、SAB与G2仍未完成。GPT技术QC/human_reviewed=0及独立备份未确认限制不变。本批代码可用显式`test_cpu`重跑合成测试；完整交付入口拒绝覆盖既有verification原件，重复候选构建使用纯函数且输出到新的明确位置，不重启真实作业。
 
 本次文档交付检查退出0：相对链接/围栏、独立回执JSON、新增公开内容敏感模式、S-full计划段不变、F2历史与顶部仅追加保护、README/主文档/规则/真实聚合原件不变、`git diff --check`。发布范围仅F2 PLAN/LOG、F3 PLAN/LOG及一份独立脱敏CPU测试回执；提交/推送结果以最终回复固定SHA及本机发布回执为准。
+### 2026-09-17｜S-full step-1000 checkpoint 与固定诊断完成
+
+S-full 单一 runner 已完成第 1000 次有效更新，`result-heartbeat.json` 随后显示已续接到 1001，状态仍为 `RUNNING`；没有重启、第二个写入者或配置变更。第 1000 步 checkpoint 存在 `_CHECKPOINT_METADATA`，元数据 SHA256=`90075845715b531ecb723f44f852af8b7a84ffc9152c2fcf033fc65023f39c5a`，路径为 `runs/pilot/f2-sfull-coverage-20260917-s0/checkpoints/step-1000/`。
+
+固定 step-1000 诊断已完成，结果在 `runs/pilot/f2-sfull-coverage-20260917-s0/diagnostics/step-1000/`，`result.json` 状态为 `COMPLETE`，`requests.jsonl` 含 20 条原始请求。结构关闭 S 路径未读取方向标签、教师缓存或 projector，不更新参数：train 自然生成 9/10 合法（1 次 `invalid_coefficient_length`），val 自然生成 9/10 合法（1 次 `invalid_coefficient_length`）；teacher-forcing train 为 85/187 token、val 为 88/200 token。以上是固定探针的描述性结果，不是 F2 通过或控制效果结论。
+
+诊断完成后训练自动继续到 1001；后续仍按原 3000 有效更新、step-2000/3000 保存和固定诊断、终点 20-clean 评测执行。S-full 本批授权、30 GPU 小时上限、F2 `IN_PROGRESS`／未验收、F3/SAB 未授权均保持不变；不补 SA-1000、不重跑旧实验、不修改数据或优化配置。
