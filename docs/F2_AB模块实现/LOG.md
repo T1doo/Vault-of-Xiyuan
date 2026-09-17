@@ -2,7 +2,7 @@
 
 ## 当前进展
 
-最后核对：2026-09-16（S-500匹配对照已获批并启动）。**F2=IN_PROGRESS／未验收，G1=PASS；F3、SAB及四组400步/24 GPU小时仍未授权。** 当前只运行一个S-500，与既有SB匹配基础权重、LoRA初始化流、500池全schedule、microbatch4×累计4、有效batch16、144容量及优化/LR日程，结构关闭A/B。发布核对时已完成8次有效更新，目标3000；不能把这个步号当完整checkpoint。
+最后核对：2026-09-17（S-500匹配对照及终点评测已完成）。**F2=IN_PROGRESS／未验收，G1=PASS；F3、SAB及四组400步/24 GPU小时仍未授权。** 已完成一个与既有SB严格匹配的S-500：基础权重、LoRA初始化流、500池全schedule、microbatch4×累计4、有效batch16、144容量及优化/LR日程一致，结构关闭A/B。三点诊断、step-3000 checkpoint和原20-clean评测均有原件；终点评测0/20成功，不能据此放行F2。
 
 训练前CPU全48,000 sample_id顺序与SB一致，配置及未改变的初始化/累计/优化函数AST相同；实际GPU初始化中10个共享LoRA叶子及全部初始模型参数与原SB固定源码重建结果精确一致。第一更新动作loss=14.703125，与原SB第一更新动作项相同；方向/对齐项均None，冻结不变/LoRA更新断言逐步执行。新模型无teacher读取、无projector创建/更新，S没有通过λB=0残留对齐分支。
 
@@ -1023,7 +1023,6 @@ SB val中，1000的3个合法、2000的4个合法到3000都变为非法，而终
 源代码、CPU前检、初始化原件、启动核查及运行身份见本机`<S500_AUDIT>/preflight.json`、`train_with_checks.py`、`run.py`和`<S500_RUN>/initialization-check.json`、`startup-verification.json`、`orchestration.json`、resolved-config/metrics/heartbeat。实际checkpoint/诊断回调复用既有保存、模型与TF函数，后续执行结果会追加；新长作业已真实启动，不以文档计划冒充后台运行。该队列仅本S对照，不恢复任何F3队列授权。
 
 本次交接仅说明前检通过及S训练启动，尚无三个中间/终点诊断或20clean结果。F2仍IN_PROGRESS，旧SA/SB、监督/QC/缓存和历史缺口不变。
-
 ### 2026-09-16｜S-500 step-1000 检查点与首个诊断完成
 
 S-500 匹配对照继续使用同一单卡、固定 500 样本池和原 sample schedule。有效更新已到 1000/3000；`checkpoints/step-1000/` 含 `_CHECKPOINT_METADATA`，心跳仍为 `RUNNING`，未启动第二个写入者。
@@ -1039,3 +1038,23 @@ S-500 匹配对照继续使用同一单卡、固定 500 样本池和原 sample s
 step-2000 的固定诊断已完成：10 个 train + 10 个 val 自然生成（20 条请求）和 train/val 各一批 teacher-forcing。原始结果位于 `runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-2000/`，`result.json` 状态为 `COMPLETE`；自然生成统计为 train 10/10 合法、val 2/10 合法（7 条 `invalid_coefficient_length`、1 条 `invalid_action_boundary`）。teacher-forcing 为 train 183/187 token、val 75/200 token。该诊断只走结构关闭 A/B 的公共 S 动作路径，不更新参数，不进入正式效果表。
 
 step-2000 训练更新耗时约 29.05 秒；诊断结果包含检查点元数据 SHA256=`e89ab0a0f7f97c7b561be5284c8f3dc40bdfb403836c5cc99d37c31ade5534dc`。实际总成本继续以运行目录 registration/心跳为准。训练进程已从该检查点继续，后续目标仍为 step-3000 及终点固定 20 个 clean 开发单元；不补 SA-1000、不训练 SA/SAB、不进入 F3，不自动将诊断结果解释为方法效果或阶段验收。
+
+### 2026-09-17｜S-500匹配对照完成：三点诊断与终点20-clean评测
+
+S-500 匹配参照已按本阶段授权完成，F2 仍为 `IN_PROGRESS／未验收`，G1=PASS；本结果不恢复 F3/SAB/正式四组授权，也不构成 F2 通过。运行目录为 `runs/pilot/f2-s500-matched-20260916-s0/`，结构关闭 A/B，使用固定 500 动作样本池、原 sample schedule、匹配 SB 的共享初始化/LoRA、microbatch 4×累计4、有效 batch 16、144容量、既定 BF16/AdamW/LR/裁剪与动作合同。
+
+**训练与保存。** heartbeat 已为 `COMPLETE`，有效更新 `3000/3000`；`checkpoints/step-1000/`、`step-2000/`、`step-3000/` 均存在 `_CHECKPOINT_METADATA`。运行编排记录训练阶段 `86883.58176898956` 秒、退出码0，终点评测阶段 `90.13039922714233` 秒，总 GPU 占用窗口 `86974.18704104424` 秒（约 `24.1595 GPU·小时`），低于本次30 GPU小时上限；未追加更新或预算。S入口 SHA256=`1707fd325296470b24eeffca7858f3cb0b1da10c32c17cd523e6725041bb14a5`，实际 GPU 为运行编排登记的 `GPU-414c52ba-72c6-fc45-95d6-1e9750bbc21b`。
+
+**固定三点离线诊断。** 原始结果及逐请求 `requests.jsonl` 分别位于 `diagnostics/step-1000/`、`step-2000/`、`step-3000/`，三份 `result.json` 均为 `COMPLETE`，每点均为10 train+10 val自然生成和 train/val 各一次 batch=10 teacher-forcing；未更新参数、未读取教师或方向标签。
+
+| checkpoint | train自然生成 | val自然生成 | train TF | val TF |
+|---|---:|---:|---:|---:|
+| step-1000 | 3/10 合法（6长度、1边界） | 8/10 合法（2长度） | 123/187 | 85/200 |
+| step-2000 | 10/10 合法 | 2/10 合法（7长度、1边界） | 183/187 | 75/200 |
+| step-3000 | 10/10 合法 | 1/10 合法（8长度、1边界） | 187/187 | 81/200 |
+
+其中每个百分比的分母是固定的10个观测或对应TF有效token；非法模型输出保留具体状态，未补零、截断或重试。step-3000 诊断元数据 SHA256=`07ec5b8fc0ab5a68324f22021ef29bfed36086ef55d3589ca1fd40ec813fca22`；其 `result.json` 中保留完整 raw token、边界、EOS、FAST token及实际/期望系数数。
+
+**终点 clean 评测。** 使用当前 step-3000 checkpoint，经真实 `serve_ab_action_only_dev.py` S 服务和 `eval_sb_service_fix.py` 公共评测入口完成 Spatial10 官方任务、每任务 init row 0/1 共20个固定单元；配置为10步预热、220最大环境步、执行horizon=5，服务容量144。原始结果位于 `runs/pilot/f2-s500-matched-20260916-s0/clean-eval/result.json`，SHA256=`3ee1087e693a29a051f367ee967e0a3b6a105a96a9eba7deb0c919ac94d14025`；服务加载回执在同目录 `service/load-receipt.json`，确认10个LoRA叶子实际加载且未加载projector/teacher/cache/方向标签。评测状态为 `COMPLETE`、`successes=0`、`failures=20`，20回合均以 `POLICY_DECODE_FAILURE` 结束；共24次请求、累计执行20个模型动作步。合法动作不等于任务成功，当前结果是固定500池pilot的真实负结果，不是正式全数据结论。
+
+**阶段含义和限制。** 这次完成了批准的 S-500 匹配工程对照、三点固定离线诊断、step-3000检查点和原20-clean评测；不改写此前 SA/SB 训练、服务修复、QC、教师缓存或中期SA1000缺口。它只能帮助区分共同500池/训练安排与B条件的后续解释，不能单独证明A/B有效或无效，也不能把0/20写成闭环目标达成。F2保持未验收；不补SA1000、不训练SA/SAB、不进入F3。后续若需技术结论，须另行审阅当前匹配结果及功能验收，不自动追加训练。

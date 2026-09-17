@@ -1967,7 +1967,7 @@
     "comparison_sha256": "9295c07710280c2062f01c0639ea7b552f610ca0a81e59db2ab6d05a11d9449e"
   },
   "s500_matched_control": {
-    "status": "RUNNING_STARTUP_VERIFIED",
+    "status": "COMPLETE_MATCHED_PILOT_NOT_F2_ACCEPTANCE",
     "target_updates": 3000,
     "budget_gpu_hours": 30,
     "max_gpus": 1,
@@ -1986,7 +1986,22 @@
       "TF_batches": 2
     },
     "terminal_clean_episodes_planned": 20,
-    "completed_evaluation": null,
+    "checkpoints_completed": [1000, 2000, 3000],
+    "diagnostic_results": {
+      "step_1000": "runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-1000/result.json",
+      "step_2000": "runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-2000/result.json",
+      "step_3000": "runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-3000/result.json"
+    },
+    "completed_evaluation": {
+      "path": "runs/pilot/f2-s500-matched-20260916-s0/clean-eval/result.json",
+      "status": "COMPLETE",
+      "episodes": 20,
+      "successes": 0,
+      "failures": 20,
+      "result_sha256": "3ee1087e693a29a051f367ee967e0a3b6a105a96a9eba7deb0c919ac94d14025"
+    },
+    "actual_gpu_seconds_window": 86974.18704104424,
+    "actual_gpu_hours_window": 24.159496400290067,
     "F2_accepted": false,
     "source_sha256": "1707fd325296470b24eeffca7858f3cb0b1da10c32c17cd523e6725041bb14a5"
   }

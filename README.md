@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**F2：IN_PROGRESS／未验收，当前已获批并启动S-500匹配对照。** 共享初始化、500池全部采样顺序、优化/batch和动作合同前检通过；单卡30 GPU小时内训练3000步，在1000/2000/3000固定离线诊断，终点原20clean一次评测。尚未完成，不自动通过F2。原SA/SB训练、有效负结果、服务修复及回归保留；G1=PASS，F3/SAB和四组400步/24 GPU小时仍未授权。见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)、[F2 LOG](docs/F2_AB模块实现/LOG.md)及[既有聚合证据](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。
+**F2：IN_PROGRESS／未验收。** 已完成获批的 S-500 匹配对照：单卡内 3,000 步、step-1000/2000/3000 固定诊断和终点原 20-clean 评测；结果是 0/20 成功，不能据此放行 F2。原SA/SB训练、有效负结果、服务修复及回归保留；G1=PASS，F3/SAB和四组400步/24 GPU小时仍未授权。见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)、[F2 LOG](docs/F2_AB模块实现/LOG.md)及[既有聚合证据](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。
 
 ## 完整方案
 
