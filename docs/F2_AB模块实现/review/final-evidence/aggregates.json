@@ -2348,7 +2348,7 @@
     "paired_audit_sha256": "8cc243e80190ea70fa970484895db4ec9a3d328cc7eae9b54e07ae926c116a21"
   },
   "sfull_coverage_control": {
-    "status": "RUNNING_STARTUP_VERIFIED",
+    "status": "RUNNING_100_UPDATE_CALIBRATION",
     "budget_gpu_hours": 30,
     "max_gpus": 1,
     "target_updates": 3000,
@@ -2360,6 +2360,9 @@
     ],
     "F2_accepted": false,
     "implementation_sha256": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692",
+    "startup_verified_updates": 100,
+    "startup_median_update_seconds": 24.44,
+    "startup_pure_update_hours_estimate": 20.37,
     "startup": {
       "verified_updates": 3,
       "actual_schedule_match": true,
