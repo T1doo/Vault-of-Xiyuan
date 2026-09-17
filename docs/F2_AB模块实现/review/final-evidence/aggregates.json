@@ -603,7 +603,7 @@
     "F3_execution_authorized": false,
     "SAB_execution_authorized": false,
     "formal_queue_authorized": false,
-    "scope": "Only approved S-500 matched experiment running under one-GPU30h cap; F2 not accepted, F3/SAB unauthorized"
+    "scope": "S-500 complete and stopped; single S-full coverage run authorized under one-GPU30h cap, CPU preflight passed; F2 not accepted, F3/SAB unauthorized"
   },
   "midpoint_diagnostic_v1": {
     "status": "PARTIAL_SA1000_NOT_EXECUTED_AFTER_LOAD_FAILURE",
@@ -1986,7 +1986,11 @@
       "TF_batches": 2
     },
     "terminal_clean_episodes_planned": 20,
-    "checkpoints_completed": [1000, 2000, 3000],
+    "checkpoints_completed": [
+      1000,
+      2000,
+      3000
+    ],
     "diagnostic_results": {
       "step_1000": "runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-1000/result.json",
       "step_2000": "runs/pilot/f2-s500-matched-20260916-s0/diagnostics/step-2000/result.json",
@@ -2003,6 +2007,358 @@
     "actual_gpu_seconds_window": 86974.18704104424,
     "actual_gpu_hours_window": 24.159496400290067,
     "F2_accepted": false,
-    "source_sha256": "1707fd325296470b24eeffca7858f3cb0b1da10c32c17cd523e6725041bb14a5"
+    "source_sha256": "1707fd325296470b24eeffca7858f3cb0b1da10c32c17cd523e6725041bb14a5",
+    "recomputed_request_counts": {
+      "invalid_action_boundary": 2,
+      "invalid_coefficient_length": 18,
+      "ok": 4
+    },
+    "first_request_failure_episodes": 17,
+    "after_legal_failure_episodes": 3,
+    "paired_temporal_transitions": {
+      "s500/train/1000-3000": {
+        "legal->legal": 3,
+        "illegal->legal": 7
+      },
+      "sb500/train/1000-3000": {
+        "legal->legal": 5,
+        "illegal->legal": 5
+      },
+      "s500/val/1000-3000": {
+        "legal->illegal": 7,
+        "legal->legal": 1,
+        "illegal->illegal": 2
+      },
+      "sb500/val/1000-3000": {
+        "legal->illegal": 3,
+        "illegal->legal": 2,
+        "illegal->illegal": 5
+      },
+      "s500/train/2000-3000": {
+        "legal->legal": 10
+      },
+      "sb500/train/2000-3000": {
+        "legal->legal": 10
+      },
+      "s500/val/2000-3000": {
+        "illegal->illegal": 8,
+        "legal->legal": 1,
+        "legal->illegal": 1
+      },
+      "sb500/val/2000-3000": {
+        "legal->illegal": 4,
+        "illegal->legal": 2,
+        "illegal->illegal": 4
+      }
+    },
+    "recomputed_diagnostics": {
+      "1000": {
+        "counts": {
+          "train": {
+            "ok": 3,
+            "invalid_action_boundary": 1,
+            "invalid_coefficient_length": 6
+          },
+          "val": {
+            "ok": 8,
+            "invalid_coefficient_length": 2
+          }
+        },
+        "teacher_forcing": {
+          "train": {
+            "valid_tokens_per_sample": [
+              21,
+              19,
+              19,
+              19,
+              19,
+              14,
+              17,
+              19,
+              19,
+              21
+            ],
+            "correct_tokens_per_sample": [
+              11,
+              13,
+              13,
+              13,
+              17,
+              10,
+              9,
+              13,
+              10,
+              14
+            ],
+            "accuracy_per_sample": [
+              0.523809552192688,
+              0.6842105388641357,
+              0.6842105388641357,
+              0.6842105388641357,
+              0.8947368264198303,
+              0.7142857313156128,
+              0.529411792755127,
+              0.6842105388641357,
+              0.5263158082962036,
+              0.6666666865348816
+            ],
+            "total_valid_tokens": 187,
+            "total_correct_tokens": 123,
+            "accuracy": 0.6577540106951871
+          },
+          "val": {
+            "valid_tokens_per_sample": [
+              22,
+              18,
+              18,
+              19,
+              18,
+              18,
+              23,
+              20,
+              19,
+              25
+            ],
+            "correct_tokens_per_sample": [
+              10,
+              8,
+              7,
+              8,
+              10,
+              8,
+              7,
+              9,
+              9,
+              9
+            ],
+            "accuracy_per_sample": [
+              0.4545454680919647,
+              0.4444444477558136,
+              0.3888888955116272,
+              0.42105263471603394,
+              0.5555555820465088,
+              0.4444444477558136,
+              0.30434784293174744,
+              0.45000001788139343,
+              0.4736842215061188,
+              0.35999998450279236
+            ],
+            "total_valid_tokens": 200,
+            "total_correct_tokens": 85,
+            "accuracy": 0.425
+          }
+        },
+        "source_sha256": "e7fbfa3af49a028b980ad8dc44c4e27ea579578c39803a1f4715fce4b2dc6011"
+      },
+      "2000": {
+        "counts": {
+          "train": {
+            "ok": 10
+          },
+          "val": {
+            "invalid_coefficient_length": 7,
+            "ok": 2,
+            "invalid_action_boundary": 1
+          }
+        },
+        "teacher_forcing": {
+          "train": {
+            "valid_tokens_per_sample": [
+              21,
+              19,
+              19,
+              19,
+              19,
+              14,
+              17,
+              19,
+              19,
+              21
+            ],
+            "correct_tokens_per_sample": [
+              20,
+              19,
+              19,
+              19,
+              18,
+              13,
+              17,
+              19,
+              19,
+              20
+            ],
+            "accuracy_per_sample": [
+              0.9523809552192688,
+              1.0,
+              1.0,
+              1.0,
+              0.9473684430122375,
+              0.9285714626312256,
+              1.0,
+              1.0,
+              1.0,
+              0.9523809552192688
+            ],
+            "total_valid_tokens": 187,
+            "total_correct_tokens": 183,
+            "accuracy": 0.9786096256684492
+          },
+          "val": {
+            "valid_tokens_per_sample": [
+              22,
+              18,
+              18,
+              19,
+              18,
+              18,
+              23,
+              20,
+              19,
+              25
+            ],
+            "correct_tokens_per_sample": [
+              11,
+              7,
+              6,
+              8,
+              6,
+              7,
+              8,
+              7,
+              7,
+              8
+            ],
+            "accuracy_per_sample": [
+              0.5,
+              0.3888888955116272,
+              0.3333333432674408,
+              0.42105263471603394,
+              0.3333333432674408,
+              0.3888888955116272,
+              0.3478260934352875,
+              0.3499999940395355,
+              0.3684210479259491,
+              0.3199999928474426
+            ],
+            "total_valid_tokens": 200,
+            "total_correct_tokens": 75,
+            "accuracy": 0.375
+          }
+        },
+        "source_sha256": "93416abc572e7b84dedc2d601a82f3f49750c507aced62069dbf51d1d712eb9c"
+      },
+      "3000": {
+        "counts": {
+          "train": {
+            "ok": 10
+          },
+          "val": {
+            "invalid_coefficient_length": 8,
+            "ok": 1,
+            "invalid_action_boundary": 1
+          }
+        },
+        "teacher_forcing": {
+          "train": {
+            "valid_tokens_per_sample": [
+              21,
+              19,
+              19,
+              19,
+              19,
+              14,
+              17,
+              19,
+              19,
+              21
+            ],
+            "correct_tokens_per_sample": [
+              21,
+              19,
+              19,
+              19,
+              19,
+              14,
+              17,
+              19,
+              19,
+              21
+            ],
+            "accuracy_per_sample": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "total_valid_tokens": 187,
+            "total_correct_tokens": 187,
+            "accuracy": 1.0
+          },
+          "val": {
+            "valid_tokens_per_sample": [
+              22,
+              18,
+              18,
+              19,
+              18,
+              18,
+              23,
+              20,
+              19,
+              25
+            ],
+            "correct_tokens_per_sample": [
+              11,
+              8,
+              6,
+              8,
+              6,
+              9,
+              8,
+              9,
+              8,
+              8
+            ],
+            "accuracy_per_sample": [
+              0.5,
+              0.4444444477558136,
+              0.3333333432674408,
+              0.42105263471603394,
+              0.3333333432674408,
+              0.5,
+              0.3478260934352875,
+              0.45000001788139343,
+              0.42105263471603394,
+              0.3199999928474426
+            ],
+            "total_valid_tokens": 200,
+            "total_correct_tokens": 81,
+            "accuracy": 0.405
+          }
+        },
+        "source_sha256": "a589a175a458cb279a9e3ff910c0c5e22b0579b199475f3631ed4cc308bb939a"
+      }
+    },
+    "paired_audit_sha256": "8cc243e80190ea70fa970484895db4ec9a3d328cc7eae9b54e07ae926c116a21"
+  },
+  "sfull_coverage_control": {
+    "status": "STARTED_INITIALIZATION_PENDING",
+    "budget_gpu_hours": 30,
+    "max_gpus": 1,
+    "target_updates": 3000,
+    "schedule_sha256": "dd0bcd1a9076c2ff3c23a6f9b57667552c61d2cd29c58533c1059357753f77ba",
+    "planned_unique_starts": [
+      13902,
+      24245,
+      32029
+    ],
+    "F2_accepted": false,
+    "implementation_sha256": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692"
   }
 }
