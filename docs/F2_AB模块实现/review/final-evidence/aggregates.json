@@ -3097,5 +3097,82 @@
       },
       "script_sha256": "bc49c6334d8ac4d17227a4839b4484f8284869f21ab4540134f5e97edcbfdd66"
     }
+  },
+  "full_ab_validation_precheck": {
+    "status": "APPROVED_SCOPE_NOT_STARTED_BUDGET_FEASIBILITY_UNCONFIRMED",
+    "gpu_computations": 0,
+    "updates": 0,
+    "approved_budget_hours_each": 30,
+    "approved_total_hours": 60,
+    "source_docs_commit": "3c71cb4efeafe4aeeea27b8ee596bb699245bc0a",
+    "groups": {
+      "sa": {
+        "cpu_connection": "PASS_CPU_CONNECTION",
+        "preflight_path": "runs/audit/f2-decode-20260915-v1/full-sa-preflight.json",
+        "preflight_sha256": "493d2838b94e72224cbb45b12fb9afab21699c96305f812450302a6d0b102502",
+        "entry_sha256": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692",
+        "full_pool": 55682,
+        "schedule_sha256": "dd0bcd1a9076c2ff3c23a6f9b57667552c61d2cd29c58533c1059357753f77ba",
+        "direction_supervised_positions": 45377,
+        "input_timing_cpu_only": [
+          {
+            "s": 0.8611073642969131,
+            "sa": 0.383048590272665
+          },
+          {
+            "s": 0.22518672421574593,
+            "sa": 0.24429557099938393
+          },
+          {
+            "s": 1.2500706315040588,
+            "sa": 0.2624822184443474
+          }
+        ],
+        "gpu_initialization": "NOT_RUN",
+        "run_started": false,
+        "budget_scenario": {
+          "training_hours": 25.251047822237016,
+          "three_diagnostics_hours": 0.36666666666666664,
+          "terminal_eval_hours": 5.377777777777778,
+          "load_save_exit_hours": 0.5,
+          "basis": "S-full last500 measured mean; 22s historical SA scenario, not new upper bound",
+          "total_hours": 31.49549226668146,
+          "excess_over_30_hours": 1.4954922666814596
+        }
+      },
+      "sb": {
+        "cpu_connection": "PASS_CPU_CONNECTION",
+        "preflight_path": "runs/audit/f2-decode-20260915-v1/full-sb-preflight.json",
+        "preflight_sha256": "054cc2324f608f2d3258312fcdc854dd4909d9c2f16337ecbf8782728ab1913e",
+        "entry_sha256": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692",
+        "full_pool": 55682,
+        "schedule_sha256": "dd0bcd1a9076c2ff3c23a6f9b57667552c61d2cd29c58533c1059357753f77ba",
+        "direction_supervised_positions": null,
+        "input_timing_cpu_only": [
+          {
+            "s": 0.07335668988525867,
+            "sb": 6.479926809668541
+          },
+          {
+            "s": 1.2154927682131529,
+            "sb": 12.43291393853724
+          },
+          {
+            "s": 0.07576957531273365,
+            "sb": 12.388029024004936
+          }
+        ],
+        "gpu_initialization": "NOT_RUN",
+        "run_started": false,
+        "budget_scenario": {
+          "training_hours": 33.24254866031309,
+          "diagnostic_eval_load_save_exit_reserve_hours": 4,
+          "additional_input_seconds_median": 11.217421170324087,
+          "basis": "S-full all-update measured mean + median paired CPU input delta; serial conservative estimate, not GPU benchmark; extra B compute not added",
+          "total_hours": 37.24254866031309,
+          "excess_over_30_hours": 7.242548660313091
+        }
+      }
+    }
   }
 }
