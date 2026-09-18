@@ -2,7 +2,7 @@
 
 ## 当前进展
 
-最后核对：2026-09-18（S-500匹配对照及终点评测已完成；S-full已完成step-1000/2000诊断并续接至2003）。**F2=IN_PROGRESS／未验收，G1=PASS；F3、SAB及四组400步/24 GPU小时仍未授权。** 已完成一个与既有SB严格匹配的S-500：基础权重、LoRA初始化流、500池全schedule、microbatch4×累计4、有效batch16、144容量及优化/LR日程一致，结构关闭A/B。三点诊断、step-3000 checkpoint和原20-clean评测均有原件；终点评测0/20成功，不能据此放行F2。
+最后核对：2026-09-18（S-500匹配对照及终点评测已完成；S-full已完成step-1000/2000/3000诊断、终点20-clean并完成归档）。**F2=IN_PROGRESS／未验收，G1=PASS；F3、SAB及四组400步/24 GPU小时仍未授权。** 已完成一个与既有SB严格匹配的S-500：基础权重、LoRA初始化流、500池全schedule、microbatch4×累计4、有效batch16、144容量及优化/LR日程一致，结构关闭A/B。三点诊断、step-3000 checkpoint和原20-clean评测均有原件；终点评测0/20成功，不能据此放行F2。
 
 训练前CPU全48,000 sample_id顺序与SB一致，配置及未改变的初始化/累计/优化函数AST相同；实际GPU初始化中10个共享LoRA叶子及全部初始模型参数与原SB固定源码重建结果精确一致。第一更新动作loss=14.703125，与原SB第一更新动作项相同；方向/对齐项均None，冻结不变/LoRA更新断言逐步执行。新模型无teacher读取、无projector创建/更新，S没有通过λB=0残留对齐分支。
 
@@ -1143,3 +1143,11 @@ S-full 单一 runner 已完成第 2000 次有效更新，诊断完成后 heartbe
 固定 step-2000 诊断已完成，结果在 `runs/pilot/f2-sfull-coverage-20260917-s0/diagnostics/step-2000/`，`result.json` 状态为 `COMPLETE`，`requests.jsonl` 含 20 条原始请求。结构关闭 S 路径未读取方向标签、教师缓存或 projector，不更新参数：train 自然生成 9/10 合法（1 次 `invalid_coefficient_length`），val 自然生成 10/10 合法；teacher-forcing train 为 96/187 token、val 为 101/200 token。以上是固定探针的描述性结果，不是 F2 通过或控制效果结论。
 
 诊断完成后训练已自动继续到 2003；后续仍按原 3000 有效更新、step-3000 保存与固定诊断、终点 20-clean 评测执行。S-full 本批授权、30 GPU 小时上限、F2 `IN_PROGRESS`／未验收、F3/SAB 未授权均保持不变；不补 SA-1000、不重跑旧实验、不修改数据或优化配置。
+
+### 2026-09-18｜S-full 完成 3000 步、终点诊断与 20-clean 评测
+
+S-full 已完成 3000/3000 有效更新，step-3000 checkpoint 存在 `_CHECKPOINT_METADATA`，元数据 SHA256=`1f3332dab45b5b7c53c8235adc3b9d10f7bdc1feef5d9eb6eaeeabf8daf85bbe`。step-3000 固定诊断 `result.json` 为 `COMPLETE`，结果路径为 `runs/pilot/f2-sfull-coverage-20260917-s0/diagnostics/step-3000/`：train/val 自然生成均 10/10 合法，teacher-forcing train 为 100/187 token、val 为 104/200 token；没有参数更新，仍未读取方向标签、教师缓存或 projector。
+
+终点 20-clean 评测已完成，路径为 `runs/pilot/f2-sfull-coverage-20260917-s0/clean-eval/`，结果 SHA256=`c51ab38bb377445fcbb040d6b4d2211642964ef8f46ed53101467bed07e9e8d7`。固定 20 个单元中 9 个成功、11 个失败，失败包含 10 个 `POLICY_DECODE_FAILURE` 和 1 个 `TIMEOUT`；共 460 条请求，累计保存 10 个预指定 task row-0 全程视频。成功、失败、请求 raw/detail 和服务加载回执均保留，合法动作不等于任务成功。
+
+本 run 编排状态为 `COMPLETE_MATCHED_PILOT_NOT_F2_ACCEPTANCE`，训练阶段 87,200.6985 秒、终点评测阶段 443.4452 秒，合计 87,644.1438 秒（24.3456 GPU·小时），低于 30 GPU·小时上限。该 S-full 覆盖对照的执行目标已完成，但 F2 仍为 `IN_PROGRESS`／未验收：结果是固定完整 train 池单次匹配 pilot 的描述性证据，不是正式全数据效果，也不自动放行 F3/SAB。原 S-500、A/B 历史结果和限制保持不变。
