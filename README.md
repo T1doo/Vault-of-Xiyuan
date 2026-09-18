@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**F2：IN_PROGRESS／未验收；S-full 覆盖对照已完成 3,000 步、三点诊断和终点 20-clean，终点评测 9/20 成功。** 已完成获批的 S-500 匹配对照：单卡内 3,000 步、step-1000/2000/3000 固定诊断和终点原 20-clean 评测；结果是 0/20 成功，不能据此放行 F2。原SA/SB训练、有效负结果、服务修复及回归保留；G1=PASS，F3/SAB和四组400步/24 GPU小时仍未授权。见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)、[F2 LOG](docs/F2_AB模块实现/LOG.md)及[既有聚合证据](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。
+**F2：IN_PROGRESS／未验收；S-full 覆盖对照已完成 3,000 步、三点诊断和终点 20-clean，终点评测 9/20 成功；实际曝光及460请求CPU复算完成，SA-full／SB-full方案待审，尚未授权启动。** 已完成获批的 S-500 匹配对照：单卡内 3,000 步、step-1000/2000/3000 固定诊断和终点原 20-clean 评测；结果是 0/20 成功，不能据此放行 F2。原SA/SB训练、有效负结果、服务修复及回归保留；G1=PASS，F3/SAB和四组400步/24 GPU小时仍未授权。见 [F2 PLAN](docs/F2_AB模块实现/PLAN.md)、[F2 LOG](docs/F2_AB模块实现/LOG.md)及[既有聚合证据](docs/F2_AB模块实现/review/final-evidence/aggregates.json)。
 
 ## 完整方案
 
