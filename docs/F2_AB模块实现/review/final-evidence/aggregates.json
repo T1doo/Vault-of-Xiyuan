@@ -4023,5 +4023,63 @@
       "sb_scenario_hours": 40.74,
       "notes": "SA rounded 25.3 training + .37 natural + .4 TF +5.38 eval + .75 loading/saving/render/exit. SB retains old 37.24 conservative scenario plus 2.5 additional B compute assumption and 1 first-validation/TF reserve; not a benchmark, some conservatism retained. First100 calibrate. No GPU work started."
     }
+  },
+  "sa_runtime_fix_20260919": {
+    "status": "PARTIAL_GPU_REGRESSION_REQUEST_LIMIT_REACHED",
+    "cpu_cases_passed": 11,
+    "gpu_requests_attempted": 8,
+    "gpu_requests_returned": 7,
+    "updates": 0,
+    "robot_rollouts": 0,
+    "comparisons": [
+      {
+        "input": 0,
+        "paths": [
+          "old",
+          "new"
+        ],
+        "tokens_actions_status_inputs_exact": true,
+        "old_observer_dtype_artifact": true
+      },
+      {
+        "input": 0,
+        "paths": [
+          "fallback",
+          "direct"
+        ],
+        "tokens_actions_status_inputs_exact": true,
+        "old_observer_dtype_artifact": false
+      },
+      {
+        "input": 591,
+        "paths": [
+          "old",
+          "new"
+        ],
+        "tokens_actions_status_inputs_exact": true,
+        "old_observer_dtype_artifact": true
+      }
+    ],
+    "controlled_fallbacks_completed": 2,
+    "missing": "val591 same SA weight direct action-only WebSocket reference",
+    "gpu_seconds": 89.27772903442383,
+    "gpu_hours": 0.024799369176228842,
+    "charged_to": "SA34",
+    "training_started": false,
+    "first_failure": "JIT dynamic shape budget kwarg; corrected to same S fixed defaults256/temp0",
+    "second_failure": "test observer converted raw list to float64; original generated dtype was not saved by old observer; token numeric values and input fingerprints exact",
+    "sources": {
+      "f2-work/serve_sa_full_a_dev.py": "216ef973532decd0ee3b9d4f8ab5a3c3b8f1981ce8b011134c620c74e8cf2f83",
+      "f2-work/serve_ab_action_only_dev.py": "330921c7f154b8a72f3d79989c94b485bad2aa5c8ad88dfb0c9bb119d105e512",
+      "f2-work/test_a_real.py": "934dd6a8ed945e426d50373578ab9315b06fdf8ca1f82b84c35e9bfba8f0867f",
+      "f2-work/eval_sb_service_fix.py": "32196d95c79020173bd516d17d79e66c960af3bde7fbeb92d7f09b84c8727568"
+    },
+    "evidence": {
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/client-results.json": "278268795f7bad22f693086ff34196e37125fd29aedc45922f7325b6e97838c7",
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/remaining-five/client-results.json": "52443526ed963b3083847fbe6b1cf5806cd6e375c604f5358b451be641c99bb9",
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/cpu-final.log": "6abbcbe47de5cd6a388be82e7f0eab25f99ca42dfb44b71baba7dfd63c9f6b0b",
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/gpu-registration.json": "e3b424780091be4513c9e431a1e2658b2bea37d29abca82d5bf340e90fd42147",
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/remaining-five/gpu-registration.json": "a7fb556b16ead50b842cd460cda29a65ce00a4d0be83b9a9a011692083374c9f"
+    }
   }
 }
