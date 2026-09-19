@@ -4081,5 +4081,163 @@
       "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/gpu-registration.json": "e3b424780091be4513c9e431a1e2658b2bea37d29abca82d5bf340e90fd42147",
       "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/remaining-five/gpu-registration.json": "a7fb556b16ead50b842cd460cda29a65ce00a4d0be83b9a9a011692083374c9f"
     }
+  },
+  "sa_runtime_fix_ninth_reference_20260919": {
+    "status": "PASS_EXACT_NINTH_REFERENCE",
+    "total_requests": 9,
+    "new_requests": 1,
+    "val_index": 591,
+    "actual_generated_dtype": "float32",
+    "input_tokens_actions_decode_exact": true,
+    "updates": 0,
+    "cumulative_gpu_seconds": 110.27847123146057,
+    "cumulative_gpu_hours": 0.030632908675405714,
+    "charged_to": "SA34",
+    "scope": "fixed two-input runtime regression completed; old normal raw dtype not independently captured",
+    "evidence": {
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/ninth-reference/comparison.json": "342f99b190759d07ed024af729cb1d4199ff85d4101713997041b1081b608f39",
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/ninth-reference/client-results.json": "7fe810fc503031cd47b35517e1d77d71b3cfb99fc0d60384679347bbcdadb9df",
+      "runs/audit/f2-decode-20260915-v1/sa-runtime-fix-v1/ninth-reference/gpu-registration.json": "ec41111608edd7e1139f16ef5f846558d3468d582061285ad12ee53d6bdbd513"
+    }
+  },
+  "full_ab_20260919": {
+    "sa": {
+      "status": "RUNNING_FIRST_THREE_UPDATES_VERIFIED",
+      "run_path": "runs/pilot/f2-sa-full-20260919-s0",
+      "budget_gpu_hours": 34.0,
+      "prior_charged_gpu_seconds": 110.27847123146057,
+      "source_hashes": {
+        "f2-work/ab_training_entry.py": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692",
+        "f2-work/serve_sa_full_a_dev.py": "216ef973532decd0ee3b9d4f8ab5a3c3b8f1981ce8b011134c620c74e8cf2f83",
+        "f2-work/serve_ab_action_only_dev.py": "330921c7f154b8a72f3d79989c94b485bad2aa5c8ad88dfb0c9bb119d105e512",
+        "f2-work/test_a_real.py": "934dd6a8ed945e426d50373578ab9315b06fdf8ca1f82b84c35e9bfba8f0867f",
+        "f2-work/a_module.py": "fca3d2fc5e218f24198bbb56ba7608377dcd3af4ea4620f4c2fafd7a0031e96b",
+        "f2-work/b_module.py": "0f1d6812fd7a1b563a1f8a9d61f249203f68901c401935b86369db7e04c059c9",
+        "f2-work/generated_token_adapter.py": "963f1cc6de27cbeb0373bc86afd730302e02d4ad8dc570d26c979cc07042a7d5",
+        "f2-work/audit_teacher_forcing_gpu.py": "25ccc693461193c4a42068773a247d54a0c98c2b817d1d928cddc38eb1b00f75",
+        "f2-work/eval_sb_service_fix.py": "32196d95c79020173bd516d17d79e66c960af3bde7fbeb92d7f09b84c8727568",
+        "f2-teacher/production_reader.py": "ce41d13690295c3a5a971071a14e8d5aaef72a7244bb05473de069bc74025616",
+        "upstream/openpi/src/openpi/models/gemma_fast.py": "4b46624557fe4875499bc8599577b3cdebc35880f0ebd67e076861f643aa734f",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/budget.py": "83e47b03d7f78c209ff4d9f79d81ea14a28a9647fa99b6fa43c8ba2e0b1a1fb1",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/train_with_checks.py": "8b9851582702f03bf8722429c941bb977b395dba7d7e0424a80d4372bd0237e3",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/run_group.py": "060c76e073b177dcd30c8557fa3f1e6d09b9d0bd753f94b002fff195d7a14bcc",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/entry-before.py": "1707fd325296470b24eeffca7858f3cb0b1da10c32c17cd523e6725041bb14a5"
+      },
+      "target_updates": 3000,
+      "F2_accepted": false,
+      "verified_updates": 3,
+      "initialization": {
+        "shared_lora_leaves_exact": 10,
+        "all_initial_parameters_exact": true,
+        "S_initial_lora_fingerprint": "2f86409ca081f3a222e1fe652ffd2de6e833927e1e4e43b8aa9ea3223259ac1a",
+        "reference": "archived actual SB initialization source, no projector instantiated",
+        "initial_rng": "key101",
+        "training_rng": "key0",
+        "entry_sha256": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692"
+      },
+      "first_updates": [
+        {
+          "effective_update": 1,
+          "raw_action_loss": 17.46875,
+          "raw_direction_loss": 13.046875,
+          "raw_alignment_loss": null,
+          "learning_rate": 2.996966941282153e-08,
+          "lambda_a": 0.3,
+          "lambda_b": 5e-05,
+          "update_seconds_including_data": 29.05852198600769
+        },
+        {
+          "effective_update": 2,
+          "raw_action_loss": 15.5,
+          "raw_direction_loss": 12.8125,
+          "raw_alignment_loss": null,
+          "learning_rate": 5.993933882564306e-08,
+          "lambda_a": 0.3,
+          "lambda_b": 0.0001,
+          "update_seconds_including_data": 24.718335151672363
+        },
+        {
+          "effective_update": 3,
+          "raw_action_loss": 16.125,
+          "raw_direction_loss": 13.8125,
+          "raw_alignment_loss": null,
+          "learning_rate": 8.99090082384646e-08,
+          "lambda_a": 0.3,
+          "lambda_b": 0.00015000000000000001,
+          "update_seconds_including_data": 24.863962650299072
+        }
+      ],
+      "calibration_100": "NOT_YET_AVAILABLE",
+      "metrics_source": "runs/pilot/f2-sa-full-20260919-s0/result-metrics.jsonl"
+    },
+    "sb": {
+      "status": "RUNNING_FIRST_THREE_UPDATES_VERIFIED",
+      "run_path": "runs/pilot/f2-sb-full-20260919-s0",
+      "budget_gpu_hours": 42.0,
+      "prior_charged_gpu_seconds": 0,
+      "source_hashes": {
+        "f2-work/ab_training_entry.py": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692",
+        "f2-work/serve_sa_full_a_dev.py": "216ef973532decd0ee3b9d4f8ab5a3c3b8f1981ce8b011134c620c74e8cf2f83",
+        "f2-work/serve_ab_action_only_dev.py": "330921c7f154b8a72f3d79989c94b485bad2aa5c8ad88dfb0c9bb119d105e512",
+        "f2-work/test_a_real.py": "934dd6a8ed945e426d50373578ab9315b06fdf8ca1f82b84c35e9bfba8f0867f",
+        "f2-work/a_module.py": "fca3d2fc5e218f24198bbb56ba7608377dcd3af4ea4620f4c2fafd7a0031e96b",
+        "f2-work/b_module.py": "0f1d6812fd7a1b563a1f8a9d61f249203f68901c401935b86369db7e04c059c9",
+        "f2-work/generated_token_adapter.py": "963f1cc6de27cbeb0373bc86afd730302e02d4ad8dc570d26c979cc07042a7d5",
+        "f2-work/audit_teacher_forcing_gpu.py": "25ccc693461193c4a42068773a247d54a0c98c2b817d1d928cddc38eb1b00f75",
+        "f2-work/eval_sb_service_fix.py": "32196d95c79020173bd516d17d79e66c960af3bde7fbeb92d7f09b84c8727568",
+        "f2-teacher/production_reader.py": "ce41d13690295c3a5a971071a14e8d5aaef72a7244bb05473de069bc74025616",
+        "upstream/openpi/src/openpi/models/gemma_fast.py": "4b46624557fe4875499bc8599577b3cdebc35880f0ebd67e076861f643aa734f",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/budget.py": "83e47b03d7f78c209ff4d9f79d81ea14a28a9647fa99b6fa43c8ba2e0b1a1fb1",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/train_with_checks.py": "8b9851582702f03bf8722429c941bb977b395dba7d7e0424a80d4372bd0237e3",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/run_group.py": "060c76e073b177dcd30c8557fa3f1e6d09b9d0bd753f94b002fff195d7a14bcc",
+        "runs/audit/f2-decode-20260915-v1/full-ab-v1/entry-before.py": "1707fd325296470b24eeffca7858f3cb0b1da10c32c17cd523e6725041bb14a5"
+      },
+      "target_updates": 3000,
+      "F2_accepted": false,
+      "verified_updates": 3,
+      "initialization": {
+        "shared_lora_leaves_exact": 10,
+        "all_initial_parameters_exact": true,
+        "S_initial_lora_fingerprint": "2f86409ca081f3a222e1fe652ffd2de6e833927e1e4e43b8aa9ea3223259ac1a",
+        "reference": "archived actual SB initialization source, no projector instantiated",
+        "initial_rng": "key101",
+        "training_rng": "key0",
+        "entry_sha256": "d2b3bf09f474ad8a7793f5638d56d53ead0bdc18ce4e9419719ee6644cbe9692"
+      },
+      "first_updates": [
+        {
+          "effective_update": 1,
+          "raw_action_loss": 14.953125,
+          "raw_direction_loss": null,
+          "raw_alignment_loss": 1.0016494691371918,
+          "learning_rate": 2.996966941282153e-08,
+          "lambda_a": 0.3,
+          "lambda_b": 5e-05,
+          "update_seconds_including_data": 39.28510856628418
+        },
+        {
+          "effective_update": 2,
+          "raw_action_loss": 13.0625,
+          "raw_direction_loss": null,
+          "raw_alignment_loss": 0.9987180829048157,
+          "learning_rate": 5.993933882564306e-08,
+          "lambda_a": 0.3,
+          "lambda_b": 0.0001,
+          "update_seconds_including_data": 73.98707485198975
+        },
+        {
+          "effective_update": 3,
+          "raw_action_loss": 14.25,
+          "raw_direction_loss": null,
+          "raw_alignment_loss": 0.9992123246192932,
+          "learning_rate": 8.99090082384646e-08,
+          "lambda_a": 0.3,
+          "lambda_b": 0.00015000000000000001,
+          "update_seconds_including_data": 27.162017107009888
+        }
+      ],
+      "calibration_100": "NOT_YET_AVAILABLE",
+      "metrics_source": "runs/pilot/f2-sb-full-20260919-s0/result-metrics.jsonl"
+    }
   }
 }
