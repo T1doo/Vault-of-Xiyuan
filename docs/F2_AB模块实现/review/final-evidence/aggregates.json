@@ -4102,7 +4102,7 @@
   },
   "full_ab_20260919": {
     "sa": {
-      "status": "RUNNING_FIRST_THREE_UPDATES_VERIFIED",
+      "status": "RUNNING_CALIBRATION_100_CONTINUE",
       "run_path": "runs/pilot/f2-sa-full-20260919-s0",
       "budget_gpu_hours": 34.0,
       "prior_charged_gpu_seconds": 110.27847123146057,
@@ -4167,11 +4167,30 @@
           "update_seconds_including_data": 24.863962650299072
         }
       ],
-      "calibration_100": "NOT_YET_AVAILABLE",
+      "calibration_100": {
+        "effective_update": 100,
+        "mean_update_seconds": 25.225149495601656,
+        "p50": 24.84487283229828,
+        "p90": 26.306847858428956,
+        "remaining_prediction_seconds": 97272.9335372448,
+        "remaining_budget_seconds": 119369.71633052826,
+        "continue": true,
+        "measured_at": 1789803488.4809387,
+        "input_host_mean_seconds": 0.896012536175549,
+        "physical_microbatches_per_update": 4,
+        "gpu_memory_mib_at_snapshot": 17289,
+        "already_charged_gpu_hours": 0.8417454637421502,
+        "predicted_total_gpu_hours": 27.86200477964348,
+        "budget_margin_hours": 6.137995220356517,
+        "source": "runs/pilot/f2-sa-full-20260919-s0/calibration-100.json",
+        "source_sha256": "37b02078d8bb03531045b856bb3cf9520224c27b8ecc3f7c60c498d1046503e1",
+        "input_timing_scope": "host interval around full microbatch preparation; includes dataset/packing/cache/device submission, not isolated teacher time",
+        "startup_loading_compile_separate_seconds": null
+      },
       "metrics_source": "runs/pilot/f2-sa-full-20260919-s0/result-metrics.jsonl"
     },
     "sb": {
-      "status": "RUNNING_FIRST_THREE_UPDATES_VERIFIED",
+      "status": "RUNNING_CALIBRATION_100_CONTINUE",
       "run_path": "runs/pilot/f2-sb-full-20260919-s0",
       "budget_gpu_hours": 42.0,
       "prior_charged_gpu_seconds": 0,
@@ -4236,7 +4255,26 @@
           "update_seconds_including_data": 27.162017107009888
         }
       ],
-      "calibration_100": "NOT_YET_AVAILABLE",
+      "calibration_100": {
+        "effective_update": 100,
+        "mean_update_seconds": 32.095372841358184,
+        "p50": 31.41240620613098,
+        "p90": 34.56088440418243,
+        "remaining_prediction_seconds": 107476.58123993874,
+        "remaining_budget_seconds": 147715.5509841442,
+        "continue": true,
+        "measured_at": 1789804085.2090118,
+        "input_host_mean_seconds": 7.5288392901048065,
+        "physical_microbatches_per_update": 4,
+        "gpu_memory_mib_at_snapshot": 17295,
+        "already_charged_gpu_hours": 0.9679025044043859,
+        "predicted_total_gpu_hours": 30.822508404387367,
+        "budget_margin_hours": 11.177491595612631,
+        "source": "runs/pilot/f2-sb-full-20260919-s0/calibration-100.json",
+        "source_sha256": "b37261cc6cf2a5ff65289a26aecc2fe9bec6a65236d6ec9cb3538b2122ee98cc",
+        "input_timing_scope": "host interval around full microbatch preparation; includes dataset/packing/cache/device submission, not isolated teacher time",
+        "startup_loading_compile_separate_seconds": null
+      },
       "metrics_source": "runs/pilot/f2-sb-full-20260919-s0/result-metrics.jsonl"
     }
   }
