@@ -3174,5 +3174,854 @@
         }
       }
     }
+  },
+  "reader_first_20260919": {
+    "status": "READER_CHECK_COMPLETE_ORIGINAL_ADOPTED_STARTUP_HELD_SA_SERVICE",
+    "adoption": "original_reader_no_patch",
+    "adopted_reader_sha256": "ce41d13690295c3a5a971071a14e8d5aaef72a7244bb05473de069bc74025616",
+    "new_gpu_hours": 0,
+    "cpu_elapsed_seconds": 470.39611744880676,
+    "memory_peak_rss_kib": 1906704,
+    "reader_instances": 1,
+    "cache_shards": 2,
+    "fixed_updates": [
+      1,
+      2,
+      3,
+      998,
+      999,
+      1000,
+      1998,
+      1999,
+      2000,
+      2998,
+      2999,
+      3000
+    ],
+    "rounds": [
+      {
+        "round": 0,
+        "input_mean_seconds": 11.086823371239007,
+        "hash_calls": 188,
+        "payload_loads": 191,
+        "parts_seconds": {
+          "hash_seconds": 60.30559175647795,
+          "payload_member_seconds": 10.913637358695269,
+          "finite_seconds": 9.090885728597641,
+          "norm_seconds": 13.68303189612925,
+          "stack_seconds": 0.061866359785199165
+        },
+        "batches": [
+          {
+            "round": 0,
+            "update": 1,
+            "total_seconds": 23.258724523708224,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7425369657576084,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671393840.0,
+              "hash_seconds": 0.5783273465931416,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 3.3686977457255125,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 7.186621718108654,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.005466897040605545,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 2,
+            "total_seconds": 9.692292863503098,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.743795320391655,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671393840.0,
+              "hash_seconds": 0.5940623059868813,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 1.4250498693436384,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 2.339033156633377,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.004684818908572197,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 3,
+            "total_seconds": 6.721002912148833,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7490297481417656,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671392320.0,
+              "hash_seconds": 0.58631338365376,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 0.9887420069426298,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 1.2182276956737041,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.012348661199212074,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 998,
+            "total_seconds": 11.558449611067772,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7856869716197252,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671393840.0,
+              "hash_seconds": 7.413698714226484,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 0.6632435135543346,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.33273684047162533,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.005075646564364433,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 999,
+            "total_seconds": 11.310003625229001,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7748709451407194,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671395920.0,
+              "hash_seconds": 7.554257096722722,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 0.5990469586104155,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3319605812430382,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.0042698923498392105,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 1000,
+            "total_seconds": 11.361880242824554,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7620860449969769,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671396320.0,
+              "hash_seconds": 7.149887628853321,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 0.5448136050254107,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3287578262388706,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.004958027973771095,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 1998,
+            "total_seconds": 8.98013679124415,
+            "unique_shards": 16,
+            "hash_count": 15,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7601440362632275,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 629431190.0,
+              "hash_seconds": 5.338587898761034,
+              "hash_calls": 15.0,
+              "payload_member_seconds": 0.5332147516310215,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3274937253445387,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.003946306183934212,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 1999,
+            "total_seconds": 10.393194692209363,
+            "unique_shards": 16,
+            "hash_count": 15,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7694548517465591,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 629433750.0,
+              "hash_seconds": 6.677093589678407,
+              "hash_calls": 15.0,
+              "payload_member_seconds": 0.5871360525488853,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3286513686180115,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.0038404278457164764,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 2000,
+            "total_seconds": 11.35870411992073,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7744672000408173,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671394240.0,
+              "hash_seconds": 7.199821168556809,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 0.5891628209501505,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3274683430790901,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.003873933106660843,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 2998,
+            "total_seconds": 9.644662007689476,
+            "unique_shards": 16,
+            "hash_count": 15,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7636898849159479,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 629427030.0,
+              "hash_seconds": 5.9345008209347725,
+              "hash_calls": 15.0,
+              "payload_member_seconds": 0.5753292720764875,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.32767510414123535,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.004246188327670097,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 2999,
+            "total_seconds": 8.650265684351325,
+            "unique_shards": 15,
+            "hash_count": 15,
+            "payload_count": 15,
+            "parts": {
+              "finite_seconds": 0.6995048876851797,
+              "finite_calls": 115.0,
+              "hash_logical_bytes": 629431030.0,
+              "hash_seconds": 4.674944786354899,
+              "hash_calls": 15.0,
+              "payload_member_seconds": 0.4851671103388071,
+              "payload_member_calls": 45.0,
+              "target_payload_bytes": 629145600.0,
+              "target_payload_loads": 15.0,
+              "norm_seconds": 0.3079824298620224,
+              "norm_calls": 19.0,
+              "stack_seconds": 0.0053210072219371796,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 0,
+            "update": 3000,
+            "total_seconds": 10.112563380971551,
+            "unique_shards": 16,
+            "hash_count": 16,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.765618871897459,
+              "finite_calls": 116.0,
+              "hash_logical_bytes": 671393280.0,
+              "hash_seconds": 6.60409701615572,
+              "hash_calls": 16.0,
+              "payload_member_seconds": 0.5540336519479752,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3264231067150831,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.003834553062915802,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          }
+        ]
+      },
+      {
+        "round": 1,
+        "input_mean_seconds": 2.6714326017536223,
+        "hash_calls": 0,
+        "payload_loads": 191,
+        "parts_seconds": {
+          "hash_seconds": 0,
+          "payload_member_seconds": 5.375894276425242,
+          "finite_seconds": 8.789796998724341,
+          "norm_seconds": 3.9237956032156944,
+          "stack_seconds": 0.06276300922036171
+        },
+        "batches": [
+          {
+            "round": 1,
+            "update": 1,
+            "total_seconds": 2.7225019987672567,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7369450107216835,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.47741231136024,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3288415018469095,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.004973839968442917,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 2,
+            "total_seconds": 2.724593438208103,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7385080419480801,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.46649626828730106,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.33064266480505466,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.00546954944729805,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 3,
+            "total_seconds": 2.7240888737142086,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7353727463632822,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.48518641479313374,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.33184354938566685,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.005321294069290161,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 998,
+            "total_seconds": 2.681178355589509,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7356027197092772,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.44800308533012867,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3311633337289095,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.004900053143501282,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 999,
+            "total_seconds": 2.666383447125554,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7347340304404497,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.4356356617063284,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.32708491012454033,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.004346814006567001,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 1000,
+            "total_seconds": 2.681439211592078,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7368242144584656,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.44293900206685066,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.32946372777223587,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.004691874608397484,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 1998,
+            "total_seconds": 2.676423206925392,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7352757379412651,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.4512861296534538,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3295438475906849,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.00543651357293129,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 1999,
+            "total_seconds": 2.6567517071962357,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7376909740269184,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.4302803911268711,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3271307833492756,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.005271643400192261,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 2000,
+            "total_seconds": 2.6636854857206345,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.735704829916358,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.4378600846976042,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3285800162702799,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.005548723042011261,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 2998,
+            "total_seconds": 2.6707656867802143,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7362064123153687,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.44179023429751396,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.3262818977236748,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.005895666778087616,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 2999,
+            "total_seconds": 2.533347465097904,
+            "unique_shards": 15,
+            "hash_count": 0,
+            "payload_count": 15,
+            "parts": {
+              "finite_seconds": 0.6919055003672838,
+              "finite_calls": 115.0,
+              "payload_member_seconds": 0.4223076719790697,
+              "payload_member_calls": 45.0,
+              "target_payload_bytes": 629145600.0,
+              "target_payload_loads": 15.0,
+              "norm_seconds": 0.3062842432409525,
+              "norm_calls": 19.0,
+              "stack_seconds": 0.005851157009601593,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          },
+          {
+            "round": 1,
+            "update": 3000,
+            "total_seconds": 2.656032344326377,
+            "unique_shards": 16,
+            "hash_count": 0,
+            "payload_count": 16,
+            "parts": {
+              "finite_seconds": 0.7350267805159092,
+              "finite_calls": 116.0,
+              "payload_member_seconds": 0.43669702112674713,
+              "payload_member_calls": 48.0,
+              "target_payload_bytes": 671088640.0,
+              "target_payload_loads": 16.0,
+              "norm_seconds": 0.32693512737751007,
+              "norm_calls": 20.0,
+              "stack_seconds": 0.005055880174040794,
+              "stack_calls": 8.0
+            },
+            "returned_target_shape": [
+              4,
+              2,
+              256,
+              2048
+            ],
+            "returned_target_dtype": "float16",
+            "returned_target_bytes_per_microbatch": 8388608,
+            "physical_disk_bytes": null
+          }
+        ]
+      }
+    ],
+    "metadata_lru": {
+      "capacity_shards": 2,
+      "hits": 10,
+      "misses": 47970
+    },
+    "container": [
+      {
+        "name": "sample_id.npy",
+        "compression": 0,
+        "stored_bytes": 9008,
+        "uncompressed_bytes": 9008
+      },
+      {
+        "name": "alignment_targets.npy",
+        "compression": 0,
+        "stored_bytes": 41943168,
+        "uncompressed_bytes": 41943168
+      },
+      {
+        "name": "alignment_valid_mask.npy",
+        "compression": 0,
+        "stored_bytes": 10368,
+        "uncompressed_bytes": 10368
+      }
+    ],
+    "scope": "instrumented CPU input measurement; neither GPU throughput nor OS-cold disk benchmark",
+    "physical_disk_bytes": null,
+    "candidate_implemented": false,
+    "sa_service_readiness": {
+      "status": "REPRODUCED_MISSING_RUNTIME_DIRECTION_FALLBACK",
+      "synthetic": true,
+      "gpu_calls": 0,
+      "source_sha256": "d635be1fdb77b64a6a283ee8fb2bdf2377f7a15a95bcee5ef6876c0943427a7d",
+      "policy_line": 104,
+      "actual_exception": "direction generation exhausted its budget without a complete candidate",
+      "calls": [
+        {
+          "kind": "prefill",
+          "prompt": "SYNTHETIC QUESTION SYNTHETIC public instruction"
+        },
+        {
+          "kind": "direction"
+        }
+      ],
+      "scope": "controlled direction budget failure propagates from actual Policy; not a model inference or a claim about old episode causes"
+    },
+    "sources": {
+      "runs/audit/f2-decode-20260915-v1/reader-first-v1/profile_reader.py": "3d1073230249ecd590f92906a9e3240b6bb1c13a0ecf33226294807b8ef42edb",
+      "runs/audit/f2-decode-20260915-v1/reader-first-v1/original-profile.json": "fd4d9c32f727b66fab627c482a25df62be2db858daf16d63f75581a2f61bc678",
+      "runs/audit/f2-decode-20260915-v1/reader-first-v1/profile-functions.txt": "78b963b847a2cb3ffbf53646a6b9f1c7c6ed75426a693009e335509fd0625f12",
+      "runs/audit/f2-decode-20260915-v1/reader-first-v1/sa-service-readiness.json": "3071cd6b1f1a25ed6ca68dfec0bd413a17739c3a614b38e62c351a586826fe6e",
+      "runs/audit/f2-decode-20260915-v1/reader-first-v1/check_sa_error_path.py": "b2ddc044bd9c5bd38637a937c55dd9c158f4264b3e20a53585b96c0a86384934"
+    },
+    "budget_proposal_adopted": {
+      "sa_cap_hours": 34,
+      "sb_cap_hours": 42,
+      "total_cap_hours": 76,
+      "sa_scenario_hours": 32.2,
+      "sb_scenario_hours": 40.74,
+      "notes": "SA rounded 25.3 training + .37 natural + .4 TF +5.38 eval + .75 loading/saving/render/exit. SB retains old 37.24 conservative scenario plus 2.5 additional B compute assumption and 1 first-validation/TF reserve; not a benchmark, some conservatism retained. First100 calibrate. No GPU work started."
+    }
   }
 }
